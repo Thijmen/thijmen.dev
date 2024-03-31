@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 
 export const client = new ApolloClient({
-  uri: 'http://localhost:88/graphql',
+  uri: process.env.GRAPHQL_ENDPOINT,
   cache: new InMemoryCache({
     resultCaching: false,
   }),
