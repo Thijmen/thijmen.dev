@@ -1,6 +1,10 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     domains: [
       'aulianza.s3.ap-southeast-1.amazonaws.com',
@@ -10,8 +14,9 @@ const nextConfig = {
       'res.cloudinary.com',
       'lh3.googleusercontent.com',
       'blog-api.aulianza.id',
+      'dev-assets.thijmen.dev',
     ],
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig)

@@ -1,39 +1,39 @@
-import clsx from 'clsx';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
-import { BiCommand as CommandIcon } from 'react-icons/bi';
-import { FiMenu as MenuIcon } from 'react-icons/fi';
+import clsx from 'clsx'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useContext, useState } from 'react'
+import { BiCommand as CommandIcon } from 'react-icons/bi'
+import { FiMenu as MenuIcon } from 'react-icons/fi'
 import {
   MdClose as CloseIcon,
   MdVerified as VerifiedIcon,
-} from 'react-icons/md';
+} from 'react-icons/md'
 
-import { MENU_ITEMS } from '@/common/constant/menu';
-import { CommandPaletteContext } from '@/common/context/CommandPaletteContext';
+import { MENU_ITEMS } from '@/common/constant/menu'
+import { CommandPaletteContext } from '@/common/context/CommandPaletteContext'
 
-import Image from '../../elements/Image';
-import ThemeToggleButton from '../../elements/ThemeToggleButton';
-import Tooltip from '../../elements/Tooltip';
-import Profile from '../../sidebar/Profile';
+import Image from '../../elements/Image'
+import ThemeToggleButton from '../../elements/ThemeToggleButton'
+import Tooltip from '../../elements/Tooltip'
+import Profile from '../../sidebar/Profile'
 
 const HeaderTop = () => {
-  const { setIsOpen } = useContext(CommandPaletteContext);
-  const [showMenu, setShowMenu] = useState(false);
+  const { setIsOpen } = useContext(CommandPaletteContext)
+  const [showMenu, setShowMenu] = useState(false)
 
-  const router = useRouter();
+  const pathname = usePathname()
 
   const menus = MENU_ITEMS.filter(
     (item) => item.isShow && item.title !== 'Home',
-  );
+  )
 
   return (
     <header>
-      <div className='mx-8 hidden items-center justify-between gap-5 py-8 lg:flex'>
+      <div className='fixed inset-x-0 top-4 z-40 mx-auto flex h-[60px] max-w-5xl items-center justify-between rounded-2xl bg-background/30 px-8 shadow-sm saturate-100 backdrop-blur-[10px] transition-colors'>
         <div className='flex items-center gap-5'>
           <Image
             src='/images/aulianza-new.png'
-            alt='Ryan Aulia'
+            alt='Thijmen Stavenuiter'
             width={40}
             height={40}
             rounded='rounded-full'
@@ -43,7 +43,7 @@ const HeaderTop = () => {
             <div className='flex items-center gap-3'>
               <Link href='/' passHref>
                 <h2 className='flex-grow font-sora text-lg font-medium lg:text-xl'>
-                  Ryan Aulia
+                  Thijmen Stavenuiter
                 </h2>
               </Link>
               <Tooltip title='Verified'>
@@ -67,7 +67,7 @@ const HeaderTop = () => {
                   passHref
                   className={clsx(
                     'text-neutral-700 hover:text-neutral-800 dark:text-neutral-400 hover:dark:text-neutral-100',
-                    router.pathname === menu?.href &&
+                    pathname === menu?.href &&
                       '!text-neutral-800 dark:!text-neutral-100',
                   )}
                 >
@@ -100,7 +100,7 @@ const HeaderTop = () => {
         <Profile />
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default HeaderTop;
+export default HeaderTop

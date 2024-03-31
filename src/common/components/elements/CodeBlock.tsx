@@ -1,18 +1,19 @@
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+'use client'
+import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react'
 import {
   HiCheckCircle as CheckIcon,
   HiOutlineClipboardCopy as CopyIcon,
-} from 'react-icons/hi';
-import { CodeProps } from 'react-markdown/lib/ast-to-react';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
-import diff from 'react-syntax-highlighter/dist/cjs/languages/prism/diff';
-import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
-import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx';
-import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
-import { a11yDark as themeColor } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { useCopyToClipboard } from 'usehooks-ts';
+} from 'react-icons/hi'
+
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css'
+import diff from 'react-syntax-highlighter/dist/cjs/languages/prism/diff'
+import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript'
+import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx'
+import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript'
+import { a11yDark as themeColor } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { useCopyToClipboard } from 'usehooks-ts'
 
 const languages = {
   javascript: 'javascript',
@@ -20,39 +21,34 @@ const languages = {
   diff: 'diff',
   tsx: 'tsx',
   css: 'css',
-};
+}
 
-SyntaxHighlighter.registerLanguage(languages.javascript, javascript);
-SyntaxHighlighter.registerLanguage(languages.typescript, typescript);
-SyntaxHighlighter.registerLanguage(languages.diff, diff);
-SyntaxHighlighter.registerLanguage(languages.tsx, tsx);
-SyntaxHighlighter.registerLanguage(languages.css, css);
+SyntaxHighlighter.registerLanguage(languages.javascript, javascript)
+SyntaxHighlighter.registerLanguage(languages.typescript, typescript)
+SyntaxHighlighter.registerLanguage(languages.diff, diff)
+SyntaxHighlighter.registerLanguage(languages.tsx, tsx)
+SyntaxHighlighter.registerLanguage(languages.css, css)
 
-const CodeBlock = ({
-  className = '',
-  children,
-  inline,
-  ...props
-}: CodeProps) => {
-  const [isCopied, setIsCopied] = useState<boolean>(false);
+const CodeBlock = ({ className = '', children, inline, ...props }: any) => {
+  const [isCopied, setIsCopied] = useState<boolean>(false)
   // eslint-disable-next-line unused-imports/no-unused-vars
-  const [value, copy] = useCopyToClipboard();
-  const match = /language-(\w+)/.exec(className || '');
+  const [value, copy] = useCopyToClipboard()
+  const match = /language-(\w+)/.exec(className || '')
 
   const handleCopy = (code: string) => {
-    copy(code);
-    setIsCopied(true);
-  };
+    copy(code)
+    setIsCopied(true)
+  }
 
   useEffect(() => {
     if (isCopied) {
       const timeout = setTimeout(() => {
-        setIsCopied(false);
-      }, 2000);
+        setIsCopied(false)
+      }, 2000)
 
-      return () => clearTimeout(timeout);
+      return () => clearTimeout(timeout)
     }
-  }, [isCopied]);
+  }, [isCopied])
 
   return (
     <>
@@ -72,6 +68,7 @@ const CodeBlock = ({
             )}
           </button>
 
+          {/*@ts-ignore*/}
           <SyntaxHighlighter
             {...props}
             style={themeColor}
@@ -94,12 +91,12 @@ const CodeBlock = ({
         </code>
       )}
     </>
-  );
-};
+  )
+}
 
-const LoadingPlaceholder = () => <div className='mb-12 mt-12 h-36 w-full' />;
+const LoadingPlaceholder = () => <div className='mb-12 mt-12 h-36 w-full' />
 
 export default dynamic(() => Promise.resolve(CodeBlock), {
   ssr: false,
   loading: LoadingPlaceholder,
-});
+})

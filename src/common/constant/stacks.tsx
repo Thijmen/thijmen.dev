@@ -1,4 +1,5 @@
-import { BsFillBootstrapFill, BsRobot } from 'react-icons/bs';
+import { BsFillBootstrapFill, BsRobot } from 'react-icons/bs'
+import { MdError } from 'react-icons/md'
 import {
   SiAngular,
   SiApollographql,
@@ -31,14 +32,20 @@ import {
   SiVuedotjs,
   SiWebpack,
   SiWordpress,
-} from 'react-icons/si';
+} from 'react-icons/si'
 
 export type stacksProps = {
-  [key: string]: JSX.Element;
-};
+  [key: string]: JSX.Element
+}
 
-const iconSize = 24;
+const iconSize = 24
 
+export const getStackIcon = (stack: string) => {
+  const icon = STACKS[stack]
+  // if icon is not found, return a default icon
+
+  return icon ?? <MdError size={iconSize} className='text-red-500' />
+}
 export const STACKS: stacksProps = {
   PHP: <SiPhp size={iconSize} className='text-blue-500' />,
   JavaScript: <SiJavascript size={iconSize} className='text-yellow-400' />,
@@ -79,4 +86,4 @@ export const STACKS: stacksProps = {
   Remix: <SiRemix size={iconSize} />,
   Express: <SiExpress size={iconSize} />,
   Jquery: <SiJquery size={iconSize} />,
-};
+}
