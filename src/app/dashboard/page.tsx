@@ -2,6 +2,12 @@ import Container from '@/common/components/elements/Container'
 import { getGithubUser } from '@/services/github'
 import PageHeading from '@/common/components/elements/PageHeading'
 import Dashboard from '@/modules/dashboard'
+import type { Metadata } from 'next'
+import { generateSiteTitle } from '@/core/metadata'
+
+export const metadata: Metadata = {
+  title: generateSiteTitle({ title: 'Dashboard' }),
+}
 
 const DashboardPage = async () => {
   const githubData = await getGithubUser('personal')

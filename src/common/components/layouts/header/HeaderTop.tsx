@@ -32,7 +32,7 @@ const HeaderTop = () => {
       <div className='fixed inset-x-0 top-4 z-40 mx-auto flex h-[60px] max-w-5xl items-center justify-between rounded-2xl bg-background/30 px-8 shadow-sm saturate-100 backdrop-blur-[10px] transition-colors'>
         <div className='flex items-center gap-5'>
           <Image
-            src='/images/aulianza-new.png'
+            src='/images/thijmen.png'
             alt='Thijmen Stavenuiter'
             width={40}
             height={40}

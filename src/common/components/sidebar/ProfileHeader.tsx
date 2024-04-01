@@ -20,7 +20,7 @@ const ProfileHeader = ({ expandMenu, imageSize }: ProfileHeaderProps) => {
       )}
     >
       <Image
-        src='/images/aulianza-new.png'
+        src='/images/thijmen.png'
         alt='Thijmen Stavenuiter'
         width={expandMenu ? 80 : imageSize}
         height={expandMenu ? 80 : imageSize}
@@ -38,7 +38,7 @@ const ProfileHeader = ({ expandMenu, imageSize }: ProfileHeaderProps) => {
         </Tooltip>
       </div>
       <div className='hidden font-sora text-sm text-neutral-600 transition-all duration-300 hover:text-neutral-700 dark:text-neutral-500 dark:hover:text-neutral-400 lg:flex'>
-        @aulianza
+        @Thijmen
       </div>
     </div>
   )
