@@ -12,16 +12,22 @@ const Introduction = () => {
               Based in Enschede, The Netherlands{' '}
               <span className='ml-1'>🇳🇱</span>
             </li>
-            <li>Working remotely</li>
           </ul>
         </div>
       </div>
 
       <p className='mt-6 leading-[1.8] text-neutral-800 dark:text-neutral-300 md:leading-loose'>
-        Seasoned Software Engineer especially in Frontend side, with a passion
-        for creating pixel-perfect web experiences. I work with JavaScript and
-        specialize in all-things web. I thrive on collaborating with teams to
-        deliver efficient, scalable, and visually appealing web applications.
+        Welcome to my website, where I try to share my knowledge and experiences
+        from my day to day life. I am a software engineer with a passion for
+        tech; backend, frontend and mobile! The sourcecode of this website is
+        completely open source, so feel free to check it out on{' '}
+        <a
+          href={'https://www.github.com/Thijmen/thijmen.dev'}
+          target={'_blank'}
+        >
+          Github
+        </a>
+        !
       </p>
     </section>
   )

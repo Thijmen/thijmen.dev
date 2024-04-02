@@ -5,6 +5,8 @@ import { generateSiteTitle } from '@/core/metadata'
 
 export const metadata: Metadata = {
   title: generateSiteTitle({ title: 'Home' }),
+  description:
+    'Welcome to my personal website. I write about web development, programming, and technology.',
 }
 const Homepage = () => {
   return (
