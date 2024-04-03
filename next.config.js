@@ -6,7 +6,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['www.thijmen.dev', 'thijmen.dev', 'dev-assets.thijmen.dev'],
+    domains: [
+      'www.thijmen.dev',
+      'thijmen.dev',
+      'media.thijmen.dev',
+      'dev-assets.thijmen.dev',
+    ],
   },
 }
 
