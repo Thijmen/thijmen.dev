@@ -5,6 +5,7 @@ import {
 } from '@/__generated__/graphql'
 import { getBlogDetailDocument } from '@/services/graphql/documents.blogs'
 import { getClient } from '@/services/graphql/graphql'
+import { REVALIDATE } from '@/common/constants'
 
 export const fetchPageInfo = async (
   slug: string,
@@ -13,6 +14,11 @@ export const fetchPageInfo = async (
     query: getPageDetailDocument,
     fetchPolicy: 'network-only',
     variables: { slug: [slug] },
+    context: {
+      fetchOptions: {
+        next: { revalidate: REVALIDATE },
+      },
+    },
   })
 
   return data.data.pagesEntries.length > 0 ? data.data.pagesEntries[0] : null
@@ -25,6 +31,11 @@ export const fetchBlogInfo = async (
     query: getBlogDetailDocument,
     fetchPolicy: 'network-only',
     variables: { slug: [slug] },
+    context: {
+      fetchOptions: {
+        next: { revalidate: REVALIDATE },
+      },
+    },
   })
 
   return data.data.blogsEntries.length > 0 ? data.data.blogsEntries[0] : null

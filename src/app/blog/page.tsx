@@ -43,5 +43,3 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default BlogPage
-
-export const dynamic = 'force-dynamic'
