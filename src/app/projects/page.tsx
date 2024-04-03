@@ -7,7 +7,7 @@ const ProjectsPage = async () => {
     query: getProjectsDocument,
     context: {
       fetchOptions: {
-        next: { revalidate: 5 },
+        next: { revalidate: 60 },
       },
     },
   })

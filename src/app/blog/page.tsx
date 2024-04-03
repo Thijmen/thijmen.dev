@@ -13,6 +13,11 @@ const BlogPage = async () => {
 
   const blogEntriesResponse = await getClient().query({
     query: getBlogOverviewDocument,
+    context: {
+      fetchOptions: {
+        next: { revalidate: 5 },
+      },
+    },
   })
 
   const blogEntries = blogEntriesResponse.data.blogsEntries
