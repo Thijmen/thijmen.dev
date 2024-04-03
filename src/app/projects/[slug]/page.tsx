@@ -6,6 +6,7 @@ import PageHeading from '@/common/components/elements/PageHeading'
 import React from 'react'
 import ProjectDetail from '@/modules/projects/components/ProjectDetail'
 import { getClient } from '@/services/graphql/graphql'
+import { REVALIDATE } from '@/common/constants'
 
 const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
@@ -14,6 +15,11 @@ const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
     query: getProjectDetailDocument,
     variables: {
       slug,
+    },
+    context: {
+      fetchOptions: {
+        next: { revalidate: REVALIDATE },
+      },
     },
   })
 

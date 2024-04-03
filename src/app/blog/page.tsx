@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
 import { fetchPageInfo } from '@/services/graphql/data-fetching'
 import { getClient } from '@/services/graphql/graphql'
+import { REVALIDATE } from '@/common/constants'
 
 const BlogPage = async () => {
   const pageInfo = await fetchPageInfo('blog')
@@ -15,7 +16,7 @@ const BlogPage = async () => {
     query: getBlogOverviewDocument,
     context: {
       fetchOptions: {
-        next: { revalidate: 5 },
+        next: { revalidate: REVALIDATE },
       },
     },
   })
