@@ -1,9 +1,16 @@
-import { client } from '@/services/graphql/graphql'
-import { getProjectsDocument } from '@/services/graphql/documents.projects'
 import ProjectsClientsComponent from '@/app/projects/client-component'
+import { getProjectsDocument } from '@/services/graphql/documents.projects'
+import { getClient } from '@/services/graphql/graphql'
 
 const ProjectsPage = async () => {
-  const projectsResponse = await client.query({ query: getProjectsDocument })
+  const projectsResponse = await getClient().query({
+    query: getProjectsDocument,
+    context: {
+      fetchOptions: {
+        next: { revalidate: 5 },
+      },
+    },
+  })
   const projects = projectsResponse.data.projectsEntries
 
   return (
@@ -12,7 +19,5 @@ const ProjectsPage = async () => {
     </>
   )
 }
-
-export const revalidate = 60
 
 export default ProjectsPage

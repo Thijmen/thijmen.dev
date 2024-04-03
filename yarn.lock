@@ -20,10 +20,18 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@apollo/client@^3.9.9":
-  version "3.9.9"
-  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.9.9.tgz#38f983a1ad24e2687abfced0a9c1c3bef8d32616"
-  integrity sha512-/sMecU/M0WK9knrguts1lSLV8xFKzIgOMVb4mi6MOxgJXjliDB8PvOtmXhTqh2cVMMR4TzXgOnb+af/690zlQw==
+"@apollo/client-react-streaming@0.9.2":
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/@apollo/client-react-streaming/-/client-react-streaming-0.9.2.tgz#470f82b20ef285cd32c9d1b8194e30a98b01fcc7"
+  integrity sha512-yCURY+XsvIcc/EUTvRnBTfqbG+zcjQOOkD8mmPClgkFvH7v7g4ZM0uGILPIV/KLxfRJf2UCH5gBQhXyoXVDbSA==
+  dependencies:
+    superjson "^1.12.2 || ^2.0.0"
+    ts-invariant "^0.10.3"
+
+"@apollo/client@^3.10.0-rc.0":
+  version "3.10.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.10.0-rc.0.tgz#3e7c292aefbda00f413eb1578f164f6565d9083f"
+  integrity sha512-Pa232MoNEz/K8U/miQCPS3s+7FMhUm4gsOV6xuX1kTw6x+2ANwl7uA6QkLHtS0qa0YYFPLdlXu6K1BKnnZVBlw==
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.1"
     "@wry/caches" "^1.0.0"
@@ -39,6 +47,13 @@
     ts-invariant "^0.10.3"
     tslib "^2.3.0"
     zen-observable-ts "^1.2.5"
+
+"@apollo/experimental-nextjs-app-support@^0.9.2":
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/@apollo/experimental-nextjs-app-support/-/experimental-nextjs-app-support-0.9.2.tgz#f7100703448b07e1d022b752bd7ec70dc5c334d2"
+  integrity sha512-LePNBEM8hun1hVSMBSSAWwUEa6i652fPZVDzLWagCMMrnKCE1LzYj3N4LBNr/keqYRaqpo8ZoRAw5tJkf0k3tw==
+  dependencies:
+    "@apollo/client-react-streaming" "0.9.2"
 
 "@ardatan/relay-compiler@12.0.0":
   version "12.0.0"
@@ -2874,23 +2889,6 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.25.tgz#f077fdc0b5d0078d30893396ff4827a13f99e817"
   integrity sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==
 
-"@prisma/client@^4.16.2":
-  version "4.16.2"
-  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-4.16.2.tgz#3bb9ebd49b35c8236b3d468d0215192267016e2b"
-  integrity sha512-qCoEyxv1ZrQ4bKy39GnylE8Zq31IRmm8bNhNbZx7bF2cU5aiCCnSa93J2imF88MBjn7J9eUQneNxUQVJdl/rPQ==
-  dependencies:
-    "@prisma/engines-version" "4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
-
-"@prisma/engines-version@4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81":
-  version "4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
-  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81.tgz#d3b5dcf95b6d220e258cbf6ae19b06d30a7e9f14"
-  integrity sha512-q617EUWfRIDTriWADZ4YiWRZXCa/WuhNgLTVd+HqWLffjMSPzyM5uOWoauX91wvQClSKZU4pzI4JJLQ9Kl62Qg==
-
-"@prisma/engines@4.16.2":
-  version "4.16.2"
-  resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-4.16.2.tgz#5ec8dd672c2173d597e469194916ad4826ce2e5f"
-  integrity sha512-vx1nxVvN4QeT/cepQce68deh/Turxy5Mr+4L4zClFuK1GlxN3+ivxfuv+ej/gvidWn1cE1uAhW7ALLNlYbRUAw==
-
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@protobufjs/aspromise/-/aspromise-1.1.2.tgz#9b8b0cc663d669a7d8f6f5d0893a14d348f30fbf"
@@ -4871,6 +4869,13 @@ cookie@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
   integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
+
+copy-anything@^3.0.2:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/copy-anything/-/copy-anything-3.0.5.tgz#2d92dce8c498f790fa7ad16b01a1ae5a45b020a0"
+  integrity sha512-yCEafptTtb4bk7GLEQoM8KVJpxAfdBJYaXyzQEgQQQgYrZiDp8SJmGKlYza6CYjEDNstAdNdKA3UuoULlEbS6w==
+  dependencies:
+    is-what "^4.1.8"
 
 cosmiconfig-typescript-loader@^4.0.0:
   version "4.3.0"
@@ -7238,6 +7243,11 @@ is-weakset@^2.0.1:
   dependencies:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
+
+is-what@^4.1.8:
+  version "4.1.16"
+  resolved "https://registry.yarnpkg.com/is-what/-/is-what-4.1.16.tgz#1ad860a19da8b4895ad5495da3182ce2acdd7a6f"
+  integrity sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==
 
 is-windows@^1.0.1:
   version "1.0.2"
@@ -9806,13 +9816,6 @@ pretty-format@^3.8.0:
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
   integrity sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==
 
-prisma@^4.16.2:
-  version "4.16.2"
-  resolved "https://registry.yarnpkg.com/prisma/-/prisma-4.16.2.tgz#469e0a0991c6ae5bcde289401726bb012253339e"
-  integrity sha512-SYCsBvDf0/7XSJyf2cHTLjLeTLVXYfqp7pG5eEVafFLeT0u/hLFz/9W196nDRGUOo1JfPatAEb+uEnTQImQC1g==
-  dependencies:
-    "@prisma/engines" "4.16.2"
-
 prismjs@^1.27.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.29.0.tgz#f113555a8fa9b57c35e637bba27509dcf802dd12"
@@ -10989,6 +10992,13 @@ sucrase@^3.32.0:
     mz "^2.7.0"
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
+
+"superjson@^1.12.2 || ^2.0.0":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/superjson/-/superjson-2.2.1.tgz#9377a7fa80fedb10c851c9dbffd942d4bcf79733"
+  integrity sha512-8iGv75BYOa0xRJHK5vRLEjE2H/i4lulTjzpUXic3Eg8akftYjkmQDa8JARQ42rlczXyFR3IeRoeFCc7RxHsYZA==
+  dependencies:
+    copy-anything "^3.0.2"
 
 supports-color@^5.3.0:
   version "5.5.0"

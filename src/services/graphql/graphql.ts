@@ -1,8 +1,11 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import { registerApolloClient } from '@apollo/experimental-nextjs-app-support/rsc'
 
-export const client = new ApolloClient({
-  uri: process.env.GRAPHQL_ENDPOINT,
-  cache: new InMemoryCache({
-    resultCaching: false,
-  }),
+export const { getClient } = registerApolloClient(() => {
+  return new ApolloClient({
+    cache: new InMemoryCache(),
+    link: new HttpLink({
+      uri: process.env.GRAPHQL_ENDPOINT,
+    }),
+  })
 })

@@ -7,7 +7,7 @@ import Container from '@/common/components/elements/Container'
 import PageHeading from '@/common/components/elements/PageHeading'
 import Projects from '@/modules/projects'
 import { getProjectsDocument } from '@/services/graphql/documents.projects'
-import { client } from '@/services/graphql/graphql'
+import { getClient } from '@/services/graphql/graphql'
 
 interface ProjectsPageProps {
   dataProjects: ProjectEntryFragmentFragment[]
@@ -42,7 +42,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ dataProjects }) => {
 export default ProjectsPage
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await client.query({ query: getProjectsDocument })
+  const data = await getClient().query({ query: getProjectsDocument })
 
   return {
     props: {

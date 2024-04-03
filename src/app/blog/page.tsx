@@ -1,17 +1,17 @@
 import Container from '@/common/components/elements/Container'
 import BlogListNew from '@/modules/blog'
 import { getBlogOverviewDocument } from '@/services/graphql/documents.blogs'
-import { client } from '@/services/graphql/graphql'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
 import { fetchPageInfo } from '@/services/graphql/data-fetching'
+import { getClient } from '@/services/graphql/graphql'
 
 const BlogPage = async () => {
   const pageInfo = await fetchPageInfo('blog')
 
   if (pageInfo === null) return null
 
-  const blogEntriesResponse = await client.query({
+  const blogEntriesResponse = await getClient().query({
     query: getBlogOverviewDocument,
   })
 

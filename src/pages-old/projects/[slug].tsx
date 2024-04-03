@@ -8,7 +8,7 @@ import PageHeading from '@/common/components/elements/PageHeading'
 import { ProjectItemProps } from '@/common/types/projects'
 import ProjectDetail from '@/modules/projects/components/ProjectDetail'
 import { getProjectDetailDocument } from '@/services/graphql/documents.projects'
-import { client } from '@/services/graphql/graphql'
+import { getClient } from '@/services/graphql/graphql'
 
 interface ProjectsDetailPageProps {
   projectOld: ProjectItemProps
@@ -57,7 +57,7 @@ const ProjectsDetailPage: NextPage<ProjectsDetailPageProps> = ({ project }) => {
 export default ProjectsDetailPage
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const data = await client.query({
+  const data = await getClient().query({
     query: getProjectDetailDocument,
     variables: {
       slug: params?.slug,

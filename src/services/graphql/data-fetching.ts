@@ -1,15 +1,15 @@
-import { client } from '@/services/graphql/graphql'
 import { getPageDetailDocument } from '@/services/graphql/documents.pages'
 import {
   BlogEntryFragmentFragment,
   PagesDocumentEntryFragment,
 } from '@/__generated__/graphql'
 import { getBlogDetailDocument } from '@/services/graphql/documents.blogs'
+import { getClient } from '@/services/graphql/graphql'
 
 export const fetchPageInfo = async (
   slug: string,
 ): Promise<PagesDocumentEntryFragment | null> => {
-  const data = await client.query({
+  const data = await getClient().query({
     query: getPageDetailDocument,
     fetchPolicy: 'network-only',
     variables: { slug: [slug] },
@@ -21,7 +21,7 @@ export const fetchPageInfo = async (
 export const fetchBlogInfo = async (
   slug: string,
 ): Promise<BlogEntryFragmentFragment | null> => {
-  const data = await client.query({
+  const data = await getClient().query({
     query: getBlogDetailDocument,
     fetchPolicy: 'network-only',
     variables: { slug: [slug] },
