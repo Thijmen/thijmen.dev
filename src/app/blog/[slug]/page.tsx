@@ -1,13 +1,13 @@
-import { fetchBlogInfo } from '@/services/graphql/data-fetching'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
 import BlogItemHeader from '@/app/blog/[slug]/components/BlogItemHeader'
 import { BlogItemContent } from '@/app/blog/[slug]/components/BlogItemContent'
+import { getBlogItem } from '@/common/services/graphql.service'
 
 export const revalidate = 300
 
 const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const blog = await fetchBlogInfo(slug)
+  const blog = await getBlogItem(slug)
 
   // @TODO: Redirects
   if (!blog) return null
@@ -25,7 +25,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const blog = await fetchBlogInfo(slug)
+  const blog = await getBlogItem(slug)
 
   const title = blog?.title ?? ''
 

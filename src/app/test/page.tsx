@@ -1,12 +1,12 @@
-import { fetchPageInfo } from '@/services/graphql/data-fetching'
 import Mdx from '@/common/components/elements/mdx/Mdx'
+import { getPage } from '@/common/services/graphql.service'
 
 const TestPage = async () => {
-  const data = await fetchPageInfo('blog')
+  const data = await getPage('blog')
 
   const dataMdx =
     '```js title="lib/test.tsx"\n' +
-    "console.log('hi hallo bonkers 123')\n" +
+    "console.log('hi hallo tester')\n" +
     '```\n\n# Hello, world!'
   return (
     <>

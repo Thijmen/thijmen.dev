@@ -1,27 +1,15 @@
 import Container from '@/common/components/elements/Container'
 import BlogListNew from '@/modules/blog'
-import { getBlogOverviewDocument } from '@/services/graphql/documents.blogs'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
-import { fetchPageInfo } from '@/services/graphql/data-fetching'
-import { getClient } from '@/services/graphql/graphql'
-import { REVALIDATE } from '@/common/constants'
+import { getBlogPosts, getPage } from '@/common/services/graphql.service'
 
 const BlogPage = async () => {
-  const pageInfo = await fetchPageInfo('blog')
+  const pageInfo = await getPage('blog')
 
   if (pageInfo === null) return null
 
-  const blogEntriesResponse = await getClient().query({
-    query: getBlogOverviewDocument,
-    context: {
-      fetchOptions: {
-        next: { revalidate: REVALIDATE },
-      },
-    },
-  })
-
-  const blogEntries = blogEntriesResponse.data.blogsEntries
+  const blogEntries = await getBlogPosts()
 
   return (
     <>
@@ -33,7 +21,7 @@ const BlogPage = async () => {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await fetchPageInfo('blog')
+  const page = await getPage('blog')
 
   return {
     title: generateSiteTitle({
