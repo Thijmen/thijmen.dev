@@ -5,7 +5,6 @@ import { ReactNode } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 
 import useHasMounted from '@/common/hooks/useHasMounted'
-import ChatButton from '@/modules/chat/components/ChatButton'
 
 import HeaderSidebar from './header/HeaderSidebar'
 import HeaderTop from './header/HeaderTop'
@@ -36,8 +35,6 @@ const Layout = ({ children }: LayoutProps) => {
     pathname.startsWith('/blog/') ||
     pathname.startsWith('/learn/')
 
-  const isShowChatButton = pageName !== 'guestbook'
-
   return (
     <>
       {/* <TopBar /> */}
@@ -61,7 +58,6 @@ const Layout = ({ children }: LayoutProps) => {
           </div>
         )}
       </div>
-      {isShowChatButton && <ChatButton />}
       {isMobile ? <NowPlayingCard /> : <NowPlayingBar />}
     </>
   )

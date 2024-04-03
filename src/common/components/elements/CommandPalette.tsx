@@ -130,8 +130,7 @@ const CommandPalette = () => {
   }: React.ChangeEvent<HTMLInputElement>) => setQuery(value)
 
   const handleFindGoogle = () => {
-    const url =
-      'https://www.google.com/search?q=' + queryDebounce + '&ref=aulianza.id'
+    const url = 'https://www.google.com/search?q=' + queryDebounce
     window.open(url, '_blank')
   }
 

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://aulianza.id
+Host: https://thijmen.dev
 
 # Sitemaps
-Sitemap: https://aulianza.id/sitemap.xml
+Sitemap: https://thijmen.dev/sitemap.xml

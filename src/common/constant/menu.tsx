@@ -1,7 +1,6 @@
 import {
   BsEnvelopeAtFill as EmailIcon,
   BsGithub as GithubIcon,
-  BsInstagram as InstagramIcon,
   BsLinkedin as LinkedinIcon,
   BsTwitter as TwitterIcon,
 } from 'react-icons/bs'
@@ -105,7 +104,7 @@ export const MENU_ITEMS: MenuItemProps[] = [
 export const SOCIAL_MEDIA: MenuItemProps[] = [
   {
     title: 'Email',
-    href: 'mailto:aulianza.dev@gmail.com',
+    href: 'mailto:thijmenstavenuiter@gmail.com',
     icon: <EmailIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -116,7 +115,7 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
 
   {
     title: 'Linkedin',
-    href: 'https://www.linkedin.com/in/aulianza/',
+    href: 'https://www.linkedin.com/in/thijmenstavenuiter/',
     icon: <LinkedinIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -126,7 +125,7 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
   },
   {
     title: 'Twitter',
-    href: 'https://twitter.com/aulianzaa',
+    href: 'https://twitter.com/Thijmen1992',
     icon: <TwitterIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
@@ -135,18 +134,8 @@ export const SOCIAL_MEDIA: MenuItemProps[] = [
     type: 'Link',
   },
   {
-    title: 'Instagram',
-    href: 'https://instagram.com/aulianza',
-    icon: <InstagramIcon size={iconSize} />,
-    isShow: true,
-    isExternal: true,
-    eventName: 'Social: Instagram',
-    className: '!bg-orange-700 border border dark:border-neutral-700',
-    type: 'Link',
-  },
-  {
     title: 'Github',
-    href: 'https://github.com/aulianza',
+    href: 'https://github.com/Thijmen',
     icon: <GithubIcon size={iconSize} />,
     isShow: true,
     isExternal: true,
