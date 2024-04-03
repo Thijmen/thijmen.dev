@@ -7,11 +7,9 @@ import ProjectCard from '@/modules/projects/components/ProjectCard'
 
 interface ProjectsComponentProps {
   projects: ProjectEntryFragmentFragment[]
-  loadMore: () => void
-  hasMore: boolean
 }
 
-const Projects = ({ projects, loadMore, hasMore }: ProjectsComponentProps) => {
+const Projects = ({ projects }: ProjectsComponentProps) => {
   const filteredProjects = projects ?? []
 
   if (filteredProjects.length === 0) {
@@ -20,9 +18,9 @@ const Projects = ({ projects, loadMore, hasMore }: ProjectsComponentProps) => {
 
   return (
     <InfiniteScroll
+      hasMore={false}
+      next={() => {}}
       dataLength={filteredProjects.length}
-      next={loadMore}
-      hasMore={hasMore}
       loader={<h4>Loading...</h4>}
       style={{ overflow: 'hidden' }}
     >
