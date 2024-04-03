@@ -16,10 +16,14 @@ const Projects = ({ projects }: ProjectsComponentProps) => {
     return <EmptyState message='No Data' />
   }
 
+  const handleNext = () => {
+    // @TODO: Remove eventually
+  }
+
   return (
     <InfiniteScroll
       hasMore={false}
-      next={() => {}}
+      next={handleNext}
       dataLength={filteredProjects.length}
       loader={<h4>Loading...</h4>}
       style={{ overflow: 'hidden' }}
