@@ -1,9 +1,7 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import { MdVerified as VerifiedIcon } from 'react-icons/md'
 
 import Image from '../elements/Image'
-import Tooltip from '../elements/Tooltip'
 
 interface ProfileHeaderProps {
   expandMenu: boolean
@@ -33,9 +31,6 @@ const ProfileHeader = ({ expandMenu, imageSize }: ProfileHeaderProps) => {
             Thijmen Stavenuiter
           </h2>
         </Link>
-        <Tooltip title='Verified'>
-          <VerifiedIcon size={18} className='text-blue-400' />
-        </Tooltip>
       </div>
       <div className='hidden font-sora text-sm text-neutral-600 transition-all duration-300 hover:text-neutral-700 dark:text-neutral-500 dark:hover:text-neutral-400 lg:flex'>
         @Thijmen
