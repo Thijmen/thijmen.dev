@@ -39,5 +39,7 @@ const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
     </>
   )
 }
-
+export const generateStaticParams = () => {
+  return []
+}
 export default ProjectDetailPage
