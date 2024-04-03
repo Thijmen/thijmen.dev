@@ -1,3 +1,5 @@
+import { Link } from '@/common/components/elements/Link'
+
 const Introduction = () => {
   return (
     <section className='bg-cover bg-no-repeat '>
@@ -21,12 +23,13 @@ const Introduction = () => {
         from my day to day life. I am a software engineer with a passion for
         tech; backend, frontend and mobile! The sourcecode of this website is
         completely open source, so feel free to check it out on{' '}
-        <a
+        <Link
           href={'https://www.github.com/Thijmen/thijmen.dev'}
           target={'_blank'}
+          variant={'article'}
         >
           Github
-        </a>
+        </Link>
         !
       </p>
     </section>

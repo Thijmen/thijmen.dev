@@ -51,6 +51,12 @@ const config: Partial<Config> = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
+      backgroundImage: {
+        'article-link':
+          'linear-gradient(rgb(0 0 0 / 0) 70%, rgb(255 15 64 / 0.4) 0)',
+        'article-link-dark':
+          'linear-gradient(rgb(0 0 0 / 0) 70%, rgb(173 32 60) 0)',
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
