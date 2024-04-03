@@ -33,6 +33,7 @@ import {
   SiWebpack,
   SiWordpress,
 } from 'react-icons/si'
+import { TbBrandReactNative } from 'react-icons/tb'
 
 export type stacksProps = {
   [key: string]: JSX.Element
@@ -86,4 +87,5 @@ export const STACKS: stacksProps = {
   Remix: <SiRemix size={iconSize} />,
   Express: <SiExpress size={iconSize} />,
   Jquery: <SiJquery size={iconSize} />,
+  ReactNative: <TbBrandReactNative size={iconSize} />,
 }
