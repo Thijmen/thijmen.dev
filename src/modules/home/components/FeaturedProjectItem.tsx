@@ -18,7 +18,7 @@ export const FeaturedProjectItem = ({
   const stacks: ProjectEntryStackCategoryFragmentFragment[] = (project.stacks ||
     []) as ProjectEntryStackCategoryFragmentFragment[]
   return (
-    <Link href={`/project/${project.slug}`}>
+    <Link href={`/projects/${project.slug}`}>
       <Card className='group relative flex h-[400px] w-full flex-col rounded-lg border shadow-sm dark:border-neutral-800'>
         <div
           className='relative rounded-xl duration-500'

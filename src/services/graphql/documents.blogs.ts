@@ -43,8 +43,8 @@ export const blogEntryFragment = gql(/* GraphQL */ `
 export const getBlogOverviewDocument = gql/* GraphQL */ `
   ${blogOverviewFragment}
 
-  query GetBlogs {
-    blogsEntries {
+  query GetBlogs($limit: Int!) {
+    blogsEntries(limit: $limit) {
       ...BlogOverviewEntryFragment
     }
   }

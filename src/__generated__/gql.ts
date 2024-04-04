@@ -19,7 +19,7 @@ const documents = {
     types.BlogBlockFragmentFragmentDoc,
   '\n  fragment BlogEntryFragment on blog_Entry {\n    id\n    title\n    slug\n    description\n    dateCreated\n    dateUpdated\n    isFeatured\n    featuredImage {\n      url\n    }\n    blogBlock {\n      ...BlogBlockFragment\n    }\n  }\n':
     types.BlogEntryFragmentFragmentDoc,
-  '\n  \n\n  query GetBlogs {\n    blogsEntries {\n      ...BlogOverviewEntryFragment\n    }\n  }\n':
+  '\n  \n\n  query GetBlogs($limit: Int!) {\n    blogsEntries(limit: $limit) {\n      ...BlogOverviewEntryFragment\n    }\n  }\n':
     types.GetBlogsDocument,
   '\n  \n  \n  query GetBlogDetail($slug: [String]) {\n    blogsEntries(slug: $slug) {\n      ...BlogEntryFragment\n    }\n  }\n':
     types.GetBlogDetailDocument,
@@ -77,8 +77,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  \n\n  query GetBlogs {\n    blogsEntries {\n      ...BlogOverviewEntryFragment\n    }\n  }\n',
-): (typeof documents)['\n  \n\n  query GetBlogs {\n    blogsEntries {\n      ...BlogOverviewEntryFragment\n    }\n  }\n']
+  source: '\n  \n\n  query GetBlogs($limit: Int!) {\n    blogsEntries(limit: $limit) {\n      ...BlogOverviewEntryFragment\n    }\n  }\n',
+): (typeof documents)['\n  \n\n  query GetBlogs($limit: Int!) {\n    blogsEntries(limit: $limit) {\n      ...BlogOverviewEntryFragment\n    }\n  }\n']
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

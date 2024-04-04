@@ -9,7 +9,7 @@ const BlogPage = async () => {
 
   if (pageInfo === null) return null
 
-  const blogEntries = await getBlogPosts()
+  const blogEntries = await getBlogPosts(10)
 
   return (
     <>

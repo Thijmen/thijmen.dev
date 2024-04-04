@@ -58,13 +58,16 @@ export const getPage = async (
 
   return data.data.pagesEntries.length > 0 ? data.data.pagesEntries[0] : null
 }
-export const getBlogPosts = async () => {
+export const getBlogPosts = async (limit: number) => {
   const blogEntriesResponse = await getClient().query({
     query: getBlogOverviewDocument,
     context: {
       fetchOptions: {
         next: { revalidate: REVALIDATE },
       },
+    },
+    variables: {
+      limit,
     },
   })
 
