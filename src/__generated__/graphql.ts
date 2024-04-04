@@ -7398,6 +7398,20 @@ export type GetProjectsQuery = {
   > | null
 }
 
+export type GetFeaturedProjectsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetFeaturedProjectsQuery = {
+  __typename?: 'Query'
+  projectsEntries?: Array<
+    | ({ __typename?: 'project_Entry' } & {
+        ' $fragmentRefs'?: {
+          ProjectEntryFragmentFragment: ProjectEntryFragmentFragment
+        }
+      })
+    | null
+  > | null
+}
+
 export type GetProjectDetailQueryVariables = Exact<{
   slug?: InputMaybe<
     | Array<InputMaybe<Scalars['String']['input']>>
@@ -8045,6 +8059,104 @@ export const GetProjectsDocument = {
     },
   ],
 } as unknown as DocumentNode<GetProjectsQuery, GetProjectsQueryVariables>
+export const GetFeaturedProjectsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetFeaturedProjects' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'projectsEntries' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'isFeatured' },
+                value: { kind: 'BooleanValue', value: true },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'ProjectEntryFragment' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'ProjectEntryStackCategoryFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'stacks_Category' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'stackHandle' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'ProjectEntryFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'project_Entry' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'isFeatured' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'projectHeaderImage' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'stacks' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: {
+                    kind: 'Name',
+                    value: 'ProjectEntryStackCategoryFragment',
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetFeaturedProjectsQuery,
+  GetFeaturedProjectsQueryVariables
+>
 export const GetProjectDetailDocument = {
   kind: 'Document',
   definitions: [

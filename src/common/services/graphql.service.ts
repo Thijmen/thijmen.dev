@@ -1,5 +1,6 @@
 import { getClient } from '@/services/graphql/graphql'
 import {
+  getFeaturedProjectsDocument,
   getProjectDetailDocument,
   getProjectsDocument,
 } from '@/services/graphql/documents.projects'
@@ -85,4 +86,17 @@ export const getBlogItem = async (
   })
 
   return data.data.blogsEntries.length > 0 ? data.data.blogsEntries[0] : null
+}
+
+export const getFeaturedProjects = async () => {
+  const featuredProjectsResponse = await getClient().query({
+    query: getFeaturedProjectsDocument,
+    context: {
+      fetchOptions: {
+        next: { revalidate: REVALIDATE },
+      },
+    },
+  })
+
+  return featuredProjectsResponse.data.projectsEntries
 }

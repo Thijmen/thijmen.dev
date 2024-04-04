@@ -53,6 +53,17 @@ export const getProjectsDocument = gql/* GraphQL */ `
     }
   }
 `
+
+export const getFeaturedProjectsDocument = gql/* GraphQL */ `
+  ${projectEntryStackCategoryFragment}
+  ${projectEntryFragment}
+
+  query GetFeaturedProjects {
+    projectsEntries(isFeatured: true) {
+      ...ProjectEntryFragment
+    }
+  }
+`
 export const getProjectDetailDocument = gql/* GraphQL */ `
   ${projectDetailFragment}
   ${projectEntryStackCategoryFragment}

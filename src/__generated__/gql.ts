@@ -35,6 +35,8 @@ const documents = {
     types.ProjectDetailFragmentFragmentDoc,
   '\n  \n  \n\n  query GetProjects {\n    projectsEntries {\n      ...ProjectEntryFragment\n    }\n  }\n':
     types.GetProjectsDocument,
+  '\n  \n  \n\n  query GetFeaturedProjects {\n    projectsEntries(isFeatured: true) {\n      ...ProjectEntryFragment\n    }\n  }\n':
+    types.GetFeaturedProjectsDocument,
   '\n  \n  \n\n  query GetProjectDetail($slug: [String]) {\n    projectsEntries(slug: $slug) {\n      ...ProjectDetailFragment\n    }\n  }\n':
     types.GetProjectDetailDocument,
 }
@@ -119,6 +121,12 @@ export function gql(
 export function gql(
   source: '\n  \n  \n\n  query GetProjects {\n    projectsEntries {\n      ...ProjectEntryFragment\n    }\n  }\n',
 ): (typeof documents)['\n  \n  \n\n  query GetProjects {\n    projectsEntries {\n      ...ProjectEntryFragment\n    }\n  }\n']
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  \n  \n\n  query GetFeaturedProjects {\n    projectsEntries(isFeatured: true) {\n      ...ProjectEntryFragment\n    }\n  }\n',
+): (typeof documents)['\n  \n  \n\n  query GetFeaturedProjects {\n    projectsEntries(isFeatured: true) {\n      ...ProjectEntryFragment\n    }\n  }\n']
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
