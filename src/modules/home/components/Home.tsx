@@ -1,8 +1,6 @@
 import Breakline from '@/common/components/elements/Breakline'
-
 import FeaturedProjectsPreview from './FeaturedProjectsPreview'
 import Introduction from './Introduction'
-import Services from './Services'
 import {
   getBlogPosts,
   getFeaturedProjects,
@@ -19,7 +17,6 @@ const Home = async () => {
       <FeaturedProjectsPreview projects={featuredProjects} />
       <Breakline className='my-8' />
       <LatestBlogs posts={latestPosts} />
-      <Services />
     </>
   )
 }
