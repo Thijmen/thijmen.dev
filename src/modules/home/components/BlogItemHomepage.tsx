@@ -12,7 +12,7 @@ export const BlogItemHomepage = ({
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className='shadow-feature-card dark:shadow-feature-card-dark group relative rounded-xl p-2'
+      className='shadow-feature-card dark:shadow-feature-card-dark group relative rounded-xl border-2 border-neutral-200 p-2'
     >
       <BlurImage
         width={1200}
