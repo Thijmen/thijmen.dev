@@ -6,6 +6,7 @@ import '@/common/styles/globals.css'
 
 import ClientLayout from '@/app/ClientLayout'
 import { generateSiteTitle } from '@/core/metadata'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: generateSiteTitle({ title: 'Unknown page' }),
@@ -54,6 +55,24 @@ export default function RootLayout({
       </head>
       <body>
         <ClientLayout>{children}</ClientLayout>
+        <Image
+          width={1512}
+          height={550}
+          className='absolute left-1/2 top-0 -z-10 -translate-x-1/2'
+          src='/images/gradient-background-top.png'
+          alt=''
+          role='presentation'
+          priority
+        />
+        {/*<Image*/}
+        {/*  width={1512}*/}
+        {/*  height={447}*/}
+        {/*  className='absolute -bottom-6 left-1/2 -z-10 -translate-x-1/2'*/}
+        {/*  src='/images/gradient-background-bottom.png'*/}
+        {/*  alt=''*/}
+        {/*  role='presentation'*/}
+        {/*  priority*/}
+        {/*/>*/}
       </body>
     </html>
   )
