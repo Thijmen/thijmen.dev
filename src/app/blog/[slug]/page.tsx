@@ -20,6 +20,10 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   )
 }
 
+export const generateStaticParams = () => {
+  return []
+}
+
 export async function generateMetadata({
   params: { slug },
 }: {
