@@ -2,6 +2,7 @@
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import Card from '@/common/components/elements/Card'
 
 interface Contribution {
   date: string
@@ -61,61 +62,62 @@ const Calendar = ({ data }: CalendarProps) => {
 
   return (
     <>
-      <div className='relative flex flex-col'>
-        <ul className='flex justify-end gap-[3px] overflow-hidden text-xs dark:text-neutral-400 md:justify-start'>
-          {months.map((month) => (
-            <li
-              key={month.firstDay}
-              className={clsx(`${month.totalWeeks < 2 ? 'invisible' : ''}`)}
-              style={{ minWidth: 14.3 * month.totalWeeks }}
-            >
-              {month.name}
-            </li>
-          ))}
-        </ul>
+      <Card className='flex flex-col self-center rounded-xl border border-neutral-200 bg-neutral-100 px-4 py-3 dark:border-neutral-900'>
+        <div className='relative flex flex-col'>
+          <ul className='flex justify-end gap-[3px] overflow-hidden text-xs dark:text-neutral-400 md:justify-start'>
+            {months.map((month) => (
+              <li
+                key={month.firstDay}
+                className={clsx(`${month.totalWeeks < 2 ? 'invisible' : ''}`)}
+                style={{ minWidth: 14.3 * month.totalWeeks }}
+              >
+                {month.name}
+              </li>
+            ))}
+          </ul>
 
-        <div className='flex justify-start gap-[3px] overflow-hidden'>
-          {weeks?.map((week) => (
-            <div key={week.firstDay}>
-              {week.contributionDays.map((contribution) => {
-                const backgroundColor =
-                  contribution.contributionCount > 0 && contribution.color
+          <div className='flex justify-start gap-[3px] overflow-hidden'>
+            {weeks?.map((week) => (
+              <div key={week.firstDay}>
+                {week.contributionDays.map((contribution) => {
+                  const backgroundColor =
+                    contribution.contributionCount > 0 && contribution.color
 
-                const getRandomDelayAnimate =
-                  Math.random() * week.contributionDays.length * 0.15
+                  const getRandomDelayAnimate =
+                    Math.random() * week.contributionDays.length * 0.15
 
-                return (
-                  <motion.span
-                    key={contribution.date}
-                    initial='initial'
-                    animate='animate'
-                    variants={{
-                      initial: { opacity: 0, translateY: -20 },
-                      animate: {
-                        opacity: 1,
-                        translateY: 0,
-                        transition: { delay: getRandomDelayAnimate },
-                      },
-                    }}
-                    className='my-[2px] block h-[12px] w-[12px] rounded-sm bg-neutral-300 dark:bg-neutral-800'
-                    style={backgroundColor ? { backgroundColor } : undefined}
-                    onMouseEnter={() =>
-                      setSelectContribution({
-                        count: contribution.contributionCount,
-                        date: contribution.date,
-                      })
-                    }
-                    onMouseLeave={() =>
-                      setSelectContribution({ count: null, date: null })
-                    }
-                  />
-                )
-              })}
-            </div>
-          ))}
+                  return (
+                    <motion.span
+                      key={contribution.date}
+                      initial='initial'
+                      animate='animate'
+                      variants={{
+                        initial: { opacity: 0, translateY: -20 },
+                        animate: {
+                          opacity: 1,
+                          translateY: 0,
+                          transition: { delay: getRandomDelayAnimate },
+                        },
+                      }}
+                      className='my-[2px] block h-[12px] w-[12px] rounded-sm bg-neutral-300 dark:bg-neutral-800'
+                      style={backgroundColor ? { backgroundColor } : undefined}
+                      onMouseEnter={() =>
+                        setSelectContribution({
+                          count: contribution.contributionCount,
+                          date: contribution.date,
+                        })
+                      }
+                      onMouseLeave={() =>
+                        setSelectContribution({ count: null, date: null })
+                      }
+                    />
+                  )
+                })}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-
+      </Card>
       <div className='flex flex-wrap items-center justify-between gap-2'>
         <div className='flex items-center gap-2 text-sm'>
           <span className='dark:text-neutral-400'>Less</span>
