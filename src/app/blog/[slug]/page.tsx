@@ -3,6 +3,7 @@ import { generateSiteTitle } from '@/core/metadata'
 import BlogItemHeader from '@/app/blog/[slug]/components/BlogItemHeader'
 import { BlogItemContent } from '@/app/blog/[slug]/components/BlogItemContent'
 import { getBlogItem } from '@/common/services/graphql.service'
+import { redirect } from 'next/navigation'
 
 export const revalidate = 300
 
@@ -30,6 +31,10 @@ export async function generateMetadata({
   params: { slug: string }
 }): Promise<Metadata> {
   const blog = await getBlogItem(slug)
+
+  if (!blog) {
+    redirect('/404')
+  }
 
   const title = blog?.title ?? ''
 
