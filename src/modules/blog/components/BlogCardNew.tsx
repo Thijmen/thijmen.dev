@@ -24,7 +24,7 @@ const BlogCardNew = ({
   return (
     <a
       href={`/blog/${blogItem.slug}`}
-      className='shadow-feature-card dark:shadow-feature-card-dark group rounded-xl px-2 py-4'
+      className='shadow-feature-card dark:shadow-feature-card-dark group relative rounded-xl border-2 border-neutral-200 p-2 dark:border-neutral-500'
     >
       <BlurImage
         src={blogItem.featuredImage[0]?.url || defaultImage}
