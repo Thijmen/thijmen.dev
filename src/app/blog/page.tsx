@@ -13,7 +13,7 @@ const BlogPage = async () => {
 
   return (
     <>
-      <Container addPaddingTop className='xl:!-mt-5 '>
+      <Container data-aos='fade-up'>
         <BlogListNew page={pageInfo} blogs={blogEntries} />
       </Container>
     </>

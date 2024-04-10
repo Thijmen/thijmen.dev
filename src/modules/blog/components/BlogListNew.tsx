@@ -4,7 +4,7 @@ import {
 } from '@/__generated__/graphql'
 import React from 'react'
 import BlogCardNew from '@/modules/blog/components/BlogCardNew'
-import { PageHeader } from '@/common/components/layouts/header/PageHeader'
+import PageHeading from '@/common/components/elements/PageHeading'
 
 interface Props {
   blogs: BlogOverviewEntryFragmentFragment[]
@@ -13,27 +13,17 @@ interface Props {
 
 const BlogListNew = (props: Props) => {
   const { page } = props
-  const total_posts = props.blogs.length
-
-  const featuredBlogs = [...props.blogs].filter((blog) => blog.isFeatured)
 
   return (
-    <div className=''>
-      <PageHeader
-        title={page.title ?? ''}
-        description={page.doxterContent ?? ''}
-      />
+    <>
+      <PageHeading title={page.title ?? ''} md={page.doxterContent ?? ''} />
 
-      <div className='space-y-5'>
-        <div className='grid gap-4 md:grid-cols-2'>
-          {props.blogs.map(
-            (item: BlogOverviewEntryFragmentFragment, index: number) => (
-              <BlogCardNew key={item.slug} blogItem={item} />
-            ),
-          )}
-        </div>
+      <div className='grid gap-4 md:grid-cols-2'>
+        {props.blogs.map((item: BlogOverviewEntryFragmentFragment) => (
+          <BlogCardNew key={item.slug} blogItem={item} />
+        ))}
       </div>
-    </div>
+    </>
   )
 }
 
