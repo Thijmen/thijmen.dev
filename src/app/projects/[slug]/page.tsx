@@ -7,6 +7,7 @@ import ProjectDetail from '@/modules/projects/components/ProjectDetail'
 import { getProject } from '@/common/services/graphql.service'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
+import Layout from '@/common/components/layouts'
 
 const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
@@ -20,13 +21,13 @@ const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
   const project = data.data.projectsEntries[0]
 
   return (
-    <>
+    <Layout>
       <Container data-aos={'fade-up'}>
         <BackButton url={'/projects'} />
         <PageHeading title={project.title} description={project.description} />
         <ProjectDetail project={project} />
       </Container>
-    </>
+    </Layout>
   )
 }
 export const generateStaticParams = () => {

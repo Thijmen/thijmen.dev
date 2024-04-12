@@ -1,7 +1,9 @@
-import ProjectsClientsComponent from '@/app/projects/client-component'
-import { getPage, getProjects } from '@/common/services/graphql.service'
-import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+
+import ProjectsClientsComponent from '@/app/projects/client-component'
+import Layout from '@/common/components/layouts'
+import { getPage, getProjects } from '@/common/services/graphql.service'
 import { generateSiteTitle } from '@/core/metadata'
 
 const ProjectsPage = async () => {
@@ -14,9 +16,9 @@ const ProjectsPage = async () => {
   const projects = await getProjects()
 
   return (
-    <>
+    <Layout>
       <ProjectsClientsComponent page={pageData} projects={projects} />
-    </>
+    </Layout>
   )
 }
 

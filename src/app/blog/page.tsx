@@ -3,6 +3,7 @@ import BlogListNew from '@/modules/blog'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
 import { getBlogPosts, getPage } from '@/common/services/graphql.service'
+import Layout from '@/common/components/layouts'
 
 const BlogPage = async () => {
   const pageInfo = await getPage('blog')
@@ -12,11 +13,11 @@ const BlogPage = async () => {
   const blogEntries = await getBlogPosts(10)
 
   return (
-    <>
+    <Layout>
       <Container data-aos='fade-up'>
         <BlogListNew page={pageInfo} blogs={blogEntries} />
       </Container>
-    </>
+    </Layout>
   )
 }
 

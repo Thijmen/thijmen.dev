@@ -4,6 +4,7 @@ import BlogItemHeader from '@/app/blog/[slug]/components/BlogItemHeader'
 import { BlogItemContent } from '@/app/blog/[slug]/components/BlogItemContent'
 import { getBlogItem } from '@/common/services/graphql.service'
 import { redirect } from 'next/navigation'
+import Layout from '@/common/components/layouts'
 
 export const revalidate = 300
 
@@ -14,10 +15,10 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   if (!blog) return null
 
   return (
-    <>
+    <Layout isFullPageHeader title={blog.title ?? ''}>
       <BlogItemHeader blog={blog} />
       <BlogItemContent blog={blog} />
-    </>
+    </Layout>
   )
 }
 
