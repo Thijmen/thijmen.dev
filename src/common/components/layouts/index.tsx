@@ -59,15 +59,22 @@ const Layout = ({ children }: LayoutProps) => {
 
   const sentinelRef = useRef<HTMLDivElement | null>(null)
   const navRef = useRef<HTMLDivElement | null>(null)
-  const handler = useCallback(([entry]: IntersectionObserverEntry[]) => {
-    const useSticky = true
-    if (useSticky && navRef.current) {
-      console.log('entry intersecting', entry.isIntersecting)
-      navRef.current?.classList.toggle('sticky-nav-full', !entry.isIntersecting)
-    } else {
-      navRef.current?.classList.add('remove-sticky')
-    }
-  }, [])
+  const handler = useCallback(
+    ([entry]: IntersectionObserverEntry[]) => {
+      const useSticky = true
+      if (useSticky && navRef.current) {
+        console.log('entry intersecting', entry.isIntersecting)
+        navRef.current?.classList.toggle(
+          'sticky-nav-full',
+          !entry.isIntersecting,
+        )
+      } else {
+        navRef.current?.classList.add('remove-sticky')
+      }
+    },
+    [navRef],
+  )
+
   const titleRef = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
@@ -83,11 +90,48 @@ const Layout = ({ children }: LayoutProps) => {
     }
   }, [sentinelRef])
 
-  const fullWidth = true
+  const fullWidth = false
 
   return (
     <>
       {/* <TopBar /> */}
+      <div className='observer-element h-4 md:h-12' ref={sentinelRef}></div>
+      <div
+        className={`sticky-nav group m-auto mb-2 flex h-6 w-full w-full flex-row items-center justify-between bg-opacity-60 py-8 md:mb-12 ${
+          !fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
+        }`}
+        id='sticky-nav'
+        ref={navRef}
+        // onClick={handleClickHeader}
+      >
+        <svg
+          viewBox='0 0 24 24'
+          className='caret pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-6 w-6 opacity-30 transition duration-100 group-hover:opacity-100'
+        >
+          <path
+            d='M12 10.828l-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414z'
+            className='fill-black dark:fill-white'
+          />
+        </svg>
+        <div className='flex items-center'>
+          <Link href='/' aria-label='Hello'>
+            <Image
+              src={'/images/thijmen.png'}
+              width={24}
+              height={24}
+              alt={''}
+            />
+          </Link>
+          <HeaderName
+            ref={titleRef}
+            siteTitle={'Title'}
+            siteDescription={'Description'}
+            postTitle={'Post title'}
+            onClick={() => console.log('clicked!')}
+          />
+        </div>
+        <NavBar />
+      </div>
       <div
         className={clsx(
           'mx-auto max-w-6xl lg:px-8',
@@ -95,49 +139,7 @@ const Layout = ({ children }: LayoutProps) => {
         )}
       >
         {isFullPageHeader ? (
-          <>
-            <div
-              className='observer-element h-4 md:h-12'
-              ref={sentinelRef}
-            ></div>
-            <div
-              className={`sticky-nav group m-auto mb-2 flex h-6 w-full flex-row items-center justify-between bg-opacity-60 py-8 md:mb-12 ${
-                !fullWidth ? 'max-w-3xl px-4' : 'px-4 md:px-24'
-              }`}
-              id='sticky-nav'
-              ref={navRef}
-              // onClick={handleClickHeader}
-            >
-              <svg
-                viewBox='0 0 24 24'
-                className='caret pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-6 w-6 opacity-30 transition duration-100 group-hover:opacity-100'
-              >
-                <path
-                  d='M12 10.828l-4.95 4.95-1.414-1.414L12 8l6.364 6.364-1.414 1.414z'
-                  className='fill-black dark:fill-white'
-                />
-              </svg>
-              <div className='flex items-center'>
-                <Link href='/' aria-label='Hello'>
-                  <Image
-                    src={'/images/thijmen.png'}
-                    width={24}
-                    height={24}
-                    alt={''}
-                  />
-                </Link>
-                <HeaderName
-                  ref={titleRef}
-                  siteTitle={'Title'}
-                  siteDescription={'Description'}
-                  postTitle={'Post title'}
-                  onClick={() => console.log('clicked!')}
-                />
-              </div>
-              <NavBar />
-            </div>
-            {children}
-          </>
+          <>{children}</>
         ) : (
           <div className='flex flex-col lg:flex-row lg:gap-5 lg:py-4 xl:pb-8'>
             <HeaderSidebar />
