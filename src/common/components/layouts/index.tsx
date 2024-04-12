@@ -13,9 +13,10 @@ import { FullHeaderNav } from '@/common/components/layouts/header/FullHeaderNav'
 interface LayoutProps {
   children: ReactNode
   isFullPageHeader?: boolean
+  title?: string
 }
 
-const Layout = ({ children, isFullPageHeader }: LayoutProps) => {
+const Layout = ({ children, isFullPageHeader, title }: LayoutProps) => {
   const { resolvedTheme } = useTheme()
   const hasMounted = useHasMounted()
   const { width } = useWindowSize()
@@ -24,10 +25,10 @@ const Layout = ({ children, isFullPageHeader }: LayoutProps) => {
   const isDarkTheme =
     hasMounted && (resolvedTheme === 'dark' || resolvedTheme === 'system')
 
-  if (isFullPageHeader) {
+  if (isFullPageHeader && title && title.length > 0) {
     return (
       <>
-        <FullHeaderNav />
+        <FullHeaderNav title={title} />
         <div
           className={clsx(
             'mx-auto max-w-6xl lg:px-8',

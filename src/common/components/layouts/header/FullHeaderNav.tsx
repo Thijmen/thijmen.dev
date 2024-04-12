@@ -24,7 +24,7 @@ const NavBar = () => {
   )
 }
 
-export const FullHeaderNav = () => {
+export const FullHeaderNav = ({ title }: { title: string }) => {
   const titleRef = useRef<HTMLParagraphElement>(null)
   const sentinelRef = useRef<HTMLDivElement | null>(null)
   const navRef = useRef<HTMLDivElement | null>(null)
@@ -88,9 +88,9 @@ export const FullHeaderNav = () => {
           </Link>
           <HeaderName
             ref={titleRef}
-            siteTitle={'Title'}
+            siteTitle={'Thijmen.dev'}
             siteDescription={'Description'}
-            postTitle={'Post title'}
+            postTitle={title}
             onClick={() => console.log('clicked!')}
           />
         </div>
@@ -122,9 +122,6 @@ const HeaderName = forwardRef<HTMLParagraphElement, HeaderNameProps>(
         )}
         <span className='col-start-1 row-start-1'>
           <span className='site-title'>{siteTitle}</span>
-          <span className='site-description font-normal'>
-            , {siteDescription}
-          </span>
         </span>
       </p>
     )

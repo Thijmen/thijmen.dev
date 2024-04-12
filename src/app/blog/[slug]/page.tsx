@@ -15,7 +15,7 @@ const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   if (!blog) return null
 
   return (
-    <Layout>
+    <Layout isFullPageHeader title={blog.title ?? ''}>
       <BlogItemHeader blog={blog} />
       <BlogItemContent blog={blog} />
     </Layout>
