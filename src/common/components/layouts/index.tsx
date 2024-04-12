@@ -39,24 +39,8 @@ const NavBar = () => {
   )
 }
 
-const Layout = ({ children }: LayoutProps) => {
-  const { resolvedTheme } = useTheme()
-  const hasMounted = useHasMounted()
-  const pathname = usePathname()
-  const { width } = useWindowSize()
-  const isMobile = width < 480
-
-  const isDarkTheme =
-    hasMounted && (resolvedTheme === 'dark' || resolvedTheme === 'system')
-
-  const pageName = pathname.split('/')[1]
-
-  const isFullPageHeader =
-    pageName === 'playground' ||
-    // pageName === 'blog' ||
-    pathname.startsWith('/blog/') ||
-    pathname.startsWith('/learn/')
-
+const StickyHeader = () => {
+  const titleRef = useRef<HTMLParagraphElement>(null)
   const sentinelRef = useRef<HTMLDivElement | null>(null)
   const navRef = useRef<HTMLDivElement | null>(null)
   const handler = useCallback(
@@ -75,8 +59,6 @@ const Layout = ({ children }: LayoutProps) => {
     [navRef],
   )
 
-  const titleRef = useRef<HTMLParagraphElement>(null)
-
   useEffect(() => {
     const sentinelEl = sentinelRef.current
 
@@ -89,12 +71,9 @@ const Layout = ({ children }: LayoutProps) => {
       sentinelEl && observer.unobserve(sentinelEl)
     }
   }, [sentinelRef])
-
   const fullWidth = false
-
   return (
     <>
-      {/* <TopBar /> */}
       <div className='observer-element h-4 md:h-12' ref={sentinelRef}></div>
       <div
         className={`sticky-nav group m-auto mb-2 flex h-6 w-full w-full flex-row items-center justify-between bg-opacity-60 py-8 md:mb-12 ${
@@ -132,6 +111,32 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
         <NavBar />
       </div>
+    </>
+  )
+}
+
+const Layout = ({ children }: LayoutProps) => {
+  const { resolvedTheme } = useTheme()
+  const hasMounted = useHasMounted()
+  const pathname = usePathname()
+  const { width } = useWindowSize()
+  const isMobile = width < 480
+
+  const isDarkTheme =
+    hasMounted && (resolvedTheme === 'dark' || resolvedTheme === 'system')
+
+  const pageName = pathname.split('/')[1]
+
+  const isFullPageHeader =
+    pageName === 'playground' ||
+    // pageName === 'blog' ||
+    pathname.startsWith('/blog/') ||
+    pathname.startsWith('/learn/')
+
+  return (
+    <>
+      {/* <TopBar /> */}
+      {isFullPageHeader && <StickyHeader />}
       <div
         className={clsx(
           'mx-auto max-w-6xl lg:px-8',
