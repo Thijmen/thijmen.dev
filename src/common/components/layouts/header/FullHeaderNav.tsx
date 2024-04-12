@@ -14,7 +14,7 @@ const NavBar = () => {
         {menus.map((link) => (
           <li
             key={link.title}
-            className='nav ml-4 block text-black dark:text-gray-50'
+            className='nav ml-4 block font-sora text-black dark:text-gray-50'
           >
             <Link href={link.href}>{link.title}</Link>
           </li>
@@ -116,12 +116,12 @@ const HeaderName = forwardRef<HTMLParagraphElement, HeaderNameProps>(
         // onClick={onClick}
       >
         {postTitle && (
-          <span className='post-title col-start-1 row-start-1'>
+          <span className='post-title col-start-1 row-start-1 font-sora'>
             {postTitle}
           </span>
         )}
         <span className='col-start-1 row-start-1'>
-          <span className='site-title'>{siteTitle}</span>
+          <span className='site-title font-sora'>{siteTitle}</span>
         </span>
       </p>
     )
