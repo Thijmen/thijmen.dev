@@ -4,8 +4,6 @@ import AOS from 'aos'
 import dynamic from 'next/dynamic'
 import { ThemeProvider } from 'next-themes'
 import { useEffect } from 'react'
-
-import Layout from '@/common/components/layouts'
 import { CommandPaletteProvider } from '@/common/context/CommandPaletteContext'
 import { firaCode, jakartaSans, soraSans } from '@/common/styles/fonts'
 import CommandPalette from '@/common/components/elements/CommandPalette'
@@ -42,7 +40,7 @@ export default function ClientLayout({
       <ThemeProvider attribute='class' defaultTheme='dark'>
         <CommandPaletteProvider>
           <CommandPalette />
-          <Layout>{children}</Layout>
+          {children}
         </CommandPaletteProvider>
       </ThemeProvider>
     </>

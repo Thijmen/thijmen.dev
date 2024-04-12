@@ -4,6 +4,7 @@ import PageHeading from '@/common/components/elements/PageHeading'
 import Dashboard from '@/modules/dashboard'
 import type { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
+import Layout from '@/common/components/layouts'
 
 export const metadata: Metadata = {
   title: generateSiteTitle({ title: 'Dashboard' }),
@@ -13,7 +14,7 @@ const DashboardPage = async () => {
   const githubData = await getGithubUser('personal')
 
   return (
-    <>
+    <Layout>
       <Container data-aos='fade-up'>
         <PageHeading
           title={'Dashboard'}
@@ -23,7 +24,7 @@ const DashboardPage = async () => {
         />
         <Dashboard />
       </Container>
-    </>
+    </Layout>
   )
 }
 
