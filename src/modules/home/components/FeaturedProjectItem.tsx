@@ -1,22 +1,19 @@
 'use client'
-import {
-  ProjectEntryFragmentFragment,
-  ProjectEntryStackCategoryFragmentFragment,
-} from '@/__generated__/graphql'
 import Link from 'next/link'
 import Card from '@/common/components/elements/Card'
 import Image from '@/common/components/elements/Image'
 import slugify from 'slugify'
+import { Project, R2Media, Stack } from '../../../../payload-types'
 
-export const FeaturedProjectItem = ({
-  project,
-}: {
-  project: ProjectEntryFragmentFragment
-}) => {
+export const FeaturedProjectItem = ({ project }: { project: Project }) => {
   const defaultImage = '/images/placeholder.png'
 
-  const stacks: ProjectEntryStackCategoryFragmentFragment[] = (project.stacks ||
-    []) as ProjectEntryStackCategoryFragmentFragment[]
+  const stacks = (project.stacks || []) as Stack[]
+
+  const projectImage =
+    project.headerImage != null
+      ? (project.headerImage as R2Media).url || defaultImage
+      : defaultImage
   return (
     <Link href={`/projects/${project.slug}`}>
       <Card className='group relative flex h-[400px] w-full flex-col rounded-lg border shadow-sm dark:border-neutral-800'>
@@ -28,7 +25,7 @@ export const FeaturedProjectItem = ({
           }}
         >
           <Image
-            src={project.projectHeaderImage[0]?.url || defaultImage}
+            src={projectImage}
             alt={project.title || ''}
             fill={true}
             sizes='100vw, 100vh'
@@ -57,7 +54,7 @@ export const FeaturedProjectItem = ({
               </h3>
 
               <p className='text-sm leading-relaxed text-neutral-400'>
-                {project.description}
+                {project.introduction}
               </p>
             </div>
           </div>
