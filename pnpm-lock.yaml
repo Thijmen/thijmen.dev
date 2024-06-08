@@ -44,6 +44,9 @@ dependencies:
   '@payloadcms/db-postgres':
     specifier: 3.0.0-beta.43
     version: 3.0.0-beta.43(payload@3.0.0-beta.43)(react@19.0.0-rc-f994737d14-20240522)(types-react@19.0.0-beta.2)
+  '@payloadcms/live-preview-react':
+    specifier: ^0.2.0
+    version: 0.2.0(react@19.0.0-rc-f994737d14-20240522)
   '@payloadcms/next':
     specifier: 3.0.0-beta.43
     version: 3.0.0-beta.43(graphql@16.8.1)(monaco-editor@0.49.0)(next@15.0.0-rc.0)(payload@3.0.0-beta.43)(react-dom@19.0.0-rc-f994737d14-20240522)(react@19.0.0-rc-f994737d14-20240522)(types-react@19.0.0-beta.2)(typescript@5.4.5)
@@ -5181,6 +5184,19 @@ packages:
       ts-essentials: 7.0.3(typescript@5.4.5)
     transitivePeerDependencies:
       - typescript
+    dev: false
+
+  /@payloadcms/live-preview-react@0.2.0(react@19.0.0-rc-f994737d14-20240522):
+    resolution: {integrity: sha512-ao7DN2GJFPoipw2cmt2M0tfwmUa0hIn3UxB5EaMv6RduMuOMQlG5hx5ouX3g5wPMcQpyvLwxCuuiQhj1nKMGhA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@payloadcms/live-preview': 0.2.2
+      react: 19.0.0-rc-f994737d14-20240522
+    dev: false
+
+  /@payloadcms/live-preview@0.2.2:
+    resolution: {integrity: sha512-FOcg/HOIzzESjoT4vXgM7Pjd+bODodZTKR/pEJWsjLtyARd6NfF3MNWS+tdlfa3TOZrdT8WnHBAKsKyREyE3og==}
     dev: false
 
   /@payloadcms/next@3.0.0-beta.43(graphql@16.8.1)(monaco-editor@0.49.0)(next@15.0.0-rc.0)(payload@3.0.0-beta.43)(react-dom@19.0.0-rc-f994737d14-20240522)(react@19.0.0-rc-f994737d14-20240522)(types-react@19.0.0-beta.2)(typescript@5.4.5):

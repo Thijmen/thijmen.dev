@@ -11,6 +11,7 @@ export interface Config {
     users: User
     projects: Project
     stacks: Stack
+    blogs: Blog
     pages: Page
     'r2-media': R2Media
     'payload-preferences': PayloadPreference
@@ -86,6 +87,26 @@ export interface R2Media {
   height?: number | null
   focalX?: number | null
   focalY?: number | null
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogs".
+ */
+export interface Blog {
+  id: number
+  title: string
+  slug: string
+  isFeatured?: boolean | null
+  image?: number | R2Media | null
+  layout: {
+    header?: string | null
+    content?: string | null
+    id?: string | null
+    blockName?: string | null
+    blockType: 'block-markdown'
+  }[]
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

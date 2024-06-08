@@ -14,6 +14,7 @@ import { StackCollection } from '@/payloadcms/collections/stackCollection'
 import { seed } from '@/payloadcms/seed'
 import { r2Adapter } from '@/payloadcms/adapters/r2adapter'
 import { PageCollection } from '@/payloadcms/collections/pageCollection'
+import { BlogCollection } from '@/payloadcms/collections/blogCollection'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,6 +34,7 @@ export default buildConfig({
     },
     ProjectCollection,
     StackCollection,
+    BlogCollection,
     PageCollection,
     MediaCollection,
   ],
