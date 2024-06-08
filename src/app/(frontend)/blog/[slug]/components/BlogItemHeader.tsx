@@ -3,16 +3,18 @@
 import * as React from 'react'
 import Link from 'next/link'
 import ImageZoom from '@/common/components/elements/ImageZoom'
-import { BlogEntryFragmentFragment } from '@/__generated__/graphql'
 import { BlurImage } from '@/common/components/elements/BlurImage'
+import { Blog, R2Media } from '../../../../../../payload-types'
 
 type HeaderProps = {
-  blog: BlogEntryFragmentFragment
+  blog: Blog
 }
 
 const Header = (props: HeaderProps) => {
   const { blog } = props
-  const formattedDate = blog.dateCreated
+  const formattedDate = blog.createdAt
+
+  const image = blog.image != null ? (blog.image as R2Media).url || '' : ''
 
   return (
     <div className='space-y-16 py-16'>
@@ -46,12 +48,12 @@ const Header = (props: HeaderProps) => {
       </div>
       <ImageZoom
         zoomImg={{
-          src: blog.featuredImage[0]?.url ?? '',
-          alt: blog.title ?? '',
+          src: image,
+          alt: blog.title,
         }}
       >
         <BlurImage
-          src={blog.featuredImage[0]?.url ?? ''}
+          src={image}
           className='rounded-lg'
           width={1200}
           height={630}

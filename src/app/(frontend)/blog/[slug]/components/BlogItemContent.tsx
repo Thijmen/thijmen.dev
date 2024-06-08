@@ -1,33 +1,29 @@
-import {
-  BlogBlockFragmentFragment,
-  BlogEntryFragmentFragment,
-} from '@/__generated__/graphql'
-import { TOC } from '@/common/components/elements/mdx/types'
-import Mdx from '@/common/components/elements/mdx/Mdx'
-import TableOfContents from '@/app/blog/[slug]/components/BlogToc'
-import { BlogProgress } from '@/app/blog/[slug]/components/BlogProgress'
-import Heading from '@/common/components/elements/mdx/elements/Heading'
 import slugify from 'slugify'
 
+import Heading from '@/common/components/elements/mdx/elements/Heading'
+import Mdx from '@/common/components/elements/mdx/Mdx'
+import { TOC } from '@/common/components/elements/mdx/types'
+
+import { Blog } from '../../../../../../payload-types'
+import TableOfContents from '@/app/(frontend)/blog/[slug]/components/BlogToc'
+import { BlogProgress } from '@/app/(frontend)/blog/[slug]/components/BlogProgress'
+
 type Props = {
-  blog: BlogEntryFragmentFragment
+  blog: Blog
 }
 
 // TODO: Move to file
 export const BlogItemContent = (props: Props) => {
   const { blog } = props
 
-  const blocks: BlogBlockFragmentFragment[] =
-    blog.blogBlock as BlogBlockFragmentFragment[]
-
   const createSlug = (title: string) => {
     return slugify(title, { lower: true })
   }
 
-  const toc: TOC[] = blocks.map((block, index) => {
+  const toc: TOC[] = blog.layout.map((block) => {
     return {
-      title: block.title ?? '',
-      url: createSlug(block.title ?? ''),
+      title: block.header ?? '',
+      url: createSlug(block.header ?? ''),
       depth: 0,
     }
   })
@@ -35,14 +31,14 @@ export const BlogItemContent = (props: Props) => {
     <>
       <div className='mt-8 flex flex-col justify-between lg:flex-row'>
         <article className='prose w-full lg:w-[670px]'>
-          {blocks.map((block, index) => {
+          {blog.layout.map((block, index) => {
             return (
               <>
-                <Heading id={createSlug(block.title ?? '')} as={'h2'}>
-                  {block.title}
+                <Heading id={createSlug(block.header ?? '')} as='h2'>
+                  {block.header}
                 </Heading>
 
-                <Mdx key={index} content={block.doxterContent ?? ''} />
+                <Mdx key={index} content={block.content ?? ''} />
               </>
             )
           })}

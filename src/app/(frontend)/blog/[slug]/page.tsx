@@ -1,21 +1,24 @@
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
-import BlogItemHeader from '@/app/blog/[slug]/components/BlogItemHeader'
-import { BlogItemContent } from '@/app/blog/[slug]/components/BlogItemContent'
 import { getBlogItem } from '@/common/services/graphql.service'
 import { redirect } from 'next/navigation'
 import Layout from '@/common/components/layouts'
+import { getNewBlog } from '@/common/services/blogs.service'
+import BlogItemHeader from '@/app/(frontend)/blog/[slug]/components/BlogItemHeader'
+import { BlogItemContent } from '@/app/(frontend)/blog/[slug]/components/BlogItemContent'
 
 export const revalidate = 300
 
 const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const blog = await getBlogItem(slug)
+  const blog = await getNewBlog(slug)
 
   // @TODO: Redirects
-  if (!blog) return null
+  if (!blog) {
+    redirect('/404')
+  }
 
   return (
-    <Layout isFullPageHeader title={blog.title ?? ''}>
+    <Layout isFullPageHeader title={blog.title}>
       <BlogItemHeader blog={blog} />
       <BlogItemContent blog={blog} />
     </Layout>
