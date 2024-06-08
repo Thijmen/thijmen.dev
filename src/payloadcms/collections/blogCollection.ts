@@ -47,6 +47,11 @@ export const BlogCollection: CollectionConfig = {
               label: 'Is Featured Blog',
               admin: {},
             },
+            {
+              name: 'description',
+              type: 'text',
+              required: true,
+            },
           ],
         },
         {

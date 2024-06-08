@@ -2,20 +2,22 @@ import Container from '@/common/components/elements/Container'
 import BlogListNew from '@/modules/blog'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
-import { getBlogPosts, getPage } from '@/common/services/graphql.service'
+import { getPage } from '@/common/services/graphql.service'
 import Layout from '@/common/components/layouts'
+import { getNewPage } from '@/common/services/pages.service'
+import { getNewBlogs } from '@/common/services/blogs.service'
 
 const BlogPage = async () => {
-  const pageInfo = await getPage('blog')
+  const page = await getNewPage('blog')
 
-  if (pageInfo === null) return null
+  if (page === null) return null
 
-  const blogEntries = await getBlogPosts(10)
+  const blogEntries = await getNewBlogs(10)
 
   return (
     <Layout>
       <Container data-aos='fade-up'>
-        <BlogListNew page={pageInfo} blogs={blogEntries} />
+        <BlogListNew page={page} blogs={blogEntries} />
       </Container>
     </Layout>
   )

@@ -97,6 +97,7 @@ export interface Blog {
   title: string
   slug: string
   isFeatured?: boolean | null
+  description: string
   image?: number | R2Media | null
   layout: {
     header?: string | null

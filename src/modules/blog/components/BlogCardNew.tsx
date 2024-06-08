@@ -1,14 +1,10 @@
 'use client'
 import { useState } from 'react'
 import { calculateReadingTime } from '@/common/helpers'
-import { BlogOverviewEntryFragmentFragment } from '@/__generated__/graphql'
 import { BlurImage } from '@/common/components/elements/BlurImage'
+import { Blog, R2Media } from '../../../../payload-types'
 
-const BlogCardNew = ({
-  blogItem,
-}: {
-  blogItem: BlogOverviewEntryFragmentFragment
-}) => {
+const BlogCardNew = ({ blogItem }: { blogItem: Blog }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false)
 
   const readingTimeMinutes = calculateReadingTime('@TODO: fixme') ?? 0
@@ -16,6 +12,10 @@ const BlogCardNew = ({
 
   const defaultImage = '/images/placeholder.png'
 
+  const image =
+    blogItem.image != null
+      ? (blogItem.image as R2Media).url || defaultImage
+      : defaultImage
   const slideDownVariants = {
     hidden: { opacity: 0, y: -10 },
     visible: { opacity: 1, y: 0 },
@@ -27,12 +27,12 @@ const BlogCardNew = ({
       className='shadow-feature-card dark:shadow-feature-card-dark group relative rounded-xl border-2 border-neutral-200 p-2 dark:border-neutral-500'
     >
       <BlurImage
-        src={blogItem.featuredImage[0]?.url || defaultImage}
+        src={image}
         className='rounded-lg'
         width={1200}
         height={630}
         imageClassName='transition-transform group-hover:scale-105'
-        alt={blogItem.title ?? ''}
+        alt={blogItem.title}
       />
       <div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-zinc-500'>
         TODO Date
