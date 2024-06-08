@@ -4,9 +4,9 @@ import 'tailwindcss/tailwind.css'
 import 'aos/dist/aos.css'
 import '@/common/styles/globals.css'
 
-import ClientLayout from '@/app/ClientLayout'
 import { generateSiteTitle } from '@/core/metadata'
 import Image from 'next/image'
+import ClientLayout from '@/app/(frontend)/ClientLayout'
 
 export const metadata: Metadata = {
   title: generateSiteTitle({ title: 'Unknown page' }),
