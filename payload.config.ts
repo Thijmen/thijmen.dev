@@ -1,51 +1,21 @@
 import path from 'path'
 // import { postgresAdapter } from '@payloadcms/db-postgres'
 import { en } from 'payload/i18n/en'
-import {
-  AlignFeature,
-  BlockquoteFeature,
-  BlocksFeature,
-  BoldFeature,
-  ChecklistFeature,
-  HeadingFeature,
-  IndentFeature,
-  InlineCodeFeature,
-  ItalicFeature,
-  lexicalEditor,
-  LinkFeature,
-  OrderedListFeature,
-  ParagraphFeature,
-  RelationshipFeature,
-  UnorderedListFeature,
-  UploadFeature,
-} from '@payloadcms/richtext-lexical'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 //import { slateEditor } from '@payloadcms/richtext-slate'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
-import { s3Adapter } from '@payloadcms/plugin-cloud-storage/s3'
 import { MediaCollection } from '@/payloadcms/collections/mediaCollection'
 import { ProjectCollection } from '@/payloadcms/collections/projectCollection'
 import { StackCollection } from '@/payloadcms/collections/stackCollection'
+import { seed } from '@/payloadcms/seed'
+import { r2Adapter } from '@/payloadcms/adapters/r2adapter'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-
-const r2Adapter = s3Adapter({
-  config: {
-    endpoint: process.env.S3_ENDPOINT,
-    credentials: {
-      accessKeyId: process.env.S3_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
-    },
-    // ... Other S3 configuration
-    region: 'auto',
-  },
-  bucket: process.env.S3_BUCKET!,
-})
 
 export default buildConfig({
   //editor: slateEditor({}),
@@ -114,20 +84,7 @@ export default buildConfig({
     },
   },
   async onInit(payload) {
-    const existingUsers = await payload.find({
-      collection: 'users',
-      limit: 1,
-    })
-
-    if (existingUsers.docs.length === 0) {
-      await payload.create({
-        collection: 'users',
-        data: {
-          email: 'dev@payloadcms.com',
-          password: 'test',
-        },
-      })
-    }
+    await seed(payload)
   },
   // Sharp is now an optional dependency -
   // if you want to resize images, crop, set focal point, etc.

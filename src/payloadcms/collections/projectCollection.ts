@@ -18,6 +18,12 @@ export const ProjectCollection: CollectionConfig = {
               required: true,
             },
             {
+              name: 'slug',
+              type: 'text',
+              required: true,
+              unique: true,
+            },
+            {
               name: 'isFeatured',
               type: 'checkbox',
               label: 'Is Featured Project',
@@ -28,6 +34,10 @@ export const ProjectCollection: CollectionConfig = {
               type: 'relationship',
               relationTo: 'stacks',
               hasMany: true,
+            },
+            {
+              name: 'introduction',
+              type: 'text',
             },
           ],
         },

@@ -8,23 +8,22 @@ import { getProject } from '@/common/services/graphql.service'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
 import Layout from '@/common/components/layouts'
+import { getNewProject } from '@/common/services/projects.service'
 
 const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
 
-  const data = await getProject(slug)
+  const project = await getNewProject(slug)
 
-  if (data.data.projectsEntries.length === 0) {
+  if (!project) {
     redirect('/404')
   }
-
-  const project = data.data.projectsEntries[0]
 
   return (
     <Layout>
       <Container data-aos={'fade-up'}>
         <BackButton url={'/projects'} />
-        <PageHeading title={project.title} description={project.description} />
+        <PageHeading title={project.title} description={project.introduction} />
         <ProjectDetail project={project} />
       </Container>
     </Layout>

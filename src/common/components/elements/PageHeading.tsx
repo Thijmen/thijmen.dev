@@ -2,7 +2,7 @@ import Mdx from '@/common/components/elements/mdx/Mdx'
 
 interface PageHeadingProps {
   title: string
-  description?: string
+  description?: string | null
   md?: string | null
 }
 

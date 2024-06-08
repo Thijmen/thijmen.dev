@@ -1,23 +1,17 @@
-import {
-  ProjectDetailFragmentFragment,
-  ProjectEntryStackCategoryFragmentFragment,
-} from '@/__generated__/graphql'
 import Image from '@/common/components/elements/Image'
+import Mdx from '@/common/components/elements/mdx/Mdx'
 import Tooltip from '@/common/components/elements/Tooltip'
 import { getStackIcon } from '@/common/constant/stacks'
 
 import ProjectLink from './ProjectLink'
-import Mdx from '@/common/components/elements/mdx/Mdx'
+import { Project, R2Media, Stack } from '../../../../payload-types'
 
-const ProjectDetail = ({
-  project,
-}: {
-  project: ProjectDetailFragmentFragment
-}) => {
-  const stacks: ProjectEntryStackCategoryFragmentFragment[] = (project.stacks ||
-    []) as ProjectEntryStackCategoryFragmentFragment[]
+const ProjectDetail = ({ project }: { project: Project }) => {
+  const image: string =
+    project.headerImage != null ? (project.headerImage as R2Media).url! : ''
 
-  const image = project.projectHeaderImage[0]?.url ?? ''
+  const stacks = (project.stacks ?? []) as Stack[]
+
   return (
     <div className='space-y-8'>
       <div className='flex flex-col items-start justify-between gap-5 sm:flex-row lg:flex-row lg:items-center'>
@@ -26,31 +20,33 @@ const ProjectDetail = ({
             Tech Stack :
           </span>
           <div className='flex flex-wrap items-center gap-3'>
-            {stacks.map((stack) => (
-              <div key={stack.id}>
-                <Tooltip title={stack.title!}>
-                  {getStackIcon(stack.stackHandle!)}
-                </Tooltip>
-              </div>
-            ))}
+            {stacks.map((stack) => {
+              return (
+                <div key={stack.id}>
+                  <Tooltip title={stack.title}>
+                    {getStackIcon(stack.stackHandle)}
+                  </Tooltip>
+                </div>
+              )
+            })}
           </div>
         </div>
         <ProjectLink
           title={project.title}
-          link_demo={project.projectLiveDemoLink}
-          link_github={project.projectSourcecodeRepositoryLink}
+          link_demo={project.liveLink}
+          link_github={project.githubLink}
         />
       </div>
       <Image
         src={image}
         width={800}
         height={400}
-        alt={project.title!}
+        alt={project.title}
         className='hover:scale-105'
       />
-      {project.projectInformation && (
+      {project.description && (
         <div className='mt-5 space-y-6 leading-[1.8] dark:text-neutral-300'>
-          <Mdx content={project.projectInformation} />
+          <Mdx content={project.description} />
         </div>
       )}
     </div>
