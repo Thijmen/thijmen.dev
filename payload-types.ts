@@ -93,22 +93,9 @@ export interface R2Media {
  */
 export interface Page {
   id: number
-  title?: string | null
-  content?: {
-    root: {
-      type: string
-      children: {
-        type: string
-        version: number
-        [k: string]: unknown
-      }[]
-      direction: ('ltr' | 'rtl') | null
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-      indent: number
-      version: number
-    }
-    [k: string]: unknown
-  } | null
+  title: string
+  slug: string
+  content: string
   updatedAt: string
   createdAt: string
 }

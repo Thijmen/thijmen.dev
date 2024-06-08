@@ -13,6 +13,7 @@ import { ProjectCollection } from '@/payloadcms/collections/projectCollection'
 import { StackCollection } from '@/payloadcms/collections/stackCollection'
 import { seed } from '@/payloadcms/seed'
 import { r2Adapter } from '@/payloadcms/adapters/r2adapter'
+import { PageCollection } from '@/payloadcms/collections/pageCollection'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,22 +33,7 @@ export default buildConfig({
     },
     ProjectCollection,
     StackCollection,
-    {
-      slug: 'pages',
-      admin: {
-        useAsTitle: 'title',
-      },
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-        },
-        {
-          name: 'content',
-          type: 'richText',
-        },
-      ],
-    },
+    PageCollection,
     MediaCollection,
   ],
   secret: process.env.PAYLOAD_SECRET || '',

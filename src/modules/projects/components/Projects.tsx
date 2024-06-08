@@ -1,13 +1,12 @@
 'use client'
 import { motion } from 'framer-motion'
 import InfiniteScroll from 'react-infinite-scroll-component'
-
-import { ProjectEntryFragmentFragment } from '@/__generated__/graphql'
 import EmptyState from '@/common/components/elements/EmptyState'
 import ProjectCard from '@/modules/projects/components/ProjectCard'
+import { Project } from '../../../../payload-types'
 
 interface ProjectsComponentProps {
-  projects: ProjectEntryFragmentFragment[]
+  projects: Project[]
 }
 
 const Projects = ({ projects }: ProjectsComponentProps) => {
