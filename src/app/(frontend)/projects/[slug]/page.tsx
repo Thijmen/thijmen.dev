@@ -7,9 +7,10 @@ import ProjectDetail from '@/modules/projects/components/ProjectDetail'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
 import Layout from '@/common/components/layouts'
-import { getNewProject } from '@/common/services/projects.service'
-
-export const dynamic = 'force-dynamic'
+import {
+  getNewProject,
+  getNewProjects,
+} from '@/common/services/projects.service'
 
 const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
@@ -29,6 +30,16 @@ const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
       </Container>
     </Layout>
   )
+}
+
+export async function generateStaticParams() {
+  const projects = await getNewProjects()
+
+  return projects.map((project) => ({
+    params: {
+      slug: project.slug,
+    },
+  }))
 }
 
 export async function generateMetadata({
@@ -53,3 +64,4 @@ export async function generateMetadata({
 }
 
 export default ProjectDetailPage
+export const revalidate = 60

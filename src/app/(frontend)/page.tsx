@@ -20,3 +20,4 @@ const Homepage = () => {
 }
 
 export default Homepage
+export const revalidate = 60

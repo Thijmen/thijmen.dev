@@ -34,3 +34,4 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default ProjectsPage
+export const revalidate = 60

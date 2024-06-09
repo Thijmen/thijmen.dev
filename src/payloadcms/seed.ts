@@ -39,6 +39,24 @@ export async function seed(payload: BasePayload<GeneratedTypes>) {
     })
 
     await payload.create({
+      collection: 'pages',
+      data: {
+        title: 'Projects',
+        slug: 'projects',
+        content: 'This is the Projects page',
+      },
+    })
+
+    await payload.create({
+      collection: 'pages',
+      data: {
+        title: 'Blogs',
+        slug: 'blogs',
+        content: 'This is the Blogs page',
+      },
+    })
+
+    await payload.create({
       collection: 'projects',
       data: {
         title: 'thijmen.dev',

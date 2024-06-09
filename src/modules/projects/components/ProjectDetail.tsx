@@ -37,13 +37,15 @@ const ProjectDetail = ({ project }: { project: Project }) => {
           link_github={project.githubLink}
         />
       </div>
-      <Image
-        src={image}
-        width={800}
-        height={400}
-        alt={project.title}
-        className='hover:scale-105'
-      />
+      {image.length > 0 && (
+        <Image
+          src={image}
+          width={800}
+          height={400}
+          alt={project.title}
+          className='hover:scale-105'
+        />
+      )}
       {project.description && (
         <div className='mt-5 space-y-6 leading-[1.8] dark:text-neutral-300'>
           <Mdx content={project.description} />
