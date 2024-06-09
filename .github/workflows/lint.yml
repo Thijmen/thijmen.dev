@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  pull_request: {}
+  pull_request: { }
 
 concurrency:
   group: ${{ github.job }}-${{ github.ref }}
@@ -23,11 +23,16 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
+        run: pnpm install
 
       - name: 🔬 Lint
-        run: yarn lint
+        run: pnpm run lint
 
   typecheck:
     name: ʦ TypeScript
