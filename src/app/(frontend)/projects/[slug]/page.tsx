@@ -9,6 +9,8 @@ import { generateSiteTitle } from '@/core/metadata'
 import Layout from '@/common/components/layouts'
 import { getNewProject } from '@/common/services/projects.service'
 
+export const dynamic = 'force-dynamic'
+
 const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
 
@@ -27,9 +29,6 @@ const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
       </Container>
     </Layout>
   )
-}
-export const generateStaticParams = () => {
-  return []
 }
 
 export async function generateMetadata({
