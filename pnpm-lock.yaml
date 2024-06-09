@@ -298,6 +298,9 @@ devDependencies:
   '@types/hast':
     specifier: ^3.0.4
     version: 3.0.4
+  '@types/jest':
+    specifier: ^29.5.12
+    version: 29.5.12
   '@types/node':
     specifier: ^20.12.12
     version: 20.14.2
