@@ -16,6 +16,7 @@
     "typecheck": "tsc --noEmit --incremental false",
     "format:check": "prettier -c .",
     "test": "jest",
+    "format": "prettier --write .",
     "test:ci": "jest --ci",
     "standalone-script": "node ./src/scripts/standalone-script.js"
   },
