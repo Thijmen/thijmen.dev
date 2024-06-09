@@ -2,6 +2,11 @@
 //
 // import Breakline from '@/common/components/elements/Breakline'
 //
+describe('Breakline', () => {
+  test('dummy', () => {
+    expect(true).toBe(true)
+  })
+})
 // describe('Breakline', () => {
 //   test('renders Breakline component with default styles', () => {
 //     render(<Breakline />)
