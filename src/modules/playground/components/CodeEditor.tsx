@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import MonacoEditor, { EditorProps } from '@monaco-editor/react'
+import { editor } from 'monaco-editor'
 
 interface CodeEditorProps {
   code: string
@@ -8,7 +9,7 @@ interface CodeEditorProps {
   isFullScreen?: boolean
 }
 
-const editorConfig = {
+const editorConfig: editor.IStandaloneEditorConstructionOptions = {
   fontSize: 14,
   minimap: {
     enabled: false,

@@ -1,18 +1,16 @@
 'use client'
-import { BlogOverviewEntryFragmentFragment } from '@/__generated__/graphql'
-import SectionHeading from '@/common/components/elements/SectionHeading'
 import { motion } from 'framer-motion'
+
+import SectionHeading from '@/common/components/elements/SectionHeading'
 import { BlogItemHomepage } from '@/modules/home/components/BlogItemHomepage'
 
-export const LatestBlogs = ({
-  posts,
-}: {
-  posts: BlogOverviewEntryFragmentFragment[]
-}) => {
+import { Blog } from '../../../../payload-types'
+
+export const LatestBlogs = ({ posts }: { posts: Blog[] }) => {
   return (
     <section className='space-y-5'>
       <div className='space-y-3'>
-        <SectionHeading title={'Latest Blog Posts'} />
+        <SectionHeading title='Latest Blog Posts' />
         <p className='leading-[1.8] text-neutral-800 dark:text-neutral-300 md:leading-loose'>
           Take a look at my latest blog posts. They usually go about{' '}
           <em>techy</em> stuff, but bear in mind; I'm not the best writer, so
@@ -21,6 +19,7 @@ export const LatestBlogs = ({
       </div>
 
       <motion.div
+        // @ts-ignore
         className='mt-12 grid gap-4 md:grid-cols-2'
         initial={{
           y: 40,

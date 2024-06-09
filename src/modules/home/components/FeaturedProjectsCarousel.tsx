@@ -2,18 +2,20 @@
 import { motion } from 'framer-motion'
 import React, { useRef } from 'react'
 import { useDraggable } from 'react-use-draggable-scroll'
-import { ProjectEntryFragmentFragment } from '@/__generated__/graphql'
 import { FeaturedProjectItem } from '@/modules/home/components/FeaturedProjectItem'
+import { Project } from '../../../../payload-types'
 
 interface Props {
-  projects: ProjectEntryFragmentFragment[]
+  projects: Project[]
 }
 
 const FeaturedProjectsCarousel = (props: Props) => {
   const { projects } = props
 
-  const ref =
-    useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>
+  const ref = useRef<HTMLDivElement>(
+    null,
+  ) as React.MutableRefObject<HTMLInputElement>
+
   const { events } = useDraggable(ref)
 
   const renderBlogCards = () => {
@@ -24,7 +26,8 @@ const FeaturedProjectsCarousel = (props: Props) => {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -100 }}
         transition={{ duration: 0.5 }}
-        className='min-w-[326px] gap-x-5'
+        // @ts-ignore
+        className={'min-w-[326px] gap-x-5'}
       >
         <FeaturedProjectItem project={item} />
       </motion.div>

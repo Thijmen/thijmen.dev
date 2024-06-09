@@ -1,23 +1,19 @@
 import Link from 'next/link'
 import { AiFillPushpin as PinIcon } from 'react-icons/ai'
 import { HiOutlineArrowSmRight as ViewIcon } from 'react-icons/hi'
-
-import {
-  ProjectEntryFragmentFragment,
-  ProjectEntryStackCategoryFragmentFragment,
-} from '@/__generated__/graphql'
 import Card from '@/common/components/elements/Card'
 import Image from '@/common/components/elements/Image'
 import Tooltip from '@/common/components/elements/Tooltip'
 import { getStackIcon } from '@/common/constant/stacks'
+import { Project, R2Media, Stack } from '../../../../payload-types'
 
-const ProjectCard = ({
-  project,
-}: {
-  project: ProjectEntryFragmentFragment
-}) => {
-  const stacks: ProjectEntryStackCategoryFragmentFragment[] = (project.stacks ||
-    []) as ProjectEntryStackCategoryFragmentFragment[]
+const ProjectCard = ({ project }: { project: Project }) => {
+  const stacks: Stack[] = (project.stacks || []) as Stack[]
+
+  const image =
+    project.headerImage != null
+      ? (project.headerImage as R2Media).url || ''
+      : ''
 
   return (
     <Link href={`/projects/${project.slug}`}>
@@ -30,10 +26,10 @@ const ProjectCard = ({
         )}
         <div className='relative'>
           <Image
-            src={project.projectHeaderImage[0]?.url ?? ''}
+            src={image}
             width={400}
             height={200}
-            alt={project.title!}
+            alt={project.title}
             className='h-48 rounded-t-xl object-cover object-left'
           />
           <div className='absolute left-0 top-0 flex flex h-full w-full items-center justify-center gap-1 rounded-t-xl bg-black text-sm font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-80'>
@@ -48,13 +44,13 @@ const ProjectCard = ({
             </div>
           </div>
           <p className='text-[15px] leading-relaxed text-neutral-700 dark:text-neutral-400'>
-            {project.description}
+            {project.introduction}
           </p>
           <div className='flex flex-wrap items-center gap-3 pt-2'>
-            {stacks.map((stack: ProjectEntryStackCategoryFragmentFragment) => (
+            {stacks.map((stack: Stack) => (
               <div key={stack.id}>
-                <Tooltip title={stack.title!}>
-                  {getStackIcon(stack.stackHandle!)}
+                <Tooltip title={stack.title}>
+                  {getStackIcon(stack.stackHandle)}
                 </Tooltip>
               </div>
             ))}

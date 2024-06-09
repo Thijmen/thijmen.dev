@@ -1,15 +1,14 @@
 import Breakline from '@/common/components/elements/Breakline'
 import FeaturedProjectsPreview from './FeaturedProjectsPreview'
 import Introduction from './Introduction'
-import {
-  getBlogPosts,
-  getFeaturedProjects,
-} from '@/common/services/graphql.service'
 import { LatestBlogs } from '@/modules/home/components/LatestBlogs'
+import { getNewFeaturedProjects } from '@/common/services/projects.service'
+import { getNewBlogs } from '@/common/services/blogs.service'
 
 const Home = async () => {
-  const featuredProjects = await getFeaturedProjects()
-  const latestPosts = await getBlogPosts(2)
+  const featuredProjects = await getNewFeaturedProjects()
+  const latestPosts = await getNewBlogs(2)
+
   return (
     <>
       <Introduction />

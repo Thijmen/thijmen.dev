@@ -5,10 +5,10 @@ import SectionHeading from '@/common/components/elements/SectionHeading'
 import SectionSubHeading from '@/common/components/elements/SectionSubHeading'
 
 import FeaturedProjectsCarousel from './FeaturedProjectsCarousel'
-import { ProjectEntryFragmentFragment } from '@/__generated__/graphql'
+import { Project } from '../../../../payload-types'
 
 interface Props {
-  projects: ProjectEntryFragmentFragment[]
+  projects: Project[]
 }
 
 const FeaturedProjectsPreview = (props: Props) => {
