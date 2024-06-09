@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Thijmen.dev</h1>
-  <p>My personal website, build with Next, React and GraphQL as its backend.</p>
+  <p>My personal website, build with Next, React and PayloadCMS as its backend.</p>
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/Thijmen/thijmen.dev)](https://github.com/Thijmen/thijmen.dev/stargazers)
 [![Depfu](https://badges.depfu.com/badges/0d9451456bf13154d93ed1afa2a1f3de/status.svg)](https://depfu.com)
