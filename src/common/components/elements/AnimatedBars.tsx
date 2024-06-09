@@ -19,6 +19,7 @@ const AnimatedBars = ({ variant = 'bg-neutral-800' }: AnimatedBarsProps) => {
           easings: 'easeInOut',
           repeat: Infinity,
         }}
+        // @ts-ignore
         className={`mr-[1px] h-2 w-1 opacity-75 ${color}`}
       />
       <motion.span
@@ -32,6 +33,7 @@ const AnimatedBars = ({ variant = 'bg-neutral-800' }: AnimatedBarsProps) => {
           repeat: Infinity,
           repeatDelay: 0.2,
         }}
+        // @ts-ignore
         className={`mr-[1px] h-1 w-1 ${color}`}
       />
       <motion.span
@@ -45,6 +47,7 @@ const AnimatedBars = ({ variant = 'bg-neutral-800' }: AnimatedBarsProps) => {
           repeat: Infinity,
           repeatDelay: 0.2,
         }}
+        // @ts-ignore
         className={`mr-[1px] h-3 w-1 opacity-80 ${color}`}
       />
 
@@ -59,6 +62,7 @@ const AnimatedBars = ({ variant = 'bg-neutral-800' }: AnimatedBarsProps) => {
           repeat: Infinity,
           repeatDelay: 0.3,
         }}
+        // @ts-ignore
         className={`h-3 w-1 ${color}`}
       />
     </div>

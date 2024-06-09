@@ -1,14 +1,11 @@
 'use client'
-import { BlogOverviewEntryFragmentFragment } from '@/__generated__/graphql'
 import Link from 'next/link'
 import { BlurImage } from '@/common/components/elements/BlurImage'
 import { formatDate } from '@/common/helpers'
+import { Blog, R2Media } from '../../../../payload-types'
 
-export const BlogItemHomepage = ({
-  post,
-}: {
-  post: BlogOverviewEntryFragmentFragment
-}) => {
+export const BlogItemHomepage = ({ post }: { post: Blog }) => {
+  const image = post.image != null ? (post.image as R2Media).url || '' : ''
   return (
     <Link
       href={`/blog/${post.slug}`}
@@ -17,12 +14,12 @@ export const BlogItemHomepage = ({
       <BlurImage
         width={1200}
         height={630}
-        src={post.featuredImage[0]?.url || ''}
-        alt={post.title || ''}
+        src={image}
+        alt={post.title}
         className='rounded-lg'
       />
       <div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-zinc-500'>
-        {formatDate(post.dateCreated)}
+        {formatDate(post.createdAt)}
         {/* @TODO: Store likes and views */}
         {/*<div className='flex gap-2'>*/}
         {/*  <div>10 likes</div>*/}

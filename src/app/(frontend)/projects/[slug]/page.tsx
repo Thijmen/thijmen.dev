@@ -4,7 +4,6 @@ import BackButton from '@/common/components/elements/BackButton'
 import PageHeading from '@/common/components/elements/PageHeading'
 import React from 'react'
 import ProjectDetail from '@/modules/projects/components/ProjectDetail'
-import { getProject } from '@/common/services/graphql.service'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
 import Layout from '@/common/components/layouts'
@@ -38,21 +37,19 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const projectData = await getProject(slug)
+  const projectData = await getNewProject(slug)
 
-  if (projectData.data.projectsEntries.length === 0) {
+  if (!projectData) {
     redirect('/404')
   }
 
-  const project = projectData.data.projectsEntries[0]
-
-  const projectTitle = project?.title ?? ''
+  const projectTitle = projectData.title
 
   const title = `Project: ${projectTitle}`
   // @TODO: Add proper metadata
   return {
     title: generateSiteTitle({ title }),
-    description: project?.description ?? '',
+    description: projectData.description,
   }
 }
 

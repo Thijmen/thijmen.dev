@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
-import { getBlogItem } from '@/common/services/graphql.service'
 import { redirect } from 'next/navigation'
 import Layout from '@/common/components/layouts'
 import { getNewBlog } from '@/common/services/blogs.service'
@@ -34,7 +33,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const blog = await getBlogItem(slug)
+  const blog = await getNewBlog(slug)
 
   if (!blog) {
     redirect('/404')

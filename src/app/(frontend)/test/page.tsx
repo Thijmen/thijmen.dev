@@ -1,9 +1,9 @@
 import Mdx from '@/common/components/elements/mdx/Mdx'
-import { getPage } from '@/common/services/graphql.service'
 import Layout from '@/common/components/layouts'
+import { getNewPage } from '@/common/services/pages.service'
 
 const TestPage = async () => {
-  const data = await getPage('blog')
+  const data = await getNewPage('blog')
 
   const dataMdx =
     '```js title="lib/test.tsx"\n' +
