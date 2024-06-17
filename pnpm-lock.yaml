@@ -210,8 +210,8 @@ dependencies:
     specifier: 0.32.6
     version: 0.32.6
   shiki:
-    specifier: ^1.2.4
-    version: 1.6.3
+    specifier: ^1.6.4
+    version: 1.6.4
   slick-carousel:
     specifier: ^1.8.1
     version: 1.8.1(jquery@3.7.1)
@@ -5750,6 +5750,10 @@ packages:
 
   /@shikijs/core@1.6.3:
     resolution: {integrity: sha512-QnJKHFUW95GnlJLJGP6QLx4M69HM0KlXk+R2Y8lr/x4nAx1Yb/lsuxq4XwybuUjTxbJk+BT0g/kvn0bcsjGGHg==}
+    dev: false
+
+  /@shikijs/core@1.6.4:
+    resolution: {integrity: sha512-WTU9rzZae1p2v6LOxMf6LhtmZOkIHYYW160IuahUyJy7YXPPjyWZLR1ag+SgD22ZMxZtz1gfU6Tccc8t0Il/XA==}
     dev: false
 
   /@shikijs/rehype@1.6.3:
@@ -15560,6 +15564,12 @@ packages:
     resolution: {integrity: sha512-lE1/YGlzFY0hQSyEfsZj18xGrTWxyhFQkaiILALqTBZPbJeYFWpbUhlmTGPOupYB/qC+H6sV4UznJzcEh3WMHQ==}
     dependencies:
       '@shikijs/core': 1.6.3
+    dev: false
+
+  /shiki@1.6.4:
+    resolution: {integrity: sha512-X88chM7w8jnadoZtjPTi5ahCJx9pc9f8GfEkZAEYUTlcUZIEw2D/RY86HI/LkkE7Nj8TQWkiBfaFTJ3VJT6ESg==}
+    dependencies:
+      '@shikijs/core': 1.6.4
     dev: false
 
   /side-channel@1.0.6:
