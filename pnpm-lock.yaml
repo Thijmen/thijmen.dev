@@ -78,8 +78,8 @@ dependencies:
     specifier: ^1.2.4
     version: 1.6.3
   '@shikijs/transformers':
-    specifier: ^1.2.4
-    version: 1.6.3
+    specifier: ^1.6.5
+    version: 1.6.5
   '@tailwindcss/typography':
     specifier: ^0.5.12
     version: 0.5.13(tailwindcss@3.4.4)
@@ -5756,6 +5756,10 @@ packages:
     resolution: {integrity: sha512-WTU9rzZae1p2v6LOxMf6LhtmZOkIHYYW160IuahUyJy7YXPPjyWZLR1ag+SgD22ZMxZtz1gfU6Tccc8t0Il/XA==}
     dev: false
 
+  /@shikijs/core@1.6.5:
+    resolution: {integrity: sha512-XcQYt6e4L61ruAxHiL3Xg1DL/XkWWjzDdeckB/DtN8jAxoAU+bcxsV6DetC8NafHpL4YpGhxy9iXF0ND/u6HmA==}
+    dev: false
+
   /@shikijs/rehype@1.6.3:
     resolution: {integrity: sha512-724+2zopOy3pNDONss0mjblgos+hKKVoy4MmboIkDLds3ZKf4squv6bGHBGEjHxP+RIKe9Vmt2wwf3wSCS6/Pw==}
     dependencies:
@@ -5771,6 +5775,12 @@ packages:
     resolution: {integrity: sha512-ptBuP/IIeqCzK3zZO/knFICZWs58uZWzbv7ND+bKOewe5NcCjZfSiMyzFwOyl23ewPJ1APjRBwLi6Asrodmmxw==}
     dependencies:
       shiki: 1.6.3
+    dev: false
+
+  /@shikijs/transformers@1.6.5:
+    resolution: {integrity: sha512-iuKa1uQtPQEe5vgCsXIb162b/3imRiAIdoF5IqafrTWL1uqZUpipfPjWZPuAAszOzYU//yIYRbhUk8reHVXA/w==}
+    dependencies:
+      shiki: 1.6.5
     dev: false
 
   /@sideway/address@4.1.5:
@@ -15570,6 +15580,12 @@ packages:
     resolution: {integrity: sha512-X88chM7w8jnadoZtjPTi5ahCJx9pc9f8GfEkZAEYUTlcUZIEw2D/RY86HI/LkkE7Nj8TQWkiBfaFTJ3VJT6ESg==}
     dependencies:
       '@shikijs/core': 1.6.4
+    dev: false
+
+  /shiki@1.6.5:
+    resolution: {integrity: sha512-iFzypldJG0zeyRHKAhaSGCf+YWXpMMyUyOrCVFBFKGGdF5vrB6jbd66/SQljxV20aSrVZEAQwUto/hhuNi/CIg==}
+    dependencies:
+      '@shikijs/core': 1.6.5
     dev: false
 
   /side-channel@1.0.6:
