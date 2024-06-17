@@ -75,8 +75,8 @@ dependencies:
     specifier: ^1.0.5
     version: 1.0.5(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522)(react@19.0.0-rc-f994737d14-20240522)(types-react-dom@19.0.0-beta.2)
   '@shikijs/rehype':
-    specifier: ^1.2.4
-    version: 1.6.3
+    specifier: ^1.6.4
+    version: 1.6.4
   '@shikijs/transformers':
     specifier: ^1.2.4
     version: 1.6.3
@@ -5756,13 +5756,13 @@ packages:
     resolution: {integrity: sha512-WTU9rzZae1p2v6LOxMf6LhtmZOkIHYYW160IuahUyJy7YXPPjyWZLR1ag+SgD22ZMxZtz1gfU6Tccc8t0Il/XA==}
     dev: false
 
-  /@shikijs/rehype@1.6.3:
-    resolution: {integrity: sha512-724+2zopOy3pNDONss0mjblgos+hKKVoy4MmboIkDLds3ZKf4squv6bGHBGEjHxP+RIKe9Vmt2wwf3wSCS6/Pw==}
+  /@shikijs/rehype@1.6.4:
+    resolution: {integrity: sha512-rQFnJKb9uJm3lr6DDKoVBSnWcocHGIqfKM591NSDawMxfhm+gPGhgLP6/EX1N2v0qNHQeuzBuunkApWVQbVTCg==}
     dependencies:
-      '@shikijs/transformers': 1.6.3
+      '@shikijs/transformers': 1.6.4
       '@types/hast': 3.0.4
       hast-util-to-string: 3.0.0
-      shiki: 1.6.3
+      shiki: 1.6.4
       unified: 11.0.4
       unist-util-visit: 5.0.0
     dev: false
@@ -5771,6 +5771,12 @@ packages:
     resolution: {integrity: sha512-ptBuP/IIeqCzK3zZO/knFICZWs58uZWzbv7ND+bKOewe5NcCjZfSiMyzFwOyl23ewPJ1APjRBwLi6Asrodmmxw==}
     dependencies:
       shiki: 1.6.3
+    dev: false
+
+  /@shikijs/transformers@1.6.4:
+    resolution: {integrity: sha512-NqDt7gUg3ayVBnsipT/KoL1pqsVbsvT/2cB0pb5SG2q72qjAv9Lb5OP99pL//BMmI+sMTo+TeARntklyBu4mZQ==}
+    dependencies:
+      shiki: 1.6.4
     dev: false
 
   /@sideway/address@4.1.5:
