@@ -75,8 +75,8 @@ dependencies:
     specifier: ^1.0.5
     version: 1.0.5(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522)(react@19.0.0-rc-f994737d14-20240522)(types-react-dom@19.0.0-beta.2)
   '@shikijs/rehype':
-    specifier: ^1.2.4
-    version: 1.6.3
+    specifier: ^1.7.0
+    version: 1.7.0
   '@shikijs/transformers':
     specifier: ^1.2.4
     version: 1.6.3
@@ -5756,13 +5756,17 @@ packages:
     resolution: {integrity: sha512-WTU9rzZae1p2v6LOxMf6LhtmZOkIHYYW160IuahUyJy7YXPPjyWZLR1ag+SgD22ZMxZtz1gfU6Tccc8t0Il/XA==}
     dev: false
 
-  /@shikijs/rehype@1.6.3:
-    resolution: {integrity: sha512-724+2zopOy3pNDONss0mjblgos+hKKVoy4MmboIkDLds3ZKf4squv6bGHBGEjHxP+RIKe9Vmt2wwf3wSCS6/Pw==}
+  /@shikijs/core@1.7.0:
+    resolution: {integrity: sha512-O6j27b7dGmJbR3mjwh/aHH8Ld+GQvA0OQsNO43wKWnqbAae3AYXrhFyScHGX8hXZD6vX2ngjzDFkZY5srtIJbQ==}
+    dev: false
+
+  /@shikijs/rehype@1.7.0:
+    resolution: {integrity: sha512-PmjhKdud2FzdexQiU79XJqH3jp4X7vQkgjeMtJIhKNuO4Q1WnOL4ah6wJjmvr0ayOSrcAHaM3bYXGUqq9NKjsQ==}
     dependencies:
-      '@shikijs/transformers': 1.6.3
+      '@shikijs/transformers': 1.7.0
       '@types/hast': 3.0.4
       hast-util-to-string: 3.0.0
-      shiki: 1.6.3
+      shiki: 1.7.0
       unified: 11.0.4
       unist-util-visit: 5.0.0
     dev: false
@@ -5771,6 +5775,12 @@ packages:
     resolution: {integrity: sha512-ptBuP/IIeqCzK3zZO/knFICZWs58uZWzbv7ND+bKOewe5NcCjZfSiMyzFwOyl23ewPJ1APjRBwLi6Asrodmmxw==}
     dependencies:
       shiki: 1.6.3
+    dev: false
+
+  /@shikijs/transformers@1.7.0:
+    resolution: {integrity: sha512-QX3TP+CS4yYLt4X4Dk7wT0MsC7yweTYHMAAKY+ay+uuR9yRdFae/h+hivny2O+YixJHfZl57xtiZfWSrHdyVhQ==}
+    dependencies:
+      shiki: 1.7.0
     dev: false
 
   /@sideway/address@4.1.5:
@@ -15570,6 +15580,12 @@ packages:
     resolution: {integrity: sha512-X88chM7w8jnadoZtjPTi5ahCJx9pc9f8GfEkZAEYUTlcUZIEw2D/RY86HI/LkkE7Nj8TQWkiBfaFTJ3VJT6ESg==}
     dependencies:
       '@shikijs/core': 1.6.4
+    dev: false
+
+  /shiki@1.7.0:
+    resolution: {integrity: sha512-H5pMn4JA7ayx8H0qOz1k2qANq6mZVCMl1gKLK6kWIrv1s2Ial4EmD4s4jE8QB5Dw03d/oCQUxc24sotuyR5byA==}
+    dependencies:
+      '@shikijs/core': 1.7.0
     dev: false
 
   /side-channel@1.0.6:
