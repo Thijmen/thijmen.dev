@@ -60,7 +60,7 @@
     "firebase": "^10.10.0",
     "framer-motion": "^10.18.0",
     "github-slugger": "^2.0.0",
-    "graphql": "^16.8.1",
+    "graphql": "^16.9.0",
     "gray-matter": "^4.0.3",
     "hast": "^1.0.0",
     "lucide-react": "^0.363.0",
