@@ -3,7 +3,6 @@ import path from 'path'
 import { en } from 'payload/i18n/en'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 //import { slateEditor } from '@payloadcms/richtext-slate'
-import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
@@ -15,6 +14,7 @@ import { seed } from '@/payloadcms/seed'
 import { r2Adapter } from '@/payloadcms/adapters/r2adapter'
 import { PageCollection } from '@/payloadcms/collections/pageCollection'
 import { BlogCollection } from '@/payloadcms/collections/blogCollection'
+import { buildConfig } from 'payload'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)

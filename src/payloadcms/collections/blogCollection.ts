@@ -1,4 +1,4 @@
-import { Block, CollectionConfig } from 'payload/types'
+import { Block, CollectionConfig } from 'payload'
 
 const blockMarkdown: Block = {
   slug: 'block-markdown',
