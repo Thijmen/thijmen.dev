@@ -1,7 +1,7 @@
-import { BasePayload, GeneratedTypes } from 'payload'
 import env from '../../env'
+import { Payload } from 'payload'
 
-export async function seed(payload: BasePayload<GeneratedTypes>) {
+export async function seed(payload: Payload) {
   const existingUsers = await payload.find({
     collection: 'users',
     limit: 1,
