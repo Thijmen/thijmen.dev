@@ -96,7 +96,7 @@
     "tailwind-merge": "^1.14.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "typewriter-effect": "^2.21.0",
-    "unified": "^11.0.4",
+    "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "usehooks-ts": "^2.16.0",
     "uuid": "^9.0.1",
