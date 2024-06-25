@@ -1,4 +1,5 @@
 import { BasePayload, GeneratedTypes } from 'payload'
+import env from '../../env'
 
 export async function seed(payload: BasePayload<GeneratedTypes>) {
   const existingUsers = await payload.find({
@@ -10,8 +11,8 @@ export async function seed(payload: BasePayload<GeneratedTypes>) {
     await payload.create({
       collection: 'users',
       data: {
-        email: 'dev@payloadcms.com',
-        password: 'test',
+        email: env.CMS_ADMIN_EMAIL,
+        password: env.CMS_ADMIN_PASSWORD,
       },
     })
   }

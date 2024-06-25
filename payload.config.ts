@@ -64,13 +64,7 @@ export default buildConfig({
     supportedLanguages: { en },
   },
 
-  admin: {
-    autoLogin: {
-      email: 'dev@payloadcms.com',
-      password: 'test',
-      prefillOnly: true,
-    },
-  },
+  admin: {},
   async onInit(payload) {
     await seed(payload)
   },
