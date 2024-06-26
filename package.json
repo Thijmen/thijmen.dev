@@ -88,7 +88,7 @@
     "remark-mdx": "^3.0.1",
     "remark-parse": "^11.0.0",
     "sharp": "0.32.6",
-    "shiki": "^1.6.4",
+    "shiki": "^1.9.0",
     "slick-carousel": "^1.8.1",
     "slugify": "^1.6.6",
     "swr": "^2.2.5",
