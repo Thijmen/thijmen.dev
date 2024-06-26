@@ -26,10 +26,10 @@ export default buildConfig({
     {
       slug: 'users',
       auth: true,
-      access: {
-        delete: () => false,
-        update: () => false,
-      },
+      // access: {
+      //   delete: () => false,
+      //   update: () => false,
+      // },
       fields: [],
     },
     ProjectCollection,
