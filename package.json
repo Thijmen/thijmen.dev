@@ -112,7 +112,7 @@
     "@emotion/styled": "^11.11.5",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/client-preset": "^4.2.5",
-    "@graphql-codegen/typescript": "^4.0.8",
+    "@graphql-codegen/typescript": "^4.0.9",
     "@graphql-codegen/typescript-react-apollo": "^4.3.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@testing-library/jest-dom": "^5.17.0",
