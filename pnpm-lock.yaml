@@ -171,8 +171,8 @@ dependencies:
     specifier: ^9.0.1
     version: 9.0.1(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
   react-medium-image-zoom:
-    specifier: ^5.2.0
-    version: 5.2.4(react-dom@19.0.0-rc-f994737d14-20240522)(react@19.0.0-rc-f994737d14-20240522)
+    specifier: ^5.2.7
+    version: 5.2.7(react-dom@19.0.0-rc-f994737d14-20240522)(react@19.0.0-rc-f994737d14-20240522)
   react-resizable-panels:
     specifier: ^0.0.55
     version: 0.0.55(react-dom@19.0.0-rc-f994737d14-20240522)(react@19.0.0-rc-f994737d14-20240522)
@@ -14603,8 +14603,8 @@ packages:
       - supports-color
     dev: false
 
-  /react-medium-image-zoom@5.2.4(react-dom@19.0.0-rc-f994737d14-20240522)(react@19.0.0-rc-f994737d14-20240522):
-    resolution: {integrity: sha512-XLu/fLqpbmhiDAGA6yie78tDv4kh8GxvS7kKQArSOvCvm5zvgItoh4h01NAAvnezQ60ovsTeedHiHG3eG9CcGg==}
+  /react-medium-image-zoom@5.2.7(react-dom@19.0.0-rc-f994737d14-20240522)(react@19.0.0-rc-f994737d14-20240522):
+    resolution: {integrity: sha512-I2mC3zQMmJ/JH5D04WIT5cS8jxFvB9Ybr3ORiIIeT3hPWRxT6mnC4dNUyvO1mVxxg158H6249UClr7tXRm5IUQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
