@@ -23,7 +23,7 @@
   "dependencies": {
     "@apollo/client": "^3.10.0-rc.0",
     "@apollo/experimental-nextjs-app-support": "^0.9.2",
-    "@aws-sdk/client-s3": "^3.609.0",
+    "@aws-sdk/client-s3": "^3.614.0",
     "@aws-sdk/lib-storage": "^3.609.0",
     "@giscus/react": "^2.4.0",
     "@headlessui/react": "^1.7.18",
