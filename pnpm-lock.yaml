@@ -240,8 +240,8 @@ dependencies:
     specifier: ^9.0.1
     version: 9.0.1
   vfile:
-    specifier: ^6.0.1
-    version: 6.0.1
+    specifier: ^6.0.2
+    version: 6.0.2
   vfile-matter:
     specifier: ^5.0.0
     version: 5.0.0
@@ -4850,7 +4850,7 @@ packages:
       unist-util-position-from-estree: 2.0.0
       unist-util-stringify-position: 4.0.0
       unist-util-visit: 5.0.0
-      vfile: 6.0.1
+      vfile: 6.0.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -12679,7 +12679,7 @@ packages:
       trim-lines: 3.0.1
       unist-util-position: 5.0.0
       unist-util-visit: 5.0.0
-      vfile: 6.0.1
+      vfile: 6.0.2
     dev: false
 
   /mdast-util-to-markdown@2.1.0:
@@ -14598,7 +14598,7 @@ packages:
       remark-rehype: 11.1.0
       unified: 11.0.4
       unist-util-visit: 5.0.0
-      vfile: 6.0.1
+      vfile: 6.0.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -14916,7 +14916,7 @@ packages:
       '@types/mdast': 4.0.4
       mdast-util-to-hast: 13.2.0
       unified: 11.0.4
-      vfile: 6.0.1
+      vfile: 6.0.2
     dev: false
 
   /remark-stringify@11.0.0:
@@ -16452,7 +16452,7 @@ packages:
       extend: 3.0.2
       is-plain-obj: 4.1.0
       trough: 2.2.0
-      vfile: 6.0.1
+      vfile: 6.0.2
     dev: false
 
   /unist-util-is@6.0.0:
@@ -16653,7 +16653,7 @@ packages:
   /vfile-matter@5.0.0:
     resolution: {integrity: sha512-jhPSqlj8hTSkTXOqyxbUeZAFFVq/iwu/jukcApEqc/7DOidaAth6rDc0Zgg0vWpzUnWkwFP7aK28l6nBmxMqdQ==}
     dependencies:
-      vfile: 6.0.1
+      vfile: 6.0.2
       yaml: 2.4.4
     dev: false
 
@@ -16664,8 +16664,8 @@ packages:
       unist-util-stringify-position: 4.0.0
     dev: false
 
-  /vfile@6.0.1:
-    resolution: {integrity: sha512-1bYqc7pt6NIADBJ98UiG0Bn/CHIVOoZ/IyEkqIruLg0mE1BKzkOXY2D6CSqQIcKqgadppE5lrxgWXJmXd7zZJw==}
+  /vfile@6.0.2:
+    resolution: {integrity: sha512-zND7NlS8rJYb/sPqkb13ZvbbUoExdbi4w3SfRrMq6R3FvnLQmmfpajJNITuuYm6AZ5uao9vy4BAos3EXBPf2rg==}
     dependencies:
       '@types/unist': 3.0.2
       unist-util-stringify-position: 4.0.0
