@@ -24,7 +24,7 @@
     "@apollo/client": "^3.10.0-rc.0",
     "@apollo/experimental-nextjs-app-support": "^0.9.2",
     "@aws-sdk/client-s3": "^3.616.0",
-    "@aws-sdk/lib-storage": "^3.614.0",
+    "@aws-sdk/lib-storage": "^3.616.0",
     "@giscus/react": "^2.4.0",
     "@headlessui/react": "^1.7.18",
     "@icons-pack/react-simple-icons": "9.3.0",
