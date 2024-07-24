@@ -43,7 +43,7 @@
     "@radix-ui/react-aspect-ratio": "^1.1.0",
     "@radix-ui/react-collapsible": "^1.1.0",
     "@radix-ui/react-scroll-area": "^1.1.0",
-    "@shikijs/rehype": "^1.2.4",
+    "@shikijs/rehype": "^1.11.1",
     "@shikijs/transformers": "^1.11.0",
     "@tailwindcss/typography": "^0.5.12",
     "aos": "^3.0.0-beta.6",
