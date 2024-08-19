@@ -207,8 +207,8 @@ dependencies:
     specifier: 0.32.6
     version: 0.32.6
   shiki:
-    specifier: ^1.12.0
-    version: 1.12.0
+    specifier: ^1.14.1
+    version: 1.14.1
   slick-carousel:
     specifier: ^1.8.1
     version: 1.8.1(jquery@3.7.1)
@@ -5637,8 +5637,8 @@ packages:
       '@types/hast': 3.0.4
     dev: false
 
-  /@shikijs/core@1.12.0:
-    resolution: {integrity: sha512-mc1cLbm6UQ8RxLc0dZES7v5rkH+99LxQp/ZvTqV3NLyYsO/fD6JhEflP1H5b2SDq9gI0+0G36AVZWxvounfR9w==}
+  /@shikijs/core@1.14.1:
+    resolution: {integrity: sha512-KyHIIpKNaT20FtFPFjCQB5WVSTpLR/n+jQXhWHWVUMm9MaOaG9BGOG0MSyt7yA4+Lm+4c9rTc03tt3nYzeYSfw==}
     dependencies:
       '@types/hast': 3.0.4
     dev: false
@@ -15343,10 +15343,10 @@ packages:
       '@types/hast': 3.0.4
     dev: false
 
-  /shiki@1.12.0:
-    resolution: {integrity: sha512-BuAxWOm5JhRcbSOl7XCei8wGjgJJonnV0oipUupPY58iULxUGyHhW5CF+9FRMuM1pcJ5cGEJGll1LusX6FwpPA==}
+  /shiki@1.14.1:
+    resolution: {integrity: sha512-FujAN40NEejeXdzPt+3sZ3F2dx1U24BY2XTY01+MG8mbxCiA2XukXdcbyMyLAHJ/1AUUnQd1tZlvIjefWWEJeA==}
     dependencies:
-      '@shikijs/core': 1.12.0
+      '@shikijs/core': 1.14.1
       '@types/hast': 3.0.4
     dev: false
 
