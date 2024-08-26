@@ -18,6 +18,8 @@ import { Pages } from '@/payload/collections/Pages'
 import { Users } from '@/payload/collections/Users'
 import { UserSeeder } from '@/payload/collections/Users/seed'
 import { StackSeeder } from '@/payload/collections/Stacks/seed'
+import { redirectsPlugin } from '@payloadcms/plugin-redirects'
+import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -51,6 +53,29 @@ export default buildConfig({
       collections: {
         'r2-media': {
           adapter: r2Adapter, // see docs for the adapter you want to use
+        },
+      },
+    }),
+    redirectsPlugin({
+      collections: ['pages', 'posts'],
+      overrides: {
+        // @ts-expect-error
+        fields: ({ defaultFields }) => {
+          return defaultFields.map((field) => {
+            if ('name' in field && field.name === 'from') {
+              return {
+                ...field,
+                admin: {
+                  description:
+                    'You will need to rebuild the website when changing this field.',
+                },
+              }
+            }
+            return field
+          })
+        },
+        hooks: {
+          afterChange: [revalidateRedirects],
         },
       },
     }),
@@ -96,11 +121,5 @@ export default buildConfig({
     await UserSeeder(payload)
     await StackSeeder(payload)
   },
-  // Sharp is now an optional dependency -
-  // if you want to resize images, crop, set focal point, etc.
-  // make sure to install it and pass it to the config.
-
-  // This is temporary - we may make an adapter pattern
-  // for this before reaching 3.0 stable
   sharp,
 })
