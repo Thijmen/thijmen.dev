@@ -1,10 +1,11 @@
 import React from 'react'
-import BlogCardNew from '@/core/modules/blog/components/BlogCardNew'
+
 import PageHeading from '@/core/common/components/elements/PageHeading'
-import { Blog, Page } from '../../../../payload/payload-types'
+import BlogCardNew from '@/core/modules/blog/components/BlogCardNew'
+import { Page, Post } from '@/payload/payload-types'
 
 interface Props {
-  blogs: Blog[]
+  blogs: Post[]
   page: Page
 }
 

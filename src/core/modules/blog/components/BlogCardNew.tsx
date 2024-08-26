@@ -2,9 +2,9 @@
 import { useState } from 'react'
 import { calculateReadingTime } from '@/core/common/helpers'
 import { BlurImage } from '@/core/common/components/elements/BlurImage'
-import { Blog, R2Media } from '../../../../payload/payload-types'
+import { Post, R2Media } from '../../../../payload/payload-types'
 
-const BlogCardNew = ({ blogItem }: { blogItem: Blog }) => {
+const BlogCardNew = ({ blogItem }: { blogItem: Post }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false)
 
   const readingTimeMinutes = calculateReadingTime('@TODO: fixme') ?? 0

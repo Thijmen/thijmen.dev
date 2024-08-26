@@ -3,10 +3,9 @@ import { motion } from 'framer-motion'
 
 import SectionHeading from '@/core/common/components/elements/SectionHeading'
 import { BlogItemHomepage } from '@/core/modules/home/components/BlogItemHomepage'
+import { Post } from '@/payload/payload-types'
 
-import { Blog } from '../../../../payload/payload-types'
-
-export const LatestBlogs = ({ posts }: { posts: Blog[] }) => {
+export const LatestBlogs = ({ posts }: { posts: Post[] }) => {
   return (
     <section className='space-y-5'>
       <div className='space-y-3'>

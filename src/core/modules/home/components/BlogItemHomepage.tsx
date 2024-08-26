@@ -1,10 +1,11 @@
 'use client'
 import Link from 'next/link'
+
 import { BlurImage } from '@/core/common/components/elements/BlurImage'
 import { formatDate } from '@/core/common/helpers'
-import { Blog, R2Media } from '../../../../payload/payload-types'
+import { Post, R2Media } from '@/payload/payload-types'
 
-export const BlogItemHomepage = ({ post }: { post: Blog }) => {
+export const BlogItemHomepage = ({ post }: { post: Post }) => {
   const image = post.image != null ? (post.image as R2Media).url || '' : ''
   return (
     <Link
