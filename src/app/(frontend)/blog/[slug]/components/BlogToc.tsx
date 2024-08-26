@@ -1,9 +1,8 @@
 'use client'
 
-import * as React from 'react'
-import { TOC } from '@/common/components/elements/mdx/types'
-import { useScrollspy } from '@/common/hooks/useControlSpy'
-import cn from '@/common/libs/cn'
+import { TOC } from '@/core/common/components/elements/mdx/types'
+import { useScrollspy } from '@/core/common/hooks/useControlSpy'
+import cn from '@/core/common/libs/cn'
 
 type TableOfContentsProps = {
   toc: TOC[]

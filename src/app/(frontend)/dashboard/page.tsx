@@ -1,10 +1,10 @@
-import Container from '@/common/components/elements/Container'
-import { getGithubUser } from '@/services/github'
-import PageHeading from '@/common/components/elements/PageHeading'
-import Dashboard from '@/modules/dashboard'
+import Container from '@/core/common/components/elements/Container'
+import { getGithubUser } from '@/core/services/github'
+import PageHeading from '@/core/common/components/elements/PageHeading'
+import Dashboard from '@/core/modules/dashboard'
 import type { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
-import Layout from '@/common/components/layouts'
+import Layout from '@/core/common/components/layouts'
 
 export const metadata: Metadata = {
   title: generateSiteTitle({ title: 'Dashboard' }),

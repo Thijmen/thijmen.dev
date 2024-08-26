@@ -1,16 +1,16 @@
 import { redirect } from 'next/navigation'
-import Container from '@/common/components/elements/Container'
-import BackButton from '@/common/components/elements/BackButton'
-import PageHeading from '@/common/components/elements/PageHeading'
+import Container from '@/core/common/components/elements/Container'
+import BackButton from '@/core/common/components/elements/BackButton'
+import PageHeading from '@/core/common/components/elements/PageHeading'
 import React from 'react'
-import ProjectDetail from '@/modules/projects/components/ProjectDetail'
+import ProjectDetail from '@/core/modules/projects/components/ProjectDetail'
 import { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
-import Layout from '@/common/components/layouts'
+import Layout from '@/core/common/components/layouts'
 import {
   getNewProject,
   getNewProjects,
-} from '@/common/services/projects.service'
+} from '@/core/common/services/projects.service'
 
 const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params

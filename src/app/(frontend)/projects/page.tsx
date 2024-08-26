@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
-import Layout from '@/common/components/layouts'
+import Layout from '@/core/common/components/layouts'
 import { generateSiteTitle } from '@/core/metadata'
-import { getNewPage } from '@/common/services/pages.service'
+import { getNewPage } from '@/core/common/services/pages.service'
 import ProjectsClientsComponent from '@/app/(frontend)/projects/client-component'
-import { getNewProjects } from '@/common/services/projects.service'
+import { getNewProjects } from '@/core/common/services/projects.service'
 
 const ProjectsPage = async () => {
   const page = await getNewPage('projects')

@@ -1,6 +1,6 @@
-import Mdx from '@/common/components/elements/mdx/Mdx'
-import Layout from '@/common/components/layouts'
-import { getNewPage } from '@/common/services/pages.service'
+import Mdx from '@/core/common/components/elements/mdx/Mdx'
+import Layout from '@/core/common/components/layouts'
+import { getNewPage } from '@/core/common/services/pages.service'
 
 const TestPage = async () => {
   const data = await getNewPage('blog')

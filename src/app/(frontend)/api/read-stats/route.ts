@@ -1,4 +1,4 @@
-import { getALLTimeSinceToday, getReadStats } from '@/services/wakatime'
+import { getALLTimeSinceToday, getReadStats } from '@/core/services/wakatime'
 
 export async function GET() {
   try {

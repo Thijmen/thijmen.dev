@@ -1,8 +1,8 @@
-import Container from '@/common/components/elements/Container'
-import Home from '@/modules/home'
+import Container from '@/core/common/components/elements/Container'
+import Home from '@/core/modules/home'
 import type { Metadata } from 'next'
 import { generateSiteTitle } from '@/core/metadata'
-import Layout from '@/common/components/layouts'
+import Layout from '@/core/common/components/layouts'
 
 export const metadata: Metadata = {
   title: generateSiteTitle({ title: 'Home' }),

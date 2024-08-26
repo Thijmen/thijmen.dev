@@ -4,13 +4,13 @@ import AOS from 'aos'
 import dynamic from 'next/dynamic'
 import { ThemeProvider } from 'next-themes'
 import { useEffect } from 'react'
-import { CommandPaletteProvider } from '@/common/context/CommandPaletteContext'
-import { firaCode, jakartaSans, soraSans } from '@/common/styles/fonts'
-import CommandPalette from '@/common/components/elements/CommandPalette'
-import { LivePreviewListener } from '@/common/components/LivePreviewListener'
+import { CommandPaletteProvider } from '@/core/common/context/CommandPaletteContext'
+import { firaCode, jakartaSans, soraSans } from '@/core/common/styles/fonts'
+import CommandPalette from '@/core/common/components/elements/CommandPalette'
+import { LivePreviewListener } from '@/core/common/components/LivePreviewListener'
 
 const ProgressBar = dynamic(
-  () => import('src/common/components/elements/ProgressBar'),
+  () => import('@/core/common/components/elements/ProgressBar'),
   { ssr: false },
 )
 

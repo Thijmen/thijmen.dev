@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import configPromise from '@payload-config'
-import Layout from '@/common/components/layouts'
+import Layout from '@/core/common/components/layouts'
 import BlogItemHeader from '@/app/(frontend)/blog/[slug]/components/BlogItemHeader'
 import { BlogItemContent } from '@/app/(frontend)/blog/[slug]/components/BlogItemContent'
 import { getPayloadHMR } from '@payloadcms/next/utilities'

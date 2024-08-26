@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import 'tailwindcss/tailwind.css'
 import 'aos/dist/aos.css'
-import '@/common/styles/globals.css'
+import '@/core/common/styles/globals.css'
 
 import { generateSiteTitle } from '@/core/metadata'
 import Image from 'next/image'

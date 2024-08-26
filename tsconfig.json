@@ -18,7 +18,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "db": ["src/common/libs/prisma"],
-      "@payload-config": ["./payload.config.ts"]
+      "@payload-config": ["./src/payload/payload.config.ts"]
     },
     "plugins": [
       {

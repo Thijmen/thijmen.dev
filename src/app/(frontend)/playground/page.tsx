@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Container from '@/common/components/elements/Container'
-import Layout from '@/common/components/layouts'
-import Playground from '@/modules/playground'
+import Container from '@/core/common/components/elements/Container'
+import Layout from '@/core/common/components/layouts'
+import Playground from '@/core/modules/playground'
 
 const PlaygroundPage = () => {
   return (

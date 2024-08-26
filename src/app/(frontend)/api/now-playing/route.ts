@@ -1,4 +1,4 @@
-import { getNowPlaying } from '@/services/spotify'
+import { getNowPlaying } from '@/core/services/spotify'
 
 export async function GET() {
   try {

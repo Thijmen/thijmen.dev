@@ -1,10 +1,10 @@
 import slugify from 'slugify'
 
-import Heading from '@/common/components/elements/mdx/elements/Heading'
-import Mdx from '@/common/components/elements/mdx/Mdx'
-import { TOC } from '@/common/components/elements/mdx/types'
+import Heading from '@/core/common/components/elements/mdx/elements/Heading'
+import Mdx from '@/core/common/components/elements/mdx/Mdx'
+import { TOC } from '@/core/common/components/elements/mdx/types'
 
-import { Blog } from '../../../../../../payload-types'
+import { Blog } from '../../../../../payload/payload-types'
 import TableOfContents from '@/app/(frontend)/blog/[slug]/components/BlogToc'
 import { BlogProgress } from '@/app/(frontend)/blog/[slug]/components/BlogProgress'
 

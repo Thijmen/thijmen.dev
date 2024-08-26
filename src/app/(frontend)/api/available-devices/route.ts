@@ -1,4 +1,4 @@
-import { getAvailableDevices } from '@/services/spotify'
+import { getAvailableDevices } from '@/core/services/spotify'
 
 export async function GET() {
   try {

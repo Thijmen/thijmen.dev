@@ -1,5 +1,5 @@
 import { type NextRequest } from 'next/server'
-import { getGithubUser } from '@/services/github'
+import { getGithubUser } from '@/core/services/github'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
