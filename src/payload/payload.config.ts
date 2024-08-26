@@ -57,7 +57,7 @@ export default buildConfig({
       },
     }),
     redirectsPlugin({
-      collections: ['pages', 'posts'],
+      collections: ['pages', 'blogs'],
       overrides: {
         // @ts-expect-error
         fields: ({ defaultFields }) => {

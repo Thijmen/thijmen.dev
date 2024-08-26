@@ -17,6 +17,7 @@ export interface Config {
     blogs: Blog
     pages: Page
     'r2-media': R2Media
+    redirects: Redirect
     'payload-preferences': PayloadPreference
     'payload-migrations': PayloadMigration
   }
@@ -53,6 +54,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number
+  name?: string | null
   updatedAt: string
   createdAt: string
   email: string
@@ -148,6 +150,29 @@ export interface Page {
   title: string
   slug: string
   content: string
+  updatedAt: string
+  createdAt: string
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects".
+ */
+export interface Redirect {
+  id: number
+  from: string
+  to?: {
+    type?: ('reference' | 'custom') | null
+    reference?:
+      | ({
+          relationTo: 'pages'
+          value: number | Page
+        } | null)
+      | ({
+          relationTo: 'blogs'
+          value: number | Blog
+        } | null)
+    url?: string | null
+  }
   updatedAt: string
   createdAt: string
 }

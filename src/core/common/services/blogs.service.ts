@@ -2,8 +2,7 @@ import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { draftMode } from 'next/headers'
 import { getPayload } from 'payload'
-
-import { Blog } from '../../../payload/payload-types'
+import { Blog } from '@/payload/payload-types'
 
 export const getNewBlogs = async (limit: number): Promise<Blog[]> => {
   const payload = await getPayload({ config: configPromise })
