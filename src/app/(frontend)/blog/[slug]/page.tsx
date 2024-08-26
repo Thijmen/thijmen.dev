@@ -7,7 +7,7 @@ import { BlogItemContent } from '@/app/(frontend)/blog/[slug]/components/BlogIte
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import React, { cache } from 'react'
 import { draftMode } from 'next/headers'
-import { generateMeta } from '@/payloadcms/utilities/generateMeta'
+import { generateMeta } from '@/payload/utilities/generateMeta'
 
 export async function generateStaticParams() {
   const payload = await getPayloadHMR({ config: configPromise })

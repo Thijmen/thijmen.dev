@@ -94,6 +94,9 @@ export default buildConfig({
 
   admin: {
     user: 'users',
+    meta: {
+      titleSuffix: '| 🚧 Thijmen.dev',
+    },
     livePreview: {
       breakpoints: [
         {
