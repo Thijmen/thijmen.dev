@@ -1,9 +1,9 @@
 import Mdx from '@/core/common/components/elements/mdx/Mdx'
 import Layout from '@/core/common/components/layouts'
-import { getNewPage } from '@/core/common/services/pages.service'
+import { queryPageBySlug } from '@/core/common/services/pages.service'
 
 const TestPage = async () => {
-  const data = await getNewPage('blog')
+  const data = await queryPageBySlug('blog')
 
   const dataMdx =
     '```js title="lib/test.tsx"\n' +

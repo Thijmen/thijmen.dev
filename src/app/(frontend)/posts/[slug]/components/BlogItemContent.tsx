@@ -4,12 +4,12 @@ import Heading from '@/core/common/components/elements/mdx/elements/Heading'
 import Mdx from '@/core/common/components/elements/mdx/Mdx'
 import { TOC } from '@/core/common/components/elements/mdx/types'
 
-import { Blog } from '../../../../../payload/payload-types'
-import TableOfContents from '@/app/(frontend)/blog/[slug]/components/BlogToc'
-import { BlogProgress } from '@/app/(frontend)/blog/[slug]/components/BlogProgress'
+import { Post } from '@/payload/payload-types'
+import TableOfContents from '@/app/(frontend)/posts/[slug]/components/BlogToc'
+import { BlogProgress } from '@/app/(frontend)/posts/[slug]/components/BlogProgress'
 
 type Props = {
-  blog: Blog
+  blog: Post
 }
 
 // TODO: Move to file

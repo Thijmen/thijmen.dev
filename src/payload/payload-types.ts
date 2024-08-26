@@ -14,7 +14,7 @@ export interface Config {
     users: User
     projects: Project
     stacks: Stack
-    blogs: Blog
+    posts: Post
     pages: Page
     'r2-media': R2Media
     redirects: Redirect
@@ -116,9 +116,9 @@ export interface R2Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blogs".
+ * via the `definition` "posts".
  */
-export interface Blog {
+export interface Post {
   id: number
   title: string
   slug: string
@@ -168,8 +168,8 @@ export interface Redirect {
           value: number | Page
         } | null)
       | ({
-          relationTo: 'blogs'
-          value: number | Blog
+          relationTo: 'posts'
+          value: number | Post
         } | null)
     url?: string | null
   }

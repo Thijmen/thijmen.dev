@@ -1,27 +1,26 @@
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { draftMode } from 'next/headers'
-import { getPayload } from 'payload'
-import { Blog } from '@/payload/payload-types'
+import { Post } from '@/payload/payload-types'
 
-export const getNewBlogs = async (limit: number): Promise<Blog[]> => {
-  const payload = await getPayload({ config: configPromise })
+export const getPosts = async (limit: number): Promise<Post[]> => {
+  const payload = await getPayloadHMR({ config: configPromise })
 
   const data = await payload.find({
-    collection: 'blogs',
+    collection: 'posts',
     limit,
   })
 
   return data.docs
 }
 
-export const getNewBlog = async (slug: string): Promise<Blog | null> => {
+export const getNewBlog = async (slug: string): Promise<Post | null> => {
   const { isEnabled: draft } = draftMode()
 
   const payload = await getPayloadHMR({ config: configPromise })
 
   const data = await payload.find({
-    collection: 'blogs',
+    collection: 'posts',
     draft,
     overrideAccess: true,
     where: {

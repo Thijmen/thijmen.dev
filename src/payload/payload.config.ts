@@ -11,8 +11,8 @@ import { buildConfig } from 'payload'
 import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import { Blog } from '@/payload/payload-types'
-import { Blogs } from '@/payload/collections/Blogs'
+import { Page, Post } from '@/payload/payload-types'
+
 import { Projects } from '@/payload/collections/Projects'
 import { Pages } from '@/payload/collections/Pages'
 import { Users } from '@/payload/collections/Users'
@@ -20,17 +20,18 @@ import { UserSeeder } from '@/payload/collections/Users/seed'
 import { StackSeeder } from '@/payload/collections/Stacks/seed'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
+import { Posts } from '@/payload/collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const generateTitle: GenerateTitle<Blog> = ({ doc }) => {
+const generateTitle: GenerateTitle<Page | Post> = ({ doc }) => {
   return doc?.title
     ? `${doc.title} | Payload Website Template`
     : 'Payload Website Template'
 }
 
-const generateURL: GenerateURL<Blog> = ({ doc }) => {
+const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
   return doc?.slug
     ? `${process.env.NEXT_PUBLIC_SERVER_URL}/${doc.slug}`
     : process.env.NEXT_PUBLIC_SERVER_URL
@@ -38,7 +39,7 @@ const generateURL: GenerateURL<Blog> = ({ doc }) => {
 
 export default buildConfig({
   editor: lexicalEditor(),
-  collections: [Users, Projects, Index, Blogs, Pages, Media],
+  collections: [Users, Projects, Index, Posts, Pages, Media],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -57,7 +58,7 @@ export default buildConfig({
       },
     }),
     redirectsPlugin({
-      collections: ['pages', 'blogs'],
+      collections: ['pages', 'posts'],
       overrides: {
         // @ts-expect-error
         fields: ({ defaultFields }) => {

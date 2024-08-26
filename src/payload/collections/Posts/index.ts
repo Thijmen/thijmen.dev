@@ -9,11 +9,11 @@ import {
 import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublished'
-import { revalidateBlog } from '@/payload/collections/blogs/hooks/revalidateBlog'
 import { Markdown } from '@/payload/blocks/Markdown'
+import { revalidatePost } from '@/payload/collections/Posts/hooks/revalidatePost'
 
-export const Blogs: CollectionConfig = {
-  slug: 'blogs',
+export const Posts: CollectionConfig = {
+  slug: 'posts',
   versions: {
     drafts: {
       autosave: {
@@ -45,7 +45,7 @@ export const Blogs: CollectionConfig = {
       }),
   },
   hooks: {
-    afterChange: [revalidateBlog],
+    afterChange: [revalidatePost],
   },
   fields: [
     {

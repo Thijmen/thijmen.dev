@@ -4,10 +4,10 @@ import * as React from 'react'
 import Link from 'next/link'
 import ImageZoom from '@/core/common/components/elements/ImageZoom'
 import { BlurImage } from '@/core/common/components/elements/BlurImage'
-import { Blog, R2Media } from '../../../../../payload/payload-types'
+import { Post, R2Media } from '@/payload/payload-types'
 
 type HeaderProps = {
-  blog: Blog
+  blog: Post
 }
 
 const Header = (props: HeaderProps) => {
