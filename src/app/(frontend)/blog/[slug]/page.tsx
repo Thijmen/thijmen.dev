@@ -1,15 +1,28 @@
 import { Metadata } from 'next'
-import { generateSiteTitle } from '@/core/metadata'
 import { redirect } from 'next/navigation'
+import configPromise from '@payload-config'
 import Layout from '@/common/components/layouts'
-import { getNewBlog } from '@/common/services/blogs.service'
 import BlogItemHeader from '@/app/(frontend)/blog/[slug]/components/BlogItemHeader'
 import { BlogItemContent } from '@/app/(frontend)/blog/[slug]/components/BlogItemContent'
+import { getPayloadHMR } from '@payloadcms/next/utilities'
+import React, { cache } from 'react'
+import { draftMode } from 'next/headers'
+import { generateMeta } from '@/payloadcms/utilities/generateMeta'
 
-export const revalidate = 300
+export async function generateStaticParams() {
+  const payload = await getPayloadHMR({ config: configPromise })
+  const posts = await payload.find({
+    collection: 'blogs',
+    draft: false,
+    limit: 1000,
+    overrideAccess: false,
+  })
+
+  return posts.docs?.map(({ slug }) => slug)
+}
 
 const BlogPage = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const blog = await getNewBlog(slug)
+  const blog = await queryPostBySlug({ slug })
 
   // @TODO: Redirects
   if (!blog) {
@@ -29,19 +42,29 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const blog = await getNewBlog(slug)
+  const post = await queryPostBySlug({ slug })
 
-  if (!blog) {
-    redirect('/404')
-  }
-
-  const title = blog?.title ?? ''
-
-  // @TODO: Add proper metadata
-  return {
-    title: generateSiteTitle({ title }),
-    description: blog?.description ?? '',
-  }
+  return generateMeta({ doc: post })
 }
+
+const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
+  const { isEnabled: draft } = draftMode()
+
+  const payload = await getPayloadHMR({ config: configPromise })
+
+  const result = await payload.find({
+    collection: 'blogs',
+    draft,
+    limit: 1,
+    overrideAccess: true,
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+  })
+
+  return result.docs?.[0] || null
+})
 
 export default BlogPage

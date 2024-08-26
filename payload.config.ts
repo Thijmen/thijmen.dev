@@ -6,7 +6,6 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
 import { MediaCollection } from '@/payloadcms/collections/mediaCollection'
 import { ProjectCollection } from '@/payloadcms/collections/projectCollection'
 import { StackCollection } from '@/payloadcms/collections/stackCollection'
@@ -15,9 +14,25 @@ import { r2Adapter } from '@/payloadcms/adapters/r2adapter'
 import { PageCollection } from '@/payloadcms/collections/pageCollection'
 import { BlogCollection } from '@/payloadcms/collections/blogCollection'
 import { buildConfig } from 'payload'
+import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
+import { Blog } from './payload-types'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const generateTitle: GenerateTitle<Blog> = ({ doc }) => {
+  return doc?.title
+    ? `${doc.title} | Payload Website Template`
+    : 'Payload Website Template'
+}
+
+const generateURL: GenerateURL<Blog> = ({ doc }) => {
+  return doc?.slug
+    ? `${process.env.NEXT_PUBLIC_SERVER_URL}/${doc.slug}`
+    : process.env.NEXT_PUBLIC_SERVER_URL
+}
 
 export default buildConfig({
   //editor: slateEditor({}),
@@ -55,6 +70,10 @@ export default buildConfig({
         },
       },
     }),
+    seoPlugin({
+      generateTitle,
+      generateURL,
+    }),
   ],
   /**
    * Payload can now accept specific translations from 'payload/i18n/en'
@@ -64,7 +83,31 @@ export default buildConfig({
     supportedLanguages: { en },
   },
 
-  admin: {},
+  admin: {
+    user: 'users',
+    livePreview: {
+      breakpoints: [
+        {
+          label: 'Mobile',
+          name: 'mobile',
+          width: 375,
+          height: 667,
+        },
+        {
+          label: 'Tablet',
+          name: 'tablet',
+          width: 768,
+          height: 1024,
+        },
+        {
+          label: 'Desktop',
+          name: 'desktop',
+          width: 1440,
+          height: 900,
+        },
+      ],
+    },
+  },
   async onInit(payload) {
     await seed(payload)
   },

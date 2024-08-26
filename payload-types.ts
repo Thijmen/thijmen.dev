@@ -7,6 +7,9 @@
  */
 
 export interface Config {
+  auth: {
+    users: UserAuthOperations
+  }
   collections: {
     users: User
     projects: Project
@@ -17,10 +20,31 @@ export interface Config {
     'payload-preferences': PayloadPreference
     'payload-migrations': PayloadMigration
   }
+  db: {
+    defaultIDType: number
+  }
   globals: {}
   locale: null
   user: User & {
     collection: 'users'
+  }
+}
+export interface UserAuthOperations {
+  forgotPassword: {
+    email: string
+    password: string
+  }
+  login: {
+    email: string
+    password: string
+  }
+  registerFirstUser: {
+    email: string
+    password: string
+  }
+  unlock: {
+    email: string
+    password: string
   }
 }
 /**
@@ -51,7 +75,7 @@ export interface Project {
   isFeatured?: boolean | null
   stacks?: (number | Stack)[] | null
   introduction?: string | null
-  headerImage?: number | R2Media | null
+  headerImage?: (number | null) | R2Media
   githubLink?: string | null
   liveLink?: string | null
   description: string
@@ -98,7 +122,7 @@ export interface Blog {
   slug: string
   isFeatured?: boolean | null
   description: string
-  image?: number | R2Media | null
+  image?: (number | null) | R2Media
   layout: {
     header?: string | null
     content?: string | null
@@ -106,8 +130,14 @@ export interface Blog {
     blockName?: string | null
     blockType: 'block-markdown'
   }[]
+  meta?: {
+    title?: string | null
+    image?: (number | null) | R2Media
+    description?: string | null
+  }
   updatedAt: string
   createdAt: string
+  _status?: ('draft' | 'published') | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -154,6 +184,13 @@ export interface PayloadMigration {
   batch?: number | null
   updatedAt: string
   createdAt: string
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "auth".
+ */
+export interface Auth {
+  [k: string]: unknown
 }
 
 declare module 'payload' {

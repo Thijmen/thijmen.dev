@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { CommandPaletteProvider } from '@/common/context/CommandPaletteContext'
 import { firaCode, jakartaSans, soraSans } from '@/common/styles/fonts'
 import CommandPalette from '@/common/components/elements/CommandPalette'
+import { LivePreviewListener } from '@/common/components/LivePreviewListener'
 
 const ProgressBar = dynamic(
   () => import('src/common/components/elements/ProgressBar'),
@@ -39,6 +40,7 @@ export default function ClientLayout({
       {/*// todo: add defaultseo*/}
       <ThemeProvider attribute='class' defaultTheme='dark'>
         <CommandPaletteProvider>
+          <LivePreviewListener />
           <CommandPalette />
           {children}
         </CommandPaletteProvider>
