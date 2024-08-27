@@ -8,221 +8,222 @@
 
 export interface Config {
   auth: {
-    users: UserAuthOperations
-  }
+    users: UserAuthOperations;
+  };
   collections: {
-    users: User
-    projects: Project
-    stacks: Stack
-    posts: Post
-    pages: Page
-    'r2-media': R2Media
-    redirects: Redirect
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
+    users: User;
+    projects: Project;
+    stacks: Stack;
+    posts: Post;
+    pages: Page;
+    'r2-media': R2Media;
+    redirects: Redirect;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
   db: {
-    defaultIDType: number
-  }
-  globals: {}
-  locale: null
+    defaultIDType: number;
+  };
+  globals: {};
+  locale: null;
   user: User & {
-    collection: 'users'
-  }
+    collection: 'users';
+  };
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   login: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   registerFirstUser: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   unlock: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: number
-  name?: string | null
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string | null
-  resetPasswordExpiration?: string | null
-  salt?: string | null
-  hash?: string | null
-  loginAttempts?: number | null
-  lockUntil?: string | null
-  password?: string | null
+  id: number;
+  name?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects".
  */
 export interface Project {
-  id: number
-  title: string
-  slug: string
-  isFeatured?: boolean | null
-  stacks?: (number | Stack)[] | null
-  introduction?: string | null
-  headerImage?: (number | null) | R2Media
-  githubLink?: string | null
-  liveLink?: string | null
-  description: string
+  id: number;
+  title: string;
+  slug: string;
+  isFeatured?: boolean | null;
+  stacks?: (number | Stack)[] | null;
+  introduction?: string | null;
+  headerImage?: (number | null) | R2Media;
+  githubLink?: string | null;
+  liveLink?: string | null;
+  description: string;
   meta?: {
-    title?: string | null
-    image?: (number | null) | R2Media
-    description?: string | null
-  }
-  updatedAt: string
-  createdAt: string
-  _status?: ('draft' | 'published') | null
+    title?: string | null;
+    image?: (number | null) | R2Media;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "stacks".
  */
 export interface Stack {
-  id: number
-  title: string
-  stackHandle: string
-  updatedAt: string
-  createdAt: string
+  id: number;
+  title: string;
+  stackHandle: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "r2-media".
  */
 export interface R2Media {
-  id: number
-  title?: string | null
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  id: number;
+  title?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
 export interface Post {
-  id: number
-  title: string
-  slug: string
-  isFeatured?: boolean | null
-  description: string
-  image?: (number | null) | R2Media
+  id: number;
+  title: string;
+  slug: string;
+  isFeatured?: boolean | null;
+  description: string;
+  image?: (number | null) | R2Media;
   layout: {
-    header?: string | null
-    content?: string | null
-    id?: string | null
-    blockName?: string | null
-    blockType: 'markdown'
-  }[]
+    header?: string | null;
+    content?: string | null;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'markdown';
+  }[];
   meta?: {
-    title?: string | null
-    image?: (number | null) | R2Media
-    description?: string | null
-  }
-  updatedAt: string
-  createdAt: string
-  _status?: ('draft' | 'published') | null
+    title?: string | null;
+    image?: (number | null) | R2Media;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
-  id: number
-  title: string
-  slug: string
-  content: string
-  updatedAt: string
-  createdAt: string
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
-  id: number
-  from: string
+  id: number;
+  from: string;
   to?: {
-    type?: ('reference' | 'custom') | null
+    type?: ('reference' | 'custom') | null;
     reference?:
       | ({
-          relationTo: 'pages'
-          value: number | Page
+          relationTo: 'pages';
+          value: number | Page;
         } | null)
       | ({
-          relationTo: 'posts'
-          value: number | Post
-        } | null)
-    url?: string | null
-  }
-  updatedAt: string
-  createdAt: string
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number
+  id: number;
   user: {
-    relationTo: 'users'
-    value: number | User
-  }
-  key?: string | null
+    relationTo: 'users';
+    value: number | User;
+  };
+  key?: string | null;
   value?:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number
-  name?: string | null
-  batch?: number | null
-  updatedAt: string
-  createdAt: string
+  id: number;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown
+  [k: string]: unknown;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
