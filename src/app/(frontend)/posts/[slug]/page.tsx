@@ -22,17 +22,16 @@ export async function generateStaticParams() {
 }
 
 const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const posts = await queryPostBySlug({ slug })
+  const post = await queryPostBySlug({ slug })
 
-  // @TODO: Redirects
-  if (!posts) {
+  if (!post) {
     redirect('/404')
   }
 
   return (
-    <Layout isFullPageHeader title={posts.title}>
-      <BlogItemHeader blog={posts} />
-      <BlogItemContent blog={posts} />
+    <Layout isFullPageHeader title={post.title}>
+      <BlogItemHeader blog={post} />
+      <BlogItemContent blog={post} />
     </Layout>
   )
 }

@@ -81,8 +81,14 @@ export interface Project {
   githubLink?: string | null
   liveLink?: string | null
   description: string
+  meta?: {
+    title?: string | null
+    image?: (number | null) | R2Media
+    description?: string | null
+  }
   updatedAt: string
   createdAt: string
+  _status?: ('draft' | 'published') | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

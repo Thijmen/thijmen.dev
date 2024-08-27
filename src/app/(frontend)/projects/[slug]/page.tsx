@@ -2,20 +2,19 @@ import { redirect } from 'next/navigation'
 import Container from '@/core/common/components/elements/Container'
 import BackButton from '@/core/common/components/elements/BackButton'
 import PageHeading from '@/core/common/components/elements/PageHeading'
-import React from 'react'
+import React, { cache } from 'react'
 import ProjectDetail from '@/core/modules/projects/components/ProjectDetail'
 import { Metadata } from 'next'
-import { generateSiteTitle } from '@/core/metadata'
 import Layout from '@/core/common/components/layouts'
-import {
-  getNewProject,
-  getNewProjects,
-} from '@/core/common/services/projects.service'
+import { getPayloadHMR } from '@payloadcms/next/utilities'
+import configPromise from '@payload-config'
+import { draftMode } from 'next/headers'
+import { generateMeta } from '@/payload/utilities/generateMeta'
 
 const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
 
-  const project = await getNewProject(slug)
+  const project = await queryProjectBySlug({ slug })
 
   if (!project) {
     redirect('/404')
@@ -33,13 +32,16 @@ const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
 }
 
 export async function generateStaticParams() {
-  const projects = await getNewProjects()
+  const payload = await getPayloadHMR({ config: configPromise })
 
-  return projects.map((project) => ({
-    params: {
-      slug: project.slug,
-    },
-  }))
+  const projects = await payload.find({
+    collection: 'projects',
+    draft: false,
+    limit: 1000,
+    overrideAccess: false,
+  })
+
+  return projects.docs?.map(({ slug }) => slug)
 }
 
 export async function generateMetadata({
@@ -47,21 +49,29 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const projectData = await getNewProject(slug)
+  const project = await queryProjectBySlug({ slug })
 
-  if (!projectData) {
-    redirect('/404')
-  }
-
-  const projectTitle = projectData.title
-
-  const title = `Project: ${projectTitle}`
-  // @TODO: Add proper metadata
-  return {
-    title: generateSiteTitle({ title }),
-    description: projectData.description,
-  }
+  return generateMeta({ doc: project })
 }
 
+const queryProjectBySlug = cache(async ({ slug }: { slug: string }) => {
+  const { isEnabled: draft } = draftMode()
+
+  const payload = await getPayloadHMR({ config: configPromise })
+
+  const result = await payload.find({
+    collection: 'projects',
+    draft,
+    limit: 1,
+    overrideAccess: true,
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+  })
+
+  return result.docs?.[0] || null
+})
+
 export default ProjectDetailPage
-export const revalidate = 60

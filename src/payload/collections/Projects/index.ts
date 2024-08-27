@@ -1,9 +1,37 @@
 import { CollectionConfig } from 'payload'
+import { authenticated } from '@/payload/access/authenticated'
+import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublished'
+import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
+import { revalidateProject } from '@/payload/collections/Projects/hooks/revalidateProject'
+import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
   admin: {
     useAsTitle: 'title',
+    defaultColumns: ['title'],
+    livePreview: {
+      url: ({ data }) => {
+        const path = generatePreviewPath({
+          path: `/projects/${typeof data?.slug === 'string' ? data.slug : ''}`,
+        })
+        return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
+      },
+    },
+    preview: (doc) =>
+      generatePreviewPath({
+        path: `/projects/${typeof doc?.slug === 'string' ? doc.slug : ''}`,
+      }),
+  },
+  versions: defaultVersions,
+  hooks: {
+    afterChange: [revalidateProject],
+  },
+  access: {
+    create: authenticated,
+    delete: authenticated,
+    read: authenticatedOrPublished,
+    update: authenticated,
   },
   fields: [
     {
@@ -78,6 +106,7 @@ export const Projects: CollectionConfig = {
             },
           ],
         },
+        defaultMetaTab,
       ],
     },
   ],

@@ -1,27 +1,14 @@
 import { CollectionConfig } from 'payload'
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from '@payloadcms/plugin-seo/fields'
 import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublished'
 import { Markdown } from '@/payload/blocks/Markdown'
 import { revalidatePost } from '@/payload/collections/Posts/hooks/revalidatePost'
+import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
-  versions: {
-    drafts: {
-      autosave: {
-        interval: 100,
-      },
-    },
-    maxPerDoc: 50,
-  },
+  versions: defaultVersions,
   access: {
     create: authenticated,
     delete: authenticated,
@@ -103,29 +90,7 @@ export const Posts: CollectionConfig = {
             },
           ],
         },
-        {
-          name: 'meta',
-          label: 'SEO',
-          fields: [
-            OverviewField({
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-              imagePath: 'meta.image',
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'r2-media',
-            }),
-            MetaDescriptionField({}),
-            PreviewField({
-              hasGenerateFn: true,
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-            }),
-          ],
-        },
+        defaultMetaTab,
       ],
     },
   ],
