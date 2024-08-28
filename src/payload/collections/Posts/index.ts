@@ -5,6 +5,7 @@ import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublis
 import { Markdown } from '@/payload/blocks/Markdown'
 import { revalidatePost } from '@/payload/collections/Posts/hooks/revalidatePost'
 import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
+import { slugField } from '@/payload/fields/slug'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -46,12 +47,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               required: true,
             },
-            {
-              name: 'slug',
-              type: 'text',
-              unique: true,
-              required: true,
-            },
+            slugField(),
             {
               name: 'isFeatured',
               type: 'checkbox',

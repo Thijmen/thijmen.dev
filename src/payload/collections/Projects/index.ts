@@ -4,6 +4,7 @@ import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublis
 import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
 import { revalidateProject } from '@/payload/collections/Projects/hooks/revalidateProject'
 import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
+import { slugField } from '@/payload/fields/slug'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -45,12 +46,7 @@ export const Projects: CollectionConfig = {
               type: 'text',
               required: true,
             },
-            {
-              name: 'slug',
-              type: 'text',
-              required: true,
-              unique: true,
-            },
+            slugField(),
             {
               name: 'isFeatured',
               type: 'checkbox',
