@@ -74,6 +74,7 @@ export interface Project {
   id: number
   title: string
   slug?: string | null
+  slugLock?: boolean | null
   isFeatured?: boolean | null
   stacks?: (number | Stack)[] | null
   introduction?: string | null
@@ -128,6 +129,7 @@ export interface Post {
   id: number
   title: string
   slug?: string | null
+  slugLock?: boolean | null
   isFeatured?: boolean | null
   description: string
   image?: (number | null) | R2Media
@@ -155,6 +157,7 @@ export interface Page {
   id: number
   title: string
   slug?: string | null
+  slugLock?: boolean | null
   layout?:
     | {
         layout?:

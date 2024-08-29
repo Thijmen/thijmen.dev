@@ -46,7 +46,7 @@ export const Projects: CollectionConfig = {
               type: 'text',
               required: true,
             },
-            slugField(),
+            ...slugField(),
             {
               name: 'isFeatured',
               type: 'checkbox',

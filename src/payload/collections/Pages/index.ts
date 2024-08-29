@@ -38,7 +38,7 @@ export const Pages: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    slugField(),
+    ...slugField(),
     {
       type: 'tabs',
 

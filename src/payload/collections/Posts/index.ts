@@ -47,7 +47,7 @@ export const Posts: CollectionConfig = {
               type: 'text',
               required: true,
             },
-            slugField(),
+            ...slugField(),
             {
               name: 'isFeatured',
               type: 'checkbox',
