@@ -47,7 +47,7 @@
     "@shikijs/transformers": "^1.11.1",
     "@tailwindcss/typography": "^0.5.12",
     "aos": "^3.0.0-beta.6",
-    "aws-crt": "^1.21.3",
+    "aws-crt": "^1.22.0",
     "axios": "^1.7.4",
     "babel-plugin-react-compiler": "^0.0.0-experimental-592953e-20240517",
     "class-variance-authority": "^0.7.0",
