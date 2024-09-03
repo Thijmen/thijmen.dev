@@ -6,7 +6,18 @@ export const Media: CollectionConfig = {
 		singular: "Media R2",
 		plural: "Media R2",
 	},
-	upload: true,
+	upload: {
+		imageSizes: [
+			{
+				name: "projectCard",
+				width: 326,
+				height: 400,
+				generateImageName: ({ height, sizeName, extension, width }) => {
+					return `custom-${sizeName}-${height}-${width}.${extension}`;
+				},
+			},
+		],
+	},
 	fields: [
 		{
 			name: "title",
