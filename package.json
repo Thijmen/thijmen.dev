@@ -12,6 +12,7 @@
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "ci": "payload migrate && pnpm build",
     "create-migration": "payload migrate:create",
+    "generate:importmap": "payload generate:importmap",
     "generate:types": "payload generate:types",
     "typecheck": "tsc --noEmit --incremental false",
     "format:check": "prettier -c .",
