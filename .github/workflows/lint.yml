@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   lint:
-    name: ⬣ ESLint
+    name: ⬣ Biome
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo
@@ -56,29 +56,6 @@ jobs:
 
       - name: 🔎 Type check
         run: pnpm run typecheck
-
-  prettier:
-    name: 💅 Prettier
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: 📥 Download deps
-        run: pnpm install
-
-      - name: 💅 Prettier check
-        run: pnpm run format:check
 
   test:
     name: 🃏 Test
