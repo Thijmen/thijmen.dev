@@ -12,7 +12,7 @@ export const PageSeeder = async (payload: Payload) => {
       data: {
         title: 'Projects',
         slug: 'projects',
-        content: 'This is the Projects page',
+        //content: 'This is the Projects page',
       },
     })
 
@@ -21,7 +21,7 @@ export const PageSeeder = async (payload: Payload) => {
       data: {
         title: 'Blogs',
         slug: 'blogs',
-        content: 'This is the Blogs page',
+        //  content: 'This is the Blogs page',
       },
     })
   }

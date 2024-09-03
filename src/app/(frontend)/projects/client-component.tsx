@@ -13,7 +13,7 @@ const ProjectsClientsComponent = ({
   return (
     <>
       <Container data-aos='fade-up'>
-        <PageHeading title={'Projects'} md={page.content} />
+        <PageHeading title={'Projects'} md={page.title} />
         <Projects projects={projects} />
       </Container>
     </>

@@ -14,7 +14,7 @@ const BlogListNew = (props: Props) => {
 
   return (
     <>
-      <PageHeading title={page.title ?? ''} md={page.content ?? ''} />
+      <PageHeading title={page.title ?? ''} md={page.title} />
 
       <div className='grid gap-4 md:grid-cols-2'>
         {props.blogs.map((item) => (
