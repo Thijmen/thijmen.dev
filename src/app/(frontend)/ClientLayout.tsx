@@ -6,13 +6,7 @@ import { CommandPaletteProvider } from "@/core/common/context/CommandPaletteCont
 import { firaCode, jakartaSans, soraSans } from "@/core/common/styles/fonts";
 import AOS from "aos";
 import { ThemeProvider } from "next-themes";
-import dynamic from "next/dynamic";
 import { useEffect } from "react";
-
-const ProgressBar = dynamic(
-	() => import("@/core/common/components/elements/ProgressBar"),
-	{ ssr: false },
-);
 
 export default function ClientLayout({
 	children,

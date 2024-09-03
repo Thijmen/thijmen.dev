@@ -11,6 +11,7 @@ export const remarkHeading: Plugin = () => {
 		const toc: TOC[] = [];
 		slugger.reset();
 
+		// biome-ignore lint/suspicious/noExplicitAny: TODO: fix me
 		visit(tree, "heading", (node: any) => {
 			node.data ||= {};
 			node.data.hProperties ||= {};

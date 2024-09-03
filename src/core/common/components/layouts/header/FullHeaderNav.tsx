@@ -108,6 +108,7 @@ interface HeaderNameProps {
 }
 
 const HeaderName = forwardRef<HTMLParagraphElement, HeaderNameProps>(
+	// biome-ignore lint/correctness/noUnusedVariables: TODO: fixme
 	function HeaderName({ siteTitle, siteDescription, postTitle, onClick }, ref) {
 		return (
 			<p

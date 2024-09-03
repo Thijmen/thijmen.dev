@@ -29,9 +29,10 @@ SyntaxHighlighter.registerLanguage(languages.diff, diff);
 SyntaxHighlighter.registerLanguage(languages.tsx, tsx);
 SyntaxHighlighter.registerLanguage(languages.css, css);
 
+// biome-ignore lint/suspicious/noExplicitAny: TODO: fix me
 const CodeBlock = ({ className = "", children, inline, ...props }: any) => {
 	const [isCopied, setIsCopied] = useState<boolean>(false);
-	// eslint-disable-next-line unused-imports/no-unused-vars
+	// biome-ignore lint/correctness/noUnusedVariables: TODO: still to do
 	const [value, copy] = useCopyToClipboard();
 	const match = /language-(\w+)/.exec(className || "");
 

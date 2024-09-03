@@ -1,7 +1,19 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
 	"organizeImports": { "enabled": true },
+	"files": {
+		"ignore": [
+			"**/node_modules",
+			"**/dist",
+			"**/build",
+			"**/public",
+			"**/.next",
+			"**/.turbo",
+			"src/migrations/**"
+		]
+	},
 	"linter": {
+		"ignore": ["src/payload/payload-types.ts"],
 		"enabled": true,
 		"rules": {
 			"recommended": false,

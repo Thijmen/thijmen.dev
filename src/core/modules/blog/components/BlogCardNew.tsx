@@ -1,25 +1,14 @@
 "use client";
 import { BlurImage } from "@/core/common/components/elements/BlurImage";
-import { calculateReadingTime } from "@/core/common/helpers";
-import { useState } from "react";
 import { Post, R2Media } from "../../../../payload/payload-types";
 
 const BlogCardNew = ({ blogItem }: { blogItem: Post }) => {
-	const [isHovered, setIsHovered] = useState<boolean>(false);
-
-	const readingTimeMinutes = calculateReadingTime("@TODO: fixme") ?? 0;
-	const tagList = [];
-
 	const defaultImage = "/images/placeholder.png";
 
 	const image =
 		blogItem.image != null
 			? (blogItem.image as R2Media).url || defaultImage
 			: defaultImage;
-	const slideDownVariants = {
-		hidden: { opacity: 0, y: -10 },
-		visible: { opacity: 1, y: 0 },
-	};
 
 	return (
 		<a

@@ -8,7 +8,9 @@ import ProjectLink from "./ProjectLink";
 
 const ProjectDetail = ({ project }: { project: Project }) => {
 	const image: string =
-		project.headerImage != null ? (project.headerImage as R2Media).url! : "";
+		project.headerImage != null
+			? (project.headerImage as R2Media).url || ""
+			: "";
 
 	const stacks = (project.stacks ?? []) as Stack[];
 

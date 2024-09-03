@@ -134,6 +134,7 @@ export const getTopTracks = async (): Promise<TopTracksResponseProps> => {
 
 	const responseData = response.data;
 
+	// biome-ignore lint/suspicious/noExplicitAny: unknown response
 	const tracks: TrackProps[] = responseData.items.map((track: any) => ({
 		album: {
 			name: track.album.name,

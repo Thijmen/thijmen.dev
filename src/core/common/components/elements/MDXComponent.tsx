@@ -1,5 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
-import { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 
 import CodeBlock from "./CodeBlock";
@@ -7,16 +5,6 @@ import CodeBlock from "./CodeBlock";
 interface MarkdownRendererProps {
 	children: string;
 }
-
-interface TableProps {
-	children: ReactNode;
-}
-
-const Table = ({ children }: TableProps) => (
-	<div className="table-container">
-		<table className="table w-full">{children}</table>
-	</div>
-);
 
 const MDXComponent = ({ children }: MarkdownRendererProps) => {
 	return (

@@ -9,6 +9,7 @@ const ALL_TIME_SINCE_TODAY =
 
 export const getReadStats = async (): Promise<{
 	status: number;
+	// biome-ignore lint/suspicious/noExplicitAny: unknown response
 	data: any;
 }> => {
 	const response = await axios.get(`${STATS_ENDPOINT}/last_7_days`, {
@@ -59,6 +60,7 @@ export const getReadStats = async (): Promise<{
 
 export const getALLTimeSinceToday = async (): Promise<{
 	status: number;
+	// biome-ignore lint/suspicious/noExplicitAny: unknown response type
 	data: any;
 }> => {
 	const response = await axios.get(ALL_TIME_SINCE_TODAY, {

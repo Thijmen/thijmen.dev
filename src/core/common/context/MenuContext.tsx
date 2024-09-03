@@ -5,6 +5,6 @@ type MenuContextType = {
 };
 
 export const MenuContext = createContext<MenuContextType>({
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	// biome-ignore lint/suspicious/noEmptyBlockStatements: TODO: fixme
 	hideNavbar: () => {},
 });

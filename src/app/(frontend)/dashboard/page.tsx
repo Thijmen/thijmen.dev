@@ -3,7 +3,6 @@ import PageHeading from "@/core/common/components/elements/PageHeading";
 import Layout from "@/core/common/components/layouts";
 import { generateSiteTitle } from "@/core/metadata";
 import Dashboard from "@/core/modules/dashboard";
-import { getGithubUser } from "@/core/services/github";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,8 +10,6 @@ export const metadata: Metadata = {
 };
 
 const DashboardPage = async () => {
-	const githubData = await getGithubUser("personal");
-
 	return (
 		<Layout>
 			<Container data-aos="fade-up">

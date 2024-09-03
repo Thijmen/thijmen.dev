@@ -32,6 +32,7 @@ export const rehypeInlineCode: Plugin<[RehypeShikiCoreOptions], Root> = () => {
 		return visit(tree, "element", (node, index, parent) => {
 			if (node.tagName !== "code") return;
 
+			// biome-ignore lint/suspicious/noExplicitAny: TODO: fix me
 			const match = (node.children[0] as any)?.value?.match(inlineShikiRegex);
 			if (!match) return;
 
@@ -44,6 +45,7 @@ export const rehypeInlineCode: Plugin<[RehypeShikiCoreOptions], Root> = () => {
 				defaultColor: false,
 			});
 
+			// biome-ignore lint/suspicious/noExplicitAny: TODO: fix me
 			const inlineCode = (hast.children[0] as any).children[0];
 			if (!inlineCode) return;
 

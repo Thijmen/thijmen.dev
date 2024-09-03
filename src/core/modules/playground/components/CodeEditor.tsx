@@ -29,7 +29,7 @@ const CodeEditor = ({
 	height = "300px",
 	isFullScreen = false,
 }: CodeEditorProps) => {
-	const handleEditorMount = (editor: any) => {
+	const handleEditorMount = (editor: editor.IStandaloneCodeEditor) => {
 		setTimeout(function () {
 			editor.getAction("editor.action.formatDocument").run();
 		}, 500);

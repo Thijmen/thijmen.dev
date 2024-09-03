@@ -7,7 +7,7 @@ interface CommandPaletteContextType {
 
 export const CommandPaletteContext = createContext<CommandPaletteContextType>({
 	isOpen: false,
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	// biome-ignore lint/suspicious/noEmptyBlockStatements: TODO: fixme
 	setIsOpen: () => {},
 });
 

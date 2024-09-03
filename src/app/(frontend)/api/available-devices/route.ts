@@ -10,7 +10,7 @@ export async function GET() {
 			},
 			status: response.status,
 		});
-	} catch (error) {
+	} catch {
 		return Response.json(
 			{ message: "Internal Server Error" },
 			{
