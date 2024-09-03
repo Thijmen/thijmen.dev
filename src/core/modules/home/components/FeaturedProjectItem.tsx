@@ -12,7 +12,8 @@ export const FeaturedProjectItem = ({ project }: { project: Project }) => {
 
 	const projectImage =
 		project.headerImage != null
-			? (project.headerImage as R2Media).sizes?.projectCard?.url || defaultImage
+			? (project.headerImage as R2Media).sizes?.projectCardHomepage?.url ||
+				defaultImage
 			: defaultImage;
 	return (
 		<Link href={`/projects/${project.slug}`}>

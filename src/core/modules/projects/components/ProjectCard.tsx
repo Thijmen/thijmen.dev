@@ -12,7 +12,8 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
 	const image =
 		project.headerImage != null
-			? (project.headerImage as R2Media).url || ""
+			? (project.headerImage as R2Media).sizes?.projectCardProjectsPage?.url ||
+				""
 			: "";
 
 	return (
