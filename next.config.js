@@ -9,11 +9,19 @@ const nextConfig = {
 		reactCompiler: false,
 	},
 	images: {
-		domains: [
-			"www.thijmen.dev",
-			"thijmen.dev",
-			"media.thijmen.dev",
-			"dev-assets.thijmen.dev",
+		remotePatterns: [
+			{
+				hostname: "www.thijmen.dev",
+			},
+			{
+				hostname: "thijmen.dev",
+			},
+			{
+				hostname: "media.thijmen.dev",
+			},
+			{
+				hostname: "dev-assets.thijmen.dev",
+			},
 		],
 	},
 };
