@@ -1,49 +1,49 @@
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
+import configPromise from "@payload-config";
+import { getPayload } from "payload";
 
-import { Project } from '../../../payload/payload-types'
+import { Project } from "../../../payload/payload-types";
 
 export const getNewProject = async (slug: string): Promise<Project | null> => {
-  const payload = await getPayload({ config: configPromise })
+	const payload = await getPayload({ config: configPromise });
 
-  const data = await payload.find({
-    collection: 'projects',
-    where: {
-      slug: {
-        equals: slug,
-      },
-    },
-    limit: 1,
-  })
+	const data = await payload.find({
+		collection: "projects",
+		where: {
+			slug: {
+				equals: slug,
+			},
+		},
+		limit: 1,
+	});
 
-  if (data.docs.length === 0) {
-    return null
-  }
+	if (data.docs.length === 0) {
+		return null;
+	}
 
-  return data.docs[0]
-}
+	return data.docs[0];
+};
 
 export const getNewFeaturedProjects = async (): Promise<Project[]> => {
-  const payload = await getPayload({ config: configPromise })
+	const payload = await getPayload({ config: configPromise });
 
-  const data = await payload.find({
-    collection: 'projects',
-    where: {
-      isFeatured: {
-        equals: true,
-      },
-    },
-  })
+	const data = await payload.find({
+		collection: "projects",
+		where: {
+			isFeatured: {
+				equals: true,
+			},
+		},
+	});
 
-  return data.docs
-}
+	return data.docs;
+};
 
 export const getNewProjects = async (): Promise<Project[]> => {
-  const payload = await getPayload({ config: configPromise })
+	const payload = await getPayload({ config: configPromise });
 
-  const data = await payload.find({
-    collection: 'projects',
-  })
+	const data = await payload.find({
+		collection: "projects",
+	});
 
-  return data.docs
-}
+	return data.docs;
+};

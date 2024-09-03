@@ -1,8 +1,8 @@
 module.exports = {
-  plugins: {
-    tailwindcss: {},
-    'postcss-lightningcss': {
-      browsers: '>= .25%',
-    },
-  },
-}
+	plugins: {
+		tailwindcss: {},
+		"postcss-lightningcss": {
+			browsers: ">= .25%",
+		},
+	},
+};

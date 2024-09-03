@@ -1,33 +1,33 @@
-import * as React from 'react'
+import * as React from "react";
 
 export const useScrollspy = (
-  ids: string[],
-  options: IntersectionObserverInit,
+	ids: string[],
+	options: IntersectionObserverInit,
 ): string | undefined => {
-  const [activeId, setActiveId] = React.useState<string>()
-  const observer = React.useRef<IntersectionObserver>()
+	const [activeId, setActiveId] = React.useState<string>();
+	const observer = React.useRef<IntersectionObserver>();
 
-  React.useEffect(() => {
-    const elements = ids.map((id) => document.querySelector(`#${id}`))
+	React.useEffect(() => {
+		const elements = ids.map((id) => document.querySelector(`#${id}`));
 
-    if (observer.current) {
-      observer.current?.disconnect()
-    }
+		if (observer.current) {
+			observer.current?.disconnect();
+		}
 
-    observer.current = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (entry?.isIntersecting) {
-          setActiveId(entry.target.id)
-        }
-      }
-    }, options)
+		observer.current = new IntersectionObserver((entries) => {
+			for (const entry of entries) {
+				if (entry?.isIntersecting) {
+					setActiveId(entry.target.id);
+				}
+			}
+		}, options);
 
-    for (const el of elements) {
-      el && observer.current?.observe(el)
-    }
+		for (const el of elements) {
+			el && observer.current?.observe(el);
+		}
 
-    return () => observer.current?.disconnect()
-  }, [ids, options])
+		return () => observer.current?.disconnect();
+	}, [ids, options]);
 
-  return activeId
-}
+	return activeId;
+};
