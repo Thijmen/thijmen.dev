@@ -3,7 +3,10 @@ import { CollectionConfig } from "payload";
 import { authenticated } from "@/payload/access/authenticated";
 import { authenticatedOrPublished } from "@/payload/access/authenticatedOrPublished";
 import { Content } from "@/payload/blocks/Content";
-import { defaultVersions } from "@/payload/collections/defaults";
+import {
+	defaultMetaTab,
+	defaultVersions,
+} from "@/payload/collections/defaults";
 import { slugField } from "@/payload/fields/slug";
 import { generatePreviewPath } from "@/payload/utilities/generatePreviewPath";
 
@@ -53,6 +56,7 @@ export const Pages: CollectionConfig = {
 						},
 					],
 				},
+				defaultMetaTab,
 			],
 		},
 	],
