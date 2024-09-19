@@ -289,6 +289,24 @@ export interface MyHorizontalLineBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyGithubContributionsBlock".
+ */
+export interface MyGithubContributionsBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'githubContributionsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyWakaContributionsBlock".
+ */
+export interface MyWakaContributionsBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'wakaContributionsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
