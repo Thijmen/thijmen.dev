@@ -1,23 +1,32 @@
 import React, { Fragment, JSX } from "react";
 
 import {
-	DefaultNodeTypes,
-	SerializedBlockNode,
+  DefaultNodeTypes,
+  SerializedBlockNode,
 } from "@payloadcms/richtext-lexical";
 
 import Mdx from "@/core/common/components/elements/mdx/Mdx";
-import { MyCodeBlock } from "@/payload/payload-types";
 import {
-	IS_BOLD,
-	IS_CODE,
-	IS_ITALIC,
-	IS_STRIKETHROUGH,
-	IS_SUBSCRIPT,
-	IS_SUPERSCRIPT,
-	IS_UNDERLINE,
+  MyCodeBlock,
+  MyHorizontalLineBlock,
+  MyProjectsBlock,
+} from "@/payload/payload-types";
+import {
+  IS_BOLD,
+  IS_CODE,
+  IS_ITALIC,
+  IS_STRIKETHROUGH,
+  IS_SUBSCRIPT,
+  IS_SUPERSCRIPT,
+  IS_UNDERLINE,
 } from "./nodeFormat";
+import { ProjectsBlock } from "@/core/common/components/shared-content/blocks/projects";
 
-export type NodeTypes = DefaultNodeTypes | SerializedBlockNode<MyCodeBlock>;
+export type NodeTypes =
+  | DefaultNodeTypes
+  | SerializedBlockNode<MyCodeBlock>
+  | SerializedBlockNode<MyProjectsBlock>
+  | SerializedBlockNode<MyHorizontalLineBlock>;
 
 type Props = {
 	nodes: NodeTypes[];
@@ -103,35 +112,23 @@ export async function serializeLexical({ nodes }: Props): Promise<JSX.Element> {
 					}
 
 					switch (blockType) {
-						// case "cta":
-						// 	return <CallToActionBlock key={index} {...block} />;
-						// case "mediaBlock":
-						// 	return (
-						// 		<MediaBlock
-						// 			className="col-start-1 col-span-3"
-						// 			imgClassName="m-0"
-						// 			key={index}
-						// 			{...block}
-						// 			captionClassName="mx-auto max-w-[48rem]"
-						// 			enableGutter={false}
-						// 			disableInnerContainer={true}
-						// 		/>
-						// 	);
-						// case "banner":
-						// 	return (
-						// 		<BannerBlock
-						// 			className="col-start-2 mb-4"
-						// 			key={index}
-						// 			{...block}
-						// 		/>
-						// 	);
 						case "code":
 							return (
 								<>
-									<h1>Code block! hallo!:D</h1>
 									<Mdx content={block.code} />
 								</>
 							);
+						case "projectsBlock":
+							return (
+								<>
+									<ProjectsBlock filterFeatured={block.filterFeatured} />
+								</>
+							);
+						case "horizontalLineBlock":
+							return (
+								<div className="mb-6 border-b border-dashed border-neutral-600 pb-6 pt-2 text-neutral-600 dark:text-neutral-400" />
+							);
+
 						default:
 							return null;
 					}
