@@ -1,8 +1,8 @@
 import {
-	FixedToolbarFeature,
-	HeadingFeature,
-	InlineToolbarFeature,
-	lexicalEditor,
+  FixedToolbarFeature,
+  HeadingFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
 } from "@payloadcms/richtext-lexical"; // Rich Text Editor configuration
 import type { Block, Field } from "payload";
 
@@ -34,11 +34,11 @@ const textBlock: Field = {
 	],
 };
 
-const codeBlock: Field = {
+export const CodeBlock: Field = {
 	name: "code",
 	type: "code",
 	admin: {
-		language: "javascript",
+		language: "markdown",
 	},
 };
 
@@ -72,7 +72,7 @@ export const Content: Block = {
 				},
 				{
 					slug: "code",
-					fields: [codeBlock],
+					fields: [CodeBlock],
 				},
 				{
 					slug: "image",
