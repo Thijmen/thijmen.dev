@@ -1,32 +1,32 @@
 import React, { Fragment, JSX } from "react";
 
 import {
-  DefaultNodeTypes,
-  SerializedBlockNode,
+	DefaultNodeTypes,
+	SerializedBlockNode,
 } from "@payloadcms/richtext-lexical";
 
 import Mdx from "@/core/common/components/elements/mdx/Mdx";
+import { ProjectsBlock } from "@/core/common/components/shared-content/blocks/projects";
 import {
-  MyCodeBlock,
-  MyHorizontalLineBlock,
-  MyProjectsBlock,
+	MyCodeBlock,
+	MyHorizontalLineBlock,
+	MyProjectsBlock,
 } from "@/payload/payload-types";
 import {
-  IS_BOLD,
-  IS_CODE,
-  IS_ITALIC,
-  IS_STRIKETHROUGH,
-  IS_SUBSCRIPT,
-  IS_SUPERSCRIPT,
-  IS_UNDERLINE,
+	IS_BOLD,
+	IS_CODE,
+	IS_ITALIC,
+	IS_STRIKETHROUGH,
+	IS_SUBSCRIPT,
+	IS_SUPERSCRIPT,
+	IS_UNDERLINE,
 } from "./nodeFormat";
-import { ProjectsBlock } from "@/core/common/components/shared-content/blocks/projects";
 
 export type NodeTypes =
-  | DefaultNodeTypes
-  | SerializedBlockNode<MyCodeBlock>
-  | SerializedBlockNode<MyProjectsBlock>
-  | SerializedBlockNode<MyHorizontalLineBlock>;
+	| DefaultNodeTypes
+	| SerializedBlockNode<MyCodeBlock>
+	| SerializedBlockNode<MyProjectsBlock>
+	| SerializedBlockNode<MyHorizontalLineBlock>;
 
 type Props = {
 	nodes: NodeTypes[];
