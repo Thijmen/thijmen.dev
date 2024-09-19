@@ -1,21 +1,21 @@
 import React, { Fragment, JSX } from "react";
 
 import {
-  DefaultNodeTypes,
-  SerializedBlockNode,
+	DefaultNodeTypes,
+	SerializedBlockNode,
 } from "@payloadcms/richtext-lexical";
 
-import {
-  IS_BOLD,
-  IS_CODE,
-  IS_ITALIC,
-  IS_STRIKETHROUGH,
-  IS_SUBSCRIPT,
-  IS_SUPERSCRIPT,
-  IS_UNDERLINE,
-} from "./nodeFormat";
-import { MyCodeBlock } from "@/payload/payload-types";
 import Mdx from "@/core/common/components/elements/mdx/Mdx";
+import { MyCodeBlock } from "@/payload/payload-types";
+import {
+	IS_BOLD,
+	IS_CODE,
+	IS_ITALIC,
+	IS_STRIKETHROUGH,
+	IS_SUBSCRIPT,
+	IS_SUPERSCRIPT,
+	IS_UNDERLINE,
+} from "./nodeFormat";
 
 export type NodeTypes = DefaultNodeTypes | SerializedBlockNode<MyCodeBlock>;
 

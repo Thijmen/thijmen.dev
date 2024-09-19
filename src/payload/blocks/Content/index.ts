@@ -1,8 +1,8 @@
 import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
+	FixedToolbarFeature,
+	HeadingFeature,
+	InlineToolbarFeature,
+	lexicalEditor,
 } from "@payloadcms/richtext-lexical"; // Rich Text Editor configuration
 import type { Block, Field } from "payload";
 

@@ -2,29 +2,28 @@ import { Block, CollectionConfig } from "payload";
 
 import { authenticated } from "@/payload/access/authenticated";
 import { authenticatedOrPublished } from "@/payload/access/authenticatedOrPublished";
-import { Content } from "@/payload/blocks/Content";
 import {
-  defaultMetaTab,
-  defaultVersions,
+	defaultMetaTab,
+	defaultVersions,
 } from "@/payload/collections/defaults";
+import { ThijmenContent } from "@/payload/fields/content";
 import { slugField } from "@/payload/fields/slug";
 import { generatePreviewPath } from "@/payload/utilities/generatePreviewPath";
-import { ThijmenContent } from "@/payload/fields/content";
 
 export const Banner: Block = {
-  slug: "banner",
-  fields: [
-    {
-      name: "code",
-      type: "code",
-      admin: {
-        language: "markdown",
-      },
-      label: false,
-      required: true,
-    },
-  ],
-  interfaceName: "BannerBlock",
+	slug: "banner",
+	fields: [
+		{
+			name: "code",
+			type: "code",
+			admin: {
+				language: "markdown",
+			},
+			label: false,
+			required: true,
+		},
+	],
+	interfaceName: "BannerBlock",
 };
 
 export const Pages: CollectionConfig = {
