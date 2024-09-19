@@ -8,19 +8,20 @@ import { getNewProjects } from "@/core/common/services/projects.service";
 import { generateSiteTitle } from "@/core/metadata";
 
 const ProjectsPage = async () => {
-	const page = await queryPageBySlug("projects");
+  const page = await queryPageBySlug("projects");
 
-	if (!page) {
-		redirect("/404");
-	}
+  if (!page) {
+    redirect("/404");
+  }
 
-	const projects = await getNewProjects();
+  const projects = await getNewProjects();
 
-	return (
-		<Layout>
-			<ProjectsClientsComponent page={page} projects={projects} />
-		</Layout>
-	);
+  return (
+    <Layout>
+      <pre>{JSON.stringify({ page }, null, 2)}</pre>
+      <ProjectsClientsComponent page={page} projects={projects} />
+    </Layout>
+  );
 };
 
 export async function generateMetadata(): Promise<Metadata> {

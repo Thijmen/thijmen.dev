@@ -8,21 +8,25 @@ import { getPayloadHMR } from "@payloadcms/next/utilities";
 import { draftMode } from "next/headers";
 import { cache } from "react";
 import type { Page } from "../../../payload/payload-types";
+import Layout from "@/core/common/components/layouts";
+import Container from "@/core/common/components/elements/Container";
+import BackButton from "@/core/common/components/elements/BackButton";
+import PageHeading from "@/core/common/components/elements/PageHeading";
 
 export async function generateStaticParams() {
-	const payload = await getPayloadHMR({ config: configPromise });
-	const pages = await payload.find({
-		collection: "pages",
-		draft: false,
-		limit: 1000,
-		overrideAccess: false,
-	});
+  const payload = await getPayloadHMR({ config: configPromise });
+  const pages = await payload.find({
+    collection: "pages",
+    draft: false,
+    limit: 1000,
+    overrideAccess: false,
+  });
 
-	return pages.docs
-		?.filter((doc) => {
-			return doc.slug !== "home";
-		})
-		.map(({ slug }) => slug);
+  return pages.docs
+    ?.filter((doc) => {
+      return doc.slug !== "home";
+    })
+    .map(({ slug }) => slug);
 }
 
 export default async function Page({ params: { slug = "home" } }) {
@@ -36,12 +40,14 @@ export default async function Page({ params: { slug = "home" } }) {
 		return <PayloadRedirects url={url} />;
 	}
 
-	const test = page.dynamiccontent;
 	return (
-		<article className="pt-16 pb-24">
-			{/* Allows redirects for valid pages too */}
-			<SharedContent content={test} />
-		</article>
+		<Layout>
+			<Container data-aos={"fade-up"}>
+				{page.showBackButton && <BackButton url={"/"} />}
+				<PageHeading title={page.title} description={""} />
+				<SharedContent content={page.dynamiccontent} />
+			</Container>
+		</Layout>
 	);
 }
 

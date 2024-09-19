@@ -3,27 +3,27 @@ import { Block, CollectionConfig } from "payload";
 import { authenticated } from "@/payload/access/authenticated";
 import { authenticatedOrPublished } from "@/payload/access/authenticatedOrPublished";
 import {
-	defaultMetaTab,
-	defaultVersions,
+  defaultMetaTab,
+  defaultVersions,
 } from "@/payload/collections/defaults";
 import { ThijmenContent } from "@/payload/fields/content";
 import { slugField } from "@/payload/fields/slug";
 import { generatePreviewPath } from "@/payload/utilities/generatePreviewPath";
 
 export const Banner: Block = {
-	slug: "banner",
-	fields: [
-		{
-			name: "code",
-			type: "code",
-			admin: {
-				language: "markdown",
-			},
-			label: false,
-			required: true,
-		},
-	],
-	interfaceName: "BannerBlock",
+  slug: "banner",
+  fields: [
+    {
+      name: "code",
+      type: "code",
+      admin: {
+        language: "markdown",
+      },
+      label: false,
+      required: true,
+    },
+  ],
+  interfaceName: "BannerBlock",
 };
 
 export const Pages: CollectionConfig = {
@@ -58,6 +58,15 @@ export const Pages: CollectionConfig = {
 			required: true,
 		},
 		...slugField(),
+		{
+			name: "showBackButton",
+			type: "checkbox",
+			label: "Show back button",
+			defaultValue: true,
+			admin: {
+				position: "sidebar",
+			},
+		},
 		{
 			type: "tabs",
 
