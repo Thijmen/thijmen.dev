@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
 import { PayloadRedirects } from "@/core/common/components/PayloadRedirects";
+import BackButton from "@/core/common/components/elements/BackButton";
+import Container from "@/core/common/components/elements/Container";
+import PageHeading from "@/core/common/components/elements/PageHeading";
+import Layout from "@/core/common/components/layouts";
 import { SharedContent } from "@/core/common/components/shared-content";
 import { generateMeta } from "@/payload/utilities/generateMeta";
 import configPromise from "@payload-config";
@@ -8,25 +12,21 @@ import { getPayloadHMR } from "@payloadcms/next/utilities";
 import { draftMode } from "next/headers";
 import { cache } from "react";
 import type { Page } from "../../../payload/payload-types";
-import Layout from "@/core/common/components/layouts";
-import Container from "@/core/common/components/elements/Container";
-import BackButton from "@/core/common/components/elements/BackButton";
-import PageHeading from "@/core/common/components/elements/PageHeading";
 
 export async function generateStaticParams() {
-  const payload = await getPayloadHMR({ config: configPromise });
-  const pages = await payload.find({
-    collection: "pages",
-    draft: false,
-    limit: 1000,
-    overrideAccess: false,
-  });
+	const payload = await getPayloadHMR({ config: configPromise });
+	const pages = await payload.find({
+		collection: "pages",
+		draft: false,
+		limit: 1000,
+		overrideAccess: false,
+	});
 
-  return pages.docs
-    ?.filter((doc) => {
-      return doc.slug !== "home";
-    })
-    .map(({ slug }) => slug);
+	return pages.docs
+		?.filter((doc) => {
+			return doc.slug !== "home";
+		})
+		.map(({ slug }) => slug);
 }
 
 export default async function Page({ params: { slug = "home" } }) {
