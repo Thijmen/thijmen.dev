@@ -1,6 +1,5 @@
 import { MenuItemProps } from "@/core/common/types/menu";
 import { Nav } from "@/payload/payload-types";
-import MenuItem from "@/core/common/components/sidebar/MenuItem";
 import { DynamicMenuItem } from "./DynamicMenuItem";
 
 type MenuProps = {

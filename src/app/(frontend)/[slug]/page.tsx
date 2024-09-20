@@ -6,13 +6,13 @@ import Container from "@/core/common/components/elements/Container";
 import PageHeading from "@/core/common/components/elements/PageHeading";
 import Layout from "@/core/common/components/layouts";
 import { SharedContent } from "@/core/common/components/shared-content";
+import { getCachedGlobal } from "@/core/services/globals";
 import { generateMeta } from "@/payload/utilities/generateMeta";
 import configPromise from "@payload-config";
 import { getPayloadHMR } from "@payloadcms/next/utilities";
 import { draftMode } from "next/headers";
 import { cache } from "react";
 import type { Page } from "../../../payload/payload-types";
-import { getCachedGlobal } from "@/core/services/globals";
 
 export async function generateStaticParams() {
 	const payload = await getPayloadHMR({ config: configPromise });

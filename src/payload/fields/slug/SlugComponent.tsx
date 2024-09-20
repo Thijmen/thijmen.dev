@@ -2,12 +2,12 @@
 import React, { useCallback, useEffect } from "react";
 
 import {
-  Button,
-  FieldLabel,
-  TextInput,
-  useField,
-  useFieldProps,
-  useFormFields,
+	Button,
+	FieldLabel,
+	TextInput,
+	useField,
+	useFieldProps,
+	useFormFields,
 } from "@payloadcms/ui";
 
 import { formatSlug } from "./formatSlug";
@@ -15,65 +15,65 @@ import "./index.scss";
 import { TextFieldClientProps } from "payload";
 
 type SlugComponentProps = {
-  fieldToUse: string;
-  checkboxFieldPath: string;
+	fieldToUse: string;
+	checkboxFieldPath: string;
 } & TextFieldClientProps;
 
 export const SlugComponent: React.FC<SlugComponentProps> = ({
-  field,
-  fieldToUse,
-  checkboxFieldPath: checkboxFieldPathFromProps,
+	field,
+	fieldToUse,
+	checkboxFieldPath: checkboxFieldPathFromProps,
 }) => {
-  const { label } = field;
-  const { path, readOnly: readOnlyFromProps } = useFieldProps();
+	const { label } = field;
+	const { path, readOnly: readOnlyFromProps } = useFieldProps();
 
-  const checkboxFieldPath = path.includes(".")
-    ? `${path}.${checkboxFieldPathFromProps}`
-    : checkboxFieldPathFromProps;
+	const checkboxFieldPath = path.includes(".")
+		? `${path}.${checkboxFieldPathFromProps}`
+		: checkboxFieldPathFromProps;
 
-  const { value, setValue } = useField<string>({ path });
+	const { value, setValue } = useField<string>({ path });
 
-  const { value: checkboxValue, setValue: setCheckboxValue } =
-    useField<boolean>({
-      path: checkboxFieldPath,
-    });
+	const { value: checkboxValue, setValue: setCheckboxValue } =
+		useField<boolean>({
+			path: checkboxFieldPath,
+		});
 
-  const fieldToUseValue = useFormFields(([fields]) => {
-    return fields[fieldToUse]?.value as string;
-  });
+	const fieldToUseValue = useFormFields(([fields]) => {
+		return fields[fieldToUse]?.value as string;
+	});
 
-  useEffect(() => {
-    if (checkboxValue) setValue(formatSlug(fieldToUseValue));
-  }, [fieldToUseValue, checkboxValue]);
+	useEffect(() => {
+		if (checkboxValue) setValue(formatSlug(fieldToUseValue));
+	}, [fieldToUseValue, checkboxValue]);
 
-  const handleLock = useCallback(
-    (e) => {
-      e.preventDefault();
+	const handleLock = useCallback(
+		(e) => {
+			e.preventDefault();
 
-      setCheckboxValue(!checkboxValue);
-    },
-    [checkboxValue, setCheckboxValue],
-  );
+			setCheckboxValue(!checkboxValue);
+		},
+		[checkboxValue, setCheckboxValue],
+	);
 
-  const readOnly = readOnlyFromProps || checkboxValue;
+	const readOnly = readOnlyFromProps || checkboxValue;
 
-  return (
-    <div className="field-type slug-field-component">
-      <div className="label-wrapper">
-        <FieldLabel field={field} htmlFor={`field-${path}`} label={label} />
+	return (
+		<div className="field-type slug-field-component">
+			<div className="label-wrapper">
+				<FieldLabel field={field} htmlFor={`field-${path}`} label={label} />
 
-        <Button className="lock-button" buttonStyle="none" onClick={handleLock}>
-          {checkboxValue ? "Unlock" : "Lock"}
-        </Button>
-      </div>
+				<Button className="lock-button" buttonStyle="none" onClick={handleLock}>
+					{checkboxValue ? "Unlock" : "Lock"}
+				</Button>
+			</div>
 
-      <TextInput
-        label={""}
-        value={value}
-        onChange={setValue}
-        path={path}
-        readOnly={readOnly}
-      />
-    </div>
-  );
+			<TextInput
+				label={""}
+				value={value}
+				onChange={setValue}
+				path={path}
+				readOnly={readOnly}
+			/>
+		</div>
+	);
 };

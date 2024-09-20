@@ -1,5 +1,4 @@
 import { Nav, Page, Project } from "@/payload/payload-types";
-import MenuItem from "./MenuItem";
 import {
 	FiPieChart as AnalyticsIcon,
 	FiRss as BlogIcon,
@@ -8,6 +7,7 @@ import {
 	FiUser as ProfileIcon,
 	FiCoffee as ProjectIcon,
 } from "react-icons/fi";
+import MenuItem from "./MenuItem";
 
 interface Props {
 	item: NonNullable<Nav["links"]>[number];
