@@ -12,6 +12,7 @@ import { getPayloadHMR } from "@payloadcms/next/utilities";
 import { draftMode } from "next/headers";
 import { cache } from "react";
 import type { Page } from "../../../payload/payload-types";
+import { getCachedGlobal } from "@/core/services/globals";
 
 export async function generateStaticParams() {
 	const payload = await getPayloadHMR({ config: configPromise });
@@ -40,8 +41,10 @@ export default async function Page({ params: { slug = "home" } }) {
 		return <PayloadRedirects url={url} />;
 	}
 
+	const nav = await getCachedGlobal("nav", 3);
+
 	return (
-		<Layout>
+		<Layout navGlobal={nav}>
 			<Container data-aos={"fade-up"}>
 				{page.showBackButton && <BackButton url={"/"} />}
 				<PageHeading title={page.title} description={""} />

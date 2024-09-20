@@ -1,13 +1,15 @@
 import { MenuItemProps } from "@/core/common/types/menu";
-
-import MenuItem from "./MenuItem";
+import { Nav } from "@/payload/payload-types";
+import MenuItem from "@/core/common/components/sidebar/MenuItem";
+import { DynamicMenuItem } from "./DynamicMenuItem";
 
 type MenuProps = {
 	title?: string;
 	list: MenuItemProps[];
+	navGlobal: Nav;
 };
 
-const Menu = ({ title, list }: MenuProps) => {
+const Menu = ({ title, list, navGlobal }: MenuProps) => {
 	return (
 		<div className="flex flex-col space-y-1">
 			{title && (
@@ -15,8 +17,8 @@ const Menu = ({ title, list }: MenuProps) => {
 					{title}
 				</div>
 			)}
-			{list?.map((item: MenuItemProps, index: number) => (
-				<MenuItem key={index} {...item} />
+			{navGlobal.links?.map((item) => (
+				<DynamicMenuItem key={item.label} item={item} />
 			))}
 		</div>
 	);
