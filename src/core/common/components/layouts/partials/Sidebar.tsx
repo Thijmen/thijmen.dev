@@ -1,49 +1,50 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-import useIsMobile from '@/core/common/hooks/useIsMobile'
+import useIsMobile from "@/core/common/hooks/useIsMobile";
 
-import type { Nav } from '@/payload/payload-types'
-import Breakline from '../../elements/Breakline'
-import Navigation from '../../sidebar/Navigation'
-import Profile from '../../sidebar/Profile'
-import Copyright from './Copyright'
+import type { Nav } from "@/payload/payload-types";
+import Breakline from "../../elements/Breakline";
+import Navigation from "../../sidebar/Navigation";
+import Profile from "../../sidebar/Profile";
+import Copyright from "./Copyright";
 
 interface Props {
-	navGlobal: Nav
+  navGlobal: Nav;
 }
 const Sidebar = (props: Props) => {
-	const isMobile = useIsMobile()
-	const [isScrolled, setIsScrolled] = useState(false)
+  const isMobile = useIsMobile();
+  const [isScrolled, setIsScrolled] = useState(false);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-			setIsScrolled(scrollTop > 0)
-		}
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 0);
+    };
 
-		window.addEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll);
 
-		return () => {
-			window.removeEventListener('scroll', handleScroll)
-		}
-	}, [])
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-	return (
-		<div
-			id='sidebar'
-			className='sticky top-0 z-10 flex flex-col transition-all duration-300 lg:py-8'
-		>
-			<Profile isScrolled={isScrolled} />
-			{!isMobile && (
-				<>
-					<Breakline />
-					<Navigation navGlobal={props.navGlobal} />
-					<Breakline className='mt-2' />
-					<Copyright />
-				</>
-			)}
-		</div>
-	)
-}
+  return (
+    <div
+      id="sidebar"
+      className="sticky top-0 z-10 flex flex-col transition-all duration-300 lg:py-8"
+    >
+      <Profile isScrolled={isScrolled} navGlobal={props.navGlobal} />
+      {!isMobile && (
+        <>
+          <Breakline />
+          <Navigation navGlobal={props.navGlobal} />
+          <Breakline className="mt-2" />
+          <Copyright />
+        </>
+      )}
+    </div>
+  );
+};
 
-export default Sidebar
+export default Sidebar;

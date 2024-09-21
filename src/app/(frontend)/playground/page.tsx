@@ -1,10 +1,13 @@
 import Container from '@/core/common/components/elements/Container'
 import Layout from '@/core/common/components/layouts'
 import Playground from '@/core/modules/playground'
+import { getMenuItems } from '@/core/services/menu'
 
-const PlaygroundPage = () => {
+const PlaygroundPage = async () => {
+	const nav = await getMenuItems()
+
 	return (
-		<Layout>
+		<Layout navGlobal={nav}>
 			<Container className='!mt-0 pt-20 md:pt-0' data-aos='fade-up'>
 				<Playground id='playground' isHeading />
 			</Container>

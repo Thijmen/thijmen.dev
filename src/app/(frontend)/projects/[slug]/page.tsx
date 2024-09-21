@@ -3,6 +3,7 @@ import Container from '@/core/common/components/elements/Container'
 import PageHeading from '@/core/common/components/elements/PageHeading'
 import Layout from '@/core/common/components/layouts'
 import ProjectDetail from '@/core/modules/projects/components/ProjectDetail'
+import { getMenuItems } from '@/core/services/menu'
 import { generateMeta } from '@/payload/utilities/generateMeta'
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
@@ -20,8 +21,10 @@ const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
 		redirect('/404')
 	}
 
+	const nav = await getMenuItems()
+
 	return (
-		<Layout>
+		<Layout navGlobal={nav}>
 			<Container data-aos={'fade-up'}>
 				<BackButton url={'/projects'} />
 				<PageHeading title={project.title} description={project.introduction} />

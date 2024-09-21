@@ -4,6 +4,7 @@ import { getPosts } from '@/core/common/services/blogs.service'
 import { queryPageBySlug } from '@/core/common/services/pages.service'
 import { generateSiteTitle } from '@/core/metadata'
 import BlogListNew from '@/core/modules/blog'
+import { getMenuItems } from '@/core/services/menu'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
@@ -18,8 +19,10 @@ const PostsPage = async () => {
 
 	const posts = await getPosts(10)
 
+	const nav = await getMenuItems()
+
 	return (
-		<Layout>
+		<Layout navGlobal={nav}>
 			<Container data-aos='fade-up'>
 				<BlogListNew page={page} blogs={posts} />
 			</Container>

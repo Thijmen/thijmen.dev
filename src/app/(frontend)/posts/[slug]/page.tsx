@@ -1,6 +1,7 @@
 import { BlogItemContent } from '@/app/(frontend)/posts/[slug]/components/BlogItemContent'
 import BlogItemHeader from '@/app/(frontend)/posts/[slug]/components/BlogItemHeader'
 import Layout from '@/core/common/components/layouts'
+import { getMenuItems } from '@/core/services/menu'
 import { generateMeta } from '@/payload/utilities/generateMeta'
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
@@ -28,8 +29,10 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
 		redirect('/404')
 	}
 
+	const nav = await getMenuItems()
+
 	return (
-		<Layout isFullPageHeader title={post.title}>
+		<Layout navGlobal={nav} isFullPageHeader title={post.title}>
 			<BlogItemHeader blog={post} />
 			<BlogItemContent blog={post} />
 		</Layout>
