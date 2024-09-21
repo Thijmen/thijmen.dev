@@ -13,9 +13,11 @@ import type {
 	MyCodeBlock,
 	MyGithubContributionsBlock,
 	MyHorizontalLineBlock,
+	MyJavascriptPlaygroundBlock,
 	MyProjectsBlock,
 	MyWakaContributionsBlock,
 } from '@/payload/payload-types'
+import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
 import {
 	IS_BOLD,
 	IS_CODE,
@@ -33,7 +35,7 @@ export type NodeTypes =
 	| SerializedBlockNode<MyHorizontalLineBlock>
 	| SerializedBlockNode<MyWakaContributionsBlock>
 	| SerializedBlockNode<MyGithubContributionsBlock>
-
+	| SerializedBlockNode<MyJavascriptPlaygroundBlock>
 type Props = {
 	nodes: NodeTypes[]
 }
@@ -145,6 +147,8 @@ export async function serializeLexical({ nodes }: Props): Promise<JSX.Element> {
 							return <WakaBlock />
 						case 'githubContributionsBlock':
 							return <GithubBlock />
+						case 'javascriptPlaygroundBlock':
+							return <JavascriptPlaygroundBlock />
 						default:
 							return null
 					}
