@@ -1,0 +1,44 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"organizeImports": { "enabled": true },
+	"files": {
+		"ignore": [
+			"**/node_modules",
+			"**/dist",
+			"**/build",
+			"**/public",
+			"**/.next",
+			"**/.turbo",
+			"src/migrations/**"
+		]
+	},
+
+	"linter": {
+		"ignore": [
+			"src/payload/payload-types.ts",
+			"src/app/(payload)/admin/importMap.js"
+		],
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noUnusedImports": "error"
+			},
+			"complexity": {
+				"noForEach": "off"
+			},
+			"a11y": {
+				"useValidAnchor": "off",
+				"noSvgWithoutTitle": "off",
+				"useKeyWithClickEvents": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"semicolons": "asNeeded",
+			"jsxQuoteStyle": "single",
+			"quoteStyle": "single"
+		}
+	}
+}
