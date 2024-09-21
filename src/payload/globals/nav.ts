@@ -40,6 +40,7 @@ export const Nav: GlobalConfig = {
 export const NavSeeder = async (payload: Payload) => {
 	const navs = await payload.findGlobal({
 		slug: 'nav',
+		overrideAccess: true,
 	})
 
 	if (navs?.links?.length === 0) {
@@ -55,7 +56,7 @@ export const NavSeeder = async (payload: Payload) => {
 				],
 			},
 			depth: 2,
-			overrideAccess: false,
+			overrideAccess: true,
 			showHiddenFields: true,
 		})
 	}

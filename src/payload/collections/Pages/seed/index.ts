@@ -4,6 +4,7 @@ export const PageSeeder = async (payload: Payload) => {
 	const pages = await payload.find({
 		collection: 'pages',
 		limit: 1,
+		overrideAccess: true,
 	})
 
 	if (pages.docs.length === 0) {
@@ -16,6 +17,7 @@ export const PageSeeder = async (payload: Payload) => {
 					title: page,
 					slug: page.toLowerCase(),
 				},
+				overrideAccess: true,
 			})
 		})
 	}

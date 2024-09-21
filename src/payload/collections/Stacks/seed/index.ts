@@ -4,6 +4,7 @@ export const StackSeeder = async (payload: Payload) => {
 	const existingStacks = await payload.find({
 		collection: 'stacks',
 		limit: 1,
+		overrideAccess: true,
 	})
 
 	if (existingStacks.docs.length === 0) {
@@ -13,6 +14,7 @@ export const StackSeeder = async (payload: Payload) => {
 				title: 'React Native',
 				stackHandle: 'ReactNative',
 			},
+			overrideAccess: true,
 		})
 
 		const nextJsStack = await payload.create({
@@ -21,6 +23,7 @@ export const StackSeeder = async (payload: Payload) => {
 				title: 'NextJS',
 				stackHandle: 'Next.js',
 			},
+			overrideAccess: true,
 		})
 
 		await payload.create({
@@ -60,6 +63,7 @@ export const StackSeeder = async (payload: Payload) => {
 				slug: 'thijmen-dev',
 				stacks: [reactNativeStack.id, nextJsStack.id],
 			},
+			overrideAccess: true,
 		})
 	}
 }
