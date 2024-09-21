@@ -1,10 +1,9 @@
-import { createContext } from "react";
+import { createContext } from 'react'
 
 type MenuContextType = {
-	hideNavbar: () => void;
-};
+	hideNavbar: () => void
+}
 
 export const MenuContext = createContext<MenuContextType>({
-	// biome-ignore lint/suspicious/noEmptyBlockStatements: TODO: fixme
 	hideNavbar: () => {},
-});
+})

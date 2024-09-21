@@ -1,28 +1,28 @@
-import { ReactNode } from "react";
+import type { ReactNode } from 'react'
 
 interface ContainerProps {
-	children: ReactNode;
-	className?: string;
+	children: ReactNode
+	className?: string
 
-	[propName: string]: ReactNode | string | undefined;
+	[propName: string]: ReactNode | string | undefined
 
-	addPaddingTop?: boolean;
+	addPaddingTop?: boolean
 }
 
 const Container = ({
 	children,
-	className = "",
+	className = '',
 	addPaddingTop = false,
 	...others
 }: ContainerProps) => {
 	const classes = addPaddingTop
 		? `${className} mx-auto mb-16 max-w-5xl px-5 py-24 sm:px-8`
-		: className;
+		: className
 	return (
 		<div className={`mb-10 mt-20 p-8 lg:mt-0 ${classes} `} {...others}>
 			{children}
 		</div>
-	);
-};
+	)
+}
 
-export default Container;
+export default Container

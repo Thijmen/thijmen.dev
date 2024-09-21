@@ -1,19 +1,19 @@
-import { Block } from "payload";
+import type { Block } from 'payload'
 
 export const Markdown: Block = {
-	slug: "markdown",
+	slug: 'markdown',
 	admin: {},
 	fields: [
 		{
-			name: "header",
-			type: "text",
+			name: 'header',
+			type: 'text',
 		},
 		{
-			name: "content",
-			type: "code",
+			name: 'content',
+			type: 'code',
 			admin: {
-				language: "markdown",
+				language: 'markdown',
 			},
 		},
 	],
-};
+}

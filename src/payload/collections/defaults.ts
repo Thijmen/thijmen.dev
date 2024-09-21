@@ -4,8 +4,8 @@ import {
 	MetaTitleField,
 	OverviewField,
 	PreviewField,
-} from "@payloadcms/plugin-seo/fields";
-import { Tab } from "payload";
+} from '@payloadcms/plugin-seo/fields'
+import type { Tab } from 'payload'
 
 export const defaultVersions = {
 	drafts: {
@@ -14,28 +14,28 @@ export const defaultVersions = {
 		},
 	},
 	maxPerDoc: 50,
-};
+}
 
 export const defaultMetaTab: Tab = {
-	name: "meta",
-	label: "SEO",
+	name: 'meta',
+	label: 'SEO',
 	fields: [
 		OverviewField({
-			titlePath: "meta.title",
-			descriptionPath: "meta.description",
-			imagePath: "meta.image",
+			titlePath: 'meta.title',
+			descriptionPath: 'meta.description',
+			imagePath: 'meta.image',
 		}),
 		MetaTitleField({
 			hasGenerateFn: true,
 		}),
 		MetaImageField({
-			relationTo: "r2-media",
+			relationTo: 'r2-media',
 		}),
 		MetaDescriptionField({}),
 		PreviewField({
 			hasGenerateFn: true,
-			titlePath: "meta.title",
-			descriptionPath: "meta.description",
+			titlePath: 'meta.title',
+			descriptionPath: 'meta.description',
 		}),
 	],
-};
+}

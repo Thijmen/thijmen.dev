@@ -1,19 +1,19 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 
-import { ContentProps } from "@/core/common/types/learn";
+import type { ContentProps } from '@/core/common/types/learn'
 
-import LearnCard from "./components/LearnCard";
+import LearnCard from './components/LearnCard'
 
 interface LearnModuleProps {
-	contents: ContentProps[];
+	contents: ContentProps[]
 }
 
 const LearnModule = ({ contents }: LearnModuleProps) => {
 	return (
-		<div className="grid gap-5 pt-2 sm:grid-cols-2">
+		<div className='grid gap-5 pt-2 sm:grid-cols-2'>
 			{contents?.map((content, index) => (
 				<motion.div
-					key={index}
+					key={content.id}
 					initial={{ opacity: 0, scale: 0.8 }}
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -22,7 +22,7 @@ const LearnModule = ({ contents }: LearnModuleProps) => {
 				</motion.div>
 			))}
 		</div>
-	);
-};
+	)
+}
 
-export default LearnModule;
+export default LearnModule

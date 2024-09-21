@@ -1,20 +1,20 @@
-import { CollectionConfig } from "payload";
+import type { CollectionConfig } from 'payload'
 
 export const Index: CollectionConfig = {
-	slug: "stacks",
+	slug: 'stacks',
 	admin: {
-		useAsTitle: "title",
+		useAsTitle: 'title',
 	},
 	fields: [
 		{
-			name: "title",
-			type: "text",
+			name: 'title',
+			type: 'text',
 			required: true,
 		},
 		{
-			name: "stackHandle",
-			type: "text",
+			name: 'stackHandle',
+			type: 'text',
 			required: true,
 		},
 	],
-};
+}

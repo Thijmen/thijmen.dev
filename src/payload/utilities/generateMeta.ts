@@ -1,21 +1,21 @@
-import { Page, Post, Project } from "@/payload/payload-types";
-import { mergeOpenGraph } from "@/payload/utilities/mergeOpenGraph";
-import { Metadata } from "next";
+import type { Page, Post, Project } from '@/payload/payload-types'
+import { mergeOpenGraph } from '@/payload/utilities/mergeOpenGraph'
+import type { Metadata } from 'next'
 
 export const generateMeta = async (args: {
-	doc: Post | Project | Page;
+	doc: Post | Project | Page
 }): Promise<Metadata> => {
-	const { doc } = args || {};
+	const { doc } = args || {}
 
 	const ogImage =
-		typeof doc?.meta?.image === "object" &&
+		typeof doc?.meta?.image === 'object' &&
 		doc.meta.image !== null &&
-		"url" in doc.meta.image &&
-		`${process.env.NEXT_PUBLIC_SERVER_URL}${doc.meta.image.url}`;
+		'url' in doc.meta.image &&
+		`${process.env.NEXT_PUBLIC_SERVER_URL}${doc.meta.image.url}`
 
 	const title = doc?.meta?.title
-		? doc?.meta?.title + " | Payload Website Template"
-		: "Payload Website Template";
+		? `${doc?.meta?.title} | Payload Website Template`
+		: 'Payload Website Template'
 
 	return {
 		description: doc?.meta?.description,
@@ -29,8 +29,8 @@ export const generateMeta = async (args: {
 					]
 				: undefined,
 			title,
-			url: Array.isArray(doc?.slug) ? doc?.slug.join("/") : "/",
+			url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
 		}),
 		title,
-	};
-};
+	}
+}

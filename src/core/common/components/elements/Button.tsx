@@ -1,14 +1,14 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	icon?: ReactNode;
-	isLoading?: boolean;
+	icon?: ReactNode
+	isLoading?: boolean
 }
 
 const Button = ({
 	children,
 	isLoading,
-	className = "",
+	className = '',
 	icon,
 	...rest
 }: ButtonProps) => {
@@ -21,12 +21,12 @@ const Button = ({
 				<>Loading...</>
 			) : (
 				<>
-					{icon && <>{icon}</>}
+					{icon && icon}
 					{children}
 				</>
 			)}
 		</button>
-	);
-};
+	)
+}
 
-export default Button;
+export default Button

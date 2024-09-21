@@ -1,17 +1,17 @@
-import { Block } from "payload";
+import type { Block } from 'payload'
 
 export const MyCode: Block = {
-	slug: "code",
+	slug: 'code',
 	fields: [
 		{
-			name: "code",
-			type: "code",
+			name: 'code',
+			type: 'code',
 			admin: {
-				language: "markdown",
+				language: 'markdown',
 			},
 			label: false,
 			required: true,
 		},
 	],
-	interfaceName: "MyCodeBlock",
-};
+	interfaceName: 'MyCodeBlock',
+}

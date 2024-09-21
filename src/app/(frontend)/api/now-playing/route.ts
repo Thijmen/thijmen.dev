@@ -1,23 +1,23 @@
-import { getNowPlaying } from "@/core/services/spotify";
+import { getNowPlaying } from '@/core/services/spotify'
 
 export async function GET() {
 	try {
-		const spotifyData = await getNowPlaying();
+		const spotifyData = await getNowPlaying()
 
 		return Response.json(spotifyData.data, {
 			headers: {
-				"Cache-Control": "public, s-maxage=60, stale-while-revalidate=30",
+				'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
 			},
 			status: 200,
-		});
+		})
 	} catch {
 		return Response.json(
-			{ message: "Internal Server Error" },
+			{ message: 'Internal Server Error' },
 			{
 				status: 500,
 			},
-		);
+		)
 	}
 }
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic'

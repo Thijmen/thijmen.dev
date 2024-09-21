@@ -1,48 +1,48 @@
-import type { CheckboxField, TextField } from "payload";
-import { formatSlugHook } from "./formatSlug";
+import type { CheckboxField, TextField } from 'payload'
+import { formatSlugHook } from './formatSlug'
 
 type Overrides = {
-	slugOverrides?: Partial<TextField>;
-	checkboxOverrides?: Partial<CheckboxField>;
-};
+	slugOverrides?: Partial<TextField>
+	checkboxOverrides?: Partial<CheckboxField>
+}
 
 type Index = (
 	fieldToUse?: string,
 	overrides?: Overrides,
-) => [TextField, CheckboxField];
+) => [TextField, CheckboxField]
 
-export const slugField: Index = (fieldToUse = "title", overrides = {}) => {
-	const { slugOverrides, checkboxOverrides } = overrides;
+export const slugField: Index = (fieldToUse = 'title', overrides = {}) => {
+	const { slugOverrides, checkboxOverrides } = overrides
 
 	const checkBoxField: CheckboxField = {
-		name: "slugLock",
-		type: "checkbox",
+		name: 'slugLock',
+		type: 'checkbox',
 		defaultValue: true,
 		admin: {
 			hidden: true,
-			position: "sidebar",
+			position: 'sidebar',
 		},
 		...checkboxOverrides,
-	};
+	}
 
 	// Expect ts error here because of typescript mismatching Partial<TextField> with TextField
 	// @ts-expect-error
 	const slugField: TextField = {
-		name: "slug",
-		type: "text",
+		name: 'slug',
+		type: 'text',
 		index: true,
-		label: "Slug",
+		label: 'Slug',
 		...(slugOverrides || {}),
 		hooks: {
 			// Kept this in for hook or API based updates
 			beforeValidate: [formatSlugHook(fieldToUse)],
 		},
 		admin: {
-			position: "sidebar",
+			position: 'sidebar',
 			...(slugOverrides?.admin || {}),
 			components: {
 				Field: {
-					path: "@/payload/fields/slug/SlugComponent#SlugComponent",
+					path: '@/payload/fields/slug/SlugComponent#SlugComponent',
 					clientProps: {
 						fieldToUse,
 						checkboxFieldPath: checkBoxField.name,
@@ -50,7 +50,7 @@ export const slugField: Index = (fieldToUse = "title", overrides = {}) => {
 				},
 			},
 		},
-	};
+	}
 
-	return [slugField, checkBoxField];
-};
+	return [slugField, checkBoxField]
+}

@@ -1,14 +1,14 @@
-import { memo } from "react";
+import { memo } from 'react'
 
-import ButtonNavigation from "./ButtonNavigation";
+import ButtonNavigation from './ButtonNavigation'
 
 interface NavigationSectionProps {
-	currentIndex: number;
-	totalItems: number;
-	handleNext: () => void;
-	handlePrevious: () => void;
-	previousTitle: string | null;
-	nextTitle: string | null;
+	currentIndex: number
+	totalItems: number
+	handleNext: () => void
+	handlePrevious: () => void
+	previousTitle: string | null
+	nextTitle: string | null
 }
 
 const NavigationSection = memo(
@@ -21,25 +21,25 @@ const NavigationSection = memo(
 		nextTitle,
 	}: NavigationSectionProps) => {
 		return (
-			<div className="mt-8 flex justify-between border-t border-gray-300 py-5 dark:border-neutral-700">
+			<div className='mt-8 flex justify-between border-t border-gray-300 py-5 dark:border-neutral-700'>
 				{previousTitle && currentIndex !== 0 && (
 					<ButtonNavigation
 						onClick={handlePrevious}
-						action="previous"
+						action='previous'
 						title={previousTitle}
 					/>
 				)}
-				<div className="flex-grow"></div>
+				<div className='flex-grow' />
 				{nextTitle && currentIndex !== totalItems - 1 && (
 					<ButtonNavigation
 						onClick={handleNext}
-						action="next"
+						action='next'
 						title={nextTitle}
 					/>
 				)}
 			</div>
-		);
+		)
 	},
-);
+)
 
-export default NavigationSection;
+export default NavigationSection

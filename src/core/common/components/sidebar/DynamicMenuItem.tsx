@@ -1,4 +1,4 @@
-import { Nav, Page, Project } from "@/payload/payload-types";
+import type { Nav, Page, Project } from '@/payload/payload-types'
 import {
 	FiPieChart as AnalyticsIcon,
 	FiRss as BlogIcon,
@@ -6,11 +6,11 @@ import {
 	FiPocket as HomeIcon,
 	FiUser as ProfileIcon,
 	FiCoffee as ProjectIcon,
-} from "react-icons/fi";
-import MenuItem from "./MenuItem";
+} from 'react-icons/fi'
+import MenuItem from './MenuItem'
 
 interface Props {
-	item: NonNullable<Nav["links"]>[number];
+	item: NonNullable<Nav['links']>[number]
 }
 const iconMap: Record<string, React.ElementType> = {
 	analytics: AnalyticsIcon,
@@ -19,31 +19,31 @@ const iconMap: Record<string, React.ElementType> = {
 	home: HomeIcon,
 	profile: ProfileIcon,
 	project: ProjectIcon,
-};
+}
 
 export const DynamicMenuItem = ({ item }: Props) => {
 	const getHref = () => {
-		if (item.page?.relationTo === "pages") {
-			const page = item.page.value as Page;
-			return `/${page.slug}`;
+		if (item.page?.relationTo === 'pages') {
+			const page = item.page.value as Page
+			return `/${page.slug}`
 		}
 
-		if (item.page?.relationTo === "projects") {
-			const project = item.page.value as Project;
-			return `/projects/${project.slug}`;
+		if (item.page?.relationTo === 'projects') {
+			const project = item.page.value as Project
+			return `/projects/${project.slug}`
 		}
 
-		return item.url || "";
-	};
+		return item.url || ''
+	}
 
 	const getIcon = () => {
-		const IconComponent = iconMap[item.icon] || DashboardIcon; // Default to DashboardIcon
-		return <IconComponent size={20} />;
-	};
-	const href = getHref();
-	const icon = getIcon();
+		const IconComponent = iconMap[item.icon] || DashboardIcon // Default to DashboardIcon
+		return <IconComponent size={20} />
+	}
+	const href = getHref()
+	const icon = getIcon()
 
-	const isExternal = href.startsWith("http");
+	const isExternal = href.startsWith('http')
 
 	return (
 		<MenuItem
@@ -52,5 +52,5 @@ export const DynamicMenuItem = ({ item }: Props) => {
 			icon={icon}
 			title={item.label}
 		/>
-	);
-};
+	)
+}

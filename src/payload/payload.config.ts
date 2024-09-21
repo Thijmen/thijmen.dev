@@ -1,81 +1,81 @@
-import path from "path";
-import { fileURLToPath } from "url";
-import { r2Adapter } from "@/payload/adapters/r2adapter";
-import { Media } from "@/payload/collections/Media";
-import { Index } from "@/payload/collections/Stacks";
-import { Page, Post } from "@/payload/payload-types";
-import { postgresAdapter } from "@payloadcms/db-postgres";
-import { cloudStoragePlugin } from "@payloadcms/plugin-cloud-storage";
-import { seoPlugin } from "@payloadcms/plugin-seo";
-import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { buildConfig } from "payload";
-import { en } from "payload/i18n/en";
-import sharp from "sharp";
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { r2Adapter } from '@/payload/adapters/r2adapter'
+import { Media } from '@/payload/collections/Media'
+import { Index } from '@/payload/collections/Stacks'
+import type { Page, Post } from '@/payload/payload-types'
+import { postgresAdapter } from '@payloadcms/db-postgres'
+import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { buildConfig } from 'payload'
+import { en } from 'payload/i18n/en'
+import sharp from 'sharp'
 
-import { Pages } from "@/payload/collections/Pages";
-import { Posts } from "@/payload/collections/Posts";
-import { Projects } from "@/payload/collections/Projects";
-import { StackSeeder } from "@/payload/collections/Stacks/seed";
-import { Users } from "@/payload/collections/Users";
-import { UserSeeder } from "@/payload/collections/Users/seed";
-import { Nav } from "@/payload/globals/nav";
-import { revalidateRedirects } from "@/payload/hooks/revalidateRedirects";
-import { redirectsPlugin } from "@payloadcms/plugin-redirects";
+import { Pages } from '@/payload/collections/Pages'
+import { Posts } from '@/payload/collections/Posts'
+import { Projects } from '@/payload/collections/Projects'
+import { StackSeeder } from '@/payload/collections/Stacks/seed'
+import { Users } from '@/payload/collections/Users'
+import { UserSeeder } from '@/payload/collections/Users/seed'
+import { Nav } from '@/payload/globals/nav'
+import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
+import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 const generateTitle: GenerateTitle<Page | Post> = ({ doc }) => {
 	return doc?.title
 		? `${doc.title} | Payload Website Template`
-		: "Payload Website Template";
-};
+		: 'Payload Website Template'
+}
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 	return doc?.slug
 		? `${process.env.NEXT_PUBLIC_SERVER_URL}/${doc.slug}`
-		: process.env.NEXT_PUBLIC_SERVER_URL;
-};
+		: process.env.NEXT_PUBLIC_SERVER_URL
+}
 
 export default buildConfig({
 	editor: lexicalEditor(),
 	collections: [Users, Projects, Index, Posts, Pages, Media],
 	globals: [Nav],
-	secret: process.env.PAYLOAD_SECRET || "",
+	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {
-		outputFile: path.resolve(dirname, "payload-types.ts"),
+		outputFile: path.resolve(dirname, 'payload-types.ts'),
 	},
 	db: postgresAdapter({
 		pool: {
-			connectionString: process.env.POSTGRES_URI || "",
+			connectionString: process.env.POSTGRES_URI || '',
 		},
 	}),
 	plugins: [
 		cloudStoragePlugin({
 			collections: {
-				"r2-media": {
+				'r2-media': {
 					adapter: r2Adapter, // see docs for the adapter you want to use
 				},
 			},
 		}),
 		redirectsPlugin({
-			collections: ["pages", "posts"],
+			collections: ['pages', 'posts'],
 			overrides: {
 				// @ts-expect-error
 				fields: ({ defaultFields }) => {
 					return defaultFields.map((field) => {
-						if ("name" in field && field.name === "from") {
+						if ('name' in field && field.name === 'from') {
 							return {
 								...field,
 								admin: {
 									description:
-										"You will need to rebuild the website when changing this field.",
+										'You will need to rebuild the website when changing this field.',
 								},
-							};
+							}
 						}
-						return field;
-					});
+						return field
+					})
 				},
 				hooks: {
 					afterChange: [revalidateRedirects],
@@ -96,27 +96,27 @@ export default buildConfig({
 	},
 
 	admin: {
-		user: "users",
+		user: 'users',
 		meta: {
-			titleSuffix: "| 🚧 Thijmen.dev",
+			titleSuffix: '| 🚧 Thijmen.dev',
 		},
 		livePreview: {
 			breakpoints: [
 				{
-					label: "Mobile",
-					name: "mobile",
+					label: 'Mobile',
+					name: 'mobile',
 					width: 375,
 					height: 667,
 				},
 				{
-					label: "Tablet",
-					name: "tablet",
+					label: 'Tablet',
+					name: 'tablet',
 					width: 768,
 					height: 1024,
 				},
 				{
-					label: "Desktop",
-					name: "desktop",
+					label: 'Desktop',
+					name: 'desktop',
 					width: 1440,
 					height: 900,
 				},
@@ -124,8 +124,8 @@ export default buildConfig({
 		},
 	},
 	async onInit(payload) {
-		await UserSeeder(payload);
-		await StackSeeder(payload);
+		await UserSeeder(payload)
+		await StackSeeder(payload)
 	},
 	sharp,
-});
+})

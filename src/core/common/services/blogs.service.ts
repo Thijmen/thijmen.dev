@@ -1,26 +1,26 @@
-import { Post } from "@/payload/payload-types";
-import configPromise from "@payload-config";
-import { getPayloadHMR } from "@payloadcms/next/utilities";
-import { draftMode } from "next/headers";
+import type { Post } from '@/payload/payload-types'
+import configPromise from '@payload-config'
+import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { draftMode } from 'next/headers'
 
 export const getPosts = async (limit: number): Promise<Post[]> => {
-	const payload = await getPayloadHMR({ config: configPromise });
+	const payload = await getPayloadHMR({ config: configPromise })
 
 	const data = await payload.find({
-		collection: "posts",
+		collection: 'posts',
 		limit,
-	});
+	})
 
-	return data.docs;
-};
+	return data.docs
+}
 
 export const getNewBlog = async (slug: string): Promise<Post | null> => {
-	const { isEnabled: draft } = draftMode();
+	const { isEnabled: draft } = draftMode()
 
-	const payload = await getPayloadHMR({ config: configPromise });
+	const payload = await getPayloadHMR({ config: configPromise })
 
 	const data = await payload.find({
-		collection: "posts",
+		collection: 'posts',
 		draft,
 		overrideAccess: true,
 		where: {
@@ -29,7 +29,7 @@ export const getNewBlog = async (slug: string): Promise<Post | null> => {
 			},
 		},
 		limit: 1,
-	});
+	})
 
-	return data.docs?.[0] || null;
-};
+	return data.docs?.[0] || null
+}

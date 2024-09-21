@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import { LivePreviewListener } from "@/core/common/components/LivePreviewListener";
-import CommandPalette from "@/core/common/components/elements/CommandPalette";
-import { CommandPaletteProvider } from "@/core/common/context/CommandPaletteContext";
-import { firaCode, jakartaSans, soraSans } from "@/core/common/styles/fonts";
-import AOS from "aos";
-import { ThemeProvider } from "next-themes";
-import { useEffect } from "react";
+import { LivePreviewListener } from '@/core/common/components/LivePreviewListener'
+import CommandPalette from '@/core/common/components/elements/CommandPalette'
+import { CommandPaletteProvider } from '@/core/common/context/CommandPaletteContext'
+import { firaCode, jakartaSans, soraSans } from '@/core/common/styles/fonts'
+import AOS from 'aos'
+import { ThemeProvider } from 'next-themes'
+import { useEffect } from 'react'
 
 export default function ClientLayout({
 	children,
 }: {
-	children: React.ReactNode;
+	children: React.ReactNode
 }) {
 	useEffect(() => {
 		AOS.init({
 			duration: 800,
 			delay: 50,
-		});
-	}, []);
+		})
+	}, [])
 
 	return (
 		<>
@@ -32,7 +32,7 @@ export default function ClientLayout({
         `}
 			</style>
 			{/*// todo: add defaultseo*/}
-			<ThemeProvider attribute="class" defaultTheme="dark">
+			<ThemeProvider attribute='class' defaultTheme='dark'>
 				<CommandPaletteProvider>
 					<LivePreviewListener />
 					<CommandPalette />
@@ -40,5 +40,5 @@ export default function ClientLayout({
 				</CommandPaletteProvider>
 			</ThemeProvider>
 		</>
-	);
+	)
 }

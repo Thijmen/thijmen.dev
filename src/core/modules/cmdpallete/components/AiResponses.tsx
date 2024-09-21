@@ -1,14 +1,14 @@
-import { BiLeftArrowCircle as BackButton } from "react-icons/bi";
-import Typewriter from "typewriter-effect";
+import { BiLeftArrowCircle as BackButton } from 'react-icons/bi'
+import Typewriter from 'typewriter-effect'
 
-import Button from "@/core/common/components/elements/Button";
-import MDXComponent from "@/core/common/components/elements/MDXComponent";
+import Button from '@/core/common/components/elements/Button'
+import MDXComponent from '@/core/common/components/elements/MDXComponent'
 
 interface AiResponsesProps {
-	response: string;
-	isAiFinished: boolean;
-	onAiFinished: () => void;
-	onAiClose: () => void;
+	response: string
+	isAiFinished: boolean
+	onAiFinished: () => void
+	onAiClose: () => void
 }
 
 const AiResponses = ({
@@ -20,7 +20,7 @@ const AiResponses = ({
 	return (
 		<>
 			{response ? (
-				response?.includes("```") ? (
+				response?.includes('```') ? (
 					<MDXComponent>{response}</MDXComponent>
 				) : (
 					<Typewriter
@@ -28,9 +28,9 @@ const AiResponses = ({
 							typewriter
 								.typeString(response)
 								.callFunction(() => {
-									onAiFinished();
+									onAiFinished()
 								})
-								.start();
+								.start()
 						}}
 						options={{
 							delay: 10,
@@ -42,20 +42,20 @@ const AiResponses = ({
 					onInit={(typewriter) => {
 						typewriter
 							.typeString(
-								"Oops! The AI seems to be lost. \u00A0 😵‍💫 \u00A0\u00A0",
+								'Oops! The AI seems to be lost. \u00A0 😵‍💫 \u00A0\u00A0',
 							)
 							.pauseFor(1000)
-							.typeString("<br/><br/>")
+							.typeString('<br/><br/>')
 							.typeString(
-								`Looks like the AI has gone on an unscheduled vacation to the Land of Confusion. Hope it brings back some souvenirs of clarity!. \u00A0\u00A0`,
+								'Looks like the AI has gone on an unscheduled vacation to the Land of Confusion. Hope it brings back some souvenirs of clarity!. \u00A0\u00A0',
 							)
 							.pauseFor(1000)
-							.typeString("<br/><br/>")
-							.typeString("Please try again later. \u00A0")
+							.typeString('<br/><br/>')
+							.typeString('Please try again later. \u00A0')
 							.callFunction(() => {
-								onAiFinished();
+								onAiFinished()
 							})
-							.start();
+							.start()
 					}}
 					options={{
 						delay: 10,
@@ -64,10 +64,10 @@ const AiResponses = ({
 			)}
 
 			{isAiFinished && (
-				<div className="mt-6 flex justify-center transition-all duration-300">
+				<div className='mt-6 flex justify-center transition-all duration-300'>
 					<Button
 						onClick={onAiClose}
-						data-umami-event="Click Back from AI Response"
+						data-umami-event='Click Back from AI Response'
 					>
 						<BackButton />
 						Back
@@ -75,7 +75,7 @@ const AiResponses = ({
 				</div>
 			)}
 		</>
-	);
-};
+	)
+}
 
-export default AiResponses;
+export default AiResponses

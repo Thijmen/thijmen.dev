@@ -1,11 +1,11 @@
-import { Block } from "payload";
+import type { Block } from 'payload'
 
 export const MyWakaContributions: Block = {
-	slug: "wakaContributionsBlock",
+	slug: 'wakaContributionsBlock',
 	labels: {
-		plural: "Waka Contributions",
-		singular: "Waka Contributions",
+		plural: 'Waka Contributions',
+		singular: 'Waka Contributions',
 	},
 	fields: [],
-	interfaceName: "MyWakaContributionsBlock",
-};
+	interfaceName: 'MyWakaContributionsBlock',
+}

@@ -1,38 +1,38 @@
-import { useContext } from "react";
-import { BiCommand as CommandIcon } from "react-icons/bi";
-import { useWindowSize } from "usehooks-ts";
+import { useContext } from 'react'
+import { BiCommand as CommandIcon } from 'react-icons/bi'
+import { useWindowSize } from 'usehooks-ts'
 
-import { MENU_ITEMS } from "@/core/common/constant/menu";
-import { CommandPaletteContext } from "@/core/common/context/CommandPaletteContext";
+import { MENU_ITEMS } from '@/core/common/constant/menu'
+import { CommandPaletteContext } from '@/core/common/context/CommandPaletteContext'
 
-import { Nav } from "@/payload/payload-types";
-import Breakline from "../elements/Breakline";
-import Menu from "./Menu";
-import MenuItem from "./MenuItem";
+import type { Nav } from '@/payload/payload-types'
+import Breakline from '../elements/Breakline'
+import Menu from './Menu'
+import MenuItem from './MenuItem'
 
 interface Props {
-	navGlobal: Nav;
+	navGlobal: Nav
 }
 const Navigation = (props: Props) => {
-	const { setIsOpen } = useContext(CommandPaletteContext);
-	const { width } = useWindowSize();
-	const isMobile = width < 480;
+	const { setIsOpen } = useContext(CommandPaletteContext)
+	const { width } = useWindowSize()
+	const isMobile = width < 480
 
-	const filterdMenu = MENU_ITEMS?.filter((item) => item?.isShow);
+	const filterdMenu = MENU_ITEMS?.filter((item) => item?.isShow)
 
 	const handleOpenCommandPalette = () => {
-		setIsOpen(true);
-	};
+		setIsOpen(true)
+	}
 
-	const cn = "group-hover:-rotate-12 transition-all duration-300";
+	const cn = 'group-hover:-rotate-12 transition-all duration-300'
 
 	return (
 		<div>
 			<Menu navGlobal={props.navGlobal} list={filterdMenu} />
-			<Breakline className="mb-2" />
+			<Breakline className='mb-2' />
 			<MenuItem
-				title={isMobile ? "Command" : "cmd + k"}
-				href="#"
+				title={isMobile ? 'Command' : 'cmd + k'}
+				href='#'
 				icon={<CommandIcon className={cn} size={20} />}
 				isExternal={false}
 				onClick={() => handleOpenCommandPalette()}
@@ -43,7 +43,7 @@ const Navigation = (props: Props) => {
           </div> */}
 			</MenuItem>
 		</div>
-	);
-};
+	)
+}
 
-export default Navigation;
+export default Navigation

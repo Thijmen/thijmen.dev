@@ -1,11 +1,11 @@
-import { Block } from "payload";
+import type { Block } from 'payload'
 
 export const MyHorizontalLine: Block = {
-	slug: "horizontalLineBlock",
+	slug: 'horizontalLineBlock',
 	labels: {
-		plural: "Horizontal Line",
-		singular: "Horizontal Line",
+		plural: 'Horizontal Line',
+		singular: 'Horizontal Line',
 	},
 	fields: [],
-	interfaceName: "MyHorizontalLineBlock",
-};
+	interfaceName: 'MyHorizontalLineBlock',
+}

@@ -1,5 +1,5 @@
-describe("Breakline", () => {
-	test("dummy", () => {
-		expect(true).toBe(true);
-	});
-});
+describe('Breakline', () => {
+	test('dummy', () => {
+		expect(true).toBe(true)
+	})
+})

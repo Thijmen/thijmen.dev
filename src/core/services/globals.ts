@@ -1,20 +1,20 @@
-import type { Config } from "@/payload/payload-types";
+import type { Config } from '@/payload/payload-types'
 
-import configPromise from "@payload-config";
-import { getPayloadHMR } from "@payloadcms/next/utilities";
-import { cache } from "react";
+import configPromise from '@payload-config'
+import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { cache } from 'react'
 
-type Global = keyof Config["globals"];
+type Global = keyof Config['globals']
 
 async function getGlobal(slug: Global, depth = 0) {
-	const payload = await getPayloadHMR({ config: configPromise });
+	const payload = await getPayloadHMR({ config: configPromise })
 
 	const global = await payload.findGlobal({
 		slug,
 		depth,
-	});
+	})
 
-	return global;
+	return global
 }
 
 /**
@@ -26,5 +26,5 @@ async function getGlobal(slug: Global, depth = 0) {
 //   });
 
 export const getCachedGlobal = cache(async (slug: Global, depth = 0) => {
-	return await getGlobal(slug, depth);
-});
+	return await getGlobal(slug, depth)
+})

@@ -3,48 +3,48 @@
  * - https://github.com/wevm/vocs/blob/75e0cfc874e7abe8648be139a8554e1fe87a18d1/src/vite/plugins/rehype/inline-shiki.ts
  * - https://github.com/shikijs/shiki/blob/481135b16287d7dabc2e155f427af63d3ff3536d/packages/rehype/src/index.ts
  */
-import type { RehypeShikiCoreOptions } from "@shikijs/rehype/core";
-import type { Root } from "hast";
-import { bundledLanguages } from "shiki";
-import type { Plugin } from "unified";
-import { visit } from "unist-util-visit";
+import type { RehypeShikiCoreOptions } from '@shikijs/rehype/core'
+import type { Root } from 'hast'
+import { bundledLanguages } from 'shiki'
+import type { Plugin } from 'unified'
+import { visit } from 'unist-util-visit'
 
-import { DEFAULT_SHIKI_THEMES } from "./rehype-code";
-import { ShikiSingleton } from "./shiki-singleton";
+import { DEFAULT_SHIKI_THEMES } from './rehype-code'
+import { ShikiSingleton } from './shiki-singleton'
 
-const inlineShikiRegex = /(.*){:(.*)}$/;
+const inlineShikiRegex = /(.*){:(.*)}$/
 
-const themeNames = Object.values(DEFAULT_SHIKI_THEMES);
-const themeKeys = Object.keys(DEFAULT_SHIKI_THEMES);
+const themeNames = Object.values(DEFAULT_SHIKI_THEMES)
+const themeKeys = Object.keys(DEFAULT_SHIKI_THEMES)
 
 export const rehypeInlineCode: Plugin<[RehypeShikiCoreOptions], Root> = () => {
-	const shikiSingleton = ShikiSingleton.getInstance();
+	const shikiSingleton = ShikiSingleton.getInstance()
 
 	return async (tree) => {
 		const highlighter = await shikiSingleton.getHighlighter({
 			themes: themeNames,
 			langs: Object.keys(bundledLanguages),
-		});
+		})
 
-		return visit(tree, "element", (node, index, parent) => {
-			if (node.tagName !== "code") return;
+		return visit(tree, 'element', (node, index, parent) => {
+			if (node.tagName !== 'code') return
 
 			// biome-ignore lint/suspicious/noExplicitAny: TODO: fix me
-			const match = (node.children[0] as any)?.value?.match(inlineShikiRegex);
-			if (!match) return;
+			const match = (node.children[0] as any)?.value?.match(inlineShikiRegex)
+			if (!match) return
 
-			const [, code, lang] = match;
-			const isLang = lang[0] !== ".";
+			const [, code, lang] = match
+			const isLang = lang[0] !== '.'
 
 			const hast = highlighter.codeToHast(code, {
 				themes: DEFAULT_SHIKI_THEMES,
-				lang: isLang ? lang : "plaintext",
+				lang: isLang ? lang : 'plaintext',
 				defaultColor: false,
-			});
+			})
 
 			// biome-ignore lint/suspicious/noExplicitAny: TODO: fix me
-			const inlineCode = (hast.children[0] as any).children[0];
-			if (!inlineCode) return;
+			const inlineCode = (hast.children[0] as any).children[0]
+			if (!inlineCode) return
 
 			/**
 			 * Set the color by scope if language is not specified
@@ -56,17 +56,17 @@ export const rehypeInlineCode: Plugin<[RehypeShikiCoreOptions], Root> = () => {
 						highlighter
 							.getTheme(name)
 							.settings.find(({ scope }) => scope?.includes(lang.slice(1)))
-							?.settings.foreground ?? "inherit",
-				);
+							?.settings.foreground ?? 'inherit',
+				)
 
 				inlineCode.children[0].children[0].properties.style = themeKeys
 					.map((key, i) => `--shiki-${key}:${colors[i]}`)
-					.join(";");
+					.join(';')
 			}
 
-			inlineCode.properties.className = ["shiki"];
+			inlineCode.properties.className = ['shiki']
 
-			parent?.children.splice(index ?? 0, 1, inlineCode);
-		});
-	};
-};
+			parent?.children.splice(index ?? 0, 1, inlineCode)
+		})
+	}
+}

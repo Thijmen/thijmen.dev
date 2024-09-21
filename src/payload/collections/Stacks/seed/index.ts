@@ -1,65 +1,65 @@
-import { Payload } from "payload";
+import type { Payload } from 'payload'
 
 export const StackSeeder = async (payload: Payload) => {
 	const existingStacks = await payload.find({
-		collection: "stacks",
+		collection: 'stacks',
 		limit: 1,
-	});
+	})
 
 	if (existingStacks.docs.length === 0) {
 		const reactNativeStack = await payload.create({
-			collection: "stacks",
+			collection: 'stacks',
 			data: {
-				title: "React Native",
-				stackHandle: "ReactNative",
+				title: 'React Native',
+				stackHandle: 'ReactNative',
 			},
-		});
+		})
 
 		const nextJsStack = await payload.create({
-			collection: "stacks",
+			collection: 'stacks',
 			data: {
-				title: "NextJS",
-				stackHandle: "Next.js",
+				title: 'NextJS',
+				stackHandle: 'Next.js',
 			},
-		});
+		})
 
 		await payload.create({
-			collection: "projects",
+			collection: 'projects',
 			data: {
-				title: "thijmen.dev",
+				title: 'thijmen.dev',
 				isFeatured: true,
-				introduction: "Personal website, still in progress, as you can see.",
+				introduction: 'Personal website, still in progress, as you can see.',
 				description:
-					"### This is something\n" +
-					"\n" +
-					"```php\n" +
-					"<?php\n" +
+					'### This is something\n' +
+					'\n' +
+					'```php\n' +
+					'<?php\n' +
 					'\techo "Hi";\n' +
-					"```\n" +
-					"\n" +
-					"Zo, dat was wat code!\n" +
-					"\n" +
-					"En nu wat mooi spul:\n" +
-					"\n" +
+					'```\n' +
+					'\n' +
+					'Zo, dat was wat code!\n' +
+					'\n' +
+					'En nu wat mooi spul:\n' +
+					'\n' +
 					'```js title="lib/mdx.js"\n' +
 					"export const formatSlug = (slug) => slug.replace(/\\.mdx$/, '')\n" +
-					"/**\n" +
+					'/**\n' +
 					" * Example: formatSlug('markdown.mdx')\n" +
 					" * Output: 'markdown'\n" +
-					" */\n" +
-					"```\n" +
-					"\n" +
+					' */\n' +
+					'```\n' +
+					'\n' +
 					'```js title="test/thijmen.dev.tsx"\n' +
-					"  const frontMatter = {\n" +
-					"    ...data,\n" +
-					"    slug\n" +
-					"  }\n" +
-					"```\n",
-				githubLink: "https://github.com/thijmen/thijmen.dev",
-				liveLink: "https://www.thijmen.dev/",
-				slug: "thijmen-dev",
+					'  const frontMatter = {\n' +
+					'    ...data,\n' +
+					'    slug\n' +
+					'  }\n' +
+					'```\n',
+				githubLink: 'https://github.com/thijmen/thijmen.dev',
+				liveLink: 'https://www.thijmen.dev/',
+				slug: 'thijmen-dev',
 				stacks: [reactNativeStack.id, nextJsStack.id],
 			},
-		});
+		})
 	}
-};
+}

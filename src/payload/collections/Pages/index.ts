@@ -1,48 +1,45 @@
-import { Block, CollectionConfig } from "payload";
+import type { Block, CollectionConfig } from 'payload'
 
-import { authenticated } from "@/payload/access/authenticated";
-import { authenticatedOrPublished } from "@/payload/access/authenticatedOrPublished";
-import {
-	defaultMetaTab,
-	defaultVersions,
-} from "@/payload/collections/defaults";
-import { ThijmenContent } from "@/payload/fields/content";
-import { slugField } from "@/payload/fields/slug";
-import { generatePreviewPath } from "@/payload/utilities/generatePreviewPath";
+import { authenticated } from '@/payload/access/authenticated'
+import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublished'
+import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
+import { ThijmenContent } from '@/payload/fields/content'
+import { slugField } from '@/payload/fields/slug'
+import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
 
 export const Banner: Block = {
-	slug: "banner",
+	slug: 'banner',
 	fields: [
 		{
-			name: "code",
-			type: "code",
+			name: 'code',
+			type: 'code',
 			admin: {
-				language: "markdown",
+				language: 'markdown',
 			},
 			label: false,
 			required: true,
 		},
 	],
-	interfaceName: "BannerBlock",
-};
+	interfaceName: 'BannerBlock',
+}
 
 export const Pages: CollectionConfig = {
-	slug: "pages",
+	slug: 'pages',
 	admin: {
-		defaultColumns: ["title", "slug", "updatedAt"],
+		defaultColumns: ['title', 'slug', 'updatedAt'],
 		livePreview: {
 			url: ({ data }) => {
 				const path = generatePreviewPath({
-					path: `/${typeof data?.slug === "string" ? data.slug : ""}`,
-				});
-				return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`;
+					path: `/${typeof data?.slug === 'string' ? data.slug : ''}`,
+				})
+				return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
 			},
 		},
 		preview: (doc) =>
 			generatePreviewPath({
-				path: `/${typeof doc?.slug === "string" ? doc.slug : ""}`,
+				path: `/${typeof doc?.slug === 'string' ? doc.slug : ''}`,
 			}),
-		useAsTitle: "title",
+		useAsTitle: 'title',
 	},
 	access: {
 		create: authenticated,
@@ -53,30 +50,30 @@ export const Pages: CollectionConfig = {
 	versions: defaultVersions,
 	fields: [
 		{
-			name: "title",
-			type: "text",
+			name: 'title',
+			type: 'text',
 			required: true,
 		},
 		...slugField(),
 		{
-			name: "showBackButton",
-			type: "checkbox",
-			label: "Show back button",
+			name: 'showBackButton',
+			type: 'checkbox',
+			label: 'Show back button',
 			defaultValue: true,
 			admin: {
-				position: "sidebar",
+				position: 'sidebar',
 			},
 		},
 		{
-			type: "tabs",
+			type: 'tabs',
 
 			tabs: [
 				{
-					label: "Content",
+					label: 'Content',
 					fields: [ThijmenContent],
 				},
 				defaultMetaTab,
 			],
 		},
 	],
-};
+}

@@ -1,13 +1,13 @@
-import { GITHUB_ACCOUNTS } from "@/core/common/constant/github";
-import Contributions from "@/core/modules/dashboard/components/Contributions";
+import { GITHUB_ACCOUNTS } from '@/core/common/constant/github'
+import Contributions from '@/core/modules/dashboard/components/Contributions'
 
 export const GithubBlock = () => {
 	return (
-		<div className="space-y-10">
+		<div className='space-y-10'>
 			{GITHUB_ACCOUNTS?.filter((account) => account?.is_active).map(
 				(account, index) => (
 					<Contributions
-						key={index}
+						key={account.username}
 						username={account?.username}
 						type={account?.type}
 						endpoint={account?.endpoint}
@@ -15,5 +15,5 @@ export const GithubBlock = () => {
 				),
 			)}
 		</div>
-	);
-};
+	)
+}

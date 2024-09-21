@@ -1,16 +1,16 @@
-import { type Highlighter, createHighlighter } from "shiki";
+import { type Highlighter, createHighlighter } from 'shiki'
 
 export class ShikiSingleton {
-	private static instance: ShikiSingleton;
-	private highlighter: Highlighter | null = null;
+	private static instance: ShikiSingleton
+	private highlighter: Highlighter | null = null
 
 	private constructor() {}
 
 	public static getInstance(): ShikiSingleton {
 		if (!ShikiSingleton.instance) {
-			ShikiSingleton.instance = new ShikiSingleton();
+			ShikiSingleton.instance = new ShikiSingleton()
 		}
-		return ShikiSingleton.instance;
+		return ShikiSingleton.instance
 	}
 
 	public async getHighlighter(param: { themes: string[]; langs: string[] }) {
@@ -18,8 +18,8 @@ export class ShikiSingleton {
 			this.highlighter = await createHighlighter({
 				themes: param.themes,
 				langs: param.langs,
-			});
+			})
 		}
-		return this.highlighter;
+		return this.highlighter
 	}
 }
