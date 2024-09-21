@@ -55,15 +55,7 @@ export const Pages: CollectionConfig = {
 			required: true,
 		},
 		...slugField(),
-		{
-			name: 'showBackButton',
-			type: 'checkbox',
-			label: 'Show back button',
-			defaultValue: true,
-			admin: {
-				position: 'sidebar',
-			},
-		},
+
 		{
 			type: 'tabs',
 
@@ -71,6 +63,28 @@ export const Pages: CollectionConfig = {
 				{
 					label: 'Content',
 					fields: [ThijmenContent],
+				},
+				{
+					label: 'Page Settings',
+					fields: [
+						{
+							name: 'containerClassName',
+							type: 'text',
+							label: 'Override default container class name',
+						},
+						{
+							name: 'showPageHeading',
+							type: 'checkbox',
+							label: 'Show page heading',
+							defaultValue: true,
+						},
+						{
+							name: 'showBackButton',
+							type: 'checkbox',
+							label: 'Show back button',
+							defaultValue: true,
+						},
+					],
 				},
 				defaultMetaTab,
 			],

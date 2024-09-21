@@ -178,7 +178,6 @@ export interface Page {
   title: string;
   slug?: string | null;
   slugLock?: boolean | null;
-  showBackButton?: boolean | null;
   dynamiccontent?: {
     root: {
       type: string;
@@ -194,6 +193,9 @@ export interface Page {
     };
     [k: string]: unknown;
   } | null;
+  containerClassName?: string | null;
+  showPageHeading?: boolean | null;
+  showBackButton?: boolean | null;
   meta?: {
     title?: string | null;
     image?: (number | null) | R2Media;

@@ -45,9 +45,11 @@ export default async function Page({ params: { slug = 'home' } }) {
 
 	return (
 		<Layout navGlobal={nav}>
-			<Container data-aos={'fade-up'}>
+			<Container className={page.containerClassName || ''} data-aos={'fade-up'}>
 				{page.showBackButton && <BackButton url={'/'} />}
-				<PageHeading title={page.title} description={''} />
+				{page.showPageHeading && (
+					<PageHeading title={page.title} description={''} />
+				)}
 				<SharedContent content={page.dynamiccontent} />
 			</Container>
 		</Layout>
