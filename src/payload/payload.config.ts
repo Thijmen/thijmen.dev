@@ -19,9 +19,10 @@ import { Projects } from '@/payload/collections/Projects'
 import { StackSeeder } from '@/payload/collections/Stacks/seed'
 import { Users } from '@/payload/collections/Users'
 import { UserSeeder } from '@/payload/collections/Users/seed'
-import { Nav } from '@/payload/globals/nav'
+import { Nav, NavSeeder } from '@/payload/globals/nav'
 import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
+import { PageSeeder } from './collections/Pages/seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -125,6 +126,8 @@ export default buildConfig({
 	},
 	async onInit(payload) {
 		await UserSeeder(payload)
+		await PageSeeder(payload)
+		await NavSeeder(payload)
 		await StackSeeder(payload)
 	},
 	sharp,
