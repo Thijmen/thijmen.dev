@@ -6,6 +6,13 @@ export const MyHorizontalLine: Block = {
 		plural: 'Horizontal Line',
 		singular: 'Horizontal Line',
 	},
-	fields: [],
+	fields: [
+		{
+			name: 'variant',
+			type: 'select',
+			options: ['dashed', 'solid'],
+			defaultValue: 'dashed',
+		},
+	],
 	interfaceName: 'MyHorizontalLineBlock',
 }

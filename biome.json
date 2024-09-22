@@ -9,7 +9,9 @@
 			"**/public",
 			"**/.next",
 			"**/.turbo",
-			"src/migrations/**"
+			"src/migrations/**",
+			"src/payload/payload-types.ts",
+			"src/app/(payload)/admin/importMap.js"
 		]
 	},
 

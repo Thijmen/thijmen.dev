@@ -18,7 +18,16 @@ export const Nav: GlobalConfig = {
 				{
 					name: 'icon',
 					label: 'Icon',
-					type: 'text',
+					type: 'select',
+					options: [
+						'home',
+						'project',
+						'dashboard',
+						'blog',
+						'profile',
+						'analytics',
+					],
+					required: true,
 				},
 				{
 					name: 'page',

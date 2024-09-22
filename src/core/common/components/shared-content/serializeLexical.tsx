@@ -12,11 +12,15 @@ import { WakaBlock } from '@/core/common/components/shared-content/blocks/waka'
 import type {
 	MyCodeBlock,
 	MyGithubContributionsBlock,
+	MyHomepageIntroductionBlock,
+	MyHomepageProjectsBlock,
 	MyHorizontalLineBlock,
 	MyJavascriptPlaygroundBlock,
 	MyProjectsBlock,
 	MyWakaContributionsBlock,
 } from '@/payload/payload-types'
+import { HorizontalLineBlock } from './blocks/horizontal-line'
+import { IntroductionBlock } from './blocks/introduction'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
 import {
 	IS_BOLD,
@@ -36,6 +40,8 @@ export type NodeTypes =
 	| SerializedBlockNode<MyWakaContributionsBlock>
 	| SerializedBlockNode<MyGithubContributionsBlock>
 	| SerializedBlockNode<MyJavascriptPlaygroundBlock>
+	| SerializedBlockNode<MyHomepageProjectsBlock>
+	| SerializedBlockNode<MyHomepageIntroductionBlock>
 type Props = {
 	nodes: NodeTypes[]
 }
@@ -140,15 +146,15 @@ export async function serializeLexical({ nodes }: Props): Promise<JSX.Element> {
 								</>
 							)
 						case 'horizontalLineBlock':
-							return (
-								<div className='mb-6 border-b border-dashed border-neutral-600 pb-6 pt-2 text-neutral-600 dark:text-neutral-400' />
-							)
+							return <HorizontalLineBlock block={block} />
 						case 'wakaContributionsBlock':
 							return <WakaBlock />
 						case 'githubContributionsBlock':
 							return <GithubBlock />
 						case 'javascriptPlaygroundBlock':
 							return <JavascriptPlaygroundBlock />
+						case 'homepageIntroductionBlock':
+							return <IntroductionBlock block={block} />
 						default:
 							return null
 					}

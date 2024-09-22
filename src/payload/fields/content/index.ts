@@ -1,4 +1,5 @@
 import { MyGithubContributions } from '@/payload/fields/content/github-contributions'
+import { MyHomepageIntroduction } from '@/payload/fields/content/homepage-introduction'
 import { MyHorizontalLine } from '@/payload/fields/content/horizontal-line'
 import { MyCode } from '@/payload/fields/content/my-code'
 import { MyProjects } from '@/payload/fields/content/projects-overview-field'
@@ -12,6 +13,7 @@ import {
 	lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import type { Field } from 'payload'
+import { MyHomepageProjects } from './homepage-projects'
 import { MyJavascriptPlayground } from './js-playground'
 
 export const ThijmenContent: Field = {
@@ -32,6 +34,8 @@ export const ThijmenContent: Field = {
 						MyGithubContributions,
 						MyWakaContributions,
 						MyJavascriptPlayground,
+						MyHomepageIntroduction,
+						MyHomepageProjects,
 					],
 				}),
 				FixedToolbarFeature(),
