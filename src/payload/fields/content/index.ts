@@ -3,6 +3,7 @@ import { MyHorizontalLine } from '@/payload/fields/content/horizontal-line'
 import { MyCode } from '@/payload/fields/content/my-code'
 import { MyProjects } from '@/payload/fields/content/projects-overview-field'
 import { MyWakaContributions } from '@/payload/fields/content/waka-statistics'
+import { MyHomepageIntroduction } from '@/payload/fields/content/homepage-introduction'
 import {
 	BlocksFeature,
 	FixedToolbarFeature,
@@ -32,6 +33,7 @@ export const ThijmenContent: Field = {
 						MyGithubContributions,
 						MyWakaContributions,
 						MyJavascriptPlayground,
+						MyHomepageIntroduction,
 					],
 				}),
 				FixedToolbarFeature(),

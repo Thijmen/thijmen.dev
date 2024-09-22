@@ -390,6 +390,18 @@ export interface MyJavascriptPlaygroundBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyHomepageIntroductionBlock".
+ */
+export interface MyHomepageIntroductionBlock {
+  heading: string;
+  subheading: string;
+  content: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homepageIntroductionBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
