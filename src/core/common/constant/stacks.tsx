@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import { BsFillBootstrapFill, BsRobot } from 'react-icons/bs'
 import { MdError } from 'react-icons/md'
 import {
