@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-
+import { authenticated } from '../access/authenticated'
 export const Media: CollectionConfig = {
 	slug: 'r2-media',
 	labels: {
@@ -32,4 +32,10 @@ export const Media: CollectionConfig = {
 			type: 'text',
 		},
 	],
+	access: {
+		create: authenticated,
+		delete: authenticated,
+		read: () => true,
+		update: authenticated,
+	},
 }

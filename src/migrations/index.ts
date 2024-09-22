@@ -1,9 +1,15 @@
 import * as migration_20240921_095309 from './20240921_095309';
+import * as migration_20240922_081248_locale_unique_indexes from './20240922_081248_locale_unique_indexes';
 
 export const migrations = [
   {
     up: migration_20240921_095309.up,
     down: migration_20240921_095309.down,
-    name: '20240921_095309'
+    name: '20240921_095309',
+  },
+  {
+    up: migration_20240922_081248_locale_unique_indexes.up,
+    down: migration_20240922_081248_locale_unique_indexes.down,
+    name: '20240922_081248_locale_unique_indexes'
   },
 ];
