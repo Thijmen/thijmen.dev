@@ -315,7 +315,7 @@ export interface Nav {
   links?:
     | {
         label?: string | null;
-        icon?: string | null;
+        icon: 'home' | 'project' | 'dashboard' | 'blog' | 'profile' | 'analytics';
         page?:
           | ({
               relationTo: 'pages';
