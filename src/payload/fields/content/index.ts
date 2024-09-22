@@ -13,8 +13,8 @@ import {
 	lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import type { Field } from 'payload'
-import { MyJavascriptPlayground } from './js-playground'
 import { MyHomepageProjects } from './homepage-projects'
+import { MyJavascriptPlayground } from './js-playground'
 
 export const ThijmenContent: Field = {
 	name: 'dynamiccontent',
