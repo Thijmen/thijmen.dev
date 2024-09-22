@@ -409,6 +409,7 @@ export interface MyHomepageProjectsBlock {
   onlyFeatured?: boolean | null;
   linkHref?: string | null;
   linkTitle?: string | null;
+  headingTitle?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'homepageProjectsBlock';

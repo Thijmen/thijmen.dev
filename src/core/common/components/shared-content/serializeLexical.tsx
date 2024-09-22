@@ -31,6 +31,7 @@ import {
 	IS_SUPERSCRIPT,
 	IS_UNDERLINE,
 } from './nodeFormat'
+import { HomepageProjectsBlock } from './blocks/homepage-projects'
 
 export type NodeTypes =
 	| DefaultNodeTypes
@@ -155,6 +156,8 @@ export async function serializeLexical({ nodes }: Props): Promise<JSX.Element> {
 							return <JavascriptPlaygroundBlock />
 						case 'homepageIntroductionBlock':
 							return <IntroductionBlock block={block} />
+						case 'homepageProjectsBlock':
+							return <HomepageProjectsBlock block={block} />
 						default:
 							return null
 					}
