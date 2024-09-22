@@ -7,6 +7,7 @@ import {
 	Folder,
 } from '@/core/common/components/elements/mdx/ui/file'
 import Video from '@/core/common/components/elements/mdx/ui/video'
+import { Link } from '../Link'
 
 type MdxProps = {
 	content: string
@@ -18,6 +19,7 @@ const components: MDXComponents = {
 	File,
 	Files,
 	Folder,
+	Link,
 }
 
 const Mdx = (props: MdxProps) => {
