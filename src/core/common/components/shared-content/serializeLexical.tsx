@@ -27,6 +27,7 @@ import {
 	IS_SUPERSCRIPT,
 	IS_UNDERLINE,
 } from './nodeFormat'
+import { HorizontalLineBlock } from './blocks/horizontal-line'
 
 export type NodeTypes =
 	| DefaultNodeTypes
@@ -140,9 +141,7 @@ export async function serializeLexical({ nodes }: Props): Promise<JSX.Element> {
 								</>
 							)
 						case 'horizontalLineBlock':
-							return (
-								<div className='mb-6 border-b border-dashed border-neutral-600 pb-6 pt-2 text-neutral-600 dark:text-neutral-400' />
-							)
+							return <HorizontalLineBlock block={block} />
 						case 'wakaContributionsBlock':
 							return <WakaBlock />
 						case 'githubContributionsBlock':
