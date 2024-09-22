@@ -19,6 +19,7 @@ import type {
 	MyProjectsBlock,
 	MyWakaContributionsBlock,
 } from '@/payload/payload-types'
+import { HomepageProjectsBlock } from './blocks/homepage-projects'
 import { HorizontalLineBlock } from './blocks/horizontal-line'
 import { IntroductionBlock } from './blocks/introduction'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
@@ -31,7 +32,6 @@ import {
 	IS_SUPERSCRIPT,
 	IS_UNDERLINE,
 } from './nodeFormat'
-import { HomepageProjectsBlock } from './blocks/homepage-projects'
 
 export type NodeTypes =
 	| DefaultNodeTypes

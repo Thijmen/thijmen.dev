@@ -1,10 +1,10 @@
 import { getProjects } from '@/core/common/services/projects.service'
+import FeaturedProjectsCarousel from '@/core/modules/home/components/FeaturedProjectsCarousel'
 import type { MyHomepageProjectsBlock } from '@/payload/payload-types'
-import SectionHeading from '../../elements/SectionHeading'
-import SectionSubHeading from '../../elements/SectionSubHeading'
 import Link from 'next/link'
 import { BsArrowRightShort as ViewAllIcon } from 'react-icons/bs'
-import FeaturedProjectsCarousel from '@/core/modules/home/components/FeaturedProjectsCarousel'
+import SectionHeading from '../../elements/SectionHeading'
+import SectionSubHeading from '../../elements/SectionSubHeading'
 export const HomepageProjectsBlock = async ({
 	block,
 }: { block: MyHomepageProjectsBlock }) => {
