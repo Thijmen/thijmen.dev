@@ -12,7 +12,12 @@ import MenuItem from './MenuItem'
 interface Props {
 	item: NonNullable<Nav['links']>[number]
 }
-const iconMap: Record<string, React.ElementType> = {
+
+// Define a type for the icon options
+type IconOption = NonNullable<Nav['links']>[number]['icon']
+
+// Use the IconOption type to define the iconMap
+const iconMap: Record<IconOption, React.ElementType> = {
 	analytics: AnalyticsIcon,
 	blog: BlogIcon,
 	dashboard: DashboardIcon,
@@ -37,7 +42,7 @@ export const DynamicMenuItem = ({ item }: Props) => {
 	}
 
 	const getIcon = () => {
-		const IconComponent = iconMap[item.icon] || DashboardIcon // Default to DashboardIcon
+		const IconComponent = iconMap[item.icon]
 		return <IconComponent size={20} />
 	}
 	const href = getHref()
