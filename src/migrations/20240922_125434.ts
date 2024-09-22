@@ -8,7 +8,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
    WHEN duplicate_object THEN null;
   END $$;
   UPDATE "nav_links" SET "icon" = 'home';
-  ALTER TABLE "nav_links" ALTER COLUMN "icon" SET DATA TYPE enum_nav_links_icon;
+  ALTER TABLE "nav_links" ALTER COLUMN "icon" SET DATA TYPE enum_nav_links_icon USING "icon"::enum_nav_links_icon;
   ALTER TABLE "nav_links" ALTER COLUMN "icon" SET NOT NULL;`)
 }
 
