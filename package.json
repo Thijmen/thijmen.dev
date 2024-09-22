@@ -4,8 +4,6 @@
 	"private": true,
 	"scripts": {
 		"dev": "cross-env NODE_OPTIONS='--inspect=9237' next dev",
-		"devturbo": "cross-env NODE_OPTIONS=--no-deprecation next dev --turbo",
-		"devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
 		"build": "cross-env NODE_OPTIONS=--no-deprecation next build",
 		"payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
 		"start": "cross-env NODE_OPTIONS=--no-deprecation next start",
@@ -47,6 +45,7 @@
 		"@radix-ui/react-aspect-ratio": "^1.1.0",
 		"@radix-ui/react-collapsible": "^1.1.0",
 		"@radix-ui/react-scroll-area": "^1.1.0",
+		"@sentry/nextjs": "^8",
 		"@shikijs/rehype": "^1.2.4",
 		"@shikijs/transformers": "^1.11.1",
 		"@tailwindcss/typography": "^0.5.12",
