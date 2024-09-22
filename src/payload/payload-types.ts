@@ -403,6 +403,18 @@ export interface MyHomepageIntroductionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyHomepageProjectsBlock".
+ */
+export interface MyHomepageProjectsBlock {
+  onlyFeatured?: boolean | null;
+  linkHref?: string | null;
+  linkTitle?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homepageProjectsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
