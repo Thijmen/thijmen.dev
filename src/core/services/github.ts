@@ -29,20 +29,21 @@ const GITHUB_USER_QUERY = `query($username: String!) {
 }`
 
 const GITHUB_STARS_QUERY = `
- query ($cursor: String) {
+ query ($cursor: String, $orderBy: StarOrder) {
   viewer {
     login
     name
-    starredRepositories(first: 100, after: $cursor) {
+    starredRepositories(first: 100, after: $cursor, orderBy: $orderBy) {
       totalCount
       pageInfo {
         endCursor
         hasNextPage
       }
       edges {
+        starredAt
         node {
           id
-          name
+          name: nameWithOwner
           description
           openGraphImageUrl
           url
@@ -96,8 +97,12 @@ export const fetchGithubData = async (
 
 	return { status, data: responseJson.data.user }
 }
-
-export const fetchGithubStars = async (token: string | undefined) => {
+interface GithubStarsResponse {
+	stars: IGithubStar[]
+}
+export const fetchGithubStars = async (
+	token: string | undefined,
+): Promise<GithubStarsResponse> => {
 	const allStars = []
 	let hasNextPage = true
 	let after = null
@@ -109,6 +114,10 @@ export const fetchGithubStars = async (token: string | undefined) => {
 					query: GITHUB_STARS_QUERY,
 					variables: {
 						cursor: after,
+						orderBy: {
+							field: 'STARRED_AT',
+							direction: 'DESC',
+						},
 					},
 				},
 				{
@@ -120,7 +129,12 @@ export const fetchGithubStars = async (token: string | undefined) => {
 
 			console.log('page ', after)
 			const data = response.data.data.viewer.starredRepositories.edges.map(
-				(edge) => edge.node,
+				(edge) => {
+					return {
+						...edge.node,
+						starredAt: edge.starredAt,
+					}
+				},
 			)
 			allStars.push(...data)
 			hasNextPage =
@@ -159,4 +173,19 @@ export const getGithubStars = async (type: string) => {
 
 	const { token } = account
 	return await fetchGithubStars(token)
+}
+
+export type IGithubStar = {
+	id: string
+	name: string
+	description: string
+	openGraphImageUrl: string
+	url: string
+	stargazerCount: number
+	starredAt: string
+	primaryLanguage?: {
+		id: string
+		name: string
+		color: string
+	}
 }
