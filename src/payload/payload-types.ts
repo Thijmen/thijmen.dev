@@ -373,6 +373,21 @@ export interface MyGithubContributionsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyGithubStarsBlock".
+ */
+export interface MyGithubStarsBlock {
+  ignoredRepositories?:
+    | {
+        name?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'githubStarsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "MyWakaContributionsBlock".
  */
 export interface MyWakaContributionsBlock {

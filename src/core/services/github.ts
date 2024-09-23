@@ -28,6 +28,37 @@ const GITHUB_USER_QUERY = `query($username: String!) {
   }
 }`
 
+const GITHUB_STARS_QUERY = `
+ query ($cursor: String) {
+  viewer {
+    login
+    name
+    starredRepositories(first: 100, after: $cursor) {
+      totalCount
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+      edges {
+        node {
+          id
+          name
+          description
+          openGraphImageUrl
+          url
+          stargazerCount
+          primaryLanguage {
+            id
+            name
+            color
+          }
+        }
+      }
+    }
+  }
+}
+`
+
 export const fetchGithubData = async (
 	username: string,
 	token: string | undefined,
@@ -66,6 +97,44 @@ export const fetchGithubData = async (
 	return { status, data: responseJson.data.user }
 }
 
+export const fetchGithubStars = async (token: string | undefined) => {
+	const allStars = []
+	let hasNextPage = true
+	let after = null
+	try {
+		while (hasNextPage) {
+			const response = await axios.post(
+				GITHUB_USER_ENDPOINT,
+				{
+					query: GITHUB_STARS_QUERY,
+					variables: {
+						cursor: after,
+					},
+				},
+				{
+					headers: {
+						Authorization: `bearer ${token}`,
+					},
+				},
+			)
+
+			console.log('page ', after)
+			const data = response.data.data.viewer.starredRepositories.edges.map(
+				(edge) => edge.node,
+			)
+			allStars.push(...data)
+			hasNextPage =
+				response.data.data.viewer.starredRepositories.pageInfo.hasNextPage
+			after = response.data.data.viewer.starredRepositories.pageInfo.endCursor
+		}
+	} catch (error) {
+		console.log('error', error)
+	}
+	return {
+		stars: allStars,
+	}
+}
+
 export const getGithubUser = async (type: string) => {
 	const account = GITHUB_ACCOUNTS.find(
 		(account) => account?.type === type && account?.is_active,
@@ -77,4 +146,17 @@ export const getGithubUser = async (type: string) => {
 
 	const { username, token } = account
 	return await fetchGithubData(username, token)
+}
+
+export const getGithubStars = async (type: string) => {
+	const account = GITHUB_ACCOUNTS.find(
+		(account) => account?.type === type && account?.is_active,
+	)
+
+	if (!account) {
+		throw new Error('Invalid user type')
+	}
+
+	const { token } = account
+	return await fetchGithubStars(token)
 }
