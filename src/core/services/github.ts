@@ -97,7 +97,7 @@ export const fetchGithubData = async (
 
 	return { status, data: responseJson.data.user }
 }
-interface GithubStarsResponse {
+export interface GithubStarsResponse {
 	stars: IGithubStar[]
 }
 export const fetchGithubStars = async (

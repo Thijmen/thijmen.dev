@@ -1,7 +1,10 @@
-import { getGithubStars } from '@/core/services/github'
+'use client'
 import type { MyGithubStarsBlock } from '@/payload/payload-types'
 import { Star } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
+import useSWR from 'swr'
+import { fetcher } from '@/core/services/fetcher'
+import type { GithubStarsResponse } from '@/core/services/github'
 
 const starredRepos = [
 	{
@@ -43,14 +46,19 @@ const LanguageColor = ({ color }) => {
 		/>
 	)
 }
-export const GithubStarsBlock = async ({
-	block,
-}: { block: MyGithubStarsBlock }) => {
-	const stars = await getGithubStars('personal')
-	// order stars by starredAt
-	const orderedStars = stars.stars.sort(
-		(a, b) => new Date(b.starredAt).getTime() - new Date(a.starredAt).getTime(),
+export const GithubStarsBlock = ({ block }: { block: MyGithubStarsBlock }) => {
+	const { data: stars } = useSWR<GithubStarsResponse>(
+		'/api/github?type=personal&section=stars',
+		fetcher,
 	)
+
+	// order stars by starredAt
+	const orderedStars =
+		stars?.sort(
+			(a, b) =>
+				new Date(b.starredAt).getTime() - new Date(a.starredAt).getTime(),
+		) ?? []
+
 	return (
 		<>
 			<ul className='grid grid-cols-1 md:grid-cols-2 gap-4'>
