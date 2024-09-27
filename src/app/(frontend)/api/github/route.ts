@@ -43,3 +43,5 @@ export async function GET(request: NextRequest) {
 		status: response.status,
 	})
 }
+
+export const revalidate = 60

@@ -1,6 +1,6 @@
 'use client'
 import { fetcher } from '@/core/services/fetcher'
-import type { GithubStarsResponse } from '@/core/services/github'
+import type { IGithubStar } from '@/core/services/github'
 import type { MyGithubStarsBlock } from '@/payload/payload-types'
 import { Star } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
@@ -47,17 +47,15 @@ const LanguageColor = ({ color }) => {
 	)
 }
 export const GithubStarsBlock = ({ block }: { block: MyGithubStarsBlock }) => {
-	const { data: stars } = useSWR<GithubStarsResponse>(
+	const { data: stars } = useSWR<IGithubStar[]>(
 		'/api/github?type=personal&section=stars',
 		fetcher,
 	)
 
 	// order stars by starredAt
-	const orderedStars =
-		stars?.sort(
-			(a, b) =>
-				new Date(b.starredAt).getTime() - new Date(a.starredAt).getTime(),
-		) ?? []
+	const orderedStars = (stars ?? []).sort(
+		(a, b) => new Date(b.starredAt).getTime() - new Date(a.starredAt).getTime(),
+	)
 
 	return (
 		<>
