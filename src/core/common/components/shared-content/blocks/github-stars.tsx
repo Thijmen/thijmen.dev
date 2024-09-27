@@ -1,10 +1,10 @@
 'use client'
+import { fetcher } from '@/core/services/fetcher'
+import type { GithubStarsResponse } from '@/core/services/github'
 import type { MyGithubStarsBlock } from '@/payload/payload-types'
 import { Star } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 import useSWR from 'swr'
-import { fetcher } from '@/core/services/fetcher'
-import type { GithubStarsResponse } from '@/core/services/github'
 
 const starredRepos = [
 	{
