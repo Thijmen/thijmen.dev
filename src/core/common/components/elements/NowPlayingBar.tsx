@@ -16,12 +16,12 @@ const NowPlayingBar = () => {
 	const [isShowPlayingInfo, setShowPlayingInfo] = useState(false)
 
 	const { data: playingData } = useSWR<NowPlayingProps>(
-		'/api/now-playing',
+		'/api/spotify/now-playing',
 		fetcher,
 	)
 
 	const { data: devicesData = [] } = useSWR<DeviceProps[]>(
-		'/api/available-devices',
+		'/api/spotify/available-devices',
 		fetcher,
 	)
 
