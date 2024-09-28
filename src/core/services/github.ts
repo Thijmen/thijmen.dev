@@ -127,7 +127,6 @@ export const fetchGithubStars = async (
 				},
 			)
 
-			console.log('page ', after)
 			const data = response.data.data.viewer.starredRepositories.edges.map(
 				(edge) => {
 					return {
@@ -142,7 +141,7 @@ export const fetchGithubStars = async (
 			after = response.data.data.viewer.starredRepositories.pageInfo.endCursor
 		}
 	} catch (error) {
-		console.log('error', error)
+		console.error('error', error)
 	}
 	return {
 		stars: allStars,
