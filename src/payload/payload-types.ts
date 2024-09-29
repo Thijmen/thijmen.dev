@@ -14,6 +14,7 @@ export interface Config {
     users: User;
     projects: Project;
     stacks: Stack;
+    posts: Post;
     pages: Page;
     'r2-media': R2Media;
     redirects: Redirect;
@@ -143,6 +144,40 @@ export interface R2Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  dynamiccontent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image?: (number | null) | R2Media;
+  meta?: {
+    title?: string | null;
+    image?: (number | null) | R2Media;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
@@ -186,10 +221,15 @@ export interface Redirect {
   from: string;
   to?: {
     type?: ('reference' | 'custom') | null;
-    reference?: {
-      relationTo: 'pages';
-      value: number | Page;
-    } | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
     url?: string | null;
   };
   updatedAt: string;
@@ -213,6 +253,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'stacks';
         value: number | Stack;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
       } | null)
     | ({
         relationTo: 'pages';

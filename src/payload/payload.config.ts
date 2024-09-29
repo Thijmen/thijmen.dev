@@ -22,6 +22,7 @@ import { Nav, NavSeeder } from '@/payload/globals/nav'
 import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { PageSeeder } from './collections/Pages/seed'
+import { Posts } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -40,7 +41,7 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 
 export default buildConfig({
 	editor: lexicalEditor(),
-	collections: [Users, Projects, Index, Pages, Media],
+	collections: [Users, Projects, Index, Posts, Pages, Media],
 	globals: [Nav],
 	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {
@@ -60,7 +61,7 @@ export default buildConfig({
 			},
 		}),
 		redirectsPlugin({
-			collections: ['pages'],
+			collections: ['pages', 'posts'],
 			overrides: {
 				// @ts-expect-error
 				fields: ({ defaultFields }) => {
