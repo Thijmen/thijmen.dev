@@ -13,6 +13,7 @@ import {
 	lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import type { Field } from 'payload'
+import { MyGithubStars } from './github-stars'
 import { MyHomepageProjects } from './homepage-projects'
 import { MyJavascriptPlayground } from './js-playground'
 
@@ -32,6 +33,7 @@ export const ThijmenContent: Field = {
 						MyProjects,
 						MyHorizontalLine,
 						MyGithubContributions,
+						MyGithubStars,
 						MyWakaContributions,
 						MyJavascriptPlayground,
 						MyHomepageIntroduction,

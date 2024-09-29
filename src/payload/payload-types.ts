@@ -358,6 +358,7 @@ export interface MyProjectsBlock {
  */
 export interface MyHorizontalLineBlock {
   variant?: ('dashed' | 'solid') | null;
+  additionalClassName?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'horizontalLineBlock';
@@ -370,6 +371,21 @@ export interface MyGithubContributionsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'githubContributionsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyGithubStarsBlock".
+ */
+export interface MyGithubStarsBlock {
+  ignoredRepositories?:
+    | {
+        name?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'githubStarsBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -409,6 +425,7 @@ export interface MyHomepageProjectsBlock {
   onlyFeatured?: boolean | null;
   linkHref?: string | null;
   linkTitle?: string | null;
+  headingTitle?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'homepageProjectsBlock';
