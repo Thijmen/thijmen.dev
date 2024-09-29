@@ -432,6 +432,18 @@ export interface MyHomepageProjectsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyPostsBlock".
+ */
+export interface MyPostsBlock {
+  heading?: string | null;
+  subheading?: string | null;
+  posts?: (number | Post)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'postsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

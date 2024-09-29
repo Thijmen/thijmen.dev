@@ -17,6 +17,7 @@ import type {
 	MyHomepageProjectsBlock,
 	MyHorizontalLineBlock,
 	MyJavascriptPlaygroundBlock,
+	MyPostsBlock,
 	MyProjectsBlock,
 	MyWakaContributionsBlock,
 } from '@/payload/payload-types'
@@ -34,6 +35,7 @@ import {
 	IS_SUPERSCRIPT,
 	IS_UNDERLINE,
 } from './nodeFormat'
+import { PostsBlock } from './blocks/posts-block'
 
 export type NodeTypes =
 	| DefaultNodeTypes
@@ -46,6 +48,7 @@ export type NodeTypes =
 	| SerializedBlockNode<MyHomepageProjectsBlock>
 	| SerializedBlockNode<MyHomepageIntroductionBlock>
 	| SerializedBlockNode<MyGithubStarsBlock>
+	| SerializedBlockNode<MyPostsBlock>
 
 type Props = {
 	nodes: NodeTypes[]
@@ -164,6 +167,8 @@ export async function serializeLexical({ nodes }: Props): Promise<JSX.Element> {
 							return <HomepageProjectsBlock block={block} />
 						case 'githubStarsBlock':
 							return <GithubStarsBlock block={block} />
+						case 'postsBlock':
+							return <PostsBlock block={block} />
 						default:
 							return null
 					}
