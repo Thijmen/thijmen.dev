@@ -3,6 +3,16 @@ import { serialize } from '@/core/common/components/elements/mdx/serialize'
 export async function POST(request: Request) {
 	try {
 		// Parse the request body to get the Markdown content
+
+		// fetch headers
+		const headers = request.headers
+
+		const secureTokenHeader = headers.get('X-Secure-Token')
+
+		if (secureTokenHeader !== process.env.SECURE_VALIDATION_TOKEN) {
+			return Response.json({ message: 'Invalid token' }, { status: 401 })
+		}
+
 		const md = await request.text()
 
 		if (!md || typeof md !== 'string') {
