@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import type { MyPostsBlock } from '@/payload/payload-types'
+import Link from 'next/link'
 
 // Demo data
 const demoData = [

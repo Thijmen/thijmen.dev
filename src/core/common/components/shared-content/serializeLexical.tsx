@@ -26,6 +26,7 @@ import { HomepageProjectsBlock } from './blocks/homepage-projects'
 import { HorizontalLineBlock } from './blocks/horizontal-line'
 import { IntroductionBlock } from './blocks/introduction'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
+import { PostsBlock } from './blocks/posts-block'
 import {
 	IS_BOLD,
 	IS_CODE,
@@ -35,7 +36,6 @@ import {
 	IS_SUPERSCRIPT,
 	IS_UNDERLINE,
 } from './nodeFormat'
-import { PostsBlock } from './blocks/posts-block'
 
 export type NodeTypes =
 	| DefaultNodeTypes
