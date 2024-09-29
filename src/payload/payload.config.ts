@@ -14,7 +14,6 @@ import { en } from 'payload/i18n/en'
 import sharp from 'sharp'
 
 import { Pages } from '@/payload/collections/Pages'
-import { Posts } from '@/payload/collections/Posts'
 import { Projects } from '@/payload/collections/Projects'
 import { StackSeeder } from '@/payload/collections/Stacks/seed'
 import { Users } from '@/payload/collections/Users'
@@ -41,7 +40,7 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 
 export default buildConfig({
 	editor: lexicalEditor(),
-	collections: [Users, Projects, Index, Posts, Pages, Media],
+	collections: [Users, Projects, Index, Pages, Media],
 	globals: [Nav],
 	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {
@@ -61,7 +60,7 @@ export default buildConfig({
 			},
 		}),
 		redirectsPlugin({
-			collections: ['pages', 'posts'],
+			collections: ['pages'],
 			overrides: {
 				// @ts-expect-error
 				fields: ({ defaultFields }) => {

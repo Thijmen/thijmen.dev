@@ -14,7 +14,6 @@ export interface Config {
     users: User;
     projects: Project;
     stacks: Stack;
-    posts: Post;
     pages: Page;
     'r2-media': R2Media;
     redirects: Redirect;
@@ -144,34 +143,6 @@ export interface R2Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: number;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  isFeatured?: boolean | null;
-  description: string;
-  image?: (number | null) | R2Media;
-  layout: {
-    header?: string | null;
-    content?: string | null;
-    id?: string | null;
-    blockName?: string | null;
-    blockType: 'markdown';
-  }[];
-  meta?: {
-    title?: string | null;
-    image?: (number | null) | R2Media;
-    description?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
@@ -215,15 +186,10 @@ export interface Redirect {
   from: string;
   to?: {
     type?: ('reference' | 'custom') | null;
-    reference?:
-      | ({
-          relationTo: 'pages';
-          value: number | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: number | Post;
-        } | null);
+    reference?: {
+      relationTo: 'pages';
+      value: number | Page;
+    } | null;
     url?: string | null;
   };
   updatedAt: string;
@@ -247,10 +213,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'stacks';
         value: number | Stack;
-      } | null)
-    | ({
-        relationTo: 'posts';
-        value: number | Post;
       } | null)
     | ({
         relationTo: 'pages';
@@ -437,7 +399,6 @@ export interface MyHomepageProjectsBlock {
 export interface MyPostsBlock {
   heading?: string | null;
   subheading?: string | null;
-  posts?: (number | Post)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'postsBlock';

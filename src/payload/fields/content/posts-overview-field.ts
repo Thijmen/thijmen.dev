@@ -19,12 +19,12 @@ export const MyPosts: Block = {
 			label: 'Subheading',
 			defaultValue: 'Take a look at my latest blog posts.',
 		},
-		{
-			name: 'posts',
-			type: 'relationship',
-			relationTo: 'posts',
-			hasMany: true,
-		},
+		// {
+		// 	name: 'posts',
+		// 	type: 'relationship',
+		// 	relationTo: 'posts',
+		// 	hasMany: true,
+		// },
 	],
 	interfaceName: 'MyPostsBlock',
 }

@@ -43,22 +43,24 @@ export const PostsBlock = ({ block }: { block: MyPostsBlock }) => {
 	const posts = demoData
 
 	return (
-		<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+		<div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
 			{posts.map((post) => (
 				<div
 					key={post.id}
-					className='bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden'
+					className='bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row'
 				>
 					{/* {post.featuredImage && (
-						<Image
-							src={post.featuredImage.url}
-							alt={post.featuredImage.alt || post.title}
-							width={400}
-							height={200}
-							className='w-full h-48 object-cover'
-						/>
+						<div className='md:w-1/3'>
+							<Image
+								src={post.featuredImage.url}
+								alt={post.featuredImage.alt || post.title}
+								width={300}
+								height={200}
+								className='w-full h-48 md:h-full object-cover'
+							/>
+						</div>
 					)} */}
-					<div className='p-4'>
+					<div className='p-4 md:w-2/3'>
 						<h3 className='text-xl font-semibold mb-2'>
 							<Link
 								href={`/blog/${post.slug}`}

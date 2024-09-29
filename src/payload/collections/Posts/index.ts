@@ -1,8 +1,8 @@
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublished'
-import { Markdown } from '@/payload/blocks/Markdown'
 import { revalidatePost } from '@/payload/collections/Posts/hooks/revalidatePost'
 import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
+import { ThijmenContent } from '@/payload/fields/content'
 import { slugField } from '@/payload/fields/slug'
 import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
 import type { CollectionConfig } from 'payload'
@@ -37,29 +37,18 @@ export const Posts: CollectionConfig = {
 	},
 	fields: [
 		{
+			name: 'title',
+			type: 'text',
+			required: true,
+		},
+		...slugField(),
+
+		{
 			type: 'tabs',
 			tabs: [
 				{
-					label: 'Blog Info',
-					fields: [
-						{
-							name: 'title',
-							type: 'text',
-							required: true,
-						},
-						...slugField(),
-						{
-							name: 'isFeatured',
-							type: 'checkbox',
-							label: 'Is Featured Blog',
-							admin: {},
-						},
-						{
-							name: 'description',
-							type: 'text',
-							required: true,
-						},
-					],
+					label: 'Content',
+					fields: [ThijmenContent],
 				},
 				{
 					label: 'Assets',
@@ -72,17 +61,6 @@ export const Posts: CollectionConfig = {
 							filterOptions: {
 								mimeType: { contains: 'image' },
 							},
-						},
-					],
-				},
-				{
-					label: 'Content',
-					fields: [
-						{
-							name: 'layout',
-							type: 'blocks',
-							required: true,
-							blocks: [Markdown],
 						},
 					],
 				},
