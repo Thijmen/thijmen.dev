@@ -358,6 +358,7 @@ export interface MyProjectsBlock {
  */
 export interface MyHorizontalLineBlock {
   variant?: ('dashed' | 'solid') | null;
+  additionalClassName?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'horizontalLineBlock';
