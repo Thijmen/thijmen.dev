@@ -1,5 +1,5 @@
-import Page, { generateMetadata as baseGenerateMetadata } from '../[slug]/page'
 import type { Metadata } from 'next'
+import Page, { generateMetadata as baseGenerateMetadata } from '../[slug]/page'
 
 export default function PostsPage() {
 	return <Page params={{ slug: 'posts' }} />

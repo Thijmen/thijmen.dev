@@ -14,9 +14,9 @@ import {
 } from '@payloadcms/richtext-lexical'
 import type { Field } from 'payload'
 import { MyGithubStars } from './github-stars'
+import { MyHomepagePosts } from './homepage-posts-overview-field'
 import { MyHomepageProjects } from './homepage-projects'
 import { MyJavascriptPlayground } from './js-playground'
-import { MyHomepagePosts } from './homepage-posts-overview-field'
 
 export const ThijmenContent: Field = {
 	name: 'dynamiccontent',
