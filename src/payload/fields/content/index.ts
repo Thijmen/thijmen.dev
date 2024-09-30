@@ -17,6 +17,7 @@ import { MyGithubStars } from './github-stars'
 import { MyHomepagePosts } from './homepage-posts-overview-field'
 import { MyHomepageProjects } from './homepage-projects'
 import { MyJavascriptPlayground } from './js-playground'
+import { MyPosts } from './posts-overview-field'
 
 export const ThijmenContent: Field = {
 	name: 'dynamiccontent',
@@ -40,6 +41,7 @@ export const ThijmenContent: Field = {
 						MyHomepageIntroduction,
 						MyHomepageProjects,
 						MyHomepagePosts,
+						MyPosts,
 					],
 				}),
 				FixedToolbarFeature(),

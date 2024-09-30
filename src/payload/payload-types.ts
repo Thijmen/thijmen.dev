@@ -449,6 +449,16 @@ export interface MyHomepagePostsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyPostsBlock".
+ */
+export interface MyPostsBlock {
+  filterFeatured: boolean;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'postsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

@@ -14,6 +14,7 @@ import type {
 	MyGithubContributionsBlock,
 	MyGithubStarsBlock,
 	MyHomepageIntroductionBlock,
+	MyHomepagePostsBlock,
 	MyHomepageProjectsBlock,
 	MyHorizontalLineBlock,
 	MyJavascriptPlaygroundBlock,
@@ -48,8 +49,8 @@ export type NodeTypes =
 	| SerializedBlockNode<MyHomepageProjectsBlock>
 	| SerializedBlockNode<MyHomepageIntroductionBlock>
 	| SerializedBlockNode<MyGithubStarsBlock>
+	| SerializedBlockNode<MyHomepagePostsBlock>
 	| SerializedBlockNode<MyPostsBlock>
-
 type Props = {
 	nodes: NodeTypes[]
 }

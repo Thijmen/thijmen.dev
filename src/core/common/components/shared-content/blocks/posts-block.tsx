@@ -1,4 +1,4 @@
-import type { MyPostsBlock } from '@/payload/payload-types'
+import type { MyHomepagePostsBlock } from '@/payload/payload-types'
 import Link from 'next/link'
 
 // Demo data
@@ -39,7 +39,7 @@ const demoData = [
 	},
 ]
 
-export const PostsBlock = ({ block }: { block: MyPostsBlock }) => {
+export const PostsBlock = ({ block }: { block: MyHomepagePostsBlock }) => {
 	const posts = demoData
 
 	return (
