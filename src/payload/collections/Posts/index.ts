@@ -41,6 +41,11 @@ export const Posts: CollectionConfig = {
 			type: 'text',
 			required: true,
 		},
+		{
+			name: 'description',
+			type: 'text',
+			required: false,
+		},
 		...slugField(),
 
 		{

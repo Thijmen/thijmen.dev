@@ -149,6 +149,7 @@ export interface R2Media {
 export interface Post {
   id: number;
   title: string;
+  description?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   dynamiccontent?: {
