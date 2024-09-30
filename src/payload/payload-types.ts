@@ -438,14 +438,14 @@ export interface MyHomepageProjectsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MyPostsBlock".
+ * via the `definition` "MyHomepagePostsBlock".
  */
-export interface MyPostsBlock {
+export interface MyHomepagePostsBlock {
   heading?: string | null;
   subheading?: string | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'postsBlock';
+  blockType: 'homepagePostsBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

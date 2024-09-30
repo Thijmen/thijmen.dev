@@ -167,7 +167,7 @@ export async function serializeLexical({ nodes }: Props): Promise<JSX.Element> {
 							return <HomepageProjectsBlock block={block} />
 						case 'githubStarsBlock':
 							return <GithubStarsBlock block={block} />
-						case 'postsBlock':
+						case 'homepagePostsBlock':
 							return <PostsBlock block={block} />
 						default:
 							return null

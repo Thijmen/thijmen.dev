@@ -1,10 +1,10 @@
 import type { Block } from 'payload'
 
-export const MyPosts: Block = {
-	slug: 'postsBlock',
+export const MyHomepagePosts: Block = {
+	slug: 'homepagePostsBlock',
 	labels: {
-		plural: 'Posts Block',
-		singular: 'Posts Block',
+		plural: 'Homepage Posts Block',
+		singular: 'Homepage Posts Block',
 	},
 	fields: [
 		{
@@ -26,5 +26,5 @@ export const MyPosts: Block = {
 		// 	hasMany: true,
 		// },
 	],
-	interfaceName: 'MyPostsBlock',
+	interfaceName: 'MyHomepagePostsBlock',
 }

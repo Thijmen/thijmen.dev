@@ -16,7 +16,7 @@ import type { Field } from 'payload'
 import { MyGithubStars } from './github-stars'
 import { MyHomepageProjects } from './homepage-projects'
 import { MyJavascriptPlayground } from './js-playground'
-import { MyPosts } from './posts-overview-field'
+import { MyHomepagePosts } from './homepage-posts-overview-field'
 
 export const ThijmenContent: Field = {
 	name: 'dynamiccontent',
@@ -39,7 +39,7 @@ export const ThijmenContent: Field = {
 						MyJavascriptPlayground,
 						MyHomepageIntroduction,
 						MyHomepageProjects,
-						MyPosts,
+						MyHomepagePosts,
 					],
 				}),
 				FixedToolbarFeature(),
