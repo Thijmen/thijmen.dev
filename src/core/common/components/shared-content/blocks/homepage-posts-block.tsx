@@ -39,7 +39,9 @@ const demoData = [
 	},
 ]
 
-export const PostsBlock = ({ block }: { block: MyHomepagePostsBlock }) => {
+export const HomepagePostsBlock = ({
+	block,
+}: { block: MyHomepagePostsBlock }) => {
 	const posts = demoData
 
 	return (

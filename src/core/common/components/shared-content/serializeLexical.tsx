@@ -27,7 +27,7 @@ import { HomepageProjectsBlock } from './blocks/homepage-projects'
 import { HorizontalLineBlock } from './blocks/horizontal-line'
 import { IntroductionBlock } from './blocks/introduction'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
-import { PostsBlock } from './blocks/posts-block'
+import { HomepagePostsBlock } from './blocks/homepage-posts-block'
 import {
 	IS_BOLD,
 	IS_CODE,
@@ -37,6 +37,7 @@ import {
 	IS_SUPERSCRIPT,
 	IS_UNDERLINE,
 } from './nodeFormat'
+import { PostsBlock } from './blocks/posts'
 
 export type NodeTypes =
 	| DefaultNodeTypes
@@ -169,6 +170,8 @@ export async function serializeLexical({ nodes }: Props): Promise<JSX.Element> {
 						case 'githubStarsBlock':
 							return <GithubStarsBlock block={block} />
 						case 'homepagePostsBlock':
+							return <HomepagePostsBlock block={block} />
+						case 'postsBlock':
 							return <PostsBlock block={block} />
 						default:
 							return null
