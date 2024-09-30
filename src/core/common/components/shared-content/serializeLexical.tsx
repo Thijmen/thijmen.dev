@@ -23,11 +23,12 @@ import type {
 	MyWakaContributionsBlock,
 } from '@/payload/payload-types'
 import { GithubStarsBlock } from './blocks/github-stars'
+import { HomepagePostsBlock } from './blocks/homepage-posts-block'
 import { HomepageProjectsBlock } from './blocks/homepage-projects'
 import { HorizontalLineBlock } from './blocks/horizontal-line'
 import { IntroductionBlock } from './blocks/introduction'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
-import { HomepagePostsBlock } from './blocks/homepage-posts-block'
+import { PostsBlock } from './blocks/posts'
 import {
 	IS_BOLD,
 	IS_CODE,
@@ -37,7 +38,6 @@ import {
 	IS_SUPERSCRIPT,
 	IS_UNDERLINE,
 } from './nodeFormat'
-import { PostsBlock } from './blocks/posts'
 
 export type NodeTypes =
 	| DefaultNodeTypes
