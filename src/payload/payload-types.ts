@@ -140,6 +140,14 @@ export interface R2Media {
       filesize?: number | null;
       filename?: string | null;
     };
+    postThumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
   };
 }
 /**
@@ -168,6 +176,7 @@ export interface Post {
     [k: string]: unknown;
   } | null;
   image?: (number | null) | R2Media;
+  thumbnail?: (number | null) | R2Media;
   meta?: {
     title?: string | null;
     image?: (number | null) | R2Media;

@@ -67,6 +67,15 @@ export const Posts: CollectionConfig = {
 								mimeType: { contains: 'image' },
 							},
 						},
+						{
+							name: 'thumbnail',
+							type: 'upload',
+							label: 'Thumbnail',
+							relationTo: 'r2-media',
+							filterOptions: {
+								mimeType: { contains: 'image' },
+							},
+						},
 					],
 				},
 				defaultMetaTab,

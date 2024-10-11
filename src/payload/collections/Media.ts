@@ -13,7 +13,7 @@ export const Media: CollectionConfig = {
 				width: 326,
 				height: 400,
 				generateImageName: ({ height, sizeName, extension, width }) => {
-					return `custom-${sizeName}-${height}-${width}.${extension}`
+					return `projectCardHomepage-${sizeName}-${height}-${width}.${extension}`
 				},
 			},
 			{
@@ -21,7 +21,15 @@ export const Media: CollectionConfig = {
 				width: 400,
 				height: 200,
 				generateImageName: ({ height, sizeName, extension, width }) => {
-					return `custom-${sizeName}-${height}-${width}.${extension}`
+					return `projectCardProjectsPage-${sizeName}-${height}-${width}.${extension}`
+				},
+			},
+			{
+				name: 'postThumbnail',
+				width: 96,
+				height: 96,
+				generateImageName: ({ height, sizeName, extension, width }) => {
+					return `postThumbnail-${sizeName}-${height}-${width}.${extension}`
 				},
 			},
 		],
