@@ -2,7 +2,7 @@ import type { Config } from '@/payload/payload-types'
 
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
-import { cache } from 'react'
+import { unstable_cache } from 'next/cache'
 
 type Global = keyof Config['globals']
 
@@ -25,6 +25,9 @@ async function getGlobal(slug: Global, depth = 0) {
 //     tags: [`global_${slug}`],
 //   });
 
-export const getCachedGlobal = cache(async (slug: Global, depth = 0) => {
-	return await getGlobal(slug, depth)
-})
+export const getCachedGlobal = unstable_cache(
+	async (slug: Global, depth = 0) => {
+		return await getGlobal(slug, depth)
+	},
+	['nav'],
+)
