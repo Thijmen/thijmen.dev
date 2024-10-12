@@ -1,5 +1,6 @@
 import { getPosts } from '@/core/common/services/blogs.service'
 import type { MyPostsBlock } from '@/payload/payload-types'
+import Link from 'next/link'
 
 export const PostsBlock = async ({ block }: { block: MyPostsBlock }) => {
 	const posts = await getPosts()
@@ -7,8 +8,9 @@ export const PostsBlock = async ({ block }: { block: MyPostsBlock }) => {
 		<div className='w-full overflow-x-auto pb-4'>
 			<div className='flex flex-col space-y-4 w-full'>
 				{posts.map((post) => (
-					<div
+					<Link
 						key={post.slug}
+						href={`/posts/${post.slug}`}
 						className='flex items-center space-x-4 w-full bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden transition-all'
 					>
 						<div className='w-24 h-24 flex-shrink-0'>
@@ -26,7 +28,7 @@ export const PostsBlock = async ({ block }: { block: MyPostsBlock }) => {
 								{post.description}
 							</p>
 						</div>
-					</div>
+					</Link>
 				))}
 				{posts.map((post) => (
 					<div
