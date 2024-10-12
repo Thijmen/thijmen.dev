@@ -3,7 +3,7 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   await payload.db.drizzle.execute(sql`
    DROP TABLE "posts_blocks_markdown";
-   DROP TABLE "posts" CASCADE;  // Use CASCADE to drop dependent objects
+   DROP TABLE "posts" CASCADE; 
    DROP TABLE "_posts_v_blocks_markdown";
    DROP TABLE "_posts_v";
    ALTER TABLE "redirects_rels" DROP CONSTRAINT "redirects_rels_posts_fk";
