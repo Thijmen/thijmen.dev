@@ -44,6 +44,12 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
    WHEN duplicate_object THEN null;
   END $$;
   
+  DO $$ BEGIN
+   CREATE TYPE "public"."enum_nav_links_icon" AS ENUM('home', 'project', 'dashboard', 'blog', 'profile', 'analytics');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
   CREATE TABLE IF NOT EXISTS "users" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"name" varchar,
@@ -125,24 +131,15 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
-  CREATE TABLE IF NOT EXISTS "posts_blocks_markdown" (
-  	"_order" integer NOT NULL,
-  	"_parent_id" integer NOT NULL,
-  	"_path" text NOT NULL,
-  	"id" varchar PRIMARY KEY NOT NULL,
-  	"header" varchar,
-  	"content" varchar,
-  	"block_name" varchar
-  );
-  
   CREATE TABLE IF NOT EXISTS "posts" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"title" varchar,
+  	"description" varchar,
   	"slug" varchar,
   	"slug_lock" boolean DEFAULT true,
-  	"is_featured" boolean,
-  	"description" varchar,
+  	"dynamiccontent" jsonb,
   	"image_id" integer,
+  	"thumbnail_id" integer,
   	"meta_title" varchar,
   	"meta_image_id" integer,
   	"meta_description" varchar,
@@ -151,26 +148,16 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"_status" "enum_posts_status" DEFAULT 'draft'
   );
   
-  CREATE TABLE IF NOT EXISTS "_posts_v_blocks_markdown" (
-  	"_order" integer NOT NULL,
-  	"_parent_id" integer NOT NULL,
-  	"_path" text NOT NULL,
-  	"id" serial PRIMARY KEY NOT NULL,
-  	"header" varchar,
-  	"content" varchar,
-  	"_uuid" varchar,
-  	"block_name" varchar
-  );
-  
   CREATE TABLE IF NOT EXISTS "_posts_v" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
   	"version_title" varchar,
+  	"version_description" varchar,
   	"version_slug" varchar,
   	"version_slug_lock" boolean DEFAULT true,
-  	"version_is_featured" boolean,
-  	"version_description" varchar,
+  	"version_dynamiccontent" jsonb,
   	"version_image_id" integer,
+  	"version_thumbnail_id" integer,
   	"version_meta_title" varchar,
   	"version_meta_image_id" integer,
   	"version_meta_description" varchar,
@@ -247,7 +234,13 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"sizes_project_card_projects_page_height" numeric,
   	"sizes_project_card_projects_page_mime_type" varchar,
   	"sizes_project_card_projects_page_filesize" numeric,
-  	"sizes_project_card_projects_page_filename" varchar
+  	"sizes_project_card_projects_page_filename" varchar,
+  	"sizes_post_thumbnail_url" varchar,
+  	"sizes_post_thumbnail_width" numeric,
+  	"sizes_post_thumbnail_height" numeric,
+  	"sizes_post_thumbnail_mime_type" varchar,
+  	"sizes_post_thumbnail_filesize" numeric,
+  	"sizes_post_thumbnail_filename" varchar
   );
   
   CREATE TABLE IF NOT EXISTS "redirects" (
@@ -266,6 +259,27 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"path" varchar NOT NULL,
   	"pages_id" integer,
   	"posts_id" integer
+  );
+  
+  CREATE TABLE IF NOT EXISTS "payload_locked_documents" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"global_slug" varchar,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE IF NOT EXISTS "payload_locked_documents_rels" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"order" integer,
+  	"parent_id" integer NOT NULL,
+  	"path" varchar NOT NULL,
+  	"users_id" integer,
+  	"projects_id" integer,
+  	"stacks_id" integer,
+  	"posts_id" integer,
+  	"pages_id" integer,
+  	"r2_media_id" integer,
+  	"redirects_id" integer
   );
   
   CREATE TABLE IF NOT EXISTS "payload_preferences" (
@@ -297,7 +311,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"id" varchar PRIMARY KEY NOT NULL,
   	"label" varchar,
-  	"icon" varchar,
+  	"icon" "enum_nav_links_icon" NOT NULL,
   	"url" varchar
   );
   
@@ -371,25 +385,19 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "posts_blocks_markdown" ADD CONSTRAINT "posts_blocks_markdown_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
    ALTER TABLE "posts" ADD CONSTRAINT "posts_image_id_r2_media_id_fk" FOREIGN KEY ("image_id") REFERENCES "public"."r2_media"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "posts" ADD CONSTRAINT "posts_meta_image_id_r2_media_id_fk" FOREIGN KEY ("meta_image_id") REFERENCES "public"."r2_media"("id") ON DELETE set null ON UPDATE no action;
+   ALTER TABLE "posts" ADD CONSTRAINT "posts_thumbnail_id_r2_media_id_fk" FOREIGN KEY ("thumbnail_id") REFERENCES "public"."r2_media"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
   
   DO $$ BEGIN
-   ALTER TABLE "_posts_v_blocks_markdown" ADD CONSTRAINT "_posts_v_blocks_markdown_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_posts_v"("id") ON DELETE cascade ON UPDATE no action;
+   ALTER TABLE "posts" ADD CONSTRAINT "posts_meta_image_id_r2_media_id_fk" FOREIGN KEY ("meta_image_id") REFERENCES "public"."r2_media"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -402,6 +410,12 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "_posts_v" ADD CONSTRAINT "_posts_v_version_image_id_r2_media_id_fk" FOREIGN KEY ("version_image_id") REFERENCES "public"."r2_media"("id") ON DELETE set null ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "_posts_v" ADD CONSTRAINT "_posts_v_version_thumbnail_id_r2_media_id_fk" FOREIGN KEY ("version_thumbnail_id") REFERENCES "public"."r2_media"("id") ON DELETE set null ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -444,6 +458,54 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "redirects_rels" ADD CONSTRAINT "redirects_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_locked_documents"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_projects_fk" FOREIGN KEY ("projects_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_stacks_fk" FOREIGN KEY ("stacks_id") REFERENCES "public"."stacks"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_posts_fk" FOREIGN KEY ("posts_id") REFERENCES "public"."posts"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_r2_media_fk" FOREIGN KEY ("r2_media_id") REFERENCES "public"."r2_media"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_redirects_fk" FOREIGN KEY ("redirects_id") REFERENCES "public"."redirects"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -503,15 +565,9 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_projects_v_rels_parent_idx" ON "_projects_v_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_projects_v_rels_path_idx" ON "_projects_v_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "stacks_created_at_idx" ON "stacks" USING btree ("created_at");
-  CREATE INDEX IF NOT EXISTS "posts_blocks_markdown_order_idx" ON "posts_blocks_markdown" USING btree ("_order");
-  CREATE INDEX IF NOT EXISTS "posts_blocks_markdown_parent_id_idx" ON "posts_blocks_markdown" USING btree ("_parent_id");
-  CREATE INDEX IF NOT EXISTS "posts_blocks_markdown_path_idx" ON "posts_blocks_markdown" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "posts_slug_idx" ON "posts" USING btree ("slug");
   CREATE INDEX IF NOT EXISTS "posts_created_at_idx" ON "posts" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "posts__status_idx" ON "posts" USING btree ("_status");
-  CREATE INDEX IF NOT EXISTS "_posts_v_blocks_markdown_order_idx" ON "_posts_v_blocks_markdown" USING btree ("_order");
-  CREATE INDEX IF NOT EXISTS "_posts_v_blocks_markdown_parent_id_idx" ON "_posts_v_blocks_markdown" USING btree ("_parent_id");
-  CREATE INDEX IF NOT EXISTS "_posts_v_blocks_markdown_path_idx" ON "_posts_v_blocks_markdown" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version_slug_idx" ON "_posts_v" USING btree ("version_slug");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version_created_at_idx" ON "_posts_v" USING btree ("version_created_at");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version__status_idx" ON "_posts_v" USING btree ("version__status");
@@ -533,11 +589,17 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE UNIQUE INDEX IF NOT EXISTS "r2_media_filename_idx" ON "r2_media" USING btree ("filename");
   CREATE INDEX IF NOT EXISTS "r2_media_sizes_project_card_homepage_sizes_project_card_homepage_filename_idx" ON "r2_media" USING btree ("sizes_project_card_homepage_filename");
   CREATE INDEX IF NOT EXISTS "r2_media_sizes_project_card_projects_page_sizes_project_card_projects_page_filename_idx" ON "r2_media" USING btree ("sizes_project_card_projects_page_filename");
+  CREATE INDEX IF NOT EXISTS "r2_media_sizes_post_thumbnail_sizes_post_thumbnail_filename_idx" ON "r2_media" USING btree ("sizes_post_thumbnail_filename");
   CREATE INDEX IF NOT EXISTS "redirects_from_idx" ON "redirects" USING btree ("from");
   CREATE INDEX IF NOT EXISTS "redirects_created_at_idx" ON "redirects" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "redirects_rels_order_idx" ON "redirects_rels" USING btree ("order");
   CREATE INDEX IF NOT EXISTS "redirects_rels_parent_idx" ON "redirects_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "redirects_rels_path_idx" ON "redirects_rels" USING btree ("path");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_global_slug_idx" ON "payload_locked_documents" USING btree ("global_slug");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_created_at_idx" ON "payload_locked_documents" USING btree ("created_at");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_order_idx" ON "payload_locked_documents_rels" USING btree ("order");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_parent_idx" ON "payload_locked_documents_rels" USING btree ("parent_id");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_path_idx" ON "payload_locked_documents_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "payload_preferences_key_idx" ON "payload_preferences" USING btree ("key");
   CREATE INDEX IF NOT EXISTS "payload_preferences_created_at_idx" ON "payload_preferences" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "payload_preferences_rels_order_idx" ON "payload_preferences_rels" USING btree ("order");
@@ -559,15 +621,15 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
   DROP TABLE "_projects_v";
   DROP TABLE "_projects_v_rels";
   DROP TABLE "stacks";
-  DROP TABLE "posts_blocks_markdown";
   DROP TABLE "posts";
-  DROP TABLE "_posts_v_blocks_markdown";
   DROP TABLE "_posts_v";
   DROP TABLE "pages";
   DROP TABLE "_pages_v";
   DROP TABLE "r2_media";
   DROP TABLE "redirects";
   DROP TABLE "redirects_rels";
+  DROP TABLE "payload_locked_documents";
+  DROP TABLE "payload_locked_documents_rels";
   DROP TABLE "payload_preferences";
   DROP TABLE "payload_preferences_rels";
   DROP TABLE "payload_migrations";
