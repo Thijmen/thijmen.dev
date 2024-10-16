@@ -43,7 +43,7 @@
 		"@payloadcms/richtext-lexical": "beta",
 		"@payloadcms/ui": "beta",
 		"@radix-ui/react-aspect-ratio": "^1.1.0",
-		"@radix-ui/react-collapsible": "^1.1.0",
+		"@radix-ui/react-collapsible": "^1.1.1",
 		"@radix-ui/react-scroll-area": "^1.1.0",
 		"@shikijs/rehype": "^1.2.4",
 		"@shikijs/transformers": "^1.11.1",
