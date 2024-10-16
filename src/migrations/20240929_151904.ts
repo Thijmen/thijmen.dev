@@ -6,7 +6,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
    DROP TABLE "posts" CASCADE; 
    DROP TABLE "_posts_v_blocks_markdown";
    DROP TABLE "_posts_v";
-   ALTER TABLE "redirects_rels" DROP CONSTRAINT "redirects_rels_posts_fk";
+   ALTER TABLE "redirects_rels";
    ALTER TABLE "payload_locked_documents_rels" DROP CONSTRAINT "payload_locked_documents_rels_posts_fk";
    ALTER TABLE "redirects_rels" DROP COLUMN IF EXISTS "posts_id";
    ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "posts_id";`)
