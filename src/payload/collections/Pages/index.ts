@@ -1,4 +1,4 @@
-import type { Block, CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublished'
@@ -6,22 +6,7 @@ import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
 import { ThijmenContent } from '@/payload/fields/content'
 import { slugField } from '@/payload/fields/slug'
 import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
-
-export const Banner: Block = {
-	slug: 'banner',
-	fields: [
-		{
-			name: 'code',
-			type: 'code',
-			admin: {
-				language: 'markdown',
-			},
-			label: false,
-			required: true,
-		},
-	],
-	interfaceName: 'BannerBlock',
-}
+import { revalidatePage } from './hooks/revalidatePage'
 
 export const Pages: CollectionConfig = {
 	slug: 'pages',
@@ -30,14 +15,16 @@ export const Pages: CollectionConfig = {
 		livePreview: {
 			url: ({ data }) => {
 				const path = generatePreviewPath({
-					path: `/${typeof data?.slug === 'string' ? data.slug : ''}`,
+					slug: typeof data?.slug === 'string' ? data.slug : '',
+					collection: 'pages',
 				})
 				return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
 			},
 		},
-		preview: (doc) =>
+		preview: (data) =>
 			generatePreviewPath({
-				path: `/${typeof doc?.slug === 'string' ? doc.slug : ''}`,
+				slug: typeof data?.slug === 'string' ? data.slug : '',
+				collection: 'pages',
 			}),
 		useAsTitle: 'title',
 	},
@@ -48,6 +35,9 @@ export const Pages: CollectionConfig = {
 		update: authenticated,
 	},
 	versions: defaultVersions,
+	hooks: {
+		afterChange: [revalidatePage],
+	},
 	fields: [
 		{
 			name: 'title',

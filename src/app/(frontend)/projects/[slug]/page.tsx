@@ -12,8 +12,14 @@ import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
 
-const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
-	const { slug } = params
+type Args = {
+	params: Promise<{
+		slug?: string
+	}>
+}
+
+const ProjectDetailPage = async ({ params: paramsPromise }: Args) => {
+	const { slug } = await paramsPromise
 
 	const project = await queryProjectBySlug({ slug })
 
@@ -48,17 +54,16 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({
-	params: { slug },
-}: {
-	params: { slug: string }
-}): Promise<Metadata> {
+	params: paramsPromise,
+}: Args): Promise<Metadata> {
+	const { slug } = await paramsPromise
 	const project = await queryProjectBySlug({ slug })
 
 	return generateMeta({ doc: project })
 }
 
 const queryProjectBySlug = cache(async ({ slug }: { slug: string }) => {
-	const { isEnabled: draft } = draftMode()
+	const { isEnabled: draft } = await draftMode()
 
 	const payload = await getPayloadHMR({ config: configPromise })
 

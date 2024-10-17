@@ -14,7 +14,6 @@ import { en } from 'payload/i18n/en'
 import sharp from 'sharp'
 
 import { Pages } from '@/payload/collections/Pages'
-import { Posts } from '@/payload/collections/Posts'
 import { Projects } from '@/payload/collections/Projects'
 import { StackSeeder } from '@/payload/collections/Stacks/seed'
 import { Users } from '@/payload/collections/Users'
@@ -23,14 +22,13 @@ import { Nav, NavSeeder } from '@/payload/globals/nav'
 import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { PageSeeder } from './collections/Pages/seed'
+import { Posts } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const generateTitle: GenerateTitle<Page | Post> = ({ doc }) => {
-	return doc?.title
-		? `${doc.title} | Payload Website Template`
-		: 'Payload Website Template'
+	return doc?.title ? `${doc.title} | Thijmen.dev` : 'Thijmen.dev'
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {

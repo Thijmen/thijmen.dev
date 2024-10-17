@@ -140,6 +140,14 @@ export interface R2Media {
       filesize?: number | null;
       filename?: string | null;
     };
+    postThumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
   };
 }
 /**
@@ -149,18 +157,26 @@ export interface R2Media {
 export interface Post {
   id: number;
   title: string;
+  description?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
-  isFeatured?: boolean | null;
-  description: string;
+  dynamiccontent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   image?: (number | null) | R2Media;
-  layout: {
-    header?: string | null;
-    content?: string | null;
-    id?: string | null;
-    blockName?: string | null;
-    blockType: 'markdown';
-  }[];
+  thumbnail?: (number | null) | R2Media;
   meta?: {
     title?: string | null;
     image?: (number | null) | R2Media;
@@ -358,6 +374,7 @@ export interface MyProjectsBlock {
  */
 export interface MyHorizontalLineBlock {
   variant?: ('dashed' | 'solid') | null;
+  additionalClassName?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'horizontalLineBlock';
@@ -370,6 +387,21 @@ export interface MyGithubContributionsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'githubContributionsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyGithubStarsBlock".
+ */
+export interface MyGithubStarsBlock {
+  ignoredRepositories?:
+    | {
+        name?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'githubStarsBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -409,9 +441,31 @@ export interface MyHomepageProjectsBlock {
   onlyFeatured?: boolean | null;
   linkHref?: string | null;
   linkTitle?: string | null;
+  headingTitle?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'homepageProjectsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyHomepagePostsBlock".
+ */
+export interface MyHomepagePostsBlock {
+  heading?: string | null;
+  subheading?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'homepagePostsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyPostsBlock".
+ */
+export interface MyPostsBlock {
+  filterFeatured: boolean;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'postsBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

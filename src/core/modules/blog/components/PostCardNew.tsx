@@ -2,17 +2,17 @@
 import { BlurImage } from '@/core/common/components/elements/BlurImage'
 import type { Post, R2Media } from '../../../../payload/payload-types'
 
-const BlogCardNew = ({ blogItem }: { blogItem: Post }) => {
+const PostCardNew = ({ post }: { post: Post }) => {
 	const defaultImage = '/images/placeholder.png'
 
 	const image =
-		blogItem.image != null
-			? (blogItem.image as R2Media).url || defaultImage
+		post.image != null
+			? (post.image as R2Media).url || defaultImage
 			: defaultImage
 
 	return (
 		<a
-			href={`/blog/${blogItem.slug}`}
+			href={`/posts/${post.slug}`}
 			className='shadow-feature-card dark:shadow-feature-card-dark group relative rounded-xl border-2 border-neutral-200 p-2 dark:border-neutral-500'
 		>
 			<BlurImage
@@ -21,7 +21,7 @@ const BlogCardNew = ({ blogItem }: { blogItem: Post }) => {
 				width={1200}
 				height={630}
 				imageClassName='transition-transform group-hover:scale-105'
-				alt={blogItem.title}
+				alt={post.title}
 			/>
 			<div className='flex items-center justify-between gap-2 px-2 pt-4 text-sm text-zinc-500'>
 				TODO Date
@@ -31,11 +31,11 @@ const BlogCardNew = ({ blogItem }: { blogItem: Post }) => {
 				</div>
 			</div>
 			<div className='flex flex-col px-2 py-4'>
-				<h3 className='font-title text-2xl font-bold'>{blogItem.title}</h3>
-				<p className='mt-2 text-muted-foreground'>{blogItem.description}</p>
+				<h3 className='font-title text-2xl font-bold'>{post.title}</h3>
+				<p className='mt-2 text-muted-foreground'>{post.description}</p>
 			</div>
 		</a>
 	)
 }
 
-export default BlogCardNew
+export default PostCardNew

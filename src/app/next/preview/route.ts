@@ -3,6 +3,7 @@ import { getPayloadHMR } from '@payloadcms/next/utilities'
 import jwt from 'jsonwebtoken'
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
+import type { CollectionSlug } from 'payload'
 
 const payloadToken = 'payload-token'
 
@@ -19,8 +20,25 @@ export async function GET(
 	const token = req.cookies.get(payloadToken)?.value
 	const { searchParams } = new URL(req.url)
 	const path = searchParams.get('path')
+	const collection = searchParams.get('collection') as CollectionSlug
+	const slug = searchParams.get('slug')
 
+	const previewSecret = searchParams.get('previewSecret')
+
+	if (previewSecret) {
+		return new Response('You are not allowed to preview this page', {
+			status: 403,
+		})
+	}
 	if (!path) {
+		return new Response('No path provided', { status: 404 })
+	}
+
+	if (!collection) {
+		return new Response('No path provided', { status: 404 })
+	}
+
+	if (!slug) {
 		return new Response('No path provided', { status: 404 })
 	}
 
@@ -28,8 +46,14 @@ export async function GET(
 		new Response('You are not allowed to preview this page', { status: 403 })
 	}
 
-	// biome-ignore lint/suspicious/noImplicitAnyLet: TODO: Dont know the type yet, look later in Payload demo code
-	let user
+	if (!path.startsWith('/')) {
+		new Response('This endpoint can only be used for internal previews', {
+			status: 500,
+		})
+	}
+
+	// biome-ignore lint/suspicious/noExplicitAny: payload user is not typed
+	let user: any
 
 	try {
 		user = jwt.verify(token, payload.secret)
@@ -37,14 +61,36 @@ export async function GET(
 		payload.logger.error('Error verifying token for live preview:', error)
 	}
 
+	const draft = await draftMode()
+
 	// You can add additional checks here to see if the user is allowed to preview this page
 	if (!user) {
-		draftMode().disable()
+		draft.disable()
 		return new Response('You are not allowed to preview this page', {
 			status: 403,
 		})
 	}
 
-	draftMode().enable()
+	// Verify the given slug exists
+	try {
+		const docs = await payload.find({
+			collection: collection,
+			draft: true,
+			where: {
+				slug: {
+					equals: slug,
+				},
+			},
+		})
+
+		if (!docs.docs.length) {
+			return new Response('Document not found', { status: 404 })
+		}
+	} catch (error) {
+		payload.logger.error('Error verifying token for live preview:', error)
+	}
+
+	draft.enable()
+
 	redirect(path)
 }

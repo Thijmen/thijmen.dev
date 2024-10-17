@@ -12,16 +12,23 @@ import { WakaBlock } from '@/core/common/components/shared-content/blocks/waka'
 import type {
 	MyCodeBlock,
 	MyGithubContributionsBlock,
+	MyGithubStarsBlock,
 	MyHomepageIntroductionBlock,
+	MyHomepagePostsBlock,
 	MyHomepageProjectsBlock,
 	MyHorizontalLineBlock,
 	MyJavascriptPlaygroundBlock,
+	MyPostsBlock,
 	MyProjectsBlock,
 	MyWakaContributionsBlock,
 } from '@/payload/payload-types'
+import { GithubStarsBlock } from './blocks/github-stars'
+import { HomepagePostsBlock } from './blocks/homepage-posts-block'
+import { HomepageProjectsBlock } from './blocks/homepage-projects'
 import { HorizontalLineBlock } from './blocks/horizontal-line'
 import { IntroductionBlock } from './blocks/introduction'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
+import { PostsBlock } from './blocks/posts'
 import {
 	IS_BOLD,
 	IS_CODE,
@@ -42,6 +49,9 @@ export type NodeTypes =
 	| SerializedBlockNode<MyJavascriptPlaygroundBlock>
 	| SerializedBlockNode<MyHomepageProjectsBlock>
 	| SerializedBlockNode<MyHomepageIntroductionBlock>
+	| SerializedBlockNode<MyGithubStarsBlock>
+	| SerializedBlockNode<MyHomepagePostsBlock>
+	| SerializedBlockNode<MyPostsBlock>
 type Props = {
 	nodes: NodeTypes[]
 }
@@ -155,6 +165,14 @@ export async function serializeLexical({ nodes }: Props): Promise<JSX.Element> {
 							return <JavascriptPlaygroundBlock />
 						case 'homepageIntroductionBlock':
 							return <IntroductionBlock block={block} />
+						case 'homepageProjectsBlock':
+							return <HomepageProjectsBlock block={block} />
+						case 'githubStarsBlock':
+							return <GithubStarsBlock block={block} />
+						case 'homepagePostsBlock':
+							return <HomepagePostsBlock block={block} />
+						case 'postsBlock':
+							return <PostsBlock block={block} />
 						default:
 							return null
 					}
