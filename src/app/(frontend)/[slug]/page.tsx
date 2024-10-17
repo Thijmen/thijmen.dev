@@ -30,7 +30,14 @@ export async function generateStaticParams() {
 		.map(({ slug }) => slug)
 }
 
-export default async function Page({ params: { slug = 'home' } }) {
+type Args = {
+	params: Promise<{
+		slug?: string
+	}>
+}
+
+export default async function Page({ params: paramsPromise }: Args) {
+	const { slug = 'home' } = await paramsPromise
 	const url = `/${slug}`
 
 	const page: PageType | null = await queryPageBySlug({
@@ -57,8 +64,9 @@ export default async function Page({ params: { slug = 'home' } }) {
 }
 
 export async function generateMetadata({
-	params: { slug = 'home' },
-}): Promise<Metadata> {
+	params: paramsPromise,
+}: Args): Promise<Metadata> {
+	const { slug = 'home' } = await paramsPromise
 	const page = await queryPageBySlug({
 		slug,
 	})

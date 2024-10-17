@@ -6,6 +6,7 @@ import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
 import { ThijmenContent } from '@/payload/fields/content'
 import { slugField } from '@/payload/fields/slug'
 import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
+import { revalidatePage } from './hooks/revalidatePage'
 
 export const Pages: CollectionConfig = {
 	slug: 'pages',
@@ -32,6 +33,9 @@ export const Pages: CollectionConfig = {
 		update: authenticated,
 	},
 	versions: defaultVersions,
+	hooks: {
+		afterChange: [revalidatePage],
+	},
 	fields: [
 		{
 			name: 'title',
