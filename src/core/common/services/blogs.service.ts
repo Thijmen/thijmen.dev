@@ -5,7 +5,7 @@ import { draftMode } from 'next/headers'
 import { getPayload } from 'payload'
 
 export const getNewBlog = async (slug: string): Promise<Post | null> => {
-	const { isEnabled: draft } = draftMode()
+	const { isEnabled: draft } = await draftMode()
 
 	const payload = await getPayloadHMR({ config: configPromise })
 

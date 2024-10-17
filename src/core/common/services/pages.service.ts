@@ -6,7 +6,7 @@ import { cache } from 'react'
 
 export const queryPageBySlug = cache(
 	async (slug: string): Promise<Page | null> => {
-		const { isEnabled: draft } = draftMode()
+		const { isEnabled: draft } = await draftMode()
 		const payload = await getPayloadHMR({ config: configPromise })
 
 		const data = await payload.find({

@@ -15,14 +15,16 @@ export const Pages: CollectionConfig = {
 		livePreview: {
 			url: ({ data }) => {
 				const path = generatePreviewPath({
-					path: `/${typeof data?.slug === 'string' ? data.slug : ''}`,
+					slug: typeof data?.slug === 'string' ? data.slug : '',
+					collection: 'pages',
 				})
 				return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
 			},
 		},
-		preview: (doc) =>
+		preview: (data) =>
 			generatePreviewPath({
-				path: `/${typeof doc?.slug === 'string' ? doc.slug : ''}`,
+				slug: typeof data?.slug === 'string' ? data.slug : '',
+				collection: 'pages',
 			}),
 		useAsTitle: 'title',
 	},

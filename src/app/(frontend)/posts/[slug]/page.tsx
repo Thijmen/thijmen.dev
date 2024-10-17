@@ -11,6 +11,11 @@ import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { cache } from 'react'
 
+type Args = {
+	params: Promise<{
+		slug?: string
+	}>
+}
 export async function generateStaticParams() {
 	const payload = await getPayloadHMR({ config: configPromise })
 	const posts = await payload.find({
@@ -23,7 +28,8 @@ export async function generateStaticParams() {
 	return posts.docs?.map(({ slug }) => slug)
 }
 
-const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
+const PostPage = async ({ params: paramsPromise }: Args) => {
+	const { slug } = await paramsPromise
 	const post = await queryPostBySlug({ slug })
 
 	if (!post) {
@@ -44,17 +50,16 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
 }
 
 export async function generateMetadata({
-	params: { slug },
-}: {
-	params: { slug: string }
-}): Promise<Metadata> {
+	params: paramsPromise,
+}: Args): Promise<Metadata> {
+	const { slug } = await paramsPromise
 	const post = await queryPostBySlug({ slug })
 
 	return generateMeta({ doc: post })
 }
 
 const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
-	const { isEnabled: draft } = draftMode()
+	const { isEnabled: draft } = await draftMode()
 
 	const payload = await getPayloadHMR({ config: configPromise })
 

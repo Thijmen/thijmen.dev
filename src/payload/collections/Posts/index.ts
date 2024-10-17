@@ -22,14 +22,16 @@ export const Posts: CollectionConfig = {
 		livePreview: {
 			url: ({ data }) => {
 				const path = generatePreviewPath({
-					path: `/posts/${typeof data?.slug === 'string' ? data.slug : ''}`,
+					slug: typeof data?.slug === 'string' ? data.slug : '',
+					collection: 'posts',
 				})
 				return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
 			},
 		},
-		preview: (doc) =>
+		preview: (data) =>
 			generatePreviewPath({
-				path: `/posts/${typeof doc?.slug === 'string' ? doc.slug : ''}`,
+				slug: typeof data?.slug === 'string' ? data.slug : '',
+				collection: 'posts',
 			}),
 	},
 	hooks: {
