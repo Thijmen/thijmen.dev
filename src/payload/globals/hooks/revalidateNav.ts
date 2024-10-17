@@ -1,4 +1,4 @@
-import { revalidateTag } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import type { GlobalAfterChangeHook } from 'payload'
 
 export const revalidateNav: GlobalAfterChangeHook = ({
@@ -8,6 +8,8 @@ export const revalidateNav: GlobalAfterChangeHook = ({
 	payload.logger.info('Revalidating navigation')
 
 	revalidateTag('nav')
+
+	revalidatePath('/')
 
 	return doc
 }
