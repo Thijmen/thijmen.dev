@@ -50,7 +50,9 @@ export async function generateStaticParams() {
 		overrideAccess: false,
 	})
 
-	return projects.docs?.map(({ slug }) => slug)
+	return projects.docs?.map(({ slug }) => {
+		return { slug }
+	})
 }
 
 export async function generateMetadata({
