@@ -1,4 +1,3 @@
-
 import Tooltip from '@/core/common/components/elements/Tooltip'
 import Mdx from '@/core/common/components/elements/mdx/Mdx'
 import { getStackIcon } from '@/core/common/constant/stacks'
