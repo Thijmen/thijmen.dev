@@ -2,6 +2,7 @@ import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublished'
 import { revalidateProject } from '@/payload/collections/Projects/hooks/revalidateProject'
 import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
+import { ThijmenContent } from '@/payload/fields/content'
 import { slugField } from '@/payload/fields/slug'
 import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
 import type { CollectionConfig } from 'payload'
@@ -94,14 +95,7 @@ export const Projects: CollectionConfig = {
 							type: 'text',
 							label: 'Live Link',
 						},
-						{
-							name: 'description',
-							type: 'code',
-							admin: {
-								language: 'markdown',
-							},
-							required: true,
-						},
+						ThijmenContent
 					],
 				},
 				defaultMetaTab,

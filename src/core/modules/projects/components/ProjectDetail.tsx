@@ -1,9 +1,9 @@
 import Tooltip from '@/core/common/components/elements/Tooltip'
-import Mdx from '@/core/common/components/elements/mdx/Mdx'
 import { getStackIcon } from '@/core/common/constant/stacks'
 
 import type { Project, R2Media, Stack } from '../../../../payload/payload-types'
 import ProjectLink from './ProjectLink'
+import { SharedContent } from '@/core/common/components/shared-content'
 
 const ProjectDetail = ({ project }: { project: Project }) => {
 	const image: string =
@@ -38,9 +38,9 @@ const ProjectDetail = ({ project }: { project: Project }) => {
 					link_github={project.githubLink}
 				/>
 			</div>
-			{project.description && (
+			{project.dynamiccontent && (
 				<div className='mt-5 space-y-6 leading-[1.8] dark:text-neutral-300'>
-					<Mdx content={project.description} />
+					<SharedContent content={project.dynamiccontent} />
 				</div>
 			)}
 		</div>

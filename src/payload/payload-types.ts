@@ -84,7 +84,21 @@ export interface Project {
   headerImage?: (number | null) | R2Media;
   githubLink?: string | null;
   liveLink?: string | null;
-  description: string;
+  dynamiccontent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   meta?: {
     title?: string | null;
     image?: (number | null) | R2Media;
