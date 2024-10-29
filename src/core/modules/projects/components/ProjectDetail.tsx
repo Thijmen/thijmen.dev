@@ -1,4 +1,4 @@
-import Image from '@/core/common/components/elements/Image'
+
 import Tooltip from '@/core/common/components/elements/Tooltip'
 import Mdx from '@/core/common/components/elements/mdx/Mdx'
 import { getStackIcon } from '@/core/common/constant/stacks'
@@ -39,15 +39,6 @@ const ProjectDetail = ({ project }: { project: Project }) => {
 					link_github={project.githubLink}
 				/>
 			</div>
-			{image.length > 0 && (
-				<Image
-					src={image}
-					width={800}
-					height={400}
-					alt={project.title}
-					className='hover:scale-105'
-				/>
-			)}
 			{project.description && (
 				<div className='mt-5 space-y-6 leading-[1.8] dark:text-neutral-300'>
 					<Mdx content={project.description} />
