@@ -8,13 +8,14 @@ import { HiOutlineArrowSmRight as ViewIcon } from 'react-icons/hi'
 import type { Project, R2Media, Stack } from '../../../../payload/payload-types'
 
 const ProjectCard = ({ project }: { project: Project }) => {
+		const defaultImage = '/images/placeholder.png'
 	const stacks: Stack[] = (project.stacks || []) as Stack[]
 
 	const image =
 		project.headerImage != null
 			? (project.headerImage as R2Media).sizes?.projectCardProjectsPage?.url ||
-				''
-			: ''
+				defaultImage
+			: defaultImage
 
 	return (
 		<Link href={`/projects/${project.slug}`}>
@@ -45,7 +46,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 						</div>
 					</div>
 					<p className='text-[15px] leading-relaxed text-neutral-700 dark:text-neutral-400'>
-						{project.introduction}
+					 {project.introduction}
 					</p>
 					<div className='flex flex-wrap items-center gap-3 pt-2'>
 						{stacks.map((stack: Stack) => (

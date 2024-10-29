@@ -22,12 +22,15 @@ export async function generateStaticParams() {
 		limit: 1000,
 		overrideAccess: false,
 	})
+	
 
 	return pages.docs
 		?.filter((doc) => {
 			return doc.slug !== 'home'
 		})
-		.map(({ slug }) => slug)
+		.map(({ slug }) => {
+			return { slug }
+		})
 }
 
 type Args = {

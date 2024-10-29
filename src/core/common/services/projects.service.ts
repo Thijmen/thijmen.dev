@@ -38,26 +38,16 @@ export const getNewFeaturedProjects = async (): Promise<Project[]> => {
 	return data.docs
 }
 
-export const getNewProjects = async (): Promise<Project[]> => {
-	const payload = await getPayload({ config: configPromise })
-
-	const data = await payload.find({
-		collection: 'projects',
-	})
-
-	return data.docs
-}
-
 export const getProjects = async (isFeatured?: boolean): Promise<Project[]> => {
 	const payload = await getPayload({ config: configPromise })
 
 	const data = await payload.find({
 		collection: 'projects',
-		...(isFeatured !== undefined
+		...(isFeatured === true
 			? {
 					where: {
 						isFeatured: {
-							equals: isFeatured,
+							equals: true,
 						},
 					},
 				}
