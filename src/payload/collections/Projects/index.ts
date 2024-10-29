@@ -24,7 +24,7 @@ export const Projects: CollectionConfig = {
 		preview: (data) =>
 			generatePreviewPath({
 				slug: typeof data?.slug === 'string' ? data.slug : '',
-				collection: 'pages',
+				collection: 'projects',
 			}),
 	},
 	versions: defaultVersions,
