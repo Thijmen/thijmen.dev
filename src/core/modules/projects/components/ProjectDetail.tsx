@@ -1,9 +1,9 @@
 import Tooltip from '@/core/common/components/elements/Tooltip'
 import { getStackIcon } from '@/core/common/constant/stacks'
 
+import { SharedContent } from '@/core/common/components/shared-content'
 import type { Project, R2Media, Stack } from '../../../../payload/payload-types'
 import ProjectLink from './ProjectLink'
-import { SharedContent } from '@/core/common/components/shared-content'
 
 const ProjectDetail = ({ project }: { project: Project }) => {
 	const image: string =

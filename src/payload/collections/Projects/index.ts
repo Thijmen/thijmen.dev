@@ -95,7 +95,7 @@ export const Projects: CollectionConfig = {
 							type: 'text',
 							label: 'Live Link',
 						},
-						ThijmenContent
+						ThijmenContent,
 					],
 				},
 				defaultMetaTab,
