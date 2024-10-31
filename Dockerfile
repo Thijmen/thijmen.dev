@@ -32,4 +32,4 @@ COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 
 EXPOSE 3000
-CMD ["sh", "-c", "HOST=0.0.0.0 node server.js"]
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 node server.js"]
