@@ -1,21 +1,33 @@
-# Use the official lightweight Node.js 21 image.
-# https://hub.docker.com/_/node
-FROM node:21-alpine
+FROM node:lts-alpine AS base
 
-# Set the working directory
-WORKDIR /usr/src/app
+RUN apk add --no-cache \
+    gcc \
+    g++ \
+    make \
+    cmake \
+    linux-headers
 
-# Copy package.json and package-lock.json (if available)
-COPY package*.json ./
+# Stage 1: Install dependencies
+FROM base AS deps
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
+    corepack enable pnpm && pnpm install --frozen-lockfile
 
-# Install dependencies
-RUN yarn install
-
-# Copy local code to the container image
+# Stage 2: Build the application
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN corepack enable pnpm && pnpm run build
 
-# Build the application
-RUN yarn build
+# Stage 3: Production server
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
 
-# Run the web service on container startup
-CMD [ "yarn", "start" ]
+EXPOSE 3000
+CMD ["node", "server.js"]
