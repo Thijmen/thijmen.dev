@@ -4,6 +4,8 @@ RUN apk add --no-cache \
     gcc \
     g++ \
     make \
+    curl \
+    wget \
     cmake \
     linux-headers
 
