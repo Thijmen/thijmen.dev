@@ -21,7 +21,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN corepack enable pnpm && pnpm run build
+RUN corepack enable pnpm && pnpm run ci
 
 # Stage 3: Production server
 FROM base AS runner
