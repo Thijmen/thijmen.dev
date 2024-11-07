@@ -31,5 +31,8 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 
+RUN echo "NODE_ENV: ${NODE_ENV}" > test.txt
+RUN echo "NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}" > next.txt
+
 EXPOSE 3001
 CMD ["sh", "-c", "HOSTNAME=0.0.0.0 PORT=3001 node server.js"]
