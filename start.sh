@@ -13,4 +13,4 @@ while IFS='=' read -r key value; do
     ENV_ARGS="$ENV_ARGS -e $key=$value"
 done < .env
 
-docker run $ENV_ARGS -p 3001:3000 website
+docker run $ENV_ARGS -p 3001:3001 website
