@@ -1,7 +1,7 @@
 FROM node:20-alpine AS base
 
 ARG COOLIFY_URL
-ENV NEXT_PUBLIC_SERVER_URL=$COOLIFY_URL
+ENV NEXT_PUBLIC_SERVER_URL=https://$COOLIFY_URL
 
 RUN apk add --no-cache \
     gcc \
