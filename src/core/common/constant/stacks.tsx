@@ -4,6 +4,8 @@ import { MdError } from 'react-icons/md'
 import {
 	SiAngular,
 	SiApollographql,
+	SiCloudflare,
+	SiCraftcms,
 	SiCss3,
 	SiExpress,
 	SiFirebase,
@@ -12,6 +14,7 @@ import {
 	SiJavascript,
 	SiJest,
 	SiJquery,
+	SiKubernetes,
 	SiLaravel,
 	SiMui,
 	SiNextdotjs,
@@ -89,4 +92,7 @@ export const STACKS: stacksProps = {
 	Express: <SiExpress size={iconSize} />,
 	Jquery: <SiJquery size={iconSize} />,
 	ReactNative: <TbBrandReactNative size={iconSize} />,
+	Kubernetes: <SiKubernetes size={iconSize} />,
+	CraftCMS: <SiCraftcms size={iconSize} />,
+	Cloudflare: <SiCloudflare size={iconSize} />,
 }
