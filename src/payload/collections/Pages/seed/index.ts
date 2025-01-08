@@ -8,7 +8,19 @@ export const PageSeeder = async (payload: Payload) => {
 	})
 
 	if (pages.docs.length === 0) {
-		const pages = ['Home', 'Projects', 'Blogs', 'Playground']
+		const pages = ['Projects', 'Blogs', 'Playground']
+
+
+		await payload.create({
+			collection: 'pages',
+			data: {
+				title: 'Home',
+				slug: 'home',
+				showBackButton: false,
+				showPageHeading: false
+			},
+			overrideAccess: true,
+		})
 
 		pages.forEach(async (page) => {
 			await payload.create({
@@ -16,7 +28,6 @@ export const PageSeeder = async (payload: Payload) => {
 				data: {
 					title: page,
 					slug: page.toLowerCase(),
-					dy
 				},
 				overrideAccess: true,
 			})
