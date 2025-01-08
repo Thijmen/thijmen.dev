@@ -1,5 +1,6 @@
 import type { MyHomepagePostsBlock } from '@/payload/payload-types'
 import Link from 'next/link'
+import React from 'react'
 
 // Demo data
 const demoData = [
@@ -39,13 +40,14 @@ const demoData = [
 	},
 ]
 
-export const HomepagePostsBlock = ({
-	block,
-}: { block: MyHomepagePostsBlock }) => {
+export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock>	 = ({
+	heading,
+	subheading,
+}) => {
 	const posts = demoData
 
 	return (
-		<div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
+			<div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
 			{posts.map((post) => (
 				<div
 					key={post.id}

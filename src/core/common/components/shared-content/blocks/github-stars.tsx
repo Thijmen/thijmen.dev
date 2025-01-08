@@ -46,7 +46,7 @@ const LanguageColor = ({ color }) => {
 		/>
 	)
 }
-export const GithubStarsBlock = ({ block }: { block: MyGithubStarsBlock }) => {
+export const GithubStarsBlock = () => {
 	const { data: stars } = useSWR<IGithubStar[]>('/api/github/stars', fetcher)
 
 	// order stars by starredAt

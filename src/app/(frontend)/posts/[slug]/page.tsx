@@ -1,14 +1,14 @@
 import Container from '@/core/common/components/elements/Container'
 import PageHeading from '@/core/common/components/elements/PageHeading'
 import Layout from '@/core/common/components/layouts'
-import { SharedContent } from '@/core/common/components/shared-content'
+import { RichText } from '@/core/common/components/shared-content'
 import { getMenuItems } from '@/core/services/menu'
 import { generateMeta } from '@/payload/utilities/generateMeta'
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 import type { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { getPayload } from 'payload'
 import { cache } from 'react'
 
 type Args = {
@@ -17,7 +17,7 @@ type Args = {
 	}>
 }
 export async function generateStaticParams() {
-	const payload = await getPayloadHMR({ config: configPromise })
+	const payload = await getPayload({ config: configPromise })
 	const posts = await payload.find({
 		collection: 'posts',
 		draft: false,
@@ -43,7 +43,7 @@ const PostPage = async ({ params: paramsPromise }: Args) => {
 			<Container data-aos={'fade-up'}>
 				<PageHeading title={post.title} description={''} />
 
-				<SharedContent content={post.dynamiccontent} />
+				<RichText data={post.dynamiccontent} />
 			</Container>
 		</Layout>
 	)
@@ -61,7 +61,7 @@ export async function generateMetadata({
 const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
 	const { isEnabled: draft } = await draftMode()
 
-	const payload = await getPayloadHMR({ config: configPromise })
+	const payload = await getPayload({ config: configPromise })
 
 	const result = await payload.find({
 		collection: 'posts',

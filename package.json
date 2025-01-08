@@ -9,7 +9,7 @@
 		"start": "cross-env NODE_OPTIONS=--no-deprecation next start",
 		"ci": "payload migrate && pnpm build",
 		"create-migration": "payload migrate:create",
-		"generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+		"generate:importmap": "payload generate:importmap",
 		"generate:types": "payload generate:types",
 		"typecheck": "tsc --noEmit --incremental false",
 		"test": "jest",

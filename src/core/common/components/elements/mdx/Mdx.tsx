@@ -10,7 +10,7 @@ import Video from '@/core/common/components/elements/mdx/ui/video'
 import { Link } from '../Link'
 
 type MdxProps = {
-	content: string
+	code: string
 }
 
 const components: MDXComponents = {
@@ -23,11 +23,11 @@ const components: MDXComponents = {
 }
 
 const Mdx = (props: MdxProps) => {
-	const { content } = props
+	const { code } = props
 
 	return (
 		<div className='prose w-full'>
-			<MDXRemoteRSC source={content} components={components} />
+			<MDXRemoteRSC source={code} components={components} />
 		</div>
 	)
 }

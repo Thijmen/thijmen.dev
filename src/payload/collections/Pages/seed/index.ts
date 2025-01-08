@@ -16,6 +16,7 @@ export const PageSeeder = async (payload: Payload) => {
 				data: {
 					title: page,
 					slug: page.toLowerCase(),
+					dy
 				},
 				overrideAccess: true,
 			})

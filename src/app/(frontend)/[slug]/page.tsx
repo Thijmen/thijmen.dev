@@ -5,17 +5,17 @@ import BackButton from '@/core/common/components/elements/BackButton'
 import Container from '@/core/common/components/elements/Container'
 import PageHeading from '@/core/common/components/elements/PageHeading'
 import Layout from '@/core/common/components/layouts'
-import { SharedContent } from '@/core/common/components/shared-content'
 import { getMenuItems } from '@/core/services/menu'
 import { generateMeta } from '@/payload/utilities/generateMeta'
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { draftMode } from 'next/headers'
 import { cache } from 'react'
 import type { Page as PageType } from '../../../payload/payload-types'
+import { RichText } from '@/core/common/components/shared-content'
+import { getPayload } from 'payload'
 
 export async function generateStaticParams() {
-	const payload = await getPayloadHMR({ config: configPromise })
+	const payload = await getPayload({ config: configPromise })
 	const pages = await payload.find({
 		collection: 'pages',
 		draft: false,
@@ -59,7 +59,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 				{page.showPageHeading && (
 					<PageHeading title={page.title} description={''} />
 				)}
-				<SharedContent content={page.dynamiccontent} />
+				<RichText data={page.dynamiccontent} />
 			</Container>
 		</Layout>
 	)
@@ -79,7 +79,7 @@ export async function generateMetadata({
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
 	const { isEnabled: draft } = await draftMode()
 
-	const payload = await getPayloadHMR({ config: configPromise })
+	const payload = await getPayload({ config: configPromise })
 
 	const result = await payload.find({
 		collection: 'pages',
