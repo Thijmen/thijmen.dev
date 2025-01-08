@@ -25,6 +25,7 @@ import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { PageSeeder } from './collections/Pages/seed'
 import { Posts } from './collections/Posts'
+import { s3Storage } from '@payloadcms/storage-s3'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -53,11 +54,18 @@ export default buildConfig({
 		},
 	}),
 	plugins: [
-		cloudStoragePlugin({
+		s3Storage({
 			collections: {
-				'r2-media': {
-					adapter: r2Adapter, // see docs for the adapter you want to use
+				'r2-media': true
+			},
+			bucket:process.env.S3_BUCKET || '',
+			config: {
+				credentials: {
+				accessKeyId: process.env.S3_ACCESS_KEY_ID,
+				secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
 				},
+				region: 'auto',
+				endpoint: process.env.S3_ENDPOINT,
 			},
 		}),
 		redirectsPlugin({

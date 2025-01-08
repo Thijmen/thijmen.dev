@@ -7,9 +7,9 @@ export const revalidateNav: GlobalAfterChangeHook = ({
 }) => {
 	payload.logger.info('Revalidating navigation')
 
-	revalidateTag('nav')
+	// revalidateTag('nav')
 
-	revalidatePath('/')
+	// revalidatePath('/')
 
 	return doc
 }

@@ -1,55 +1,15 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
-export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
-  await payload.db.drizzle.execute(sql`
-   DO $$ BEGIN
+export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+  await db.execute(sql`
    CREATE TYPE "public"."enum_projects_status" AS ENUM('draft', 'published');
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   CREATE TYPE "public"."enum__projects_v_version_status" AS ENUM('draft', 'published');
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   CREATE TYPE "public"."enum_posts_status" AS ENUM('draft', 'published');
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   CREATE TYPE "public"."enum__posts_v_version_status" AS ENUM('draft', 'published');
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   CREATE TYPE "public"."enum_pages_status" AS ENUM('draft', 'published');
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   CREATE TYPE "public"."enum__pages_v_version_status" AS ENUM('draft', 'published');
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   CREATE TYPE "public"."enum_redirects_to_type" AS ENUM('reference', 'custom');
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
-  DO $$ BEGIN
-   CREATE TYPE "public"."enum_nav_links_icon" AS ENUM('home', 'project', 'dashboard', 'blog', 'profile', 'analytics');
-  EXCEPTION
-   WHEN duplicate_object THEN null;
-  END $$;
-  
+  CREATE TYPE "public"."enum__projects_v_version_status" AS ENUM('draft', 'published');
+  CREATE TYPE "public"."enum_posts_status" AS ENUM('draft', 'published');
+  CREATE TYPE "public"."enum__posts_v_version_status" AS ENUM('draft', 'published');
+  CREATE TYPE "public"."enum_pages_status" AS ENUM('draft', 'published');
+  CREATE TYPE "public"."enum__pages_v_version_status" AS ENUM('draft', 'published');
+  CREATE TYPE "public"."enum_redirects_to_type" AS ENUM('reference', 'custom');
+  CREATE TYPE "public"."enum_nav_links_icon" AS ENUM('home', 'project', 'dashboard', 'blog', 'profile', 'analytics');
   CREATE TABLE IF NOT EXISTS "users" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"name" varchar,
@@ -74,7 +34,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"header_image_id" integer,
   	"github_link" varchar,
   	"live_link" varchar,
-  	"description" varchar,
+  	"dynamiccontent" jsonb,
   	"meta_title" varchar,
   	"meta_image_id" integer,
   	"meta_description" varchar,
@@ -102,7 +62,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"version_header_image_id" integer,
   	"version_github_link" varchar,
   	"version_live_link" varchar,
-  	"version_description" varchar,
+  	"version_dynamiccontent" jsonb,
   	"version_meta_title" varchar,
   	"version_meta_image_id" integer,
   	"version_meta_description" varchar,
@@ -546,11 +506,13 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
    WHEN duplicate_object THEN null;
   END $$;
   
+  CREATE INDEX IF NOT EXISTS "users_updated_at_idx" ON "users" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "users_created_at_idx" ON "users" USING btree ("created_at");
   CREATE UNIQUE INDEX IF NOT EXISTS "users_email_idx" ON "users" USING btree ("email");
   CREATE INDEX IF NOT EXISTS "projects_slug_idx" ON "projects" USING btree ("slug");
   CREATE INDEX IF NOT EXISTS "projects_header_image_idx" ON "projects" USING btree ("header_image_id");
   CREATE INDEX IF NOT EXISTS "projects_meta_meta_image_idx" ON "projects" USING btree ("meta_image_id");
+  CREATE INDEX IF NOT EXISTS "projects_updated_at_idx" ON "projects" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "projects_created_at_idx" ON "projects" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "projects__status_idx" ON "projects" USING btree ("_status");
   CREATE INDEX IF NOT EXISTS "projects_rels_order_idx" ON "projects_rels" USING btree ("order");
@@ -561,6 +523,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_projects_v_version_version_slug_idx" ON "_projects_v" USING btree ("version_slug");
   CREATE INDEX IF NOT EXISTS "_projects_v_version_version_header_image_idx" ON "_projects_v" USING btree ("version_header_image_id");
   CREATE INDEX IF NOT EXISTS "_projects_v_version_meta_version_meta_image_idx" ON "_projects_v" USING btree ("version_meta_image_id");
+  CREATE INDEX IF NOT EXISTS "_projects_v_version_version_updated_at_idx" ON "_projects_v" USING btree ("version_updated_at");
   CREATE INDEX IF NOT EXISTS "_projects_v_version_version_created_at_idx" ON "_projects_v" USING btree ("version_created_at");
   CREATE INDEX IF NOT EXISTS "_projects_v_version_version__status_idx" ON "_projects_v" USING btree ("version__status");
   CREATE INDEX IF NOT EXISTS "_projects_v_created_at_idx" ON "_projects_v" USING btree ("created_at");
@@ -571,11 +534,13 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_projects_v_rels_parent_idx" ON "_projects_v_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_projects_v_rels_path_idx" ON "_projects_v_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "_projects_v_rels_stacks_id_idx" ON "_projects_v_rels" USING btree ("stacks_id");
+  CREATE INDEX IF NOT EXISTS "stacks_updated_at_idx" ON "stacks" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "stacks_created_at_idx" ON "stacks" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "posts_slug_idx" ON "posts" USING btree ("slug");
   CREATE INDEX IF NOT EXISTS "posts_image_idx" ON "posts" USING btree ("image_id");
   CREATE INDEX IF NOT EXISTS "posts_thumbnail_idx" ON "posts" USING btree ("thumbnail_id");
   CREATE INDEX IF NOT EXISTS "posts_meta_meta_image_idx" ON "posts" USING btree ("meta_image_id");
+  CREATE INDEX IF NOT EXISTS "posts_updated_at_idx" ON "posts" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "posts_created_at_idx" ON "posts" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "posts__status_idx" ON "posts" USING btree ("_status");
   CREATE INDEX IF NOT EXISTS "_posts_v_parent_idx" ON "_posts_v" USING btree ("parent_id");
@@ -583,6 +548,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version_image_idx" ON "_posts_v" USING btree ("version_image_id");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version_thumbnail_idx" ON "_posts_v" USING btree ("version_thumbnail_id");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_meta_version_meta_image_idx" ON "_posts_v" USING btree ("version_meta_image_id");
+  CREATE INDEX IF NOT EXISTS "_posts_v_version_version_updated_at_idx" ON "_posts_v" USING btree ("version_updated_at");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version_created_at_idx" ON "_posts_v" USING btree ("version_created_at");
   CREATE INDEX IF NOT EXISTS "_posts_v_version_version__status_idx" ON "_posts_v" USING btree ("version__status");
   CREATE INDEX IF NOT EXISTS "_posts_v_created_at_idx" ON "_posts_v" USING btree ("created_at");
@@ -591,23 +557,27 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_posts_v_autosave_idx" ON "_posts_v" USING btree ("autosave");
   CREATE INDEX IF NOT EXISTS "pages_slug_idx" ON "pages" USING btree ("slug");
   CREATE INDEX IF NOT EXISTS "pages_meta_meta_image_idx" ON "pages" USING btree ("meta_image_id");
+  CREATE INDEX IF NOT EXISTS "pages_updated_at_idx" ON "pages" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "pages_created_at_idx" ON "pages" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "pages__status_idx" ON "pages" USING btree ("_status");
   CREATE INDEX IF NOT EXISTS "_pages_v_parent_idx" ON "_pages_v" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "_pages_v_version_version_slug_idx" ON "_pages_v" USING btree ("version_slug");
   CREATE INDEX IF NOT EXISTS "_pages_v_version_meta_version_meta_image_idx" ON "_pages_v" USING btree ("version_meta_image_id");
+  CREATE INDEX IF NOT EXISTS "_pages_v_version_version_updated_at_idx" ON "_pages_v" USING btree ("version_updated_at");
   CREATE INDEX IF NOT EXISTS "_pages_v_version_version_created_at_idx" ON "_pages_v" USING btree ("version_created_at");
   CREATE INDEX IF NOT EXISTS "_pages_v_version_version__status_idx" ON "_pages_v" USING btree ("version__status");
   CREATE INDEX IF NOT EXISTS "_pages_v_created_at_idx" ON "_pages_v" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "_pages_v_updated_at_idx" ON "_pages_v" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "_pages_v_latest_idx" ON "_pages_v" USING btree ("latest");
   CREATE INDEX IF NOT EXISTS "_pages_v_autosave_idx" ON "_pages_v" USING btree ("autosave");
+  CREATE INDEX IF NOT EXISTS "r2_media_updated_at_idx" ON "r2_media" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "r2_media_created_at_idx" ON "r2_media" USING btree ("created_at");
   CREATE UNIQUE INDEX IF NOT EXISTS "r2_media_filename_idx" ON "r2_media" USING btree ("filename");
   CREATE INDEX IF NOT EXISTS "r2_media_sizes_project_card_homepage_sizes_project_card_homepage_filename_idx" ON "r2_media" USING btree ("sizes_project_card_homepage_filename");
   CREATE INDEX IF NOT EXISTS "r2_media_sizes_project_card_projects_page_sizes_project_card_projects_page_filename_idx" ON "r2_media" USING btree ("sizes_project_card_projects_page_filename");
   CREATE INDEX IF NOT EXISTS "r2_media_sizes_post_thumbnail_sizes_post_thumbnail_filename_idx" ON "r2_media" USING btree ("sizes_post_thumbnail_filename");
   CREATE INDEX IF NOT EXISTS "redirects_from_idx" ON "redirects" USING btree ("from");
+  CREATE INDEX IF NOT EXISTS "redirects_updated_at_idx" ON "redirects" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "redirects_created_at_idx" ON "redirects" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "redirects_rels_order_idx" ON "redirects_rels" USING btree ("order");
   CREATE INDEX IF NOT EXISTS "redirects_rels_parent_idx" ON "redirects_rels" USING btree ("parent_id");
@@ -615,6 +585,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "redirects_rels_pages_id_idx" ON "redirects_rels" USING btree ("pages_id");
   CREATE INDEX IF NOT EXISTS "redirects_rels_posts_id_idx" ON "redirects_rels" USING btree ("posts_id");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_global_slug_idx" ON "payload_locked_documents" USING btree ("global_slug");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_updated_at_idx" ON "payload_locked_documents" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_created_at_idx" ON "payload_locked_documents" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_order_idx" ON "payload_locked_documents_rels" USING btree ("order");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_parent_idx" ON "payload_locked_documents_rels" USING btree ("parent_id");
@@ -627,11 +598,13 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_r2_media_id_idx" ON "payload_locked_documents_rels" USING btree ("r2_media_id");
   CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_redirects_id_idx" ON "payload_locked_documents_rels" USING btree ("redirects_id");
   CREATE INDEX IF NOT EXISTS "payload_preferences_key_idx" ON "payload_preferences" USING btree ("key");
+  CREATE INDEX IF NOT EXISTS "payload_preferences_updated_at_idx" ON "payload_preferences" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "payload_preferences_created_at_idx" ON "payload_preferences" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "payload_preferences_rels_order_idx" ON "payload_preferences_rels" USING btree ("order");
   CREATE INDEX IF NOT EXISTS "payload_preferences_rels_parent_idx" ON "payload_preferences_rels" USING btree ("parent_id");
   CREATE INDEX IF NOT EXISTS "payload_preferences_rels_path_idx" ON "payload_preferences_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "payload_preferences_rels_users_id_idx" ON "payload_preferences_rels" USING btree ("users_id");
+  CREATE INDEX IF NOT EXISTS "payload_migrations_updated_at_idx" ON "payload_migrations" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "payload_migrations_created_at_idx" ON "payload_migrations" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "nav_links_order_idx" ON "nav_links" USING btree ("_order");
   CREATE INDEX IF NOT EXISTS "nav_links_parent_id_idx" ON "nav_links" USING btree ("_parent_id");
@@ -642,27 +615,35 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "nav_rels_projects_id_idx" ON "nav_rels" USING btree ("projects_id");`)
 }
 
-export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
-  await payload.db.drizzle.execute(sql`
-   DROP TABLE "users";
-  DROP TABLE "projects";
-  DROP TABLE "projects_rels";
-  DROP TABLE "_projects_v";
-  DROP TABLE "_projects_v_rels";
-  DROP TABLE "stacks";
-  DROP TABLE "posts";
-  DROP TABLE "_posts_v";
-  DROP TABLE "pages";
-  DROP TABLE "_pages_v";
-  DROP TABLE "r2_media";
-  DROP TABLE "redirects";
-  DROP TABLE "redirects_rels";
-  DROP TABLE "payload_locked_documents";
-  DROP TABLE "payload_locked_documents_rels";
-  DROP TABLE "payload_preferences";
-  DROP TABLE "payload_preferences_rels";
-  DROP TABLE "payload_migrations";
-  DROP TABLE "nav_links";
-  DROP TABLE "nav";
-  DROP TABLE "nav_rels";`)
+export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
+  await db.execute(sql`
+   DROP TABLE "users" CASCADE;
+  DROP TABLE "projects" CASCADE;
+  DROP TABLE "projects_rels" CASCADE;
+  DROP TABLE "_projects_v" CASCADE;
+  DROP TABLE "_projects_v_rels" CASCADE;
+  DROP TABLE "stacks" CASCADE;
+  DROP TABLE "posts" CASCADE;
+  DROP TABLE "_posts_v" CASCADE;
+  DROP TABLE "pages" CASCADE;
+  DROP TABLE "_pages_v" CASCADE;
+  DROP TABLE "r2_media" CASCADE;
+  DROP TABLE "redirects" CASCADE;
+  DROP TABLE "redirects_rels" CASCADE;
+  DROP TABLE "payload_locked_documents" CASCADE;
+  DROP TABLE "payload_locked_documents_rels" CASCADE;
+  DROP TABLE "payload_preferences" CASCADE;
+  DROP TABLE "payload_preferences_rels" CASCADE;
+  DROP TABLE "payload_migrations" CASCADE;
+  DROP TABLE "nav_links" CASCADE;
+  DROP TABLE "nav" CASCADE;
+  DROP TABLE "nav_rels" CASCADE;
+  DROP TYPE "public"."enum_projects_status";
+  DROP TYPE "public"."enum__projects_v_version_status";
+  DROP TYPE "public"."enum_posts_status";
+  DROP TYPE "public"."enum__posts_v_version_status";
+  DROP TYPE "public"."enum_pages_status";
+  DROP TYPE "public"."enum__pages_v_version_status";
+  DROP TYPE "public"."enum_redirects_to_type";
+  DROP TYPE "public"."enum_nav_links_icon";`)
 }

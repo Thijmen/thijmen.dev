@@ -1,81 +1,88 @@
 'use client'
-import type React from 'react'
-import { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
+import { TextFieldClientProps } from 'payload'
 
-import {
-	Button,
-	FieldLabel,
-	TextInput,
-	useField,
-	useFieldProps,
-	useFormFields,
-} from '@payloadcms/ui'
+import { useField, Button, TextInput, FieldLabel, useFormFields, useForm } from '@payloadcms/ui'
 
 import { formatSlug } from './formatSlug'
 import './index.scss'
-import type { TextFieldClientProps } from 'payload'
 
 type SlugComponentProps = {
-	fieldToUse: string
-	checkboxFieldPath: string
+  fieldToUse: string
+  checkboxFieldPath: string
 } & TextFieldClientProps
 
 export const SlugComponent: React.FC<SlugComponentProps> = ({
-	field,
-	fieldToUse,
-	checkboxFieldPath: checkboxFieldPathFromProps,
+  field,
+  fieldToUse,
+  checkboxFieldPath: checkboxFieldPathFromProps,
+  path,
+  readOnly: readOnlyFromProps,
 }) => {
-	const { label } = field
-	const { path, readOnly: readOnlyFromProps } = useFieldProps()
+  const { label } = field
 
-	const checkboxFieldPath = path.includes('.')
-		? `${path}.${checkboxFieldPathFromProps}`
-		: checkboxFieldPathFromProps
+  const checkboxFieldPath = path?.includes('.')
+    ? `${path}.${checkboxFieldPathFromProps}`
+    : checkboxFieldPathFromProps
 
-	const { value, setValue } = useField<string>({ path })
+  const { value, setValue } = useField<string>({ path: path || field.name })
 
-	const { value: checkboxValue, setValue: setCheckboxValue } =
-		useField<boolean>({
-			path: checkboxFieldPath,
-		})
+  const { dispatchFields } = useForm()
 
-	const fieldToUseValue = useFormFields(([fields]) => {
-		return fields[fieldToUse]?.value as string
-	})
+  // The value of the checkbox
+  // We're using separate useFormFields to minimise re-renders
+  const checkboxValue = useFormFields(([fields]) => {
+    return fields[checkboxFieldPath]?.value as string
+  })
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-	useEffect(() => {
-		if (checkboxValue) setValue(formatSlug(fieldToUseValue))
-	}, [fieldToUseValue, checkboxValue])
+  // The value of the field we're listening to for the slug
+  const targetFieldValue = useFormFields(([fields]) => {
+    return fields[fieldToUse]?.value as string
+  })
 
-	const handleLock = useCallback(
-		(e) => {
-			e.preventDefault()
+  useEffect(() => {
+    if (checkboxValue) {
+      if (targetFieldValue) {
+        const formattedSlug = formatSlug(targetFieldValue)
 
-			setCheckboxValue(!checkboxValue)
-		},
-		[checkboxValue, setCheckboxValue],
-	)
+        if (value !== formattedSlug) setValue(formattedSlug)
+      } else {
+        if (value !== '') setValue('')
+      }
+    }
+  }, [targetFieldValue, checkboxValue, setValue, value])
 
-	const readOnly = readOnlyFromProps || checkboxValue
+  const handleLock = useCallback(
+    (e) => {
+      e.preventDefault()
 
-	return (
-		<div className='field-type slug-field-component'>
-			<div className='label-wrapper'>
-				<FieldLabel field={field} htmlFor={`field-${path}`} label={label} />
+      dispatchFields({
+        type: 'UPDATE',
+        path: checkboxFieldPath,
+        value: !checkboxValue,
+      })
+    },
+    [checkboxValue, checkboxFieldPath, dispatchFields],
+  )
 
-				<Button className='lock-button' buttonStyle='none' onClick={handleLock}>
-					{checkboxValue ? 'Unlock' : 'Lock'}
-				</Button>
-			</div>
+  const readOnly = readOnlyFromProps || checkboxValue
 
-			<TextInput
-				label={''}
-				value={value}
-				onChange={setValue}
-				path={path}
-				readOnly={readOnly}
-			/>
-		</div>
-	)
+  return (
+    <div className="field-type slug-field-component">
+      <div className="label-wrapper">
+        <FieldLabel htmlFor={`field-${path}`} label={label} />
+
+        <Button className="lock-button" buttonStyle="none" onClick={handleLock}>
+          {checkboxValue ? 'Unlock' : 'Lock'}
+        </Button>
+      </div>
+
+      <TextInput
+        value={value}
+        onChange={setValue}
+        path={path || field.name}
+        readOnly={Boolean(readOnly)}
+      />
+    </div>
+  )
 }

@@ -48,9 +48,9 @@ export interface Config {
   user: User & {
     collection: 'users';
   };
-  jobs?: {
+  jobs: {
     tasks: unknown;
-    workflows?: unknown;
+    workflows: unknown;
   };
 }
 export interface UserAuthOperations {
@@ -121,6 +121,9 @@ export interface Project {
   } | null;
   meta?: {
     title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | R2Media;
     description?: string | null;
   };
@@ -213,6 +216,9 @@ export interface Post {
   thumbnail?: (number | null) | R2Media;
   meta?: {
     title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | R2Media;
     description?: string | null;
   };
@@ -249,6 +255,9 @@ export interface Page {
   showBackButton?: boolean | null;
   meta?: {
     title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | R2Media;
     description?: string | null;
   };
@@ -262,6 +271,9 @@ export interface Page {
  */
 export interface Redirect {
   id: number;
+  /**
+   * You will need to rebuild the website when changing this field.
+   */
   from: string;
   to?: {
     type?: ('reference' | 'custom') | null;
@@ -390,11 +402,9 @@ export interface ProjectsSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         image?: T;
         description?: T;
-        preview?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -425,11 +435,9 @@ export interface PostsSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         image?: T;
         description?: T;
-        preview?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -450,11 +458,9 @@ export interface PagesSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         image?: T;
         description?: T;
-        preview?: T;
       };
   updatedAt?: T;
   createdAt?: T;
