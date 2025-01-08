@@ -1,12 +1,10 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { r2Adapter } from '@/payload/adapters/r2adapter'
 import { Media } from '@/payload/collections/Media'
 import { Index } from '@/payload/collections/Stacks'
 // biome-ignore lint/style/useImportType: <explanation>
 import { Page, Post } from '@/payload/payload-types'
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 // biome-ignore lint/style/useImportType: <explanation>
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
@@ -23,9 +21,9 @@ import { UserSeeder } from '@/payload/collections/Users/seed'
 import { Nav, NavSeeder } from '@/payload/globals/nav'
 import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
+import { s3Storage } from '@payloadcms/storage-s3'
 import { PageSeeder } from './collections/Pages/seed'
 import { Posts } from './collections/Posts'
-import { s3Storage } from '@payloadcms/storage-s3'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -56,13 +54,13 @@ export default buildConfig({
 	plugins: [
 		s3Storage({
 			collections: {
-				'r2-media': true
+				'r2-media': true,
 			},
-			bucket:process.env.S3_BUCKET || '',
+			bucket: process.env.S3_BUCKET || '',
 			config: {
 				credentials: {
-				accessKeyId: process.env.S3_ACCESS_KEY_ID,
-				secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+					accessKeyId: process.env.S3_ACCESS_KEY_ID,
+					secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
 				},
 				region: 'auto',
 				endpoint: process.env.S3_ENDPOINT,
