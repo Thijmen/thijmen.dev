@@ -3,7 +3,7 @@ import { getStackIcon } from '@/core/common/constant/stacks'
 
 import type { Project, R2Media, Stack } from '../../../../payload/payload-types'
 import ProjectLink from './ProjectLink'
-import { RichText } from '@payloadcms/richtext-lexical/react'
+import { RichText } from '@/core/common/components/shared-content'
 
 const ProjectDetail = ({ project }: { project: Project }) => {
 	const image: string =

@@ -10,7 +10,7 @@ export const PageHeader = ({ title, description }: Props) => {
 		<div className='mb-16 mt-6 sm:mb-24 sm:mt-12'>
 			<h1 className='my-4 text-4xl font-bold md:text-5xl'>{title}</h1>
 			<div className='mb-8 text-muted-foreground'>
-				<Mdx content={description} />
+				<Mdx code={description} />
 			</div>
 			<div
 				className={
