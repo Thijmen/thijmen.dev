@@ -1,9 +1,9 @@
 import Tooltip from '@/core/common/components/elements/Tooltip'
 import { getStackIcon } from '@/core/common/constant/stacks'
 
-import { SharedContent } from '@/core/common/components/shared-content'
 import type { Project, R2Media, Stack } from '../../../../payload/payload-types'
 import ProjectLink from './ProjectLink'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 const ProjectDetail = ({ project }: { project: Project }) => {
 	const image: string =
@@ -40,7 +40,7 @@ const ProjectDetail = ({ project }: { project: Project }) => {
 			</div>
 			{project.dynamiccontent && (
 				<div className='mt-5 space-y-6 leading-[1.8] dark:text-neutral-300'>
-					<SharedContent content={project.dynamiccontent} />
+					<RichText data={project.dynamiccontent} />
 				</div>
 			)}
 		</div>
