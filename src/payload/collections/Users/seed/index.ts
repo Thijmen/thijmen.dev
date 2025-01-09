@@ -11,6 +11,7 @@ export const UserSeeder = async (payload: Payload) => {
 		await payload.create({
 			collection: 'users',
 			data: {
+				name: 'Thijmen',
 				email: env.CMS_ADMIN_EMAIL,
 				password: env.CMS_ADMIN_PASSWORD,
 			},
