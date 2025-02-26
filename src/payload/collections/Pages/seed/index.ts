@@ -24,6 +24,17 @@ export const PageSeeder = async (payload: Payload) => {
 			overrideAccess: true,
 		})
 
+		await payload.create({
+			collection: 'pages',
+			data: {
+				title: 'About',
+				slug: 'About',
+				showBackButton: false,
+				showPageHeading: false,
+				dynamiccontent: {"root": {"type": "root", "format": "", "indent": 0, "version": 1, "children": [{"type": "block", "fields": {"id": "67bf8228253daf11fc8e83c8", "blockName": "", "blockType": "wakaContributionsBlock"}, "format": "", "version": 2}, {"type": "block", "fields": {"id": "67bf82c6253daf11fc8e83c9", "variant": "dashed", "blockName": "", "blockType": "horizontalLineBlock"}, "format": "", "version": 2}, {"type": "paragraph", "format": "", "indent": 0, "version": 1, "children": [], "direction": null, "textStyle": "", "textFormat": 0}, {"type": "block", "fields": {"id": "67bf82d5253daf11fc8e83ca", "blockName": "", "blockType": "githubStarsBlock", "ignoredRepositories": 0}, "format": "", "version": 2}], "direction": null}}
+			}
+		})
+
 		// Create other pages
 		pages.forEach(async (page) => {
 			await payload.create({
