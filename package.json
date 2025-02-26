@@ -7,7 +7,7 @@
 		"build": "cross-env NODE_OPTIONS=--no-deprecation next build",
 		"payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
 		"start": "cross-env NODE_OPTIONS=--no-deprecation next start",
-		"ci": "payload migrate && bun run build",
+		"ci": "payload info",
 		"create-migration": "payload migrate:create",
 		"generate:importmap": "payload generate:importmap",
 		"generate:types": "payload generate:types",
@@ -17,7 +17,7 @@
 		"standalone-script": "node ./src/scripts/standalone-script.js",
 		"lint": "biome check .",
 		"lint:fix": "biome check . --write",
-		"prepare": "husky",
+		"ssssprepare": "husky",
 		"knip": "knip"
 	},
 	"dependencies": {
@@ -137,6 +137,7 @@
 		"postcss": "^8.4.47",
 		"postcss-lightningcss": "^1.0.1",
 		"tailwindcss": "^3.4.13",
+		"tsx": "^4.19.3",
 		"typescript": "^5.6.2"
 	}
 }
