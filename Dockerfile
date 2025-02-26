@@ -12,6 +12,8 @@ RUN apk add --no-cache \
     cmake \
     linux-headers
 
+RUN npm i -g corepack
+
 # Stage 1: Install dependencies
 FROM base AS deps
 WORKDIR /app
