@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 # Stage 1: Install dependencies
 FROM base AS deps
 WORKDIR /app
-COPY package.json bun.lockb ./
+COPY package.json bun.lock ./
 RUN --mount=type=cache,target=/root/.bun \
     bun install --frozen-lockfile
 
