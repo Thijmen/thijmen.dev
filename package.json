@@ -7,7 +7,7 @@
 		"build": "cross-env NODE_OPTIONS=--no-deprecation next build",
 		"payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
 		"start": "cross-env NODE_OPTIONS=--no-deprecation next start",
-		"ci": "payload migrate && pnpm build",
+		"ci": "payload migrate && bun run build",
 		"create-migration": "payload migrate:create",
 		"generate:importmap": "payload generate:importmap",
 		"generate:types": "payload generate:types",
