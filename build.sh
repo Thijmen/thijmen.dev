@@ -15,4 +15,4 @@ while IFS='=' read -r key value; do
 done < .env
 
 # Run docker build with the build args
-docker build $BUILD_ARGS --tag website --no-cache .
+docker build $BUILD_ARGS --tag website  .
