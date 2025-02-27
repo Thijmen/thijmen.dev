@@ -74,6 +74,11 @@ export const Pages: CollectionConfig = {
 							label: 'Show back button',
 							defaultValue: true,
 						},
+						{
+							name: 'backButtonOverrideUrl',
+							type: 'text',
+							label: 'Override back button URL',
+						}
 					],
 				},
 				defaultMetaTab,

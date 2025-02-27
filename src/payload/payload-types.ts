@@ -308,6 +308,7 @@ export interface Page {
   containerClassName?: string | null;
   showPageHeading?: boolean | null;
   showBackButton?: boolean | null;
+  backButtonOverrideUrl?: string | null;
   meta?: {
     title?: string | null;
     /**
@@ -510,6 +511,7 @@ export interface PagesSelect<T extends boolean = true> {
   containerClassName?: T;
   showPageHeading?: T;
   showBackButton?: T;
+  backButtonOverrideUrl?: T;
   meta?:
     | T
     | {

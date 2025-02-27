@@ -59,7 +59,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 	return (
 		<Layout navGlobal={nav}>
 			<Container className={page.containerClassName || ''} data-aos={'fade-up'}>
-				{page.showBackButton && <BackButton url={'/'} />}
+				{page.showBackButton && (
+					<BackButton url={page.backButtonOverrideUrl || '/'} />
+				)}
 				{page.showPageHeading && (
 					<PageHeading title={page.title} description={''} />
 				)}
