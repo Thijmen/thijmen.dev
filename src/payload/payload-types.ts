@@ -772,6 +772,7 @@ export interface MyHomepageProjectsBlock {
 export interface MyHomepagePostsBlock {
   heading?: string | null;
   subheading?: string | null;
+  posts?: (number | Post)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'homepagePostsBlock';
