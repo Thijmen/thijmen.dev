@@ -1,4 +1,3 @@
-
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
@@ -32,7 +31,7 @@ import { HorizontalLineBlock } from './blocks/horizontal-line'
 import { GithubBlock } from './blocks/github'
 import { WakaBlock } from './blocks/waka'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
-import { IntroductionBlock } from './blocks/introduction'
+import { EnhancedIntroductionBlock } from './blocks/enhancedIntroduction'
 import { HomepagePostsBlock } from './blocks/homepage-posts-block'
 
 
@@ -68,7 +67,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
 		githubContributionsBlock: ({ node }) => <GithubBlock  />,
 		wakaContributionsBlock: ({ node }) => <WakaBlock  />,
 		javascriptPlaygroundBlock: ({ node }) => <JavascriptPlaygroundBlock  />,
-		homepageIntroductionBlock: ({ node }) => <IntroductionBlock {...node.fields} />,
+		homepageIntroductionBlock: ({ node }) => <EnhancedIntroductionBlock {...node.fields} />,
 		homepagePostsBlock: ({ node }) => <HomepagePostsBlock {...node.fields} />,
   },
 })
@@ -90,4 +89,3 @@ export const RichText = (props: Props) => {
 	  />
 	)
   }
-  
