@@ -103,6 +103,9 @@ export default buildConfig({
 
   admin: {
     user: 'users',
+    components: {
+      beforeDashboard: ['@/payload/components/BeforeDashboard'],
+    },
     meta: {
       titleSuffix: '| 🚧 Thijmen.dev',
     },
