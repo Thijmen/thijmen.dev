@@ -1,6 +1,6 @@
 'use client'
 import type { MyHomepageIntroductionBlock } from '@/payload/payload-types'
-import Mdx from '../../elements/mdx/Mdx'
+
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { Link } from '../../elements/Link'
@@ -148,7 +148,7 @@ export const EnhancedIntroductionBlock: React.FC<MyHomepageIntroductionBlock> = 
           <div className="absolute -right-1 -top-1 h-3 w-3 border-r-2 border-t-2 border-teal-500"></div>
           <div className="absolute -left-1 -bottom-1 h-3 w-3 border-l-2 border-b-2 border-indigo-500"></div>
           <div className="prose prose-neutral max-w-none dark:prose-invert">
-            <Mdx code={content} />
+            {/* <Mdx code={content} /> */}
           </div>
         </div>
 
