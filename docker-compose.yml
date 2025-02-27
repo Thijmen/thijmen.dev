@@ -13,6 +13,11 @@ services:
     ports:
       - '5432:5432'
 
+  website-v6:
+    image: website-v6
+    ports:
+      - '3001:3001'
+
 volumes:
   pgdata:
     driver: local
