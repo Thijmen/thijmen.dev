@@ -4,6 +4,8 @@ import Link from 'next/link'
 import React from 'react'
 import { motion } from 'framer-motion'
 import SectionHeading from '../../elements/SectionHeading'
+import SectionSubHeading from '../../elements/SectionSubHeading'
+import { BsArrowRightShort as ViewAllIcon } from 'react-icons/bs'
 
 const demoData: Post[] = [
   {
@@ -43,6 +45,8 @@ const fadeInUp = {
 
 export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
   heading,
+  linkHref,
+  linkTitle,
   subheading,
   posts,
 }) => {
@@ -51,24 +55,22 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
   const tags = ['TypeScript', 'Design Patterns', 'Enterprise']
 
   return (
-    <section className="py-12">
-      <div className="mb-10 relative">
+    <section className="py-2">
+      <div className="flex items-center justify-between">
         <SectionHeading title={heading} className="ml-1" />
-        {/* <SectionSubHeading>
-					<Link href={linkHref || '/'}>
-						<div className='mt-1 flex cursor-pointer gap-1 text-sm text-neutral-700 transition-all duration-300 hover:gap-3 hover:text-neutral-700 dark:text-neutral-400 hover:dark:text-neutral-300'>
-							<div className='flex'>
-								{/* biome-ignore lint/security/noDangerouslySetInnerHtml: is my own input, can be trusted */}
-        {/* <p dangerouslySetInnerHTML={{ __html: linkTitle || '' }} />
-							</div>
-							<ViewAllIcon size={22} />
-						</div>
-					</Link>
-				</SectionSubHeading> */}
-        <div className="absolute -inset-x-4 -inset-y-2 bg-gradient-to-r from-violet-500/5 via-purple-500/5 to-pink-500/5 blur-2xl rounded-full" />
+        <SectionSubHeading>
+          <Link href={linkHref || '/'}>
+            <div className="mt-1 flex cursor-pointer gap-1 text-sm text-neutral-700 transition-all duration-300 hover:gap-3 hover:text-neutral-700 dark:text-neutral-400 hover:dark:text-neutral-300">
+              <div className="flex">
+                {/* biome-ignore lint/security/noDangerouslySetInnerHtml: is my own input, can be trusted */}
+                <p dangerouslySetInnerHTML={{ __html: linkTitle || '' }} />
+              </div>
+              <ViewAllIcon size={22} />
+            </div>
+          </Link>
+        </SectionSubHeading>
       </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid pt-4 grid-cols-1 lg:grid-cols-2 gap-8">
         {thePosts.map((post, index) => (
           <motion.article
             key={post.slug}
@@ -78,9 +80,9 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
             viewport={{ once: true }}
             className="group relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/[0.07] via-purple-500/[0.07] to-pink-500/[0.07] rounded-2xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-100 opacity-0 blur-sm" />
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/[0.07] via-purple-500/[0.07] to-pink-500/[0.07] dark:from-violet-400/[0.03] dark:via-purple-400/[0.03] dark:to-pink-400/[0.03] rounded-2xl transform transition-all duration-500 group-hover:scale-[1.02] group-hover:opacity-100 opacity-0 blur-sm" />
             <div
-              className="relative bg-gradient-to-b from-white to-gray-50/80 dark:from-gray-900/60 dark:to-gray-900/40 rounded-2xl border border-gray-100 dark:border-gray-800/20 overflow-hidden transition-all duration-500 group-hover:border-gray-200 dark:group-hover:border-gray-700/50"
+              className="relative bg-gradient-to-b from-white to-gray-50/80 dark:from-gray-900/60 dark:to-gray-800/40 rounded-2xl border border-gray-100 dark:border-gray-800/40 overflow-hidden transition-all duration-500 group-hover:border-gray-200 dark:group-hover:border-gray-700/60"
               style={{
                 boxShadow: `
                   0 0 0 1px rgb(0 0 0 / 0.02),
@@ -90,33 +92,33 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
                 `,
               }}
             >
-              <div className="relative p-6 space-y-4 bg-gradient-to-br from-transparent via-transparent to-gray-50/50">
+              <div className="relative p-6 space-y-4 bg-gradient-to-br from-transparent via-transparent to-gray-50/50 dark:from-transparent dark:via-gray-900/20 dark:to-gray-800/40">
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 text-[11px] font-medium tracking-wider uppercase bg-white dark:bg-gray-800/50 text-gray-500 dark:text-gray-200 rounded-full ring-1 ring-gray-100 dark:ring-gray-700/50 shadow-sm"
+                      className="px-3 py-1 text-[11px] font-medium tracking-wider uppercase bg-white/80 dark:bg-gray-800/80 text-gray-500 dark:text-gray-300 rounded-full ring-1 ring-gray-100 dark:ring-white/5 shadow-sm dark:shadow-none backdrop-blur-sm"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <h3 className="text-base font-medium tracking-tight text-gray-800 dark:text-white">
+                <h3 className="text-base font-medium tracking-tight text-gray-800 dark:text-gray-100">
                   <Link
                     href={`/posts/${post.slug}`}
-                    className="relative inline-block group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300"
+                    className="relative inline-block group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors duration-300"
                   >
                     {post.title}
                   </Link>
                 </h3>
 
-                <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-300 line-clamp-2">
+                <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400 line-clamp-2">
                   {post.description}
                 </p>
 
-                <div className="flex justify-between items-center pt-4 border-t border-gray-100 dark:border-gray-800/30">
-                  <time className="text-xs tracking-wide text-gray-400 dark:text-gray-400">
+                <div className="flex justify-between items-center pt-4 border-t border-gray-100 dark:border-white/[0.04]">
+                  <time className="text-xs tracking-wide text-gray-400 dark:text-gray-500">
                     {new Date(post.createdAt).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'short',
@@ -125,11 +127,11 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
                   </time>
                   <Link
                     href={`/posts/${post.slug}`}
-                    className="inline-flex items-center text-xs tracking-wide text-indigo-500 dark:text-indigo-400 font-medium group/link hover:text-indigo-600 transition-colors duration-300"
+                    className="inline-flex items-center text-xs tracking-wide text-indigo-500 dark:text-indigo-300 font-medium group/link hover:text-indigo-600 dark:hover:text-indigo-200 transition-colors duration-300"
                   >
                     <span className="relative">
                       Read article
-                      <span className="absolute inset-x-0 -bottom-0.5 h-px bg-gradient-to-r from-indigo-500/0 via-indigo-500/50 to-indigo-500/0 dark:from-indigo-400/0 dark:via-indigo-400/50 dark:to-indigo-400/0 transform origin-left scale-x-0 transition-transform duration-300 group-hover/link:scale-x-100" />
+                      <span className="absolute inset-x-0 -bottom-0.5 h-px bg-gradient-to-r from-indigo-500/0 via-indigo-500/50 to-indigo-500/0 dark:from-indigo-300/0 dark:via-indigo-300/40 dark:to-indigo-300/0 transform origin-left scale-x-0 transition-transform duration-300 group-hover/link:scale-x-100" />
                     </span>
                     <svg
                       className="w-3.5 h-3.5 ml-1.5 transform transition-transform duration-300 group-hover/link:translate-x-1 opacity-70"

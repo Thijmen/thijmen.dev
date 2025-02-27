@@ -20,6 +20,21 @@ export const MyHomepagePosts: Block = {
       defaultValue: 'Take a look at my latest blog posts.',
     },
     {
+      name: 'linkHref',
+      type: 'text',
+      label: 'Link href',
+      required: false,
+    },
+    {
+      name: 'linkTitle',
+      type: 'code',
+      label: 'Link title',
+      required: false,
+      admin: {
+        language: 'markdown',
+      },
+    },
+    {
       name: 'posts',
       type: 'relationship',
       relationTo: 'posts',
