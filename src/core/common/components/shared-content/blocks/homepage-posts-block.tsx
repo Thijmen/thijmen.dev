@@ -46,7 +46,7 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
   subheading,
   posts,
 }) => {
-  const cmsPosts = posts as Post[]
+  const cmsPosts = (posts ?? []) as Post[]
   const thePosts = [...cmsPosts, ...demoData]
   const tags = ['TypeScript', 'Design Patterns', 'Enterprise']
 
