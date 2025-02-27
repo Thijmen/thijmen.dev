@@ -28,22 +28,26 @@ export async function generateStaticParams() {
 			return doc.slug !== 'home'
 		})
 		.map(({ slug }) => {
-			return { slug }
+			// Split the slug string into an array of segments
+			const slugArray = slug.split('/').filter(Boolean)
+			return { slug: slugArray }
 		})
 }
 
 type Args = {
 	params: Promise<{
-		slug?: string
+		slug?: string[]
 	}>
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
-	const { slug = 'home' } = await paramsPromise
-	const url = `/${slug}`
+	const { slug = ['home'] } = await paramsPromise
+	const url = `/${slug.join('/')}`
+
+	console.log('slug', slug)
 
 	const page: PageType | null = await queryPageBySlug({
-		slug,
+		slug: slug.join('/'),
 	})
 
 	if (!page) {
@@ -68,9 +72,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 export async function generateMetadata({
 	params: paramsPromise,
 }: Args): Promise<Metadata> {
-	const { slug = 'home' } = await paramsPromise
+	const { slug = ['home'] } = await paramsPromise
 	const page = await queryPageBySlug({
-		slug,
+		slug: slug.join('/'),
 	})
 
 	return generateMeta({ doc: page })

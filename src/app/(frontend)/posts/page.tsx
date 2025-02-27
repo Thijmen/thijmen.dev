@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Page, { generateMetadata as baseGenerateMetadata } from '../[slug]/page'
+import Page, { generateMetadata as baseGenerateMetadata } from '../[...slug]/page'
 
 export default function PostsPage() {
 	return <Page params={Promise.resolve({ slug: 'posts' })} />
