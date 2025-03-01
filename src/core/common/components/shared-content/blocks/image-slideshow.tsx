@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback, useRef } from 'react'
-import type { MyImageSlideshowBlock } from '@/payload/payload-types'
+import type { MyImageSlideshowBlock, R2Media } from '@/payload/payload-types'
 import cn from '../../../libs/cn'
 import useIsMobile from '@/core/common/hooks/useIsMobile'
 import '@/core/common/styles/grid-pattern.css'
@@ -342,7 +342,7 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
               {/* Lightbox image container */}
               <div className="w-full h-full max-h-[85vh] relative flex items-center justify-center">
                 <img
-                  src={slides[currentSlide].image.url || ''}
+                  src={(slides[currentSlide].image as R2Media).url || ''}
                   alt={slides[currentSlide].caption || 'Fullscreen image'}
                   className="max-h-full max-w-full object-contain shadow-2xl rounded-lg"
                 />
@@ -425,7 +425,7 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
               )}
             </div>
           </div>,
-          document.body
+          document.body,
         )}
     </div>
   )
