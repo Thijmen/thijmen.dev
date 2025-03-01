@@ -14,47 +14,65 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
     project.headerImage != null
       ? (project.headerImage as R2Media).url || ''
       : '/images/placeholder.png'
-  
+
   const stacks = (project.stacks ?? []) as Stack[]
 
   return (
-    <div className="relative h-64 md:h-80 lg:h-96 w-full mb-8 overflow-hidden rounded-xl">
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/90 via-purple-800/80 to-teal-900/70 mix-blend-multiply z-10" />
+    <div className="w-full mb-8 overflow-hidden rounded-2xl bg-gradient-to-b from-neutral-900/90 to-black/80 border border-purple-500/30 shadow-lg shadow-purple-500/10 backdrop-blur-md group hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-500">
+      {/* Hero Image Section */}
+      <div className="relative w-full h-72 md:h-96 lg:h-[450px] overflow-hidden rounded-t-2xl">
+        {/* Background Image with Gradient Overlay */}
+        <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-700 ease-in-out">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-indigo-800/70 to-teal-900/60 mix-blend-multiply" />
 
-      {/* Decorative pattern */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-repeat opacity-30" />
-        <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full filter blur-3xl" />
-        <div className="absolute top-0 left-0 w-48 h-48 bg-indigo-500/10 rounded-full filter blur-3xl" />
-      </div>
+          {/* Animated grid pattern */}
+          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-repeat opacity-30 group-hover:opacity-40 transition-opacity duration-700" />
 
-      {/* Project image */}
-      <Image
-        src={image}
-        alt={project.title}
-        fill
-        className="object-cover object-center z-0"
-        priority
-      />
+          {/* Decorative elements */}
+          <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-purple-600/20 rounded-full filter blur-[100px] group-hover:bg-purple-500/30 transition-colors duration-700" />
+          <div className="absolute -top-20 -left-20 w-96 h-96 bg-teal-600/10 rounded-full filter blur-[100px] group-hover:bg-teal-500/20 transition-colors duration-700" />
 
-      {/* Content overlay */}
-      <div className="absolute inset-0 flex flex-col justify-end p-8 z-20">
-        <div className="backdrop-blur-sm bg-black/30 p-6 rounded-lg inline-block max-w-2xl border border-white/10">
-          <h1 className="font-sora text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-indigo-200 to-teal-200 bg-clip-text text-transparent mb-3">
+          {/* Accent line */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 via-indigo-500 to-teal-500 opacity-80" />
+
+          <Image
+            src={image}
+            alt={project.title}
+            fill
+            className="object-cover object-center transition-all duration-700 group-hover:saturate-[1.1]"
+            priority
+          />
+        </div>
+
+        {/* Floating title overlay for larger screens */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-black/80 to-transparent">
+          <h1 className="font-sora text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-purple-200 to-teal-200 bg-clip-text text-transparent mb-2 transform transition-all duration-500 group-hover:translate-y-[-5px]">
             {project.title}
           </h1>
-          <p className="text-neutral-200 text-lg max-w-2xl">{project.introduction}</p>
-          
-          {/* Project tags/stacks */}
-          {stacks.length > 0 && (
-            <div className="mt-6 pt-4 border-t border-white/10">
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="text-sm font-medium uppercase text-neutral-300">TECH STACK:</span>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div className="p-6 md:p-8 border-t border-purple-500/30 bg-gradient-to-b from-black/40 to-neutral-900/40">
+        <p className="text-neutral-200 text-lg md:text-xl max-w-3xl leading-relaxed mb-8">
+          {project.introduction}
+        </p>
+
+        {/* Project tags/stacks with improved styling */}
+        {stacks.length > 0 && (
+          <div className="mt-6 pt-6 border-t border-purple-800/20">
+            <div className="flex flex-wrap items-center gap-4">
+              <span className="text-sm font-medium uppercase text-purple-300 tracking-wider">
+                TECH STACK
+              </span>
+              <div className="flex flex-wrap gap-3">
                 {stacks.map((stack) => (
-                  <div key={stack.id} className="transition-transform duration-200 hover:scale-110">
+                  <div
+                    key={stack.id}
+                    className="transition-all duration-300 hover:scale-110 hover:-translate-y-1"
+                  >
                     <Tooltip title={stack.title}>
-                      <div className="flex h-9 w-9 items-center justify-center rounded-md bg-neutral-800/70 p-1.5 border border-neutral-700/30 backdrop-blur-sm">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-800/70 p-2 border border-purple-500/30 backdrop-blur-sm shadow-md shadow-purple-900/20 hover:shadow-purple-700/30 hover:border-purple-400/50 transition-all duration-300">
                         {getStackIcon(stack.stackHandle)}
                       </div>
                     </Tooltip>
@@ -62,46 +80,46 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
                 ))}
               </div>
             </div>
-          )}
-          
-          <div className="flex flex-wrap items-center justify-between mt-6 pt-4 border-t border-white/10">
-            <div className="flex gap-2">
-              <span className="inline-block px-3 py-1 text-xs font-mono rounded-md bg-teal-900/30 text-teal-400 border border-teal-800/30">
-                PROJECT
-              </span>
-              <span className="inline-block px-3 py-1 text-xs font-mono rounded-md bg-neutral-800/50 text-neutral-300 border border-neutral-700/30">
-                {new Date(project.createdAt).getFullYear()}
-              </span>
-            </div>
-            
-            {/* Project links */}
-            {(project.githubLink || project.liveLink) && (
-              <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
-                {project.githubLink && (
-                  <Link 
-                    href={project.githubLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-all duration-300 border border-indigo-500"
-                  >
-                    <FiGithub size={16} />
-                    <span>GitHub</span>
-                  </Link>
-                )}
-                {project.liveLink && (
-                  <Link 
-                    href={project.liveLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-neutral-700 hover:bg-neutral-800 rounded-lg transition-all duration-300 border border-neutral-600"
-                  >
-                    <FiExternalLink size={16} />
-                    <span>Live Preview</span>
-                  </Link>
-                )}
-              </div>
-            )}
           </div>
+        )}
+
+        <div className="flex flex-wrap items-center justify-between mt-8 pt-6 border-t border-purple-800/20">
+          <div className="flex gap-3">
+            <span className="inline-block px-4 py-2 text-xs font-mono rounded-lg bg-purple-900/40 text-purple-300 border border-purple-700/40 shadow-sm shadow-purple-900/20">
+              PROJECT
+            </span>
+            <span className="inline-block px-4 py-2 text-xs font-mono rounded-lg bg-neutral-800/70 text-neutral-300 border border-neutral-700/40 shadow-sm shadow-black/20">
+              {new Date(project.createdAt).getFullYear()}
+            </span>
+          </div>
+
+          {/* Project links with enhanced styling */}
+          {(project.githubLink || project.liveLink) && (
+            <div className="flex flex-wrap gap-3 mt-4 sm:mt-0">
+              {project.githubLink && (
+                <Link
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-lg transition-all duration-300 border border-purple-500/50 shadow-md shadow-purple-900/20 hover:shadow-lg hover:shadow-purple-700/30 hover:translate-y-[-2px]"
+                >
+                  <FiGithub size={18} />
+                  <span>GitHub</span>
+                </Link>
+              )}
+              {project.liveLink && (
+                <Link
+                  href={project.liveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 rounded-lg transition-all duration-300 border border-teal-500/50 shadow-md shadow-teal-900/20 hover:shadow-lg hover:shadow-teal-700/30 hover:translate-y-[-2px]"
+                >
+                  <FiExternalLink size={18} />
+                  <span>Live Preview</span>
+                </Link>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
