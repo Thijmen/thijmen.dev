@@ -80,7 +80,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-[#2d2b55]/90 hover:bg-[#3c3a75] rounded-lg transition-colors duration-300 border border-[#4a4873]/70 shadow-sm"
                   >
-                    <FiGithub size={14} />
+                    <FiGithub size={14} className="text-white" />
                     <span>View Source</span>
                   </Link>
                 )}
@@ -91,7 +91,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-teal-600/90 hover:bg-teal-700 rounded-lg transition-colors duration-300 border border-teal-500/70 shadow-sm"
                   >
-                    <FiExternalLink size={14} />
+                    <FiExternalLink size={14} className="text-white" />
                     <span>View Project</span>
                   </Link>
                 )}
@@ -103,14 +103,14 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
       
       {/* Tech stack section - improved tooltip visibility */}
       {stacks.length > 0 && (
-        <div className="p-4 md:p-5 border-t border-[#2d2b55]/70 bg-[#1a1a2e]/95 relative z-40">
+        <div className="p-4 md:p-5 border-t border-[#2d2b55]/70 bg-[#1a1a2e]/95 relative z-40 dark:text-white">
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-xs font-medium uppercase text-neutral-300 tracking-wide">// TECH STACK</span>
             <div className="flex flex-wrap gap-2">
               {stacks.map((stack) => (
                 <div key={stack.id} className="transition-transform duration-200 hover:scale-105 relative z-50">
                   <Tooltip title={stack.title}>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#2d2b55]/80 p-1.5 border border-[#4a4873]/60 shadow-sm">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#2d2b55]/80 p-1.5 border border-[#4a4873]/60 shadow-sm text-white">
                       {getStackIcon(stack.stackHandle)}
                     </div>
                   </Tooltip>
@@ -137,6 +137,14 @@ const styles = `
   [role="tooltip"] {
     z-index: 100 !important;
     position: relative !important;
+  }
+  
+  /* Ensure icons are visible in light mode */
+  .bg-[#2d2b55]/80 svg,
+  .bg-[#2d2b55]/90 svg,
+  .bg-teal-600/90 svg {
+    color: white !important;
+    fill: white !important;
   }
 `;
 
