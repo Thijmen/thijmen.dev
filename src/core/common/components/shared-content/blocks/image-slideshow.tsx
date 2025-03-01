@@ -167,7 +167,7 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
             >
               <div className="relative aspect-video w-full">
                 <img
-                  src={slide.image.url || ''}
+                  src={(slide.image as R2Media).url || ''}
                   alt={slide.caption || 'Slideshow image'}
                   className="h-full w-full object-cover"
                 />
