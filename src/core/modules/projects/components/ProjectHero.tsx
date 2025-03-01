@@ -14,13 +14,13 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
   return (
     <div className="relative h-64 md:h-80 lg:h-96 w-full mb-8 overflow-hidden rounded-xl">
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/90 via-purple-800/80 to-teal-900/70 mix-blend-multiply z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/90 via-purple-800/80 to-teal-900/70 mix-blend-multiply z-10" />
 
       {/* Decorative pattern */}
       <div className="absolute inset-0 z-0 opacity-20">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-repeat opacity-30"></div>
-        <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute top-0 left-0 w-48 h-48 bg-indigo-500/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-repeat opacity-30" />
+        <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full filter blur-3xl" />
+        <div className="absolute top-0 left-0 w-48 h-48 bg-indigo-500/10 rounded-full filter blur-3xl" />
       </div>
 
       {/* Project image */}
@@ -44,7 +44,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
               PROJECT
             </span>
             <span className="inline-block px-3 py-1 text-xs font-mono rounded-md bg-neutral-800/50 text-neutral-300 border border-neutral-700/30">
-              2025
+              {new Date(project.createdAt).getFullYear()}
             </span>
           </div>
         </div>

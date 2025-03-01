@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "cross-env NODE_OPTIONS='--inspect=9237' next dev --port 3001 --turbo",
+		"dev": "cross-env NODE_OPTIONS='--no-deprecation' next dev --port 3001 --turbo",
 		"build": "cross-env NODE_OPTIONS=--no-deprecation next build",
 		"payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
 		"start": "cross-env NODE_OPTIONS=--no-deprecation next start",
