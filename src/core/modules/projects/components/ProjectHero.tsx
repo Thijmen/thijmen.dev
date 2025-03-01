@@ -101,14 +101,14 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
         </div>
       </div>
       
-      {/* Tech stack section */}
+      {/* Tech stack section - improved tooltip visibility */}
       {stacks.length > 0 && (
-        <div className="p-4 md:p-5 border-t border-[#2d2b55]/70 bg-[#1a1a2e]/95">
+        <div className="p-4 md:p-5 border-t border-[#2d2b55]/70 bg-[#1a1a2e]/95 relative z-40">
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-xs font-medium uppercase text-neutral-300 tracking-wide">// TECH STACK</span>
             <div className="flex flex-wrap gap-2">
               {stacks.map((stack) => (
-                <div key={stack.id} className="transition-transform duration-200 hover:scale-105">
+                <div key={stack.id} className="transition-transform duration-200 hover:scale-105 relative z-50">
                   <Tooltip title={stack.title}>
                     <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#2d2b55]/80 p-1.5 border border-[#4a4873]/60 shadow-sm">
                       {getStackIcon(stack.stackHandle)}
@@ -124,13 +124,19 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
   )
 }
 
-// Add global styles for text shadows
+// Add global styles for text shadows and tooltip fixes
 const styles = `
   .text-shadow-sm {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   }
   .text-shadow-xs {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Ensure tooltips are visible */
+  [role="tooltip"] {
+    z-index: 100 !important;
+    position: relative !important;
   }
 `;
 
