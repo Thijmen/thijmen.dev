@@ -791,6 +791,28 @@ export interface MyPostsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyImageSlideshowBlock".
+ */
+export interface MyImageSlideshowBlock {
+  description: string;
+  slides: {
+    image: number | R2Media;
+    caption: string;
+    description?: string | null;
+    id?: string | null;
+  }[];
+  settings?: {
+    autoplay?: boolean | null;
+    autoplaySpeed?: number | null;
+    showDots?: boolean | null;
+    showArrows?: boolean | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageSlideshow';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

@@ -17,6 +17,7 @@ import type {
 	MyHomepagePostsBlock,
 	MyHomepageProjectsBlock,
 	MyHorizontalLineBlock,
+	MyImageSlideshowBlock,
 	MyJavascriptPlaygroundBlock,
 	MyPostsBlock,
 	MyProjectsBlock,
@@ -33,19 +34,17 @@ import { WakaBlock } from './blocks/waka'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
 import { EnhancedIntroductionBlock } from './blocks/enhancedIntroduction'
 import { HomepagePostsBlock } from './blocks/homepage-posts-block'
-
+import { ImageSlideshowBlock } from './blocks/image-slideshow'
 
 type Props = {
 	data: SerializedEditorState
 	enableGutter?: boolean
 	enableProse?: boolean
-  } & React.HTMLAttributes<HTMLDivElement>
-  
+} & React.HTMLAttributes<HTMLDivElement>
 
-  type NodeTypes =
+type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<MyCodeBlock | MyProjectsBlock | MyHorizontalLineBlock | MyWakaContributionsBlock |MyGithubContributionsBlock | MyJavascriptPlaygroundBlock | MyHomepageProjectsBlock | MyHomepageIntroductionBlock | MyGithubStarsBlock | MyHomepagePostsBlock | MyPostsBlock> 
-
+  | SerializedBlockNode<MyCodeBlock | MyProjectsBlock | MyHorizontalLineBlock | MyWakaContributionsBlock | MyGithubContributionsBlock | MyJavascriptPlaygroundBlock | MyHomepageProjectsBlock | MyHomepageIntroductionBlock | MyGithubStarsBlock | MyHomepagePostsBlock | MyPostsBlock | MyImageSlideshowBlock>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
 	const { value, relationTo } = linkNode.fields.doc!
@@ -61,31 +60,24 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
 	blocks: {
 		code: ({ node }) => <Mdx {...node.fields} />,
 		projectsBlock: ({ node }) => <ProjectsBlock {...node.fields} />,
-		githubStarsBlock: ({ node }) => <GithubStarsBlock  />,
+		githubStarsBlock: ({ node }) => <GithubStarsBlock />,
 		homepageProjectsBlock: ({ node }) => <HomepageProjectsBlock {...node.fields} />,
 		horizontalLineBlock: ({ node }) => <HorizontalLineBlock {...node.fields} />,
-		githubContributionsBlock: ({ node }) => <GithubBlock  />,
-		wakaContributionsBlock: ({ node }) => <WakaBlock  />,
-		javascriptPlaygroundBlock: ({ node }) => <JavascriptPlaygroundBlock  />,
+		githubContributionsBlock: ({ node }) => <GithubBlock />,
+		wakaContributionsBlock: ({ node }) => <WakaBlock />,
+		javascriptPlaygroundBlock: ({ node }) => <JavascriptPlaygroundBlock />,
 		homepageIntroductionBlock: ({ node }) => <EnhancedIntroductionBlock {...node.fields} />,
 		homepagePostsBlock: ({ node }) => <HomepagePostsBlock {...node.fields} />,
-  },
+		imageSlideshow: ({ node }) => <ImageSlideshowBlock {...node.fields} />,
+	},
 })
-  
+
 export const RichText = (props: Props) => {
 	const { className, enableProse = true, enableGutter = true, ...rest } = props
 	return (
-	  <RichTextWithoutBlocks
-		converters={jsxConverters}
-		// className={cn(
-		//   {
-		// 	'container ': enableGutter,
-		// 	'max-w-none': !enableGutter,
-		// 	'mx-auto prose md:prose-md dark:prose-invert ': enableProse,
-		//   },
-		//   className,
-		// )}
-		{...rest}
-	  />
+		<RichTextWithoutBlocks
+			converters={jsxConverters}
+			{...rest}
+		/>
 	)
-  }
+}
