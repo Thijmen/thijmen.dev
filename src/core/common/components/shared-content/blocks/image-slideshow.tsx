@@ -5,6 +5,7 @@ import type { MyImageSlideshowBlock } from '@/payload/payload-types'
 import cn from '../../../libs/cn'
 import useIsMobile from '@/core/common/hooks/useIsMobile'
 import '@/core/common/styles/grid-pattern.css'
+import { createPortal } from 'react-dom'
 
 export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
   description,
@@ -13,9 +14,11 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const slideshowRef = useRef<HTMLDivElement>(null)
+  const fullscreenRef = useRef<HTMLDivElement>(null)
   const isMobile = useIsMobile()
 
   const totalSlides = slides?.length || 0
@@ -27,12 +30,12 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
   // Minimum swipe distance (in px)
   const minSwipeDistance = 50
 
-  const handlePrev = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)
+  const handleNext = useCallback(() => {
+    setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1))
   }, [totalSlides])
 
-  const handleNext = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides)
+  const handlePrev = useCallback(() => {
+    setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1))
   }, [totalSlides])
 
   const handleDotClick = (index: number) => {
@@ -64,37 +67,46 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
   }
 
   // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (isHovering) {
-        if (e.key === 'ArrowLeft') {
-          handlePrev()
-        } else if (e.key === 'ArrowRight') {
-          handleNext()
-        }
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        handlePrev()
+      } else if (e.key === 'ArrowRight') {
+        handleNext()
+      } else if (e.key === 'Escape' && isFullscreen) {
+        setIsFullscreen(false)
       }
-    }
+    },
+    [handleNext, handlePrev, isFullscreen],
+  )
 
-    window.addEventListener('keydown', handleKeyDown)
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isHovering, handlePrev, handleNext])
+  // Toggle fullscreen mode
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen)
+  }
 
-  // Autoplay
+  // Set up autoplay
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null
-
     if (autoplay && !isHovering) {
-      interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % totalSlides)
-      }, autoplaySpeed)
+      const interval = setInterval(handleNext, autoplaySpeed)
+      return () => clearInterval(interval)
     }
+  }, [autoplay, autoplaySpeed, handleNext, isHovering])
 
+  // Set up keyboard navigation
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
     return () => {
-      if (interval) clearInterval(interval)
+      document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [autoplay, autoplaySpeed, totalSlides, isHovering])
+  }, [handleKeyDown])
+
+  // Handle fullscreen mode focus
+  useEffect(() => {
+    if (isFullscreen && fullscreenRef.current) {
+      fullscreenRef.current.focus()
+    }
+  }, [isFullscreen])
 
   if (!slides || slides.length === 0) {
     return null
@@ -153,30 +165,51 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
               aria-label={`Slide ${index + 1} of ${totalSlides}: ${slide.caption}`}
               aria-hidden={currentSlide !== index}
             >
-              {slide.image && (
-                <div className="relative aspect-video w-full">
-                  <img
-                    src={slide.image.url || ''}
-                    alt={slide.caption || 'Slideshow image'}
-                    className="h-full w-full object-cover"
-                  />
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent pt-10 pb-4 px-5">
-                    <div className="flex items-start">
-                      <div className="mr-3 mt-1 h-12 w-1.5 bg-gradient-to-b from-teal-400 to-indigo-600 rounded-full shadow-md" />
-                      <div>
-                        <h4 className="font-sora text-xl font-medium text-white drop-shadow-md">
-                          {slide.caption}
-                        </h4>
-                        {slide.description && (
-                          <p className="mt-2 font-mono text-sm text-white opacity-90 drop-shadow-sm leading-relaxed">
-                            {slide.description}
-                          </p>
-                        )}
-                      </div>
+              <div className="relative aspect-video w-full">
+                <img
+                  src={slide.image.url || ''}
+                  alt={slide.caption || 'Slideshow image'}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent pt-10 pb-4 px-5">
+                  <div className="flex items-start">
+                    <div className="mr-3 mt-1 h-12 w-1.5 bg-gradient-to-b from-teal-400 to-indigo-600 rounded-full shadow-md" />
+                    <div>
+                      <h4 className="font-sora text-xl font-medium text-white drop-shadow-md">
+                        {slide.caption}
+                      </h4>
+                      {slide.description && (
+                        <p className="mt-2 font-mono text-sm text-white opacity-90 drop-shadow-sm leading-relaxed">
+                          {slide.description}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
-              )}
+
+                {/* Fullscreen button */}
+                <button
+                  type="button"
+                  onClick={toggleFullscreen}
+                  className="absolute top-3 right-3 p-2 rounded-lg bg-black/40 hover:bg-black/60 text-white backdrop-blur-sm transition-all duration-200 hover:scale-110"
+                  aria-label="Open lightbox"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -187,8 +220,8 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
         {showArrows && (
           <>
             <button
-              onClick={handlePrev}
               type="button"
+              onClick={handlePrev}
               className="absolute left-3 top-1/2 -translate-y-1/2 rounded-lg bg-black/50 p-2 text-white backdrop-blur-md transition-all hover:bg-indigo-600/90 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 shadow-lg"
               aria-label="Previous slide"
             >
@@ -208,8 +241,8 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
               </svg>
             </button>
             <button
-              onClick={handleNext}
               type="button"
+              onClick={handleNext}
               className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg bg-black/50 p-2 text-white backdrop-blur-md transition-all hover:bg-indigo-600/90 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 shadow-lg"
               aria-label="Next slide"
             >
@@ -268,6 +301,132 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
           <span>/* swipe to navigate */</span>
         </div>
       )}
+
+      {/* Lightbox modal */}
+      {isFullscreen &&
+        createPortal(
+          <div
+            ref={fullscreenRef}
+            className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center backdrop-blur-lg"
+            tabIndex={0}
+            onClick={() => setIsFullscreen(false)}
+            onKeyDown={(e) => e.key === 'Escape' && setIsFullscreen(false)}
+          >
+            <div
+              className="relative w-screen h-screen flex flex-col items-center justify-center p-4 md:p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                type="button"
+                onClick={() => setIsFullscreen(false)}
+                className="absolute top-4 right-4 z-10 p-2 rounded-lg bg-black/60 hover:bg-black/80 text-white transition-all duration-200 hover:scale-110"
+                aria-label="Close fullscreen"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              {/* Lightbox image container */}
+              <div className="w-full h-full max-h-[85vh] relative flex items-center justify-center">
+                <img
+                  src={slides[currentSlide].image.url || ''}
+                  alt={slides[currentSlide].caption || 'Fullscreen image'}
+                  className="max-h-full max-w-full object-contain shadow-2xl rounded-lg"
+                />
+
+                {/* Tech-inspired overlay pattern */}
+                <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
+              </div>
+
+              {/* Caption in lightbox */}
+              <div className="absolute bottom-4 left-4 right-4 max-w-4xl mx-auto bg-gradient-to-r from-gray-900/90 via-black/95 to-gray-900/90 rounded-xl p-4 backdrop-blur-md border border-indigo-500/20 shadow-xl">
+                <div className="flex items-start">
+                  <div className="mr-3 mt-1 h-16 w-1.5 bg-gradient-to-b from-teal-400 to-indigo-600 rounded-full shadow-md" />
+                  <div className="flex-1">
+                    <h4 className="font-sora text-xl font-medium text-white bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text">
+                      {slides[currentSlide].caption}
+                    </h4>
+                    {slides[currentSlide].description && (
+                      <p className="mt-2 font-mono text-sm text-white/90 leading-relaxed">
+                        {slides[currentSlide].description}
+                      </p>
+                    )}
+
+                    {/* Image counter */}
+                    <div className="mt-3 flex items-center">
+                      <div className="flex items-center space-x-1 text-xs font-mono text-gray-400">
+                        <span className="inline-block h-2 w-2 rounded-full bg-teal-500/70 animate-pulse" />
+                        <span>{`${currentSlide + 1}/${totalSlides}`}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Navigation arrows */}
+              {showArrows && (
+                <>
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-3 text-white shadow-md transition-all hover:bg-black/80 hover:scale-110"
+                    aria-label="Previous slide"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-3 text-white shadow-md transition-all hover:bg-black/80 hover:scale-110"
+                    aria-label="Next slide"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </>
+              )}
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   )
 }
