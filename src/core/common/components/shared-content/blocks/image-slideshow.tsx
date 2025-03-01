@@ -142,7 +142,7 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
         </div>
 
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+          className="flex h-full transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
           {slides.map((slide, index) => (
@@ -160,7 +160,7 @@ export const ImageSlideshowBlock: React.FC<MyImageSlideshowBlock> = ({
                     alt={slide.caption || 'Slideshow image'}
                     className="h-full w-full object-cover"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-5 backdrop-blur-sm">
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent pt-10 pb-4 px-5">
                     <div className="flex items-start">
                       <div className="mr-3 mt-1 h-12 w-1.5 bg-gradient-to-b from-teal-400 to-indigo-600 rounded-full shadow-md" />
                       <div>
