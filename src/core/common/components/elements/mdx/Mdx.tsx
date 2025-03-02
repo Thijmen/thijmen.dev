@@ -26,7 +26,7 @@ const Mdx = (props: MdxProps) => {
 	const { code } = props
 
 	return (
-		<div className='prose w-full'>
+		<div className='prose prose-code:max-w-full w-full'>
 			<MDXRemoteRSC source={code} components={components} />
 		</div>
 	)
