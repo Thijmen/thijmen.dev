@@ -22,7 +22,6 @@ const getLanguageIcon = (lang: string): React.ReactNode => {
       return <SiJavascript className="size-3.5" />
     }
 
-    case 'typescript':
     case 'ts': {
       // @ts-ignore
       return <SiTypescript className="size-3.5" />
@@ -49,7 +48,6 @@ const getLanguageIcon = (lang: string): React.ReactNode => {
 
 const Pre = (props: PreProps) => {
   const { children, className, title, 'data-lang': lang, ...rest } = props
-  console.log({ props })
 
   const textInput = React.useRef<HTMLPreElement>(null)
   const [text, setText] = React.useState<string>('')
