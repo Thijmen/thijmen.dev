@@ -42,71 +42,76 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
         <div className="absolute bottom-0 right-0 w-48 h-48 bg-teal-500/10 rounded-full filter blur-[60px] z-20" />
         <div className="absolute top-0 left-0 w-48 h-48 bg-purple-600/20 rounded-full filter blur-[60px] z-20" />
 
-        {/* Content overlay - added text shadow and improved contrast */}
-        <div className="absolute inset-0 z-30 p-5 md:p-6 flex flex-col justify-end">
-          {/* Featured project tag */}
+        {/* Content overlay with better positioning */}
+        <div className="absolute inset-0 z-30 flex flex-col">
+          {/* Featured project tag - positioned at top for both mobile and desktop */}
           {project.isFeatured && (
-            <div className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-teal-300 bg-teal-500/30 rounded-full w-fit border border-teal-500/40 mb-2.5 shadow-sm">
-              FEATURED PROJECT
+            <div className="p-5 md:p-6 pt-6 sm:pt-5">
+              <div className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-teal-300 bg-teal-500/30 rounded-full w-fit border border-teal-500/40 shadow-sm">
+                FEATURED PROJECT
+              </div>
             </div>
           )}
 
-          {/* Title and project name */}
-          <div className="mb-3">
-            <h1 className="font-sora text-3xl md:text-4xl font-bold text-white mb-1.5 text-shadow-sm">
-              {project.title}
-            </h1>
-            <p className="text-white text-base max-w-3xl line-clamp-2 text-shadow-xs bg-[#1a1a2e]/40 backdrop-blur-sm py-1 px-1.5 rounded-md inline-block">
-              {project.introduction}
-            </p>
-          </div>
-
-          {/* Project meta info */}
-          <div className="flex flex-wrap items-center justify-between">
-            <div className="flex gap-2 mb-2 sm:mb-0">
-              <span className="inline-block px-2.5 py-1 text-xs font-mono rounded-md bg-[#2d2b55]/80 text-white border border-[#4a4873]/60 shadow-sm">
-                PROJECT
-              </span>
-              <span className="inline-block px-2.5 py-1 text-xs font-mono rounded-md bg-[#2d2b55]/80 text-white border border-[#4a4873]/60 shadow-sm">
-                {new Date(project.createdAt).getFullYear()}
-              </span>
+          {/* Main content - positioned at bottom */}
+          <div className="mt-auto p-5 md:p-6">
+            {/* Title and project name */}
+            <div className="mb-3">
+              <h1 className="font-sora text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1.5 text-shadow-sm">
+                {project.title}
+              </h1>
+              <p className="text-white text-sm sm:text-base max-w-3xl line-clamp-2 text-shadow-xs bg-[#1a1a2e]/40 backdrop-blur-sm py-1 px-1.5 rounded-md inline-block">
+                {project.introduction}
+              </p>
             </div>
 
-            {/* Project links */}
-            {(project.githubLink || project.liveLink) && (
-              <div className="flex flex-wrap gap-2">
-                {project.githubLink && (
-                  <Link
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-[#2d2b55]/90 hover:bg-[#3c3a75] rounded-lg transition-colors duration-300 border border-[#4a4873]/70 shadow-sm"
-                  >
-                    <FiGithub size={14} className="text-white" />
-                    <span>View Source</span>
-                  </Link>
-                )}
-                {project.liveLink && (
-                  <Link
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-teal-600/90 hover:bg-teal-700 rounded-lg transition-colors duration-300 border border-teal-500/70 shadow-sm"
-                  >
-                    <FiExternalLink size={14} className="text-white" />
-                    <span>View Project</span>
-                  </Link>
-                )}
+            {/* Project meta info - improved mobile layout */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
+              <div className="flex gap-2">
+                <span className="inline-block px-2.5 py-1 text-xs font-mono rounded-md bg-[#2d2b55]/80 text-white border border-[#4a4873]/60 shadow-sm">
+                  PROJECT
+                </span>
+                <span className="inline-block px-2.5 py-1 text-xs font-mono rounded-md bg-[#2d2b55]/80 text-white border border-[#4a4873]/60 shadow-sm">
+                  {new Date(project.createdAt).getFullYear()}
+                </span>
               </div>
-            )}
+
+              {/* Project links */}
+              {(project.githubLink || project.liveLink) && (
+                <div className="flex flex-wrap gap-2">
+                  {project.githubLink && (
+                    <Link
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-[#2d2b55]/90 hover:bg-[#3c3a75] rounded-lg transition-colors duration-300 border border-[#4a4873]/70 shadow-sm"
+                    >
+                      <FiGithub size={14} className="text-white" />
+                      <span>View Source</span>
+                    </Link>
+                  )}
+                  {project.liveLink && (
+                    <Link
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-teal-600/90 hover:bg-teal-700 rounded-lg transition-colors duration-300 border border-teal-500/70 shadow-sm"
+                    >
+                      <FiExternalLink size={14} className="text-white" />
+                      <span>View Project</span>
+                    </Link>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Tech stack section - improved tooltip visibility */}
+      {/* Tech stack section - improved mobile spacing */}
       {stacks.length > 0 && (
         <div className="p-4 md:p-5 border-t border-[#2d2b55]/70 bg-[#1a1a2e]/95 relative z-40 dark:text-white">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <span className="text-xs font-medium uppercase text-neutral-300 tracking-wide">
               // TECH STACK
             </span>
