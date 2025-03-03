@@ -167,7 +167,12 @@ Card.Title = function CardTitle({ variant, children, className }: CardTitleProps
 
 Card.Description = function CardDescription({ children, className }: CardDescriptionProps) {
   return (
-    <p className={cn('mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 line-clamp-3', className)}>
+    <p
+      className={cn(
+        'mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 line-clamp-3',
+        className,
+      )}
+    >
       {children}
     </p>
   )
@@ -215,7 +220,10 @@ Card.Tags = function CardTags({ variant, tags, label = 'TOPICS', className }: Ca
 Card.Footer = function CardFooter({ children, className }: CardFooterProps) {
   return (
     <div
-      className={cn('flex justify-between items-center pt-3 border-t border-neutral-200 dark:border-neutral-800', className)}
+      className={cn(
+        'flex justify-between items-center pt-3 border-t border-neutral-200 dark:border-neutral-800',
+        className,
+      )}
     >
       {children}
     </div>

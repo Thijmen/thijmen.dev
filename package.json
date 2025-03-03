@@ -17,7 +17,7 @@
 		"standalone-script": "node ./src/scripts/standalone-script.js",
 		"lint": "biome check .",
 		"lint:fix": "biome check . --write",
-		"ssssprepare": "husky",
+		"prepare": "husky",
 		"knip": "knip"
 	},
 	"dependencies": {
@@ -111,7 +111,7 @@
 		"zustand": "^4.5.5"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.8.3",
+		"@biomejs/biome": "^1.9.4",
 		"@commitlint/cli": "^17.8.1",
 		"@commitlint/config-conventional": "^17.8.1",
 		"@emotion/react": "^11.13.3",
@@ -148,6 +148,11 @@
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"sharp"
+		]
+	},
+	"lint-staged": {
+		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+		  "biome lint --write --no-errors-on-unmatched"
 		]
 	}
 }

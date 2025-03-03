@@ -101,7 +101,7 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
                     })}
                   </time>
                   <span className="inline-flex items-center text-xs tracking-wide text-indigo-600 dark:text-indigo-400 font-medium group/link">
-                    Read article
+                    Read article here
                     <svg
                       className="w-3.5 h-3.5 ml-1.5 transform transition-transform duration-300 group-hover/link:translate-x-1 opacity-80"
                       viewBox="0 0 24 24"

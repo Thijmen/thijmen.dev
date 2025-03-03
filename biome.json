@@ -29,6 +29,9 @@
 			"complexity": {
 				"noForEach": "off"
 			},
+			"suspicious": {
+				"noCommentText": "off"
+			},
 			"a11y": {
 				"useValidAnchor": "off",
 				"noSvgWithoutTitle": "off",
