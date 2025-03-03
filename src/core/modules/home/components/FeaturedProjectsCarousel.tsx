@@ -12,35 +12,38 @@ interface Props {
 
 const FeaturedProjectsCarousel = (props: Props) => {
   const { projects } = props
-
   const ref = useRef<HTMLDivElement>(null) as React.MutableRefObject<HTMLInputElement>
-
   const { events } = useDraggable(ref)
 
-  const renderBlogCards = () => {
-    return projects.map((item, index) => (
-      <motion.div
-        key={item.id}
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -100 }}
-        transition={{ duration: 0.5 }}
-        // @ts-ignore
-        className={'min-w-[326px] gap-x-5'}
-      >
-        <FeaturedProjectItem project={item} />
-      </motion.div>
-    ))
-  }
+  // Create a duplicated array of projects for demo purposes
+  const duplicatedProjects = [...projects, ...projects, ...projects, ...projects]
 
   return (
-    <div className="grid pt-4 grid-cols-1 lg:grid-cols-2 gap-8" {...events} ref={ref}>
-      {renderBlogCards()}
-      {renderBlogCards()}
-      {renderBlogCards()}
-      {renderBlogCards()}
-      {renderBlogCards()}
-      {renderBlogCards()}
+    <div className="overflow-hidden">
+      <div
+        ref={ref}
+        {...events}
+        className="flex gap-8 overflow-x-auto pt-4 pb-4 no-scrollbar"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}
+      >
+        {duplicatedProjects.map((item, index) => (
+          <div 
+            key={`${item.id}-${index}`}
+            className="min-w-[calc(50%-16px)] w-[calc(50%-16px)] flex-shrink-0"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <FeaturedProjectItem project={item} />
+            </motion.div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
