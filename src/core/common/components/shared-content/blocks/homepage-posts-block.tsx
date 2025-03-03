@@ -72,7 +72,7 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
 					</Link>
 				</SectionSubHeading>
 			</div>
-			<div className='grid pt-4 grid-cols-1 lg:grid-cols-2 gap-8'>
+			<div className='grid pt-4 grid-cols-1 sm:grid-cols-2 gap-8'>
 				{thePosts.map((post) => (
 					<motion.div
 						key={post.slug}

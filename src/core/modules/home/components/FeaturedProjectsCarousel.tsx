@@ -81,7 +81,7 @@ const FeaturedProjectsCarousel = (props: Props) => {
 				{duplicatedProjects.map((item, index) => (
 					<div
 						key={`${item.id}-${index}`}
-						className='min-w-[calc(50%-16px)] w-[calc(50%-16px)] flex-shrink-0'
+						className='min-w-full w-full sm:min-w-[calc(50%-16px)] sm:w-[calc(50%-16px)] flex-shrink-0'
 					>
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}

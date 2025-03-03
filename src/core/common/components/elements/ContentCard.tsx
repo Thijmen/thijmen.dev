@@ -87,7 +87,7 @@ export function Card({ variant, href, children, className }: CardRootProps) {
 		<Link href={href}>
 			<div
 				className={cn(
-					'group relative flex h-[400px] w-full flex-col rounded-lg border transition-all duration-300 shadow-md hover:shadow-xl dark:border-neutral-800 overflow-hidden',
+					'group relative flex h-[350px] sm:h-[400px] w-full flex-col rounded-lg border transition-all duration-300 shadow-md hover:shadow-xl dark:border-neutral-800 overflow-hidden',
 					variantStyles[variant].card,
 					className,
 				)}
