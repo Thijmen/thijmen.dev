@@ -55,6 +55,7 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
   const thePosts = [...cmsPosts, ...demoData]
   const tags = ['TypeScript', 'Design Patterns', 'Enterprise']
 
+  const variant = 'post'
   return (
     <section className="py-2 space-y-6">
       <div className="flex items-center justify-between">
@@ -80,17 +81,17 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
             whileInView="animate"
             viewport={{ once: true }}
           >
-            <Card variant="post" href={`/posts/${post.slug}`}>
-              <Card.Header variant="post" />
+            <Card variant={variant} href={`/posts/${post.slug}`}>
+              <Card.Header variant={variant} />
               <Card.Content>
                 <div>
-                  <Card.Label variant="post">LATEST POST</Card.Label>
-                  <Card.Title variant="post">{post.title}</Card.Title>
+                  <Card.Label variant={variant}>LATEST POST</Card.Label>
+                  <Card.Title variant={variant}>{post.title}</Card.Title>
                   <Card.Description>{post.description}</Card.Description>
                 </div>
 
-                <Card.Tags variant="post" tags={tags} />
-                
+                <Card.Tags variant={variant} tags={tags} />
+
                 <Card.Footer>
                   <time className="text-xs tracking-wide text-neutral-500 dark:text-neutral-500 font-mono">
                     {new Date(post.createdAt).toLocaleDateString('en-US', {
