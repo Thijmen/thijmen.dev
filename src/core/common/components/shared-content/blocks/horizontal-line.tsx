@@ -1,7 +1,10 @@
 import type { MyHorizontalLineBlock } from '@/payload/payload-types'
 import Breakline from '../../elements/Breakline'
 
-export const HorizontalLineBlock: React.FC<MyHorizontalLineBlock> = ({ variant, additionalClassName })  => {
+export const HorizontalLineBlock: React.FC<MyHorizontalLineBlock> = ({
+	variant,
+	additionalClassName,
+}) => {
 	switch (variant) {
 		case 'dashed':
 		case null:

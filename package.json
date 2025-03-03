@@ -146,13 +146,11 @@
 	},
 	"packageManager": "pnpm@10.3.0",
 	"pnpm": {
-		"onlyBuiltDependencies": [
-			"sharp"
-		]
+		"onlyBuiltDependencies": ["sharp"]
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
-		  "biome lint --write --no-errors-on-unmatched"
+			"biome lint --write --no-errors-on-unmatched"
 		]
 	}
 }

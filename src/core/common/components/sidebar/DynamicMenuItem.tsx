@@ -7,7 +7,6 @@ import {
 	FiUser as ProfileIcon,
 	FiCoffee as ProjectIcon,
 } from 'react-icons/fi'
-import { SiJavascript } from 'react-icons/si'
 import MenuItem from './MenuItem'
 
 interface Props {

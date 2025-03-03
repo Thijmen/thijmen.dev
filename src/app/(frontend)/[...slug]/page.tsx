@@ -5,14 +5,14 @@ import BackButton from '@/core/common/components/elements/BackButton'
 import Container from '@/core/common/components/elements/Container'
 import PageHeading from '@/core/common/components/elements/PageHeading'
 import Layout from '@/core/common/components/layouts'
+import { RichText } from '@/core/common/components/shared-content'
 import { getMenuItems } from '@/core/services/menu'
 import { generateMeta } from '@/payload/utilities/generateMeta'
 import configPromise from '@payload-config'
 import { draftMode } from 'next/headers'
+import { getPayload } from 'payload'
 import { cache } from 'react'
 import type { Page as PageType } from '../../../payload/payload-types'
-import { RichText } from '@/core/common/components/shared-content'
-import { getPayload } from 'payload'
 
 export async function generateStaticParams() {
 	const payload = await getPayload({ config: configPromise })

@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext, useState } from 'react'
@@ -54,21 +53,14 @@ const MenuItem = ({
 	const itemComponent = () => {
 		return (
 			<div {...elementProps}>
-				{!hideIcon && (
-					<div>
-						{icon}
-					</div>
-				)}
+				{!hideIcon && <div>{icon}</div>}
 				<div className='ml-0.5 flex-grow'>{title}</div>
 				{children && children}
 				{isActiveRoute && (
 					<ExternalLinkIcon size={22} className='text-gray-500' />
 				)}
 				{isExternalUrl && isHovered && (
-					<ExternalLinkIcon
-						size={22}
-						className='-rotate-45 text-gray-500'
-					/>
+					<ExternalLinkIcon size={22} className='-rotate-45 text-gray-500' />
 				)}
 			</div>
 		)

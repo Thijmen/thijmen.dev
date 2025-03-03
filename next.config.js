@@ -8,7 +8,7 @@ const nextConfig = {
 	output: 'standalone',
 	experimental: {
 		reactCompiler: false,
-		turbo: {}
+		turbo: {},
 	},
 	images: {
 		remotePatterns: [

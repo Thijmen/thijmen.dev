@@ -2,7 +2,7 @@ import configPromise from '@payload-config'
 import jwt, { type JwtPayload } from 'jsonwebtoken'
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { getPayload, type CollectionSlug } from 'payload'
+import { type CollectionSlug, getPayload } from 'payload'
 
 const payloadToken = 'payload-token'
 

@@ -25,16 +25,18 @@ const Navigation = (props: Props) => {
 	}
 
 	return (
-		<div className="relative">
+		<div className='relative'>
 			{/* Simple navigation header */}
-			<div className="mb-4">
-				<div className="text-xs font-mono text-neutral-500 dark:text-neutral-400 ml-2 tracking-wider">NAVIGATION</div>
+			<div className='mb-4'>
+				<div className='text-xs font-mono text-neutral-500 dark:text-neutral-400 ml-2 tracking-wider'>
+					NAVIGATION
+				</div>
 			</div>
-			
+
 			<Menu navGlobal={props.navGlobal} list={filterdMenu} />
-			
+
 			<Breakline className='my-3' />
-			
+
 			<MenuItem
 				title={isMobile ? 'Command' : 'cmd + k'}
 				href='#'

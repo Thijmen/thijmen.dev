@@ -1,7 +1,7 @@
 import type { Page } from '@/payload/payload-types'
 import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
+import { getPayload } from 'payload'
 import { cache } from 'react'
 
 export const queryPageBySlug = cache(

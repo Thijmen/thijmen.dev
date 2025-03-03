@@ -1,5 +1,3 @@
-import { serialize } from '@/core/common/components/elements/mdx/serialize'
-
 export async function POST(request: Request) {
 	try {
 		// Parse the request body to get the Markdown content

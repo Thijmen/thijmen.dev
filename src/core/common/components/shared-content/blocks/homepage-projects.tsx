@@ -1,6 +1,5 @@
 import { getProjects } from '@/core/common/services/projects.service'
 import FeaturedProjectsCarousel from '@/core/modules/home/components/FeaturedProjectsCarousel'
-import type { MyHomepageProjectsBlock } from '@/payload/payload-types'
 import Link from 'next/link'
 import { BsArrowRightShort as ViewAllIcon } from 'react-icons/bs'
 import SectionHeading from '../../elements/SectionHeading'
@@ -10,7 +9,12 @@ export const HomepageProjectsBlock = async ({
 	headingTitle,
 	linkHref,
 	linkTitle,
-}: { onlyFeatured?: boolean | null; headingTitle?: string; linkHref?: string; linkTitle?: string }) => {
+}: {
+	onlyFeatured?: boolean | null
+	headingTitle?: string
+	linkHref?: string
+	linkTitle?: string
+}) => {
 	const projects = await getProjects(onlyFeatured)
 
 	return (

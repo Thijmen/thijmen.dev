@@ -27,7 +27,7 @@ const CodingActive = ({ lastUpdate }: CodingActiveProps) => {
 			const lastUpdateDate = lastUpdate || data?.last_update
 			if (lastUpdateDate) {
 				const zonedDate = lastUpdateDate //	utcToZonedTime(
-					// zonedTimeToUtc(lastUpdateDate, 'Europe/Amsterdam'),
+				// zonedTimeToUtc(lastUpdateDate, 'Europe/Amsterdam'),
 				//	'Europe/Amsterdam',
 				//)
 				const distance = formatDistanceToNowStrict(zonedDate, {
