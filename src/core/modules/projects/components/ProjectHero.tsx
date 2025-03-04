@@ -20,7 +20,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
 	return (
 		<div className='w-full mb-8 overflow-hidden rounded-xl bg-[#1a1a2e]/90 border border-[#2d2b55]/50 backdrop-blur-md'>
 			{/* Hero section with image and overlaid content */}
-			<div className='relative w-full h-[260px] md:h-[300px] overflow-hidden'>
+			<div className='relative w-full h-[240px] sm:h-[260px] md:h-[300px] overflow-hidden'>
 				{/* Background image with gradient overlay */}
 				<div className='absolute inset-0'>
 					{/* Darker gradient overlay for better text readability */}
@@ -46,7 +46,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
 				<div className='absolute inset-0 z-30 flex flex-col'>
 					{/* Featured project tag - positioned at top for both mobile and desktop */}
 					{project.isFeatured && (
-						<div className='p-5 md:p-6 pt-6 sm:pt-5'>
+						<div className='p-4 sm:p-5 md:p-6 pt-5 sm:pt-6'>
 							<div className='inline-flex items-center px-2.5 py-1 text-xs font-medium text-teal-300 bg-teal-500/30 rounded-full w-fit border border-teal-500/40 shadow-sm'>
 								FEATURED PROJECT
 							</div>
@@ -54,9 +54,9 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
 					)}
 
 					{/* Main content - positioned at bottom */}
-					<div className='mt-auto p-5 md:p-6'>
+					<div className='mt-auto p-4 sm:p-5 md:p-6'>
 						{/* Title and project name */}
-						<div className='mb-3'>
+						<div className='mb-2 sm:mb-3'>
 							<h1 className='font-sora text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1.5 text-shadow-sm'>
 								{project.title}
 							</h1>
@@ -66,7 +66,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
 						</div>
 
 						{/* Project meta info - improved mobile layout */}
-						<div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0'>
+						<div className='flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4'>
 							<div className='flex gap-2'>
 								<span className='inline-block px-2.5 py-1 text-xs font-mono rounded-md bg-[#2d2b55]/80 text-white border border-[#4a4873]/60 shadow-sm'>
 									PROJECT
@@ -76,9 +76,9 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
 								</span>
 							</div>
 
-							{/* Project links */}
+							{/* Project links - moved outside the flex container for better mobile visibility */}
 							{(project.githubLink || project.liveLink) && (
-								<div className='flex flex-wrap gap-2'>
+								<div className='flex flex-wrap gap-2 mt-2 sm:mt-0'>
 									{project.githubLink && (
 										<Link
 											href={project.githubLink}
