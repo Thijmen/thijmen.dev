@@ -180,10 +180,6 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
                   </Link>
                 </div>
               </div>
-
-              {/* Decorative glowing elements */}
-              <div className="absolute -left-6 top-20 h-12 w-12 rounded-full bg-gradient-to-r from-indigo-400 to-blue-500 opacity-40 blur-xl" />
-              <div className="absolute -right-6 bottom-20 h-12 w-12 rounded-full bg-gradient-to-r from-purple-400 to-indigo-500 opacity-40 blur-xl" />
             </article>
           </motion.div>
         ))}

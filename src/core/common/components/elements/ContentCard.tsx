@@ -67,6 +67,13 @@ const variantStyles = {
 			first: 'from-teal-400 to-blue-500',
 			second: 'from-purple-400 to-teal-500',
 		},
+		header: {
+			height: '200px',
+			bg: 'bg-gradient-to-br from-teal-600 to-blue-700',
+		},
+		label: {
+			bg: 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300',
+		},
 	},
 	post: {
 		card: 'hover:shadow-indigo-500/20',
@@ -79,15 +86,22 @@ const variantStyles = {
 			first: 'from-indigo-400 to-blue-500',
 			second: 'from-purple-400 to-indigo-500',
 		},
+		header: {
+			height: '60px',
+			bg: 'bg-gradient-to-br from-indigo-600 to-purple-700',
+		},
+		label: {
+			bg: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300',
+		},
 	},
 }
 
 export function Card({ variant, href, children, className }: CardRootProps) {
 	return (
 		<Link href={href}>
-			<div
+			<article
 				className={cn(
-					'group relative flex h-[350px] sm:h-[400px] w-full flex-col rounded-lg border transition-all duration-300 shadow-md hover:shadow-xl dark:border-neutral-800 overflow-hidden',
+					'group relative flex h-[380px] w-full flex-col rounded-xl border border-neutral-200 dark:border-neutral-800 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden',
 					variantStyles[variant].card,
 					className,
 				)}
@@ -106,7 +120,7 @@ export function Card({ variant, href, children, className }: CardRootProps) {
 						variantStyles[variant].glow.second,
 					)}
 				/>
-			</div>
+			</article>
 		</Link>
 	)
 }
@@ -119,20 +133,24 @@ Card.Header = function CardHeader({
 	const Icon = variantStyles[variant].icon
 
 	return (
-		<div
+		<header
+			style={{ height: variantStyles[variant].header.height }}
 			className={cn(
-				'relative rounded-t-lg duration-500 h-[200px] overflow-hidden',
+				'relative overflow-hidden',
 				className,
 			)}
 		>
+			{/* Gradient Background */}
 			<div
 				className={cn(
-					'absolute inset-0 bg-gradient-to-br opacity-90 transition-opacity duration-300',
-					variantStyles[variant].gradient,
+					'absolute inset-0 opacity-90 transition-opacity duration-300',
+					variantStyles[variant].header.bg,
 				)}
 			/>
+			{/* Decorative Pattern */}
 			<div className="absolute inset-0 opacity-10 bg-[url('/images/pattern.svg')] bg-repeat bg-center" />
-			<div className='absolute top-3 right-3 flex items-center gap-2'>
+			{/* Icon */}
+			<div className="absolute top-3 right-3">
 				<div
 					className={cn(
 						'flex h-8 w-8 items-center justify-center rounded-full bg-neutral-800/80 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110',
@@ -143,7 +161,7 @@ Card.Header = function CardHeader({
 				</div>
 			</div>
 			{children}
-		</div>
+		</header>
 	)
 }
 
@@ -151,7 +169,7 @@ Card.Content = function CardContent({ children, className }: CardContentProps) {
 	return (
 		<div
 			className={cn(
-				'flex flex-col justify-between p-5 flex-grow bg-gradient-to-b from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-950',
+				'flex flex-col justify-between flex-grow p-5 bg-gradient-to-b from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-950',
 				className,
 			)}
 		>
@@ -168,7 +186,7 @@ Card.Title = function CardTitle({
 	return (
 		<h3
 			className={cn(
-				'font-sora text-xl font-semibold text-neutral-800 dark:text-neutral-100 transition-colors duration-300',
+				'font-sora text-xl font-semibold text-neutral-800 dark:text-neutral-100 transition-colors duration-300 line-clamp-2 h-[56px]',
 				variantStyles[variant].hover,
 				className,
 			)}
@@ -185,7 +203,7 @@ Card.Description = function CardDescription({
 	return (
 		<p
 			className={cn(
-				'mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 line-clamp-3',
+				'mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 line-clamp-3 h-[72px]',
 				className,
 			)}
 		>
@@ -202,8 +220,8 @@ Card.Label = function CardLabel({
 	return (
 		<div
 			className={cn(
-				'mb-2 inline-block rounded-sm px-2 py-0.5 text-[10px] font-medium text-white',
-				variantStyles[variant].badge,
+				'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mb-3',
+				variantStyles[variant].label.bg,
 				className,
 			)}
 		>
@@ -215,38 +233,41 @@ Card.Label = function CardLabel({
 Card.Tags = function CardTags({
 	variant,
 	tags,
-	label = 'TOPICS',
+	label,
 	className,
 }: CardTagsProps) {
-	if (!tags?.length) return null
-
 	return (
-		<div className={cn('mt-auto', className)}>
-			<div className='mb-2 text-xs font-medium text-neutral-500 dark:text-neutral-400 font-mono'>
-				// {label}
-			</div>
-			<div className='flex flex-wrap gap-2 mb-3'>
+		<div className={cn('flex flex-wrap gap-2 mt-3 mb-4', className)}>
+			{label && (
+				<div className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2 font-mono">
+					{label}
+				</div>
+			)}
+			<div className="flex flex-wrap gap-2">
 				{tags.map((tag) => (
-					<div
+					<span
 						key={tag}
 						className={cn(
-							'rounded-md bg-neutral-200 dark:bg-neutral-800 px-2.5 py-1 font-mono text-xs text-neutral-700 dark:text-neutral-300 border-l-2 transition-transform duration-200 hover:scale-105',
+							'inline-flex items-center px-2 py-1 rounded-md text-xs font-mono bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-l-2',
 							variantStyles[variant].tag,
 						)}
 					>
-						{tag.toLowerCase()}
-					</div>
+						{tag}
+					</span>
 				))}
 			</div>
 		</div>
 	)
 }
 
-Card.Footer = function CardFooter({ children, className }: CardFooterProps) {
+Card.Footer = function CardFooter({
+	children,
+	className,
+}: CardFooterProps) {
 	return (
 		<div
 			className={cn(
-				'flex justify-between items-center pt-3 border-t border-neutral-200 dark:border-neutral-800',
+				'flex items-center justify-between pt-3 border-t border-neutral-200 dark:border-neutral-800',
 				className,
 			)}
 		>
