@@ -49,7 +49,15 @@ export const Posts: CollectionConfig = {
 			required: false,
 		},
 		...slugField(),
-
+		{
+			name: 'tags',
+			type: 'relationship',
+			relationTo: 'tags',
+			hasMany: true,
+			admin: {
+				description: 'Select or create tags for this post',
+			},
+		},
 		{
 			type: 'tabs',
 			tabs: [

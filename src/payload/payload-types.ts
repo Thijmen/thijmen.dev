@@ -72,6 +72,7 @@ export interface Config {
     posts: Post;
     pages: Page;
     'r2-media': R2Media;
+    tags: Tag;
     redirects: Redirect;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -85,6 +86,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'r2-media': R2MediaSelect<false> | R2MediaSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -252,6 +254,10 @@ export interface Post {
   description?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
+  /**
+   * Select or create tags for this post
+   */
+  tags?: (number | Tag)[] | null;
   dynamiccontent?: {
     root: {
       type: string;
@@ -277,6 +283,20 @@ export interface Post {
     image?: (number | null) | R2Media;
     description?: string | null;
   };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  name: string;
+  description?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -377,6 +397,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'r2-media';
         value: number | R2Media;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: number | Tag;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -485,6 +509,7 @@ export interface PostsSelect<T extends boolean = true> {
   description?: T;
   slug?: T;
   slugLock?: T;
+  tags?: T;
   dynamiccontent?: T;
   image?: T;
   thumbnail?: T;
@@ -574,6 +599,19 @@ export interface R2MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

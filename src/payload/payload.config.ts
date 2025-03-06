@@ -4,6 +4,7 @@ import { Media } from '@/payload/collections/Media'
 import { Pages } from '@/payload/collections/Pages'
 import { Projects } from '@/payload/collections/Projects'
 import { Index } from '@/payload/collections/Stacks'
+import { Tags } from '@/payload/collections/Tags'
 import { Users } from '@/payload/collections/Users'
 import { Nav } from '@/payload/globals/nav'
 import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
@@ -34,7 +35,7 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 
 export default buildConfig({
 	editor: lexicalEditor(),
-	collections: [Users, Projects, Index, Posts, Pages, Media],
+	collections: [Users, Projects, Index, Posts, Pages, Media, Tags],
 	globals: [Nav],
 	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {
