@@ -413,7 +413,10 @@ const seedPosts = async (payload: Payload): Promise<void> => {
     for (const tag of tagData) {
       const createdTag = await payload.create({
         collection: 'tags',
-        data: tag,
+        data: {
+          ...tag,
+          _status: 'published',
+        },
         overrideAccess: true,
       })
       createdTags[tag.name] = createdTag.id
