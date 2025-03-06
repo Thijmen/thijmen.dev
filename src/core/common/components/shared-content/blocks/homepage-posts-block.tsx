@@ -8,54 +8,6 @@ import { BsArrowRightShort as ViewAllIcon } from 'react-icons/bs'
 import SectionHeading from '../../elements/SectionHeading'
 import SectionSubHeading from '../../elements/SectionSubHeading'
 
-const demoData: Post[] = [
-  {
-    id: 1,
-    title: 'Building Scalable Microservices Architecture',
-    slug: 'building-scalable-microservices',
-    description:
-      'An in-depth exploration of designing and implementing microservices at scale, featuring real-world examples and best practices.',
-    createdAt: '2024-02-15T12:00:00Z',
-    updatedAt: '2024-02-15T12:00:00Z',
-  },
-  {
-    id: 2,
-    title: 'Advanced TypeScript Design Patterns',
-    slug: 'advanced-typescript-patterns',
-    description:
-      'Deep dive into enterprise-level TypeScript patterns, focusing on maintainability and type safety in large applications.',
-    createdAt: '2024-02-15T12:00:00Z',
-    updatedAt: '2024-02-15T12:00:00Z',
-  },
-  {
-    id: 3,
-    title: 'Leading Technical Teams Through Digital Transformation',
-    slug: 'leading-technical-teams',
-    description:
-      'Insights and strategies for technical leadership in modern software development teams.',
-    createdAt: '2024-01-05T09:15:00Z',
-    updatedAt: '2024-01-05T09:15:00Z',
-  },
-  {
-    id: 4,
-    title: 'Leading Technical Teams Through Digital Transformation',
-    slug: 'leading-technical-teams2',
-    description:
-      'Insights and strategies for technical leadership in modern software development teams.',
-    createdAt: '2024-01-05T09:15:00Z',
-    updatedAt: '2024-01-05T09:15:00Z',
-  },
-  {
-    id: 5,
-    title: 'Building Scalable Microservices Architecture',
-    slug: 'building-scalable-microservices1',
-    description:
-      'An in-depth exploration of designing and implementing microservices at scale, featuring real-world examples and best practices.',
-    createdAt: '2024-02-15T12:00:00Z',
-    updatedAt: '2024-02-15T12:00:00Z',
-  },
-]
-
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -70,7 +22,6 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
   posts,
 }) => {
   const cmsPosts = (posts ?? []) as Post[]
-  const thePosts = [...cmsPosts, ...demoData]
   const tags = ['typescript', 'design patterns', 'enterprise']
 
   return (
@@ -90,7 +41,7 @@ export const HomepagePostsBlock: React.FC<MyHomepagePostsBlock> = ({
         </SectionSubHeading>
       </div>
       <div className="grid pt-4 grid-cols-1 sm:grid-cols-2 gap-8">
-        {thePosts.map((post) => (
+        {cmsPosts.map((post) => (
           <motion.div
             key={post.slug}
             {...fadeInUp}
