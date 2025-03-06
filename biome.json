@@ -26,7 +26,8 @@
         "noUnusedImports": "error"
       },
       "complexity": {
-        "noForEach": "off"
+        "noForEach": "off",
+        "useLiteralKeys": "off"
       },
       "suspicious": {
         "noCommentText": "off"

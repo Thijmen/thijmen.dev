@@ -377,6 +377,48 @@ const seedPosts = async (payload: Payload): Promise<void> => {
   if (existingPosts.docs.length === 0) {
     payload.logger.info('Seeding posts...')
 
+    // Create seed tags first
+    payload.logger.info('Seeding tags...')
+    const tagData = [
+      {
+        name: 'Microservices',
+        slug: 'microservices',
+        description: 'Topics related to microservices architecture and implementation',
+      },
+      {
+        name: 'TypeScript',
+        slug: 'typescript',
+        description: 'TypeScript language features, patterns and best practices',
+      },
+      {
+        name: 'Architecture',
+        slug: 'architecture',
+        description: 'Software architecture concepts and principles',
+      },
+      {
+        name: 'Leadership',
+        slug: 'leadership',
+        description: 'Technical leadership and team management',
+      },
+      {
+        name: 'Backend',
+        slug: 'backend',
+        description: 'Backend development topics',
+      },
+    ]
+
+    const createdTags = {}
+
+    // Create the tags
+    for (const tag of tagData) {
+      const createdTag = await payload.create({
+        collection: 'tags',
+        data: tag,
+        overrideAccess: true,
+      })
+      createdTags[tag.name] = createdTag.id
+    }
+
     const demoData: Post[] = [
       {
         id: 1,
@@ -386,6 +428,7 @@ const seedPosts = async (payload: Payload): Promise<void> => {
           'An in-depth exploration of designing and implementing microservices at scale, featuring real-world examples and best practices.',
         createdAt: '2024-02-15T12:00:00Z',
         updatedAt: '2024-02-15T12:00:00Z',
+        tags: [createdTags['Microservices'], createdTags['Architecture'], createdTags['Backend']],
       },
       {
         id: 2,
@@ -395,6 +438,7 @@ const seedPosts = async (payload: Payload): Promise<void> => {
           'Deep dive into enterprise-level TypeScript patterns, focusing on maintainability and type safety in large applications.',
         createdAt: '2024-02-15T12:00:00Z',
         updatedAt: '2024-02-15T12:00:00Z',
+        tags: [createdTags['TypeScript'], createdTags['Architecture']],
       },
       {
         id: 3,
@@ -404,24 +448,7 @@ const seedPosts = async (payload: Payload): Promise<void> => {
           'Insights and strategies for technical leadership in modern software development teams.',
         createdAt: '2024-01-05T09:15:00Z',
         updatedAt: '2024-01-05T09:15:00Z',
-      },
-      {
-        id: 4,
-        title: 'Leading Technical Teams Through Digital Transformation',
-        slug: 'leading-technical-teams2',
-        description:
-          'Insights and strategies for technical leadership in modern software development teams.',
-        createdAt: '2024-01-05T09:15:00Z',
-        updatedAt: '2024-01-05T09:15:00Z',
-      },
-      {
-        id: 5,
-        title: 'Building Scalable Microservices Architecture',
-        slug: 'building-scalable-microservices1',
-        description:
-          'An in-depth exploration of designing and implementing microservices at scale, featuring real-world examples and best practices.',
-        createdAt: '2024-02-15T12:00:00Z',
-        updatedAt: '2024-02-15T12:00:00Z',
+        tags: [createdTags['Leadership']],
       },
     ]
 
