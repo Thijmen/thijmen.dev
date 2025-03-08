@@ -296,8 +296,8 @@ export default async function Page({ params: paramsPromise }: Args) {
 								/>
 
 								{/* Optional: Title overlay on the image */}
-								<div className='absolute bottom-0 left-0 right-0 p-6 z-20'>
-									<div className='max-w-3xl mx-auto'>
+								<div className='absolute inset-0 z-20'>
+									<div className='absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-purple-900/90 to-transparent'>
 										<div className='flex items-center gap-2 text-sm text-neutral-200 mb-2'>
 											<time dateTime={postData.createdAt}>
 												{formatDistanceToNow(new Date(postData.createdAt), {
@@ -307,12 +307,12 @@ export default async function Page({ params: paramsPromise }: Args) {
 											<span>•</span>
 											<span>5 min read</span>
 										</div>
-										<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-sora'>
+										<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 font-sora'>
 											{postData.title}
 										</h1>
 
 										{postData.tags && postData.tags.length > 0 && (
-											<div className='mb-8 flex flex-wrap gap-2'>
+											<div className='flex flex-wrap gap-2'>
 												{(postData.tags as Tag[]).map((tag, index) => (
 													<span
 														key={tag.slug ?? tag.id}
