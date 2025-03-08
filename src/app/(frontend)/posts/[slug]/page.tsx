@@ -220,7 +220,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 			<Container data-aos={'fade-up'}>
 				<article className='max-w-3xl mx-auto'>
 					{/* Post Header */}
-					<header className='mb-8'>
+					{/* <header className='mb-8'>
 						{!postData.image && (
 							<>
 								<div className='flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 mb-3'>
@@ -269,7 +269,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 								{postData.description}
 							</p>
 						)}
-					</header>
+					</header> */}
 
 					{/* Featured Image */}
 					{postData.image && (
