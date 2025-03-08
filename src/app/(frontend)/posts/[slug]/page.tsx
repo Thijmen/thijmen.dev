@@ -310,22 +310,19 @@ export default async function Page({ params: paramsPromise }: Args) {
 										<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-sora'>
 											{postData.title}
 										</h1>
+
 										{postData.tags && postData.tags.length > 0 && (
-											<div className='flex flex-wrap gap-2'>
-												{postData.tags.map((tag) => {
-													const tagData =
-														typeof tag === 'object'
-															? tag
-															: ({ id: 0, name: 'Tag', slug: 'tag' } as Tag)
-													return (
-														<span
-															key={tagData.id}
-															className='px-3 py-1 text-xs font-medium rounded-full bg-purple-100/90 text-purple-800 dark:bg-purple-900/90 dark:text-purple-300'
-														>
-															{tagData.name}
-														</span>
-													)
-												})}
+											<div className='mb-8 flex flex-wrap gap-2'>
+												{(postData.tags as Tag[]).map((tag, index) => (
+													<span
+														key={tag.slug ?? tag.id}
+														className='group relative overflow-hidden rounded-md border border-neutral-200 bg-white/50 px-3 py-1.5 text-sm font-medium text-neutral-800 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-teal-500 hover:shadow-md dark:border-neutral-800 dark:bg-black/50 dark:text-neutral-200 dark:hover:border-teal-400'
+														style={{ animationDelay: `${index * 0.1}s` }}
+													>
+														<span className='relative z-10'>{tag.name}</span>
+														<span className='absolute inset-0 -z-10 translate-y-full bg-gradient-to-r from-teal-500/10 to-indigo-500/10 transition-transform duration-300 group-hover:translate-y-0 dark:from-teal-500/20 dark:to-indigo-500/20' />
+													</span>
+												))}
 											</div>
 										)}
 									</div>
