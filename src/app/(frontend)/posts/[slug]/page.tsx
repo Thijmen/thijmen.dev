@@ -275,8 +275,11 @@ export default async function Page({ params: paramsPromise }: Args) {
 					{postData.image && (
 						<div className='relative w-full mb-10 overflow-hidden'>
 							<div className='relative w-full h-[500px] rounded-xl overflow-hidden shadow-xl'>
-								{/* Gradient overlay */}
-								<div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10' />
+								{/* Purple-ish gradient overlay */}
+								<div className='absolute inset-0 bg-gradient-to-br from-purple-900/70 via-indigo-800/60 to-transparent z-10' />
+
+								{/* Purple duotone effect container */}
+								<div className='absolute inset-0 mix-blend-multiply bg-purple-400/30 z-[5]' />
 
 								<Image
 									src={
@@ -286,7 +289,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 									}
 									alt={postData.title}
 									fill
-									className='object-cover transition-transform duration-700 hover:scale-105'
+									className='object-cover transition-transform duration-700 hover:scale-105 filter contrast-[1.05] saturate-[1.1]'
 									priority
 									sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px'
 									quality={90}
@@ -317,7 +320,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 													return (
 														<span
 															key={tagData.id}
-															className='px-3 py-1 text-xs font-medium rounded-full bg-indigo-100/90 text-indigo-800 dark:bg-indigo-900/90 dark:text-indigo-300'
+															className='px-3 py-1 text-xs font-medium rounded-full bg-purple-100/90 text-purple-800 dark:bg-purple-900/90 dark:text-purple-300'
 														>
 															{tagData.name}
 														</span>
@@ -338,71 +341,8 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 					{/* Post Footer */}
 					<footer className='mt-12 pt-6 border-t border-neutral-200 dark:border-neutral-800'>
-						<div className='flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
-							<div>
-								<h3 className='text-lg font-semibold text-neutral-900 dark:text-neutral-100'>
-									Share this post
-								</h3>
-								<div className='flex gap-4 mt-2'>
-									<button
-										type='button'
-										className='text-neutral-700 dark:text-neutral-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors'
-									>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											width='20'
-											height='20'
-											viewBox='0 0 24 24'
-											fill='none'
-											stroke='currentColor'
-											strokeWidth='2'
-											strokeLinecap='round'
-											strokeLinejoin='round'
-										>
-											<path d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z' />
-										</svg>
-									</button>
-									<button
-										type='button'
-										className='text-neutral-700 dark:text-neutral-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors'
-									>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											width='20'
-											height='20'
-											viewBox='0 0 24 24'
-											fill='none'
-											stroke='currentColor'
-											strokeWidth='2'
-											strokeLinecap='round'
-											strokeLinejoin='round'
-										>
-											<path d='M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z' />
-										</svg>
-									</button>
-									<button
-										type='button'
-										className='text-neutral-700 dark:text-neutral-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors'
-									>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											width='20'
-											height='20'
-											viewBox='0 0 24 24'
-											fill='none'
-											stroke='currentColor'
-											strokeWidth='2'
-											strokeLinecap='round'
-											strokeLinejoin='round'
-										>
-											<path d='M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z' />
-											<rect x='2' y='9' width='4' height='12' />
-											<circle cx='4' cy='4' r='2' />
-										</svg>
-									</button>
-								</div>
-							</div>
-							<div>
+						<div className='flex flex-col md:flex-row-reverse md:items-center md:justify-between gap-4'>
+							<div className='md:text-right'>
 								<a
 									href='/posts'
 									className='inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors'
