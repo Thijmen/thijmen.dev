@@ -4,8 +4,10 @@ import Layout from '@/core/common/components/layouts'
 import { RichText } from '@/core/common/components/shared-content'
 import { getMenuItems } from '@/core/services/menu'
 import type { Post, Tag } from '@/payload/payload-types'
+import { generateMeta } from '@/payload/utilities/generateMeta'
 import configPromise from '@payload-config'
 import { formatDistanceToNow } from 'date-fns'
+import type { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import Image from 'next/image'
 import { getPayload } from 'payload'
@@ -202,7 +204,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 	})
 
 	// Use mock data if no post is found (for development or preview)
-	const postData = mockPost
+	const postData = post
 
 	if (!post) {
 		// In production, redirect if no post is found
@@ -388,6 +390,15 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
 
 	return result.docs?.[0] || null
 })
+
+export async function generateMetadata({
+	params: paramsPromise,
+}: Args): Promise<Metadata> {
+	const { slug } = await paramsPromise
+	const post = await queryPostBySlug({ slug })
+
+	return generateMeta({ doc: post })
+}
 
 export async function generateStaticParams() {
 	const payload = await getPayload({ config: configPromise })
