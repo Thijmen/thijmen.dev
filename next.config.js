@@ -24,6 +24,9 @@ const nextConfig = {
 			{
 				hostname: 'dev-assets.thijmen.dev',
 			},
+			{
+				hostname: 'images.unsplash.com',
+			},
 		],
 	},
 }

@@ -1,49 +1,52 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": { "enabled": true },
-  "files": {
-    "ignore": [
-      "**/node_modules",
-      "**/dist",
-      "**/build",
-      "**/public",
-      "**/.next",
-      "**/.turbo",
-      "src/core/common/styles/**",
-      "src/migrations/**",
-      "src/payload/payload-types.ts",
-      "src/app/(payload)/admin/importMap.js",
-      "src/app/(payload)/layout.tsx"
-    ]
-  },
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"organizeImports": { "enabled": true },
+	"files": {
+		"ignore": [
+			"**/node_modules",
+			"**/dist",
+			"**/build",
+			"**/public",
+			"**/.next",
+			"**/.turbo",
+			"src/core/common/styles/**",
+			"src/migrations/**",
+			"src/payload/payload-types.ts",
+			"src/app/(payload)/admin/importMap.js",
+			"src/app/(payload)/layout.tsx"
+		]
+	},
 
-  "linter": {
-    "ignore": ["src/payload/payload-types.ts", "src/app/(payload)/admin/importMap.js"],
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "correctness": {
-        "noUnusedImports": "error"
-      },
-      "complexity": {
-        "noForEach": "off",
-        "useLiteralKeys": "off"
-      },
-      "suspicious": {
-        "noCommentText": "off"
-      },
-      "a11y": {
-        "useValidAnchor": "off",
-        "noSvgWithoutTitle": "off",
-        "useKeyWithClickEvents": "off"
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "semicolons": "asNeeded",
-      "jsxQuoteStyle": "single",
-      "quoteStyle": "single"
-    }
-  }
+	"linter": {
+		"ignore": [
+			"src/payload/payload-types.ts",
+			"src/app/(payload)/admin/importMap.js"
+		],
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noUnusedImports": "error"
+			},
+			"complexity": {
+				"noForEach": "off",
+				"useLiteralKeys": "off"
+			},
+			"suspicious": {
+				"noCommentText": "off"
+			},
+			"a11y": {
+				"useValidAnchor": "off",
+				"noSvgWithoutTitle": "off",
+				"useKeyWithClickEvents": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"semicolons": "asNeeded",
+			"jsxQuoteStyle": "single",
+			"quoteStyle": "single"
+		}
+	}
 }
