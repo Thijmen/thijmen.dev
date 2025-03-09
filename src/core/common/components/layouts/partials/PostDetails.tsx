@@ -1,6 +1,6 @@
+import type { Post, Tag } from '@/payload/payload-types'
 import { formatDistanceToNow } from 'date-fns'
 import Link from 'next/link'
-import type { Post, Tag } from '@/payload/payload-types'
 
 interface PostDetailsProps {
 	post: Post | null

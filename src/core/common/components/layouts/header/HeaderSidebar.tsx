@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react'
 import type { Nav } from '@/payload/payload-types'
+import type { ReactNode } from 'react'
 import Sidebar from '../partials/Sidebar'
 
 interface Props {
