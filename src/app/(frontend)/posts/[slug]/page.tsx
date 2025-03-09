@@ -217,66 +217,63 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 	const nav = await getMenuItems()
 
+	// Create PostDetails component for the sidebar
+	const PostDetailsSidebar = () => (
+		<div className='mt-4 px-3 py-2 text-sm'>
+			<h3 className='font-medium text-neutral-800 dark:text-neutral-300 mb-2'>
+				Post Details
+			</h3>
+
+			{/* Created Date */}
+			<div className='mb-3'>
+				<p className='text-xs text-neutral-500 dark:text-neutral-400'>
+					Published
+				</p>
+				<p className='text-neutral-700 dark:text-neutral-300'>
+					{formatDistanceToNow(new Date(postData.createdAt), {
+						addSuffix: true,
+					})}
+				</p>
+			</div>
+
+			{/* Tags */}
+			{postData.tags && postData.tags.length > 0 && (
+				<div className='mb-3'>
+					<p className='text-xs text-neutral-500 dark:text-neutral-400 mb-1'>
+						Tags
+					</p>
+					<div className='flex flex-wrap gap-1'>
+						{(postData.tags as Tag[]).map((tag) => (
+							<a
+								key={tag.slug ?? tag.id}
+								href={`/tags/${tag.slug}`}
+								className='inline-block px-2 py-0.5 text-xs bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 rounded transition-colors'
+							>
+								{tag.name}
+							</a>
+						))}
+					</div>
+				</div>
+			)}
+
+			{/* Reading Time - This is a placeholder, you might want to calculate this based on content length */}
+			<div className='mb-3'>
+				<p className='text-xs text-neutral-500 dark:text-neutral-400'>
+					Reading time
+				</p>
+				<p className='text-neutral-700 dark:text-neutral-300'>5 min read</p>
+			</div>
+		</div>
+	)
+
 	return (
-		<Layout navGlobal={nav}>
+		<Layout navGlobal={nav} sidebarContent={<PostDetailsSidebar />}>
 			<div
 				style={{ zIndex: 1, position: 'relative' }}
 				className='mt-[80px] md:mt-0'
 			>
 				<Container data-aos={'fade-up'}>
 					<article className='max-w-3xl mx-auto'>
-						{/* Post Header */}
-						{/* <header className='mb-8'>
-						{!postData.image && (
-							<>
-								<div className='flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 mb-3'>
-									<time dateTime={postData.createdAt}>
-										{formatDistanceToNow(new Date(postData.createdAt), {
-											addSuffix: true,
-										})}
-									</time>
-									<span>•</span>
-									<span>5 min read</span>
-								</div>
-
-								<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-neutral-100 mb-4 font-sora'>
-									{postData.title}
-								</h1>
-
-								{postData.description && (
-									<p className='text-lg text-neutral-700 dark:text-neutral-300 mb-6'>
-										{postData.description}
-									</p>
-								)}
-
-								{postData.tags && postData.tags.length > 0 && (
-									<div className='flex flex-wrap gap-2 mb-6'>
-										{postData.tags.map((tag) => {
-											const tagData =
-												typeof tag === 'object'
-													? tag
-													: ({ id: 0, name: 'Tag', slug: 'tag' } as Tag)
-											return (
-												<span
-													key={tagData.id}
-													className='px-3 py-1 text-xs font-medium rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300'
-												>
-													{tagData.name}
-												</span>
-											)
-										})}
-									</div>
-								)}
-							</>
-						)}
-
-						{postData.image && postData.description && (
-							<p className='text-lg text-neutral-700 dark:text-neutral-300 mt-6 mb-6'>
-								{postData.description}
-							</p>
-						)}
-					</header> */}
-
 						{/* Featured Image */}
 						{postData.image && (
 							<div className='relative w-full mb-10 overflow-hidden'>

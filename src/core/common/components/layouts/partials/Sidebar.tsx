@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 
 import useIsMobile from '@/core/common/hooks/useIsMobile'
 
@@ -10,6 +10,7 @@ import Copyright from './Copyright'
 
 interface Props {
 	navGlobal: Nav
+	sidebarContent?: ReactNode
 }
 const Sidebar = (props: Props) => {
 	const isMobile = useIsMobile()
@@ -40,6 +41,12 @@ const Sidebar = (props: Props) => {
 					<Navigation navGlobal={props.navGlobal} />
 					<Breakline className='mt-2' />
 					<Copyright />
+					{props.sidebarContent && (
+						<>
+							<Breakline className='mt-2' />
+							{props.sidebarContent}
+						</>
+					)}
 				</>
 			)}
 		</div>
