@@ -217,9 +217,19 @@ export default async function Page({ params: paramsPromise }: Args) {
 	}
 
 	const nav = await getMenuItems()
+	const adjacentPosts = await getAdjacentPosts(postData)
 
 	return (
-		<Layout navGlobal={nav} sidebarContent={<PostDetails post={postData} />}>
+		<Layout
+			navGlobal={nav}
+			sidebarContent={
+				<PostDetails
+					post={postData}
+					prevPost={adjacentPosts.prev}
+					nextPost={adjacentPosts.next}
+				/>
+			}
+		>
 			<div
 				style={{ zIndex: 1, position: 'relative' }}
 				className='mt-[80px] md:mt-0'
@@ -353,6 +363,73 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
 
 	return result.docs?.[0] || null
 })
+
+async function getAdjacentPosts(
+	currentPost: Post | null,
+): Promise<{ prev: Post | null; next: Post | null }> {
+	if (!currentPost) {
+		return { prev: null, next: null }
+	}
+
+	try {
+		// Get posts with IDs lower than the current post (for "previous" post)
+		const prevPostsResponse = await queryPostById({
+			id: currentPost.id,
+			limit: 1,
+			sort: 'desc',
+		})
+
+		// Get posts with IDs higher than the current post (for "next" post)
+		const nextPostsResponse = await queryPostById({
+			id: currentPost.id,
+			limit: 1,
+			sort: 'asc',
+		})
+
+		const prevPost =
+			prevPostsResponse.docs && prevPostsResponse.docs.length > 0
+				? prevPostsResponse.docs[0]
+				: null
+		const nextPost =
+			nextPostsResponse.docs && nextPostsResponse.docs.length > 0
+				? nextPostsResponse.docs[0]
+				: null
+
+		return { prev: prevPost, next: nextPost }
+	} catch (error) {
+		console.error('Error fetching adjacent posts:', error)
+		return { prev: null, next: null }
+	}
+}
+
+async function queryPostById({
+	id,
+	limit,
+	sort,
+}: {
+	id: number
+	limit: number
+	sort: 'asc' | 'desc'
+}): Promise<{ docs: Post[] }> {
+	const { isEnabled: draft } = await draftMode()
+
+	const payload = await getPayload({ config: configPromise })
+
+	const result = await payload.find({
+		collection: 'posts',
+		draft,
+		limit,
+		overrideAccess: true,
+		sort: `id:${sort}`,
+		where: {
+			id: {
+				[sort === 'asc' ? 'greater_than' : 'less_than']: id,
+			},
+		},
+	})
+
+	return result
+}
 
 export async function generateMetadata({
 	params: paramsPromise,

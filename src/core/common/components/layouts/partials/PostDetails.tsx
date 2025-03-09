@@ -4,9 +4,11 @@ import Link from 'next/link'
 
 interface PostDetailsProps {
 	post: Post | null
+	prevPost?: Post | null
+	nextPost?: Post | null
 }
 
-const PostDetails = ({ post }: PostDetailsProps) => {
+const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 	if (!post) return null
 
 	return (
@@ -70,7 +72,109 @@ const PostDetails = ({ post }: PostDetailsProps) => {
 				</div>
 			</div>
 
-			{/* Share Links - New Section */}
+			{/* Post Navigation */}
+			<div className='mb-4 pl-3 py-1 border-l-2 border-purple-500'>
+				<p className='text-xs uppercase tracking-wider font-medium text-purple-300 mb-2'>
+					Navigation
+				</p>
+				<div className='space-y-2'>
+					{prevPost ? (
+						<Link
+							href={`/posts/${prevPost.slug}`}
+							className='group flex items-center py-2 px-3 bg-neutral-800/70 hover:bg-neutral-700/70 text-neutral-200 rounded-md transition-all border border-neutral-700 hover:border-purple-500'
+						>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								className='h-4 w-4 text-purple-500 mr-2 transition-transform group-hover:-translate-x-1'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='currentColor'
+							>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									strokeWidth={2}
+									d='M15 19l-7-7 7-7'
+								/>
+							</svg>
+							<div className='overflow-hidden'>
+								<p className='text-xs text-purple-300'>Previous</p>
+								<p className='text-sm truncate'>{prevPost.title}</p>
+							</div>
+						</Link>
+					) : (
+						<div className='flex items-center py-2 px-3 bg-neutral-800/30 text-neutral-500 rounded-md border border-neutral-800'>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								className='h-4 w-4 mr-2 opacity-50'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='currentColor'
+							>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									strokeWidth={2}
+									d='M15 19l-7-7 7-7'
+								/>
+							</svg>
+							<div>
+								<p className='text-xs'>Previous</p>
+								<p className='text-sm'>No earlier posts</p>
+							</div>
+						</div>
+					)}
+
+					{nextPost ? (
+						<Link
+							href={`/posts/${nextPost.slug}`}
+							className='group flex items-center justify-between py-2 px-3 bg-neutral-800/70 hover:bg-neutral-700/70 text-neutral-200 rounded-md transition-all border border-neutral-700 hover:border-purple-500'
+						>
+							<div className='overflow-hidden'>
+								<p className='text-xs text-purple-300'>Next</p>
+								<p className='text-sm truncate'>{nextPost.title}</p>
+							</div>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								className='h-4 w-4 text-purple-500 ml-2 transition-transform group-hover:translate-x-1'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='currentColor'
+							>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									strokeWidth={2}
+									d='M9 5l7 7-7 7'
+								/>
+							</svg>
+						</Link>
+					) : (
+						<div className='flex items-center justify-between py-2 px-3 bg-neutral-800/30 text-neutral-500 rounded-md border border-neutral-800'>
+							<div>
+								<p className='text-xs'>Next</p>
+								<p className='text-sm'>No newer posts</p>
+							</div>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								className='h-4 w-4 ml-2 opacity-50'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='currentColor'
+							>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									strokeWidth={2}
+									d='M9 5l7 7-7 7'
+								/>
+							</svg>
+						</div>
+					)}
+				</div>
+			</div>
+
+			{/* Share Links */}
 			<div className='mt-6 pt-4 border-t border-neutral-700'>
 				<p className='text-xs uppercase tracking-wider font-medium text-neutral-400 mb-2'>
 					Share
