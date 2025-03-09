@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import type { CSSProperties } from 'react'
 
 import { MenuContext } from '@/core/common/context/MenuContext'
 import useIsMobile from '@/core/common/hooks/useIsMobile'
@@ -47,7 +48,7 @@ const Profile = ({ isScrolled = false, navGlobal }: ProfileProps) => {
 	}, [expandMenu])
 
 	// Create a style for mobile header that ensures it stays on top
-	const headerStyle = {
+	const headerStyle: CSSProperties = {
 		position: 'fixed',
 		top: 0,
 		left: 0,
