@@ -124,6 +124,55 @@ a {
   position: fixed !important;
 }
 
+/* Fix for profile component z-index on mobile */
+.fixed[class*="bg-light"],
+.fixed[class*="dark:bg-dark"] {
+  z-index: 999999 !important;
+  position: relative !important;
+}
+
+@media (max-width: 1024px) {
+  .fixed[class*="bg-light"],
+  .fixed[class*="dark:bg-dark"] {
+    position: fixed !important;
+  }
+}
+
+/* Additional fix for profile component */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  z-index: -1;
+}
+
+/* Ensure post images and gradients don't interfere with header */
+[class*="posts"] [class*="overflow-hidden"] {
+  isolation: isolate;
+  z-index: 1;
+}
+
+/* Mobile profile fix - extremely specific selector to ensure it overrides everything */
+@media (max-width: 1023px) {
+  div[class*="fixed"][class*="bg-light"],
+  div[class*="fixed"][class*="dark:bg-dark"] {
+    position: fixed !important;
+    z-index: 9999999 !important; 
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Force post gradients to stay below the header */
+  [class*="posts"] [class*="absolute"][class*="inset-0"] {
+    z-index: 5 !important;
+  }
+}
+
 ::-webkit-scrollbar {
   @apply w-1;
 }

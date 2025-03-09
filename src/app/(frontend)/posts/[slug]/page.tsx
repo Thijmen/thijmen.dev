@@ -219,10 +219,14 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 	return (
 		<Layout navGlobal={nav}>
-			<Container data-aos={'fade-up'}>
-				<article className='max-w-3xl mx-auto'>
-					{/* Post Header */}
-					{/* <header className='mb-8'>
+			<div
+				style={{ zIndex: 1, position: 'relative' }}
+				className='mt-[80px] md:mt-0'
+			>
+				<Container data-aos={'fade-up'}>
+					<article className='max-w-3xl mx-auto'>
+						{/* Post Header */}
+						{/* <header className='mb-8'>
 						{!postData.image && (
 							<>
 								<div className='flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 mb-3'>
@@ -273,100 +277,110 @@ export default async function Page({ params: paramsPromise }: Args) {
 						)}
 					</header> */}
 
-					{/* Featured Image */}
-					{postData.image && (
-						<div className='relative w-full mb-10 overflow-hidden'>
-							<div className='relative w-full h-[500px] rounded-xl overflow-hidden shadow-xl'>
-								{/* Purple-ish gradient overlay */}
-								<div className='absolute inset-0 bg-gradient-to-br from-purple-900/70 via-indigo-800/60 to-transparent z-10' />
+						{/* Featured Image */}
+						{postData.image && (
+							<div className='relative w-full mb-10 overflow-hidden'>
+								<div className='relative w-full h-[500px] rounded-xl overflow-hidden shadow-xl'>
+									{/* Purple-ish gradient overlay - lower z-index and pointer-events none */}
+									<div
+										className='absolute inset-0 bg-gradient-to-br from-purple-900/70 via-indigo-800/60 to-transparent pointer-events-none'
+										style={{ zIndex: 1 }}
+									/>
 
-								{/* Purple duotone effect container */}
-								<div className='absolute inset-0 mix-blend-multiply bg-purple-400/30 z-[5]' />
+									{/* Purple duotone effect container - lower z-index and pointer-events none */}
+									<div
+										className='absolute inset-0 mix-blend-multiply bg-purple-400/30 pointer-events-none'
+										style={{ zIndex: 2 }}
+									/>
 
-								<Image
-									src={
-										typeof postData.image === 'object' && postData.image?.url
-											? postData.image.url
-											: '/images/placeholder.jpg'
-									}
-									alt={postData.title}
-									fill
-									className='object-cover transition-transform duration-700 hover:scale-105 filter contrast-[1.05] saturate-[1.1]'
-									priority
-									sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px'
-									quality={90}
-								/>
+									<Image
+										src={
+											typeof postData.image === 'object' && postData.image?.url
+												? postData.image.url
+												: '/images/placeholder.jpg'
+										}
+										alt={postData.title}
+										fill
+										className='object-cover transition-transform duration-700 hover:scale-105 filter contrast-[1.05] saturate-[1.1]'
+										priority
+										sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px'
+										quality={90}
+									/>
 
-								{/* Optional: Title overlay on the image */}
-								<div className='absolute inset-0 z-20'>
-									<div className='absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-purple-900/90 to-transparent'>
-										<div className='flex items-center gap-2 text-sm text-neutral-200 mb-2'>
-											<time dateTime={postData.createdAt}>
-												{formatDistanceToNow(new Date(postData.createdAt), {
-													addSuffix: true,
-												})}
-											</time>
-											<span>•</span>
-											<span>5 min read</span>
-										</div>
-										<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 font-sora'>
-											{postData.title}
-										</h1>
-
-										{postData.tags && postData.tags.length > 0 && (
-											<div className='flex flex-wrap gap-2'>
-												{(postData.tags as Tag[]).map((tag, index) => (
-													<span
-														key={tag.slug ?? tag.id}
-														className='group relative overflow-hidden rounded-md border border-neutral-200 bg-white/50 px-3 py-1.5 text-sm font-medium text-neutral-800 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-teal-500 hover:shadow-md dark:border-neutral-800 dark:bg-black/50 dark:text-neutral-200 dark:hover:border-teal-400'
-														style={{ animationDelay: `${index * 0.1}s` }}
-													>
-														<span className='relative z-10'>{tag.name}</span>
-														<span className='absolute inset-0 -z-10 translate-y-full bg-gradient-to-r from-teal-500/10 to-indigo-500/10 transition-transform duration-300 group-hover:translate-y-0 dark:from-teal-500/20 dark:to-indigo-500/20' />
-													</span>
-												))}
+									{/* Optional: Title overlay on the image - lower z-index and pointer-events none */}
+									<div
+										className='absolute inset-0 pointer-events-none'
+										style={{ zIndex: 3 }}
+									>
+										<div className='absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-purple-900/90 to-transparent'>
+											<div className='flex items-center gap-2 text-sm text-neutral-200 mb-2'>
+												<time dateTime={postData.createdAt}>
+													{formatDistanceToNow(new Date(postData.createdAt), {
+														addSuffix: true,
+													})}
+												</time>
+												<span>•</span>
+												<span>5 min read</span>
 											</div>
-										)}
+											<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 font-sora'>
+												{postData.title}
+											</h1>
+
+											{postData.tags && postData.tags.length > 0 && (
+												<div className='flex flex-wrap gap-2'>
+													{(postData.tags as Tag[]).map((tag, index) => (
+														<span
+															key={tag.slug ?? tag.id}
+															className='group relative overflow-hidden rounded-md border border-neutral-200 bg-white/50 px-3 py-1.5 text-sm font-medium text-neutral-800 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-teal-500 hover:shadow-md dark:border-neutral-800 dark:bg-black/50 dark:text-neutral-200 dark:hover:border-teal-400'
+															style={{ animationDelay: `${index * 0.1}s` }}
+														>
+															<span className='relative z-10'>{tag.name}</span>
+															<span className='absolute inset-0 -z-10 translate-y-full bg-gradient-to-r from-teal-500/10 to-indigo-500/10 transition-transform duration-300 group-hover:translate-y-0 dark:from-teal-500/20 dark:to-indigo-500/20' />
+														</span>
+													))}
+												</div>
+											)}
+										</div>
 									</div>
 								</div>
 							</div>
+						)}
+
+						{/* Post Content */}
+						<div className='prose dark:prose-invert prose-lg prose-neutral max-w-none'>
+							<RichText data={postData.dynamiccontent} />
 						</div>
-					)}
 
-					{/* Post Content */}
-					<div className='prose dark:prose-invert prose-lg prose-neutral max-w-none'>
-						<RichText data={postData.dynamiccontent} />
-					</div>
-
-					{/* Post Footer */}
-					<footer className='mt-12 pt-6 border-t border-neutral-200 dark:border-neutral-800'>
-						<div className='flex flex-col md:flex-row-reverse md:items-center md:justify-between gap-4'>
-							<div className='md:text-right'>
-								<a
-									href='/posts'
-									className='inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors'
-								>
-									<svg
-										xmlns='http://www.w3.org/2000/svg'
-										width='16'
-										height='16'
-										viewBox='0 0 24 24'
-										fill='none'
-										stroke='currentColor'
-										strokeWidth='2'
-										strokeLinecap='round'
-										strokeLinejoin='round'
-										className='mr-2'
+						{/* Post Footer */}
+						<footer className='mt-12 pt-6 border-t border-neutral-200 dark:border-neutral-800'>
+							<div className='flex flex-col md:flex-row-reverse md:items-center md:justify-between gap-4'>
+								<div className='md:text-right'>
+									<a
+										href='/posts'
+										className='inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors'
 									>
-										<path d='M19 12H5M12 19l-7-7 7-7' />
-									</svg>
-									Back to all posts
-								</a>
+										<svg
+											xmlns='http://www.w3.org/2000/svg'
+											width='16'
+											height='16'
+											viewBox='0 0 24 24'
+											fill='none'
+											stroke='currentColor'
+											strokeWidth='2'
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											className='mr-2'
+										>
+											<path d='M19 12H5M12 19l-7-7 7-7' />
+										</svg>
+										Back to all posts
+									</a>
+								</div>
 							</div>
-						</div>
-					</footer>
-				</article>
-			</Container>
+						</footer>
+					</article>
+				</Container>
+			</div>
 		</Layout>
 	)
 }
