@@ -1,6 +1,7 @@
 import { MyGithubContributions } from '@/payload/fields/content/github-contributions'
 import { MyHomepageIntroduction } from '@/payload/fields/content/homepage-introduction'
 import { MyHorizontalLine } from '@/payload/fields/content/horizontal-line'
+import { MyImage } from '@/payload/fields/content/my-image'
 import { MyImageSlideshow } from '@/payload/fields/content/image-slideshow'
 import { MyCode } from '@/payload/fields/content/my-code'
 import { MyProjects } from '@/payload/fields/content/projects-overview-field'
@@ -44,6 +45,7 @@ export const ThijmenContent: Field = {
 						MyHomepagePosts,
 						MyPosts,
 						MyImageSlideshow,
+						MyImage,
 					],
 				}),
 				FixedToolbarFeature(),

@@ -6,6 +6,7 @@ import type {
 	MyHomepagePostsBlock,
 	MyHomepageProjectsBlock,
 	MyHorizontalLineBlock,
+	MyImageBlock,
 	MyImageSlideshowBlock,
 	MyJavascriptPlaygroundBlock,
 	MyPostsBlock,
@@ -30,6 +31,7 @@ import { GithubStarsBlock } from './blocks/github-stars'
 import { HomepagePostsBlock } from './blocks/homepage-posts-block'
 import { HomepageProjectsBlock } from './blocks/homepage-projects'
 import { HorizontalLineBlock } from './blocks/horizontal-line'
+import { ImageBlock } from './blocks/image'
 import { ImageSlideshowBlock } from './blocks/image-slideshow'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
 import { ProjectsBlock } from './blocks/projects'
@@ -56,6 +58,7 @@ type NodeTypes =
 			| MyHomepagePostsBlock
 			| MyPostsBlock
 			| MyImageSlideshowBlock
+			| MyImageBlock
 	  >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -87,6 +90,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
 		),
 		homepagePostsBlock: ({ node }) => <HomepagePostsBlock {...node.fields} />,
 		imageSlideshow: ({ node }) => <ImageSlideshowBlock {...node.fields} />,
+		image: ({ node }) => <ImageBlock {...node.fields} />,
 	},
 })
 

@@ -851,6 +851,21 @@ export interface MyImageSlideshowBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyImageBlock".
+ */
+export interface MyImageBlock {
+  image: number | R2Media;
+  caption?: string | null;
+  /**
+   * Important for accessibility and SEO
+   */
+  altText: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
