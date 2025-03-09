@@ -1,6 +1,7 @@
 import { PayloadRedirects } from '@/core/common/components/PayloadRedirects'
 import Container from '@/core/common/components/elements/Container'
 import Layout from '@/core/common/components/layouts'
+import PostDetails from '@/core/common/components/layouts/partials/PostDetails'
 import { RichText } from '@/core/common/components/shared-content'
 import { getMenuItems } from '@/core/services/menu'
 import type { Post, Tag } from '@/payload/payload-types'
@@ -217,57 +218,8 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 	const nav = await getMenuItems()
 
-	// Create PostDetails component for the sidebar
-	const PostDetailsSidebar = () => (
-		<div className='mt-4 px-3 py-2 text-sm'>
-			<h3 className='font-medium text-neutral-800 dark:text-neutral-300 mb-2'>
-				Post Details
-			</h3>
-
-			{/* Created Date */}
-			<div className='mb-3'>
-				<p className='text-xs text-neutral-500 dark:text-neutral-400'>
-					Published
-				</p>
-				<p className='text-neutral-700 dark:text-neutral-300'>
-					{formatDistanceToNow(new Date(postData.createdAt), {
-						addSuffix: true,
-					})}
-				</p>
-			</div>
-
-			{/* Tags */}
-			{postData.tags && postData.tags.length > 0 && (
-				<div className='mb-3'>
-					<p className='text-xs text-neutral-500 dark:text-neutral-400 mb-1'>
-						Tags
-					</p>
-					<div className='flex flex-wrap gap-1'>
-						{(postData.tags as Tag[]).map((tag) => (
-							<a
-								key={tag.slug ?? tag.id}
-								href={`/tags/${tag.slug}`}
-								className='inline-block px-2 py-0.5 text-xs bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 rounded transition-colors'
-							>
-								{tag.name}
-							</a>
-						))}
-					</div>
-				</div>
-			)}
-
-			{/* Reading Time - This is a placeholder, you might want to calculate this based on content length */}
-			<div className='mb-3'>
-				<p className='text-xs text-neutral-500 dark:text-neutral-400'>
-					Reading time
-				</p>
-				<p className='text-neutral-700 dark:text-neutral-300'>5 min read</p>
-			</div>
-		</div>
-	)
-
 	return (
-		<Layout navGlobal={nav} sidebarContent={<PostDetailsSidebar />}>
+		<Layout navGlobal={nav} sidebarContent={<PostDetails post={postData} />}>
 			<div
 				style={{ zIndex: 1, position: 'relative' }}
 				className='mt-[80px] md:mt-0'
