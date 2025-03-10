@@ -12,7 +12,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 	if (!post) return null
 
 	return (
-		<div className='mt-6 px-5 py-4 text-sm bg-neutral-900/80 backdrop-blur-sm rounded-lg'>
+		<div className='mt-6 px-5 py-4 text-sm bg-neutral-900/80 backdrop-blur-sm rounded-lg border border-purple-800/30'>
 			<h3 className='font-medium text-neutral-300 mb-5 text-base'>
 				Post Details
 			</h3>
