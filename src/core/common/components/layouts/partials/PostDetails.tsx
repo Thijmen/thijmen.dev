@@ -12,35 +12,30 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 	if (!post) return null
 
 	return (
-		<div className='mt-6 px-4 py-3 text-sm bg-gradient-to-br from-neutral-900/80 to-indigo-950/80 backdrop-blur-sm rounded-lg border border-indigo-500/20'>
-			<h3 className='font-semibold text-neutral-100 mb-4 text-base'>
+		<div className='mt-6 px-5 py-4 text-sm bg-neutral-900/80 backdrop-blur-sm rounded-lg'>
+			<h3 className='font-medium text-neutral-300 mb-5 text-base'>
 				Post Details
 			</h3>
 
-			{/* Created Date */}
-			<div className='mb-4 pl-3 py-1 border-l-2 border-indigo-500'>
-				<p className='text-xs uppercase tracking-wider font-medium text-indigo-300 mb-1'>
-					Published
-				</p>
-				<p className='text-neutral-200 font-medium'>
+			{/* Published Date */}
+			<div className='mb-5'>
+				<p className='text-xs text-neutral-400 mb-1'>PUBLISHED</p>
+				<p className='text-neutral-300'>
 					{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
 				</p>
 			</div>
 
 			{/* Tags */}
 			{post.tags && post.tags.length > 0 && (
-				<div className='mb-4 pl-3 py-1 border-l-2 border-teal-500'>
-					<p className='text-xs uppercase tracking-wider font-medium text-teal-300 mb-2'>
-						Tags
-					</p>
+				<div className='mb-5'>
+					<p className='text-xs text-neutral-400 mb-2'>TAGS</p>
 					<div className='flex flex-wrap gap-2'>
 						{(post.tags as Tag[]).map((tag) => (
 							<Link
 								key={tag.slug ?? tag.id}
 								href={`/tags/${tag.slug}`}
-								className='inline-flex items-center px-3 py-1 text-xs font-medium bg-neutral-800/70 hover:bg-neutral-700/70 text-neutral-200 rounded-md transition-colors border border-neutral-700 hover:border-teal-500'
+								className='inline-flex items-center px-2.5 py-1 text-xs bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded transition-colors'
 							>
-								<span className='w-1.5 h-1.5 rounded-full bg-teal-500 mr-1.5' />
 								{tag.name}
 							</Link>
 						))}
@@ -49,43 +44,23 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 			)}
 
 			{/* Reading Time */}
-			<div className='mb-4 pl-3 py-1 border-l-2 border-amber-500'>
-				<p className='text-xs uppercase tracking-wider font-medium text-amber-300 mb-1'>
-					Reading time
-				</p>
-				<div className='flex items-center'>
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						className='h-4 w-4 text-amber-500 mr-1.5'
-						fill='none'
-						viewBox='0 0 24 24'
-						stroke='currentColor'
-					>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth={2}
-							d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
-						/>
-					</svg>
-					<p className='text-neutral-200 font-medium'>5 min read</p>
-				</div>
+			<div className='mb-5'>
+				<p className='text-xs text-neutral-400 mb-1'>READING TIME</p>
+				<p className='text-neutral-300'>5 min read</p>
 			</div>
 
 			{/* Post Navigation */}
-			<div className='mb-4 pl-3 py-1 border-l-2 border-purple-500'>
-				<p className='text-xs uppercase tracking-wider font-medium text-purple-300 mb-2'>
-					Navigation
-				</p>
+			<div className='mb-5'>
+				<p className='text-xs text-neutral-400 mb-2'>NAVIGATION</p>
 				<div className='space-y-2'>
 					{prevPost ? (
 						<Link
 							href={`/posts/${prevPost.slug}`}
-							className='group flex items-center py-2 px-3 bg-neutral-800/70 hover:bg-neutral-700/70 text-neutral-200 rounded-md transition-all border border-neutral-700 hover:border-purple-500'
+							className='group flex items-center py-2 px-3 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								className='h-4 w-4 text-purple-500 mr-2 transition-transform group-hover:-translate-x-1'
+								className='h-4 w-4 text-neutral-400 mr-2'
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -93,17 +68,16 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 								<path
 									strokeLinecap='round'
 									strokeLinejoin='round'
-									strokeWidth={2}
+									strokeWidth={1.5}
 									d='M15 19l-7-7 7-7'
 								/>
 							</svg>
 							<div className='overflow-hidden'>
-								<p className='text-xs text-purple-300'>Previous</p>
 								<p className='text-sm truncate'>{prevPost.title}</p>
 							</div>
 						</Link>
 					) : (
-						<div className='flex items-center py-2 px-3 bg-neutral-800/30 text-neutral-500 rounded-md border border-neutral-800'>
+						<div className='flex items-center py-2 px-3 bg-neutral-800/50 text-neutral-500 rounded'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								className='h-4 w-4 mr-2 opacity-50'
@@ -114,12 +88,11 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 								<path
 									strokeLinecap='round'
 									strokeLinejoin='round'
-									strokeWidth={2}
+									strokeWidth={1.5}
 									d='M15 19l-7-7 7-7'
 								/>
 							</svg>
 							<div>
-								<p className='text-xs'>Previous</p>
 								<p className='text-sm'>No earlier posts</p>
 							</div>
 						</div>
@@ -128,15 +101,14 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 					{nextPost ? (
 						<Link
 							href={`/posts/${nextPost.slug}`}
-							className='group flex items-center justify-between py-2 px-3 bg-neutral-800/70 hover:bg-neutral-700/70 text-neutral-200 rounded-md transition-all border border-neutral-700 hover:border-purple-500'
+							className='group flex items-center justify-between py-2 px-3 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded transition-colors'
 						>
 							<div className='overflow-hidden'>
-								<p className='text-xs text-purple-300'>Next</p>
 								<p className='text-sm truncate'>{nextPost.title}</p>
 							</div>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								className='h-4 w-4 text-purple-500 ml-2 transition-transform group-hover:translate-x-1'
+								className='h-4 w-4 text-neutral-400 ml-2'
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -144,15 +116,14 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 								<path
 									strokeLinecap='round'
 									strokeLinejoin='round'
-									strokeWidth={2}
+									strokeWidth={1.5}
 									d='M9 5l7 7-7 7'
 								/>
 							</svg>
 						</Link>
 					) : (
-						<div className='flex items-center justify-between py-2 px-3 bg-neutral-800/30 text-neutral-500 rounded-md border border-neutral-800'>
+						<div className='flex items-center justify-between py-2 px-3 bg-neutral-800/50 text-neutral-500 rounded'>
 							<div>
-								<p className='text-xs'>Next</p>
 								<p className='text-sm'>No newer posts</p>
 							</div>
 							<svg
@@ -165,7 +136,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 								<path
 									strokeLinecap='round'
 									strokeLinejoin='round'
-									strokeWidth={2}
+									strokeWidth={1.5}
 									d='M9 5l7 7-7 7'
 								/>
 							</svg>
@@ -175,16 +146,15 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 			</div>
 
 			{/* Share Links */}
-			<div className='mt-6 pt-4 border-t border-neutral-700'>
-				<p className='text-xs uppercase tracking-wider font-medium text-neutral-400 mb-2'>
-					Share
-				</p>
-				<div className='flex gap-2'>
+			<div className='mt-6 pt-4 border-t border-neutral-800'>
+				<p className='text-xs text-neutral-400 mb-3'>SHARE</p>
+				<div className='flex gap-3'>
 					<a
 						href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://thijmen.dev/posts/${post.slug}`)}`}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='p-2 rounded-md bg-neutral-800/70 hover:bg-neutral-700/70 text-neutral-300 hover:text-neutral-100 transition-colors border border-neutral-700 hover:border-indigo-500'
+						className='p-2 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-neutral-300 transition-colors'
+						aria-label='Share on Twitter'
 					>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -200,7 +170,8 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 						href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://thijmen.dev/posts/${post.slug}`)}`}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='p-2 rounded-md bg-neutral-800/70 hover:bg-neutral-700/70 text-neutral-300 hover:text-neutral-100 transition-colors border border-neutral-700 hover:border-indigo-500'
+						className='p-2 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-neutral-300 transition-colors'
+						aria-label='Share on LinkedIn'
 					>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -213,8 +184,9 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 						</svg>
 					</a>
 					<a
-						href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this article: https://thijmen.dev/posts/${post.slug}`)}`}
-						className='p-2 rounded-md bg-neutral-800/70 hover:bg-neutral-700/70 text-neutral-300 hover:text-neutral-100 transition-colors border border-neutral-700 hover:border-indigo-500'
+						href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this post: https://thijmen.dev/posts/${post.slug}`)}`}
+						className='p-2 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-neutral-300 transition-colors'
+						aria-label='Share via Email'
 					>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -223,7 +195,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 							fill='currentColor'
 							viewBox='0 0 16 16'
 						>
-							<path d='M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z' />
+							<path d='M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z' />
 						</svg>
 					</a>
 				</div>
