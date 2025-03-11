@@ -12,15 +12,17 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 	if (!post) return null
 
 	return (
-		<div className='mt-6 px-5 py-4 text-sm bg-neutral-900/80 backdrop-blur-sm rounded-lg border border-purple-800/30'>
-			<h3 className='font-medium text-neutral-300 mb-5 text-base'>
+		<div className='mt-6 px-5 py-4 text-sm bg-white dark:bg-neutral-900/80 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-purple-800/30 shadow-sm'>
+			<h3 className='font-medium text-gray-800 dark:text-neutral-300 mb-5 text-base'>
 				Post Details
 			</h3>
 
 			{/* Published Date */}
 			<div className='mb-5'>
-				<p className='text-xs text-neutral-400 mb-1'>PUBLISHED</p>
-				<p className='text-neutral-300'>
+				<p className='text-xs text-gray-500 dark:text-neutral-400 mb-1'>
+					PUBLISHED
+				</p>
+				<p className='text-gray-700 dark:text-neutral-300'>
 					{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
 				</p>
 			</div>
@@ -28,13 +30,15 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 			{/* Tags */}
 			{post.tags && post.tags.length > 0 && (
 				<div className='mb-5'>
-					<p className='text-xs text-neutral-400 mb-2'>TAGS</p>
+					<p className='text-xs text-gray-500 dark:text-neutral-400 mb-2'>
+						TAGS
+					</p>
 					<div className='flex flex-wrap gap-2'>
 						{(post.tags as Tag[]).map((tag) => (
 							<Link
 								key={tag.slug ?? tag.id}
 								href={`/tags/${tag.slug}`}
-								className='inline-flex items-center px-2.5 py-1 text-xs bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded transition-colors'
+								className='inline-flex items-center px-2.5 py-1 text-xs bg-gray-100 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-gray-700 dark:text-neutral-300 rounded transition-colors'
 							>
 								{tag.name}
 							</Link>
@@ -45,22 +49,26 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 
 			{/* Reading Time */}
 			<div className='mb-5'>
-				<p className='text-xs text-neutral-400 mb-1'>READING TIME</p>
-				<p className='text-neutral-300'>5 min read</p>
+				<p className='text-xs text-gray-500 dark:text-neutral-400 mb-1'>
+					READING TIME
+				</p>
+				<p className='text-gray-700 dark:text-neutral-300'>5 min read</p>
 			</div>
 
 			{/* Post Navigation */}
 			<div className='mb-5'>
-				<p className='text-xs text-neutral-400 mb-2'>NAVIGATION</p>
+				<p className='text-xs text-gray-500 dark:text-neutral-400 mb-2'>
+					NAVIGATION
+				</p>
 				<div className='space-y-2'>
 					{prevPost ? (
 						<Link
 							href={`/posts/${prevPost.slug}`}
-							className='group flex items-center py-2 px-3 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded transition-colors'
+							className='group flex items-center py-2 px-3 bg-gray-100 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-gray-700 dark:text-neutral-300 rounded transition-colors'
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								className='h-4 w-4 text-neutral-400 mr-2'
+								className='h-4 w-4 text-gray-500 dark:text-neutral-400 mr-2'
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -77,7 +85,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 							</div>
 						</Link>
 					) : (
-						<div className='flex items-center py-2 px-3 bg-neutral-800/50 text-neutral-500 rounded'>
+						<div className='flex items-center py-2 px-3 bg-gray-50 dark:bg-neutral-800/50 text-gray-400 dark:text-neutral-500 rounded'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								className='h-4 w-4 mr-2 opacity-50'
@@ -101,14 +109,14 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 					{nextPost ? (
 						<Link
 							href={`/posts/${nextPost.slug}`}
-							className='group flex items-center justify-between py-2 px-3 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded transition-colors'
+							className='group flex items-center justify-between py-2 px-3 bg-gray-100 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-gray-700 dark:text-neutral-300 rounded transition-colors'
 						>
 							<div className='overflow-hidden'>
 								<p className='text-sm truncate'>{nextPost.title}</p>
 							</div>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								className='h-4 w-4 text-neutral-400 ml-2'
+								className='h-4 w-4 text-gray-500 dark:text-neutral-400 ml-2'
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -122,7 +130,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 							</svg>
 						</Link>
 					) : (
-						<div className='flex items-center justify-between py-2 px-3 bg-neutral-800/50 text-neutral-500 rounded'>
+						<div className='flex items-center justify-between py-2 px-3 bg-gray-50 dark:bg-neutral-800/50 text-gray-400 dark:text-neutral-500 rounded'>
 							<div>
 								<p className='text-sm'>No newer posts</p>
 							</div>
@@ -146,14 +154,16 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 			</div>
 
 			{/* Share Links */}
-			<div className='mt-6 pt-4 border-t border-neutral-800'>
-				<p className='text-xs text-neutral-400 mb-3'>SHARE</p>
+			<div className='mt-6 pt-4 border-t border-gray-200 dark:border-neutral-800'>
+				<p className='text-xs text-gray-500 dark:text-neutral-400 mb-3'>
+					SHARE
+				</p>
 				<div className='flex gap-3'>
 					<a
 						href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://thijmen.dev/posts/${post.slug}`)}`}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='p-2 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-neutral-300 transition-colors'
+						className='p-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-gray-500 hover:text-gray-700 dark:text-neutral-400 dark:hover:text-neutral-300 transition-colors'
 						aria-label='Share on Twitter'
 					>
 						<svg
@@ -170,7 +180,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 						href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://thijmen.dev/posts/${post.slug}`)}`}
 						target='_blank'
 						rel='noopener noreferrer'
-						className='p-2 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-neutral-300 transition-colors'
+						className='p-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-gray-500 hover:text-gray-700 dark:text-neutral-400 dark:hover:text-neutral-300 transition-colors'
 						aria-label='Share on LinkedIn'
 					>
 						<svg
@@ -185,7 +195,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 					</a>
 					<a
 						href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${encodeURIComponent(`Check out this post: https://thijmen.dev/posts/${post.slug}`)}`}
-						className='p-2 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-neutral-300 transition-colors'
+						className='p-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-gray-500 hover:text-gray-700 dark:text-neutral-400 dark:hover:text-neutral-300 transition-colors'
 						aria-label='Share via Email'
 					>
 						<svg
