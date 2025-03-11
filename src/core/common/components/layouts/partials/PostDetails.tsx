@@ -12,13 +12,13 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 	if (!post) return null
 
 	return (
-		<div className='mt-6 px-5 py-4 text-sm bg-white dark:bg-neutral-900/80 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-purple-800/30 shadow-sm'>
-			<h3 className='font-medium text-gray-800 dark:text-neutral-300 mb-5 text-base'>
+		<div className='mt-6 px-4 py-4 text-sm bg-white dark:bg-neutral-900/80 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-purple-800/30 shadow-sm'>
+			<h3 className='font-medium text-gray-800 dark:text-neutral-300 mb-4 text-base'>
 				Post Details
 			</h3>
 
 			{/* Published Date */}
-			<div className='mb-5'>
+			<div className='mb-4'>
 				<p className='text-xs text-gray-500 dark:text-neutral-400 mb-1'>
 					PUBLISHED
 				</p>
@@ -27,9 +27,17 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 				</p>
 			</div>
 
+			{/* Reading Time */}
+			<div className='mb-4'>
+				<p className='text-xs text-gray-500 dark:text-neutral-400 mb-1'>
+					READING TIME
+				</p>
+				<p className='text-gray-700 dark:text-neutral-300'>5 min read</p>
+			</div>
+
 			{/* Tags */}
 			{post.tags && post.tags.length > 0 && (
-				<div className='mb-5'>
+				<div className='mb-4'>
 					<p className='text-xs text-gray-500 dark:text-neutral-400 mb-2'>
 						TAGS
 					</p>
@@ -47,16 +55,8 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 				</div>
 			)}
 
-			{/* Reading Time */}
-			<div className='mb-5'>
-				<p className='text-xs text-gray-500 dark:text-neutral-400 mb-1'>
-					READING TIME
-				</p>
-				<p className='text-gray-700 dark:text-neutral-300'>5 min read</p>
-			</div>
-
 			{/* Post Navigation */}
-			<div className='mb-5'>
+			<div className='mb-4'>
 				<p className='text-xs text-gray-500 dark:text-neutral-400 mb-2'>
 					NAVIGATION
 				</p>
@@ -68,7 +68,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								className='h-4 w-4 text-gray-500 dark:text-neutral-400 mr-2'
+								className='h-4 w-4 text-gray-500 dark:text-neutral-400 mr-2 flex-shrink-0'
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -88,7 +88,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 						<div className='flex items-center py-2 px-3 bg-gray-50 dark:bg-neutral-800/50 text-gray-400 dark:text-neutral-500 rounded'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								className='h-4 w-4 mr-2 opacity-50'
+								className='h-4 w-4 mr-2 opacity-50 flex-shrink-0'
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -116,7 +116,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 							</div>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								className='h-4 w-4 text-gray-500 dark:text-neutral-400 ml-2'
+								className='h-4 w-4 text-gray-500 dark:text-neutral-400 ml-2 flex-shrink-0'
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -136,7 +136,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 							</div>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
-								className='h-4 w-4 ml-2 opacity-50'
+								className='h-4 w-4 ml-2 opacity-50 flex-shrink-0'
 								fill='none'
 								viewBox='0 0 24 24'
 								stroke='currentColor'
@@ -154,7 +154,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 			</div>
 
 			{/* Share Links */}
-			<div className='mt-6 pt-4 border-t border-gray-200 dark:border-neutral-800'>
+			<div className='mt-5 pt-4 border-t border-gray-200 dark:border-neutral-800'>
 				<p className='text-xs text-gray-500 dark:text-neutral-400 mb-3'>
 					SHARE
 				</p>

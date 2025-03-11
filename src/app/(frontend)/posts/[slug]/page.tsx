@@ -306,8 +306,17 @@ export default async function Page({ params: paramsPromise }: Args) {
 						)}
 
 						{/* Post Content */}
-						<div className='prose dark:prose-invert prose-lg prose-neutral max-w-none'>
+						<div className='prose prose-lg dark:prose-invert prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-purple-600 dark:prose-a:text-purple-400 prose-img:rounded-lg prose-img:shadow-md max-w-none'>
 							<RichText data={postData.dynamiccontent} />
+						</div>
+
+						{/* Mobile Post Details - only shown on mobile */}
+						<div className='md:hidden mt-10'>
+							<PostDetails
+								post={postData}
+								prevPost={adjacentPosts.prev}
+								nextPost={adjacentPosts.next}
+							/>
 						</div>
 
 						{/* Post Footer */}
