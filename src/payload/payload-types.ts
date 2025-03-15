@@ -829,6 +829,20 @@ export interface MyPostsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MyFilteredPostsListBlock".
+ */
+export interface MyFilteredPostsListBlock {
+  heading: string;
+  description?: string | null;
+  showAllTags?: boolean | null;
+  specificTags?: (number | Tag)[] | null;
+  limit: number;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'filteredPostsListBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "MyImageSlideshowBlock".
  */
 export interface MyImageSlideshowBlock {

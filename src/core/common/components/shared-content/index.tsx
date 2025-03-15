@@ -12,6 +12,7 @@ import type {
 	MyPostsBlock,
 	MyProjectsBlock,
 	MyWakaContributionsBlock,
+	MyFilteredPostsListBlock,
 } from '@/payload/payload-types'
 import type {
 	DefaultNodeTypes,
@@ -36,6 +37,7 @@ import { ImageSlideshowBlock } from './blocks/image-slideshow'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
 import { ProjectsBlock } from './blocks/projects'
 import { WakaBlock } from './blocks/waka'
+import { FilteredPostsListBlock } from './blocks/filtered-posts-list'
 
 type Props = {
 	data: SerializedEditorState
@@ -59,6 +61,7 @@ type NodeTypes =
 			| MyPostsBlock
 			| MyImageSlideshowBlock
 			| MyImageBlock
+			| MyFilteredPostsListBlock
 	  >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -89,6 +92,9 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
 			<EnhancedIntroductionBlock {...node.fields} />
 		),
 		homepagePostsBlock: ({ node }) => <HomepagePostsBlock {...node.fields} />,
+		filteredPostsListBlock: ({ node }) => (
+			<FilteredPostsListBlock block={node.fields} />
+		),
 		imageSlideshow: ({ node }) => <ImageSlideshowBlock {...node.fields} />,
 		image: ({ node }) => <ImageBlock {...node.fields} />,
 	},

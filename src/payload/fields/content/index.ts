@@ -6,6 +6,7 @@ import { MyCode } from '@/payload/fields/content/my-code'
 import { MyImage } from '@/payload/fields/content/my-image'
 import { MyProjects } from '@/payload/fields/content/projects-overview-field'
 import { MyWakaContributions } from '@/payload/fields/content/waka-statistics'
+import { MyFilteredPostsList } from '@/payload/fields/content/filtered-posts-list'
 import {
 	BlocksFeature,
 	FixedToolbarFeature,
@@ -44,6 +45,7 @@ export const ThijmenContent: Field = {
 						MyHomepageProjects,
 						MyHomepagePosts,
 						MyPosts,
+						MyFilteredPostsList,
 						MyImageSlideshow,
 						MyImage,
 					],
