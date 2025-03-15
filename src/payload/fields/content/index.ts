@@ -1,3 +1,4 @@
+import { MyFilteredPostsList } from '@/payload/fields/content/filtered-posts-list'
 import { MyGithubContributions } from '@/payload/fields/content/github-contributions'
 import { MyHomepageIntroduction } from '@/payload/fields/content/homepage-introduction'
 import { MyHorizontalLine } from '@/payload/fields/content/horizontal-line'
@@ -6,7 +7,6 @@ import { MyCode } from '@/payload/fields/content/my-code'
 import { MyImage } from '@/payload/fields/content/my-image'
 import { MyProjects } from '@/payload/fields/content/projects-overview-field'
 import { MyWakaContributions } from '@/payload/fields/content/waka-statistics'
-import { MyFilteredPostsList } from '@/payload/fields/content/filtered-posts-list'
 import {
 	BlocksFeature,
 	FixedToolbarFeature,

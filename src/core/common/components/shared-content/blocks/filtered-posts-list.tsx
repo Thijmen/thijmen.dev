@@ -1,12 +1,12 @@
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
+import PageHeading from '@/core/common/components/elements/PageHeading'
+import PostsList from '@/core/modules/posts/components/PostsList'
 import type {
 	MyFilteredPostsListBlock,
 	Post,
 	Tag,
 } from '@/payload/payload-types'
-import PageHeading from '@/core/common/components/elements/PageHeading'
-import PostsList from '@/core/modules/posts/components/PostsList'
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
 
 interface FilteredPostsListBlockProps {
 	block: MyFilteredPostsListBlock

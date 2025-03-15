@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useRouter, useSearchParams } from 'next/navigation'
 import type { Post, Tag } from '@/payload/payload-types'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import PostsGrid from './PostsGrid'
 
 interface PostsListProps {

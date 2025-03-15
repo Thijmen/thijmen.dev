@@ -1,5 +1,6 @@
 import type {
 	MyCodeBlock,
+	MyFilteredPostsListBlock,
 	MyGithubContributionsBlock,
 	MyGithubStarsBlock,
 	MyHomepageIntroductionBlock,
@@ -12,7 +13,6 @@ import type {
 	MyPostsBlock,
 	MyProjectsBlock,
 	MyWakaContributionsBlock,
-	MyFilteredPostsListBlock,
 } from '@/payload/payload-types'
 import type {
 	DefaultNodeTypes,
@@ -27,6 +27,7 @@ import {
 } from '@payloadcms/richtext-lexical/react'
 import Mdx from '../elements/mdx/Mdx'
 import { EnhancedIntroductionBlock } from './blocks/enhancedIntroduction'
+import { FilteredPostsListBlock } from './blocks/filtered-posts-list'
 import { GithubBlock } from './blocks/github'
 import { GithubStarsBlock } from './blocks/github-stars'
 import { HomepagePostsBlock } from './blocks/homepage-posts-block'
@@ -37,7 +38,6 @@ import { ImageSlideshowBlock } from './blocks/image-slideshow'
 import { JavascriptPlaygroundBlock } from './blocks/javascript-playground'
 import { ProjectsBlock } from './blocks/projects'
 import { WakaBlock } from './blocks/waka'
-import { FilteredPostsListBlock } from './blocks/filtered-posts-list'
 
 type Props = {
 	data: SerializedEditorState
