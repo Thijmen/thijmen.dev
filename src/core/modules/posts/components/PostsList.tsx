@@ -3,7 +3,7 @@
 import type { Post, Tag } from '@/payload/payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import PostsGrid from './PostsGrid'
 
 interface PostsListProps {
@@ -11,7 +11,11 @@ interface PostsListProps {
 	allTags: Tag[]
 }
 
-const PostsList: React.FC<PostsListProps> = ({ initialPosts, allTags }) => {
+// Create a client component that uses useSearchParams
+const PostsListClient: React.FC<PostsListProps> = ({
+	initialPosts,
+	allTags,
+}) => {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 
@@ -150,6 +154,15 @@ const PostsList: React.FC<PostsListProps> = ({ initialPosts, allTags }) => {
 				</motion.div>
 			</AnimatePresence>
 		</div>
+	)
+}
+
+// Create a wrapper component with Suspense
+const PostsList: React.FC<PostsListProps> = (props) => {
+	return (
+		<Suspense fallback={<div>Loading posts...</div>}>
+			<PostsListClient {...props} />
+		</Suspense>
 	)
 }
 
