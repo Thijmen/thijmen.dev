@@ -4,7 +4,7 @@ import Layout from '@/core/common/components/layouts'
 import PostDetails from '@/core/common/components/layouts/partials/PostDetails'
 import { RichText } from '@/core/common/components/shared-content'
 import { getMenuItems } from '@/core/services/menu'
-import type { Post, Tag } from '@/payload/payload-types'
+import type { Post } from '@/payload/payload-types'
 import { generateMeta } from '@/payload/utilities/generateMeta'
 import configPromise from '@payload-config'
 import { formatDistanceToNow } from 'date-fns'
@@ -281,24 +281,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 												<span>•</span>
 												<span>5 min read</span>
 											</div>
-											<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 font-sora'>
+											<h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 font-sora'>
 												{postData.title}
 											</h1>
-
-											{postData.tags && postData.tags.length > 0 && (
-												<div className='flex flex-wrap gap-2'>
-													{(postData.tags as Tag[]).map((tag, index) => (
-														<span
-															key={tag.slug ?? tag.id}
-															className='group relative overflow-hidden rounded-md border border-neutral-200 bg-white/50 px-3 py-1.5 text-sm font-medium text-neutral-800 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-teal-500 hover:shadow-md dark:border-neutral-800 dark:bg-black/50 dark:text-neutral-200 dark:hover:border-teal-400'
-															style={{ animationDelay: `${index * 0.1}s` }}
-														>
-															<span className='relative z-10'>{tag.name}</span>
-															<span className='absolute inset-0 -z-10 translate-y-full bg-gradient-to-r from-teal-500/10 to-indigo-500/10 transition-transform duration-300 group-hover:translate-y-0 dark:from-teal-500/20 dark:to-indigo-500/20' />
-														</span>
-													))}
-												</div>
-											)}
 										</div>
 									</div>
 								</div>
