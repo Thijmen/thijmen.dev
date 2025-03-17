@@ -45,7 +45,7 @@ const PostDetails = ({ post, prevPost, nextPost }: PostDetailsProps) => {
 						{(post.tags as Tag[]).map((tag) => (
 							<Link
 								key={tag.slug ?? tag.id}
-								href={`/tags/${tag.slug}`}
+								href={`/posts?tags=${tag.slug}`}
 								className='inline-flex items-center px-2.5 py-1 text-xs bg-gray-100 hover:bg-gray-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-gray-700 dark:text-neutral-300 rounded transition-colors'
 							>
 								{tag.name}
