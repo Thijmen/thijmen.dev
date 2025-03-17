@@ -1,4 +1,3 @@
-import PageHeading from '@/core/common/components/elements/PageHeading'
 import PostsList from '@/core/modules/posts/components/PostsList'
 import type {
 	MyFilteredPostsListBlock,
@@ -90,11 +89,7 @@ export async function FilteredPostsListBlock({
 	])
 
 	return (
-		<div className='py-4'>
-			<PageHeading
-				title={block.heading || 'Blog Posts'}
-				description={block.description || ''}
-			/>
+		<div className='py-4 max-w-4xl mx-auto'>
 			<div className='mt-6'>
 				<PostsList initialPosts={posts} allTags={tags} />
 			</div>

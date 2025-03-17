@@ -3,8 +3,8 @@
 import type { Post, Tag } from '@/payload/payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState, Suspense } from 'react'
-import PostsGrid from './PostsGrid'
+import { Suspense, useEffect, useState } from 'react'
+import PostsVerticalList from './PostsVerticalList'
 
 interface PostsListProps {
 	initialPosts: Post[]
@@ -126,7 +126,7 @@ const PostsListClient: React.FC<PostsListProps> = ({
 				)}
 			</div>
 
-			{/* Posts grid with animation */}
+			{/* Posts list with animation */}
 			<AnimatePresence mode='wait'>
 				<motion.div
 					key={selectedTags.join(',')}
@@ -136,7 +136,7 @@ const PostsListClient: React.FC<PostsListProps> = ({
 					transition={{ duration: 0.3 }}
 				>
 					{filteredPosts.length > 0 ? (
-						<PostsGrid posts={filteredPosts} />
+						<PostsVerticalList posts={filteredPosts} />
 					) : (
 						<div className='py-12 text-center'>
 							<p className='text-gray-500 dark:text-neutral-400'>
