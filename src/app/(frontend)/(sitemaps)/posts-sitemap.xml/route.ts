@@ -3,14 +3,14 @@ import { getServerSideSitemap } from 'next-sitemap'
 import { unstable_cache } from 'next/cache'
 import { getPayload } from 'payload'
 
-const getPagesSitemap = unstable_cache(
+const getPostsSitemap = unstable_cache(
 	async () => {
 		const payload = await getPayload({ config })
 		const SITE_URL =
 			process.env.NEXT_PUBLIC_SERVER_URL || 'https://www.thijmen.dev'
 
 		const results = await payload.find({
-			collection: 'pages',
+			collection: 'posts',
 			overrideAccess: false,
 			draft: false,
 			depth: 0,
@@ -31,28 +31,25 @@ const getPagesSitemap = unstable_cache(
 
 		const sitemap = results.docs
 			? results.docs
-					.filter((page) => Boolean(page?.slug))
-					.map((page) => {
+					.filter((post) => Boolean(post?.slug))
+					.map((post) => {
 						return {
-							loc:
-								page?.slug === 'home'
-									? `${SITE_URL}/`
-									: `${SITE_URL}/${page?.slug}`,
-							lastmod: page.updatedAt || dateFallback,
+							loc: `${SITE_URL}/posts/${post?.slug}`,
+							lastmod: post.updatedAt || dateFallback,
 						}
 					})
 			: []
 
 		return [...sitemap]
 	},
-	['pages-sitemap'],
+	['posts-sitemap'],
 	{
-		tags: ['pages-sitemap'],
+		tags: ['posts-sitemap'],
 	},
 )
 
 export async function GET() {
-	const sitemap = await getPagesSitemap()
+	const sitemap = await getPostsSitemap()
 
 	return getServerSideSitemap(sitemap)
 }

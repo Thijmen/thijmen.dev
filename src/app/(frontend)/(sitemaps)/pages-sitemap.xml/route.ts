@@ -10,7 +10,7 @@ const getPostsSitemap = unstable_cache(
 			process.env.NEXT_PUBLIC_SERVER_URL || 'https://www.thijmen.dev'
 
 		const results = await payload.find({
-			collection: 'posts',
+			collection: 'pages',
 			overrideAccess: false,
 			draft: false,
 			depth: 0,
@@ -34,7 +34,10 @@ const getPostsSitemap = unstable_cache(
 					.filter((page) => Boolean(page?.slug))
 					.map((page) => {
 						return {
-							loc: `${SITE_URL}/${page?.slug}`,
+							loc:
+								page?.slug === 'home'
+									? `${SITE_URL}/`
+									: `${SITE_URL}/${page?.slug}`,
 							lastmod: page.updatedAt || dateFallback,
 						}
 					})
@@ -42,9 +45,9 @@ const getPostsSitemap = unstable_cache(
 
 		return [...sitemap]
 	},
-	['posts-sitemap'],
+	['pages-sitemap'],
 	{
-		tags: ['posts-sitemap'],
+		tags: ['pages-sitemap'],
 	},
 )
 

@@ -31,11 +31,11 @@ const getProjectsSitemap = unstable_cache(
 
 		const sitemap = results.docs
 			? results.docs
-					.filter((page) => Boolean(page?.slug))
-					.map((page) => {
+					.filter((project) => Boolean(project?.slug))
+					.map((project) => {
 						return {
-							loc: `${SITE_URL}/projects/${page?.slug}`,
-							lastmod: page.updatedAt || dateFallback,
+							loc: `${SITE_URL}/projects/${project?.slug}`,
+							lastmod: project.updatedAt || dateFallback,
 						}
 					})
 			: []
