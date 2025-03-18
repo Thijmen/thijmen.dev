@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "cross-env NODE_OPTIONS='--no-deprecation' next dev --port 3001 --turbo",
 		"build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+		"postbuild": "next-sitemap --config next-sitemap.config.cjs",
 		"payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
 		"start": "cross-env NODE_OPTIONS=--no-deprecation next start",
 		"ci": "payload migrate && pnpm build",
