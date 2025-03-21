@@ -97,8 +97,8 @@ dependencies:
     specifier: ^1.21.3
     version: 1.22.0
   axios:
-    specifier: ^1.7.4
-    version: 1.7.7
+    specifier: ^1.8.4
+    version: 1.8.4
   babel-plugin-react-compiler:
     specifier: ^0.0.0-experimental-592953e-20240517
     version: 0.0.0-experimental-6067d4e-20240919
@@ -6036,7 +6036,7 @@ packages:
     dependencies:
       '@aws-sdk/util-utf8-browser': 3.259.0
       '@httptoolkit/websocket-stream': 6.0.1
-      axios: 1.7.7
+      axios: 1.8.4
       buffer: 6.0.3
       crypto-js: 4.2.0
       mqtt: 5.10.1
@@ -6058,8 +6058,8 @@ packages:
       - debug
     dev: false
 
-  /axios@1.7.7:
-    resolution: {integrity: sha512-S4kL7XrjgBmvdGut0sN3yJxqYzrDOnivkBiN0OFs6hLiUam3UPvswUo0kqGyhqUZGEOytHyumEdXsAkgCOUf3Q==}
+  /axios@1.8.4:
+    resolution: {integrity: sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==}
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.0
