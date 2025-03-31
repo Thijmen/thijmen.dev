@@ -58,7 +58,7 @@ const Layout = ({
 					isDarkTheme ? 'dark:text-darkText' : '',
 				)}
 			>
-				<div className='flex flex-col lg:flex-row lg:gap-5 lg:py-4 xl:pb-8'>
+				<div className='min-h-screen flex flex-col lg:flex-row lg:gap-5 lg:py-4 xl:pb-8'>
 					<HeaderSidebar
 						navGlobal={navGlobal}
 						sidebarContent={sidebarContent}

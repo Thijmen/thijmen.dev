@@ -21,7 +21,7 @@ export const EnhancedIntroductionBlock: React.FC<
 	}, [])
 
 	return (
-		<section className='relative overflow-hidden rounded-xl p-8 border border-neutral-800/10 dark:border-white/10'>
+		<section className='relative z-0 overflow-hidden rounded-xl p-8 border border-neutral-800/10 dark:border-white/10 mt-[80px] lg:mt-0'>
 			{/* Futuristic background with mesh gradient */}
 			<div className='absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-teal-500/5 dark:from-indigo-500/20 dark:via-purple-500/20 dark:to-teal-500/20 animate-gradient' />
 

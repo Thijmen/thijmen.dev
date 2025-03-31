@@ -34,21 +34,23 @@ const Sidebar = (props: Props) => {
 			id='sidebar'
 			className='sticky top-0 z-10 flex flex-col transition-all duration-300 lg:py-8'
 		>
-			<Profile isScrolled={isScrolled} navGlobal={props.navGlobal} />
-			{!isMobile && (
-				<>
-					<Breakline />
-					<Navigation navGlobal={props.navGlobal} />
-					<Breakline className='mt-2' />
-					<Copyright />
-					{props.sidebarContent && (
-						<>
-							<Breakline className='mt-2' />
-							{props.sidebarContent}
-						</>
-					)}
-				</>
-			)}
+			<div className='lg:mt-0'>
+				<Profile isScrolled={isScrolled} navGlobal={props.navGlobal} />
+				{!isMobile && (
+					<>
+						<Breakline />
+						<Navigation navGlobal={props.navGlobal} />
+						<Breakline className='mt-2' />
+						<Copyright />
+						{props.sidebarContent && (
+							<>
+								<Breakline className='mt-2' />
+								{props.sidebarContent}
+							</>
+						)}
+					</>
+				)}
+			</div>
 		</div>
 	)
 }

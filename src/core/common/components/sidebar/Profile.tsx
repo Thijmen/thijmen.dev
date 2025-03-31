@@ -54,7 +54,7 @@ const Profile = ({ isScrolled = false, navGlobal }: ProfileProps) => {
 		left: 0,
 		right: 0,
 		width: '100%',
-		zIndex: 9999999,
+		zIndex: 50,
 		isolation: 'isolate',
 	}
 
@@ -62,12 +62,12 @@ const Profile = ({ isScrolled = false, navGlobal }: ProfileProps) => {
 		<MenuContext.Provider value={{ hideNavbar }}>
 			<div
 				className={clsx(
-					'fixed w-full bg-light p-5 shadow-sm dark:border-b dark:border-neutral-800 dark:bg-dark sm:shadow-none lg:relative lg:border-none lg:!bg-transparent lg:p-0',
-					expandMenu && 'pb-0',
+					'fixed w-full h-[80px] bg-light/95 backdrop-blur-sm px-5 shadow-sm dark:border-b dark:border-neutral-800 dark:bg-dark/95 sm:shadow-none lg:relative lg:h-auto lg:border-none lg:!bg-transparent lg:p-0',
+					expandMenu && 'h-auto pb-0',
 				)}
 				style={headerStyle}
 			>
-				<div className='flex items-start justify-between md:px-2 lg:flex-col lg:space-y-4'>
+				<div className='flex h-full items-center justify-between md:px-2 lg:h-auto lg:flex-col lg:space-y-4'>
 					<ProfileHeader expandMenu={expandMenu} imageSize={getImageSize()} />
 
 					{!isMobile && (
