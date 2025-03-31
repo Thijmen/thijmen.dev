@@ -12,16 +12,42 @@ export const Media: CollectionConfig = {
 				name: 'projectCardHomepage',
 				width: 326,
 				height: 400,
-				generateImageName: ({ height, sizeName, extension, width }) => {
-					return `custom-${sizeName}-${height}-${width}.${extension}`
+				generateImageName: ({
+					height,
+					originalName,
+					sizeName,
+					extension,
+					width,
+				}) => {
+					return `projectCardHomepage-${originalName}-${sizeName}-${height}-${width}.${extension}`
 				},
 			},
 			{
 				name: 'projectCardProjectsPage',
 				width: 400,
 				height: 200,
-				generateImageName: ({ height, sizeName, extension, width }) => {
-					return `custom-${sizeName}-${height}-${width}.${extension}`
+				generateImageName: ({
+					height,
+					originalName,
+					sizeName,
+					extension,
+					width,
+				}) => {
+					return `projectCardProjectsPage-${originalName}-${sizeName}-${height}-${width}.${extension}`
+				},
+			},
+			{
+				name: 'postThumbnail',
+				width: 96,
+				height: 96,
+				generateImageName: ({
+					height,
+					originalName,
+					sizeName,
+					extension,
+					width,
+				}) => {
+					return `postThumbnail-${originalName}-${sizeName}-${height}-${width}.${extension}`
 				},
 			},
 		],

@@ -2,6 +2,7 @@ import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticatedOrPublished'
 import { revalidateProject } from '@/payload/collections/Projects/hooks/revalidateProject'
 import { defaultMetaTab, defaultVersions } from '@/payload/collections/defaults'
+import { ThijmenContent } from '@/payload/fields/content'
 import { slugField } from '@/payload/fields/slug'
 import { generatePreviewPath } from '@/payload/utilities/generatePreviewPath'
 import type { CollectionConfig } from 'payload'
@@ -14,14 +15,16 @@ export const Projects: CollectionConfig = {
 		livePreview: {
 			url: ({ data }) => {
 				const path = generatePreviewPath({
-					path: `/projects/${typeof data?.slug === 'string' ? data.slug : ''}`,
+					slug: typeof data?.slug === 'string' ? data.slug : '',
+					collection: 'projects',
 				})
 				return `${process.env.NEXT_PUBLIC_SERVER_URL}${path}`
 			},
 		},
-		preview: (doc) =>
+		preview: (data) =>
 			generatePreviewPath({
-				path: `/projects/${typeof doc?.slug === 'string' ? doc.slug : ''}`,
+				slug: typeof data?.slug === 'string' ? data.slug : '',
+				collection: 'projects',
 			}),
 	},
 	versions: defaultVersions,
@@ -92,14 +95,7 @@ export const Projects: CollectionConfig = {
 							type: 'text',
 							label: 'Live Link',
 						},
-						{
-							name: 'description',
-							type: 'code',
-							admin: {
-								language: 'markdown',
-							},
-							required: true,
-						},
+						ThijmenContent,
 					],
 				},
 				defaultMetaTab,

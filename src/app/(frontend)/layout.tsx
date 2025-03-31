@@ -22,12 +22,14 @@ export default function RootLayout({
 	return (
 		<html suppressHydrationWarning lang='en'>
 			<head>
-				<script
-					async
-					defer
-					src='https://umami.thijmen.dev/script.js'
-					data-website-id={umamiWebsiteId}
-				/>
+				{umamiWebsiteId?.length > 0 && (
+					<script
+						async
+						defer
+						src='https://umami.thijmen.dev/script.js'
+						data-website-id={umamiWebsiteId}
+					/>
+				)}
 				<link
 					rel='apple-touch-icon'
 					sizes='180x180'

@@ -8,8 +8,10 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 	previousDoc,
 	req: { payload },
 }) => {
+	const slug = doc.slug === 'home' ? '' : doc.slug
+
 	if (doc._status === 'published') {
-		const path = `/${doc.slug}`
+		const path = `/${slug}`
 
 		payload.logger.info(`Revalidating page at path: ${path}`)
 

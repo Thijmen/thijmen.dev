@@ -1,8 +1,12 @@
 import type { GlobalConfig, Payload } from 'payload'
+import { revalidateNav } from './hooks/revalidateNav'
 
 export const Nav: GlobalConfig = {
 	slug: 'nav',
 	label: 'Navigation',
+	hooks: {
+		afterChange: [revalidateNav],
+	},
 	fields: [
 		{
 			name: 'links',

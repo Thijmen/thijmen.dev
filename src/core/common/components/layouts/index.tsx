@@ -16,6 +16,7 @@ interface LayoutProps {
 	isFullPageHeader?: boolean
 	title?: string
 	navGlobal: Nav
+	sidebarContent?: ReactNode
 }
 
 const Layout = ({
@@ -23,6 +24,7 @@ const Layout = ({
 	isFullPageHeader,
 	title,
 	navGlobal,
+	sidebarContent,
 }: LayoutProps) => {
 	const { resolvedTheme } = useTheme()
 	const hasMounted = useHasMounted()
@@ -56,8 +58,11 @@ const Layout = ({
 					isDarkTheme ? 'dark:text-darkText' : '',
 				)}
 			>
-				<div className='flex flex-col lg:flex-row lg:gap-5 lg:py-4 xl:pb-8'>
-					<HeaderSidebar navGlobal={navGlobal} />
+				<div className='min-h-screen flex flex-col lg:flex-row lg:gap-5 lg:py-4 xl:pb-8'>
+					<HeaderSidebar
+						navGlobal={navGlobal}
+						sidebarContent={sidebarContent}
+					/>
 					<main className='max-w-[854px] transition-all duration-300 lg:w-4/5'>
 						{children}
 					</main>

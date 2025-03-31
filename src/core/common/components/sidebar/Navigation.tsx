@@ -24,23 +24,29 @@ const Navigation = (props: Props) => {
 		setIsOpen(true)
 	}
 
-	const cn = 'group-hover:-rotate-12 transition-all duration-300'
-
 	return (
-		<div>
+		<div className='relative'>
+			{/* Simple navigation header */}
+			<div className='mb-4'>
+				<div className='text-xs font-mono text-neutral-500 dark:text-neutral-400 ml-2 tracking-wider'>
+					NAVIGATION
+				</div>
+			</div>
+
 			<Menu navGlobal={props.navGlobal} list={filterdMenu} />
-			<Breakline className='mb-2' />
+
+			<Breakline className='my-3' />
+
 			<MenuItem
 				title={isMobile ? 'Command' : 'cmd + k'}
 				href='#'
-				icon={<CommandIcon className={cn} size={20} />}
+				icon={<CommandIcon size={20} />}
 				isExternal={false}
 				onClick={() => handleOpenCommandPalette()}
 			>
-				{/* <div className='relative inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-green-200 text-green-800 '>
-            <div className='absolute -ml-2 w-[4.9rem] rounded-full h-5 border-2 border-green-300 animate-badge-pulse'></div>
-            <span>AI Powered</span>
-          </div> */}
+				<div className='inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300'>
+					<span>TERMINAL</span>
+				</div>
 			</MenuItem>
 		</div>
 	)

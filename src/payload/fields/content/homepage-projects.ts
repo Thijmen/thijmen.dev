@@ -28,6 +28,12 @@ export const MyHomepageProjects: Block = {
 				language: 'markdown',
 			},
 		},
+		{
+			name: 'headingTitle',
+			type: 'text',
+			label: 'Heading title',
+			required: false,
+		},
 	],
 	interfaceName: 'MyHomepageProjectsBlock',
 }

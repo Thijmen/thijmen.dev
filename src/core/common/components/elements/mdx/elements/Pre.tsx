@@ -10,16 +10,22 @@ import {
 	Button,
 	type ButtonProps,
 } from '@/core/common/components/elements/mdx/ui/button'
-import { ScrollArea } from '@/core/common/components/elements/mdx/ui/scroll-area'
+import {
+	ScrollArea,
+	ScrollBar,
+} from '@/core/common/components/elements/mdx/ui/scroll-area'
+import { useToast } from '@/core/common/components/elements/mdx/ui/toast'
 import cn from '@/core/common/libs/cn'
 import { CheckIcon, CopyIcon, FileIcon, TerminalIcon } from 'lucide-react'
 import * as React from 'react'
 
 type PreProps = {
 	'data-lang'?: string
+	copy?: boolean
 } & React.ComponentPropsWithoutRef<'pre'>
 type CopyButtonProps = {
 	text: string
+	onCopy?: () => void
 } & ButtonProps
 
 const getLanguageIcon = (lang: string): React.ReactNode => {
@@ -54,10 +60,11 @@ const getLanguageIcon = (lang: string): React.ReactNode => {
 }
 
 const Pre = (props: PreProps) => {
-	const { children, className, title, 'data-lang': lang, ...rest } = props
+	const { children, copy, className, title, 'data-lang': lang, ...rest } = props
 
 	const textInput = React.useRef<HTMLPreElement>(null)
 	const [text, setText] = React.useState<string>('')
+	const { show, ToastContainer } = useToast()
 
 	React.useEffect(() => {
 		if (textInput.current) {
@@ -75,25 +82,53 @@ const Pre = (props: PreProps) => {
 					<figcaption className='flex-1 truncate text-muted-foreground'>
 						{title}
 					</figcaption>
-					<CopyButton text={text} />
+					{copy && (
+						<CopyButton
+							text={text}
+							onCopy={() => show('Copied to clipboard', { variant: 'success' })}
+						/>
+					)}
 				</div>
 			) : (
-				<CopyButton className='absolute right-4 top-3 z-10' text={text} />
+				copy && (
+					<CopyButton
+						className='absolute right-4 top-3 z-10'
+						text={text}
+						onCopy={() => show('Copied to clipboard', { variant: 'success' })}
+					/>
+				)
 			)}
 
-			<ScrollArea>
-				<pre ref={textInput} className={cn('py-4', className)} {...rest}>
+			<ScrollArea className='max-w-full'>
+				<pre
+					ref={textInput}
+					className={cn('py-4 overflow-x-auto whitespace-pre', className)}
+					{...rest}
+				>
 					{children}
 				</pre>
+				<ScrollBar orientation='horizontal' />
 			</ScrollArea>
+			<ToastContainer />
 		</figure>
 	)
 }
 
 const CopyButton = (props: CopyButtonProps) => {
-	const { text, className, ...rest } = props
-	// const [copy, isCopied] = useCopyToClipboard()
-	const isCopied = false
+	const { text, className, onCopy, ...rest } = props
+	const [isCopied, setIsCopied] = React.useState(false)
+
+	const copyToClipboard = React.useCallback(async () => {
+		try {
+			await navigator.clipboard.writeText(text)
+			setIsCopied(true)
+			onCopy?.()
+			setTimeout(() => setIsCopied(false), 2000)
+		} catch (err) {
+			console.error('Failed to copy text: ', err)
+		}
+	}, [text, onCopy])
+
 	return (
 		<Button
 			className={cn(
@@ -101,7 +136,7 @@ const CopyButton = (props: CopyButtonProps) => {
 				className,
 			)}
 			variant='outline'
-			onClick={() => alert(text)}
+			onClick={copyToClipboard}
 			type='button'
 			aria-label='Copy code to clipboard'
 			{...rest}

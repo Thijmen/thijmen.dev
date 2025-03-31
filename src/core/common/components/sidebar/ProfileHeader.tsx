@@ -26,7 +26,7 @@ const ProfileHeader = ({ expandMenu, imageSize }: ProfileHeaderProps) => {
 				className='rotate-3 border-2 border-neutral-400 dark:border-neutral-600 lg:hover:scale-105'
 			/>
 			<div className='mt-1 flex items-center gap-2 lg:mt-4'>
-				<Link href='/public' passHref>
+				<Link href='/' passHref>
 					<h2 className='flex-grow font-sora text-lg font-medium lg:text-xl'>
 						Thijmen Stavenuiter
 					</h2>

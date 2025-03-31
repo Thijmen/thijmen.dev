@@ -1,36 +1,30 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { r2Adapter } from '@/payload/adapters/r2adapter'
 import { Media } from '@/payload/collections/Media'
+import { Pages } from '@/payload/collections/Pages'
+import { Projects } from '@/payload/collections/Projects'
 import { Index } from '@/payload/collections/Stacks'
+import { Tags } from '@/payload/collections/Tags'
+import { Users } from '@/payload/collections/Users'
+import { Nav } from '@/payload/globals/nav'
+import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
 import type { Page, Post } from '@/payload/payload-types'
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
+import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload'
 import { en } from 'payload/i18n/en'
 import sharp from 'sharp'
-
-import { Pages } from '@/payload/collections/Pages'
-import { Posts } from '@/payload/collections/Posts'
-import { Projects } from '@/payload/collections/Projects'
-import { StackSeeder } from '@/payload/collections/Stacks/seed'
-import { Users } from '@/payload/collections/Users'
-import { UserSeeder } from '@/payload/collections/Users/seed'
-import { Nav, NavSeeder } from '@/payload/globals/nav'
-import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
-import { redirectsPlugin } from '@payloadcms/plugin-redirects'
-import { PageSeeder } from './collections/Pages/seed'
+import { Posts } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const generateTitle: GenerateTitle<Page | Post> = ({ doc }) => {
-	return doc?.title
-		? `${doc.title} | Payload Website Template`
-		: 'Payload Website Template'
+	return doc?.title ? `${doc.title} | Thijmen.dev` : 'Thijmen.dev'
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
@@ -41,7 +35,7 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 
 export default buildConfig({
 	editor: lexicalEditor(),
-	collections: [Users, Projects, Index, Posts, Pages, Media],
+	collections: [Users, Projects, Index, Posts, Pages, Media, Tags],
 	globals: [Nav],
 	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {
@@ -53,11 +47,18 @@ export default buildConfig({
 		},
 	}),
 	plugins: [
-		cloudStoragePlugin({
+		s3Storage({
 			collections: {
-				'r2-media': {
-					adapter: r2Adapter, // see docs for the adapter you want to use
+				'r2-media': true,
+			},
+			bucket: process.env.S3_BUCKET || '',
+			config: {
+				credentials: {
+					accessKeyId: process.env.S3_ACCESS_KEY_ID,
+					secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
 				},
+				region: 'auto',
+				endpoint: process.env.S3_ENDPOINT,
 			},
 		}),
 		redirectsPlugin({
@@ -98,6 +99,9 @@ export default buildConfig({
 
 	admin: {
 		user: 'users',
+		components: {
+			beforeDashboard: ['@/payload/components/BeforeDashboard'],
+		},
 		meta: {
 			titleSuffix: '| 🚧 Thijmen.dev',
 		},
@@ -123,12 +127,6 @@ export default buildConfig({
 				},
 			],
 		},
-	},
-	async onInit(payload) {
-		await UserSeeder(payload)
-		await PageSeeder(payload)
-		await NavSeeder(payload)
-		await StackSeeder(payload)
 	},
 	sharp,
 })

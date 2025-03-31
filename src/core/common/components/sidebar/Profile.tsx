@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import type { CSSProperties } from 'react'
 
 import { MenuContext } from '@/core/common/context/MenuContext'
 import useIsMobile from '@/core/common/hooks/useIsMobile'
@@ -46,15 +47,27 @@ const Profile = ({ isScrolled = false, navGlobal }: ProfileProps) => {
 		}
 	}, [expandMenu])
 
+	// Create a style for mobile header that ensures it stays on top
+	const headerStyle: CSSProperties = {
+		position: 'fixed',
+		top: 0,
+		left: 0,
+		right: 0,
+		width: '100%',
+		zIndex: 50,
+		isolation: 'isolate',
+	}
+
 	return (
 		<MenuContext.Provider value={{ hideNavbar }}>
 			<div
 				className={clsx(
-					'fixed z-20 w-full bg-light p-5 shadow-sm dark:border-b dark:border-neutral-800 dark:bg-dark sm:shadow-none lg:relative lg:border-none lg:!bg-transparent lg:p-0',
-					expandMenu && 'pb-0',
+					'fixed w-full h-[80px] bg-light/95 backdrop-blur-sm px-5 shadow-sm dark:border-b dark:border-neutral-800 dark:bg-dark/95 sm:shadow-none lg:relative lg:h-auto lg:border-none lg:!bg-transparent lg:p-0',
+					expandMenu && 'h-auto pb-0',
 				)}
+				style={headerStyle}
 			>
-				<div className='flex items-start justify-between md:px-2 lg:flex-col lg:space-y-4'>
+				<div className='flex h-full items-center justify-between md:px-2 lg:h-auto lg:flex-col lg:space-y-4'>
 					<ProfileHeader expandMenu={expandMenu} imageSize={getImageSize()} />
 
 					{!isMobile && (

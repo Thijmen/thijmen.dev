@@ -5,8 +5,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
+	output: 'standalone',
 	experimental: {
 		reactCompiler: false,
+		turbo: {},
 	},
 	images: {
 		remotePatterns: [
@@ -21,6 +23,9 @@ const nextConfig = {
 			},
 			{
 				hostname: 'dev-assets.thijmen.dev',
+			},
+			{
+				hostname: 'images.unsplash.com',
 			},
 		],
 	},

@@ -1,21 +1,21 @@
-import * as migration_20240921_095309 from './20240921_095309';
-import * as migration_20240922_081248_locale_unique_indexes from './20240922_081248_locale_unique_indexes';
-import * as migration_20240922_125434 from './20240922_125434';
+import * as migration_20250108_114137 from './20250108_114137';
+import * as migration_20250227_120406 from './20250227_120406';
+import * as migration_20250306_201341 from './20250306_201341';
 
 export const migrations = [
   {
-    up: migration_20240921_095309.up,
-    down: migration_20240921_095309.down,
-    name: '20240921_095309',
+    up: migration_20250108_114137.up,
+    down: migration_20250108_114137.down,
+    name: '20250108_114137',
   },
   {
-    up: migration_20240922_081248_locale_unique_indexes.up,
-    down: migration_20240922_081248_locale_unique_indexes.down,
-    name: '20240922_081248_locale_unique_indexes',
+    up: migration_20250227_120406.up,
+    down: migration_20250227_120406.down,
+    name: '20250227_120406',
   },
   {
-    up: migration_20240922_125434.up,
-    down: migration_20240922_125434.down,
-    name: '20240922_125434'
+    up: migration_20250306_201341.up,
+    down: migration_20250306_201341.down,
+    name: '20250306_201341'
   },
 ];

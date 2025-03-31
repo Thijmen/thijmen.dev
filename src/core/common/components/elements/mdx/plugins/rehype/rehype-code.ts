@@ -52,7 +52,9 @@ export const rehypeCode: [
 			const titleMatch = meta.match(titleRegex)
 			const title = titleMatch?.[1] ?? null
 
-			return { title }
+			const copy = meta.includes('copy')
+
+			return { title, copy }
 		},
 		themes: DEFAULT_SHIKI_THEMES,
 		defaultColor: false,

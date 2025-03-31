@@ -1,7 +1,10 @@
+import { MyFilteredPostsList } from '@/payload/fields/content/filtered-posts-list'
 import { MyGithubContributions } from '@/payload/fields/content/github-contributions'
 import { MyHomepageIntroduction } from '@/payload/fields/content/homepage-introduction'
 import { MyHorizontalLine } from '@/payload/fields/content/horizontal-line'
+import { MyImageSlideshow } from '@/payload/fields/content/image-slideshow'
 import { MyCode } from '@/payload/fields/content/my-code'
+import { MyImage } from '@/payload/fields/content/my-image'
 import { MyProjects } from '@/payload/fields/content/projects-overview-field'
 import { MyWakaContributions } from '@/payload/fields/content/waka-statistics'
 import {
@@ -13,8 +16,11 @@ import {
 	lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import type { Field } from 'payload'
+import { MyGithubStars } from './github-stars'
+import { MyHomepagePosts } from './homepage-posts-overview-field'
 import { MyHomepageProjects } from './homepage-projects'
 import { MyJavascriptPlayground } from './js-playground'
+import { MyPosts } from './posts-overview-field'
 
 export const ThijmenContent: Field = {
 	name: 'dynamiccontent',
@@ -32,10 +38,16 @@ export const ThijmenContent: Field = {
 						MyProjects,
 						MyHorizontalLine,
 						MyGithubContributions,
+						MyGithubStars,
 						MyWakaContributions,
 						MyJavascriptPlayground,
 						MyHomepageIntroduction,
 						MyHomepageProjects,
+						MyHomepagePosts,
+						MyPosts,
+						MyFilteredPostsList,
+						MyImageSlideshow,
+						MyImage,
 					],
 				}),
 				FixedToolbarFeature(),

@@ -1,19 +1,23 @@
-import BackButton from '@/core/common/components/elements/BackButton'
 import Container from '@/core/common/components/elements/Container'
-import PageHeading from '@/core/common/components/elements/PageHeading'
 import Layout from '@/core/common/components/layouts'
 import ProjectDetail from '@/core/modules/projects/components/ProjectDetail'
 import { getMenuItems } from '@/core/services/menu'
 import { generateMeta } from '@/payload/utilities/generateMeta'
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 import type { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { getPayload } from 'payload'
 import { cache } from 'react'
 
-const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
-	const { slug } = params
+type Args = {
+	params: Promise<{
+		slug?: string
+	}>
+}
+
+const ProjectDetailPage = async ({ params: paramsPromise }: Args) => {
+	const { slug } = await paramsPromise
 
 	const project = await queryProjectBySlug({ slug })
 
@@ -26,8 +30,6 @@ const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
 	return (
 		<Layout navGlobal={nav}>
 			<Container data-aos={'fade-up'}>
-				<BackButton url={'/projects'} />
-				<PageHeading title={project.title} description={project.introduction} />
 				<ProjectDetail project={project} />
 			</Container>
 		</Layout>
@@ -35,7 +37,7 @@ const ProjectDetailPage = async ({ params }: { params: { slug: string } }) => {
 }
 
 export async function generateStaticParams() {
-	const payload = await getPayloadHMR({ config: configPromise })
+	const payload = await getPayload({ config: configPromise })
 
 	const projects = await payload.find({
 		collection: 'projects',
@@ -44,23 +46,24 @@ export async function generateStaticParams() {
 		overrideAccess: false,
 	})
 
-	return projects.docs?.map(({ slug }) => slug)
+	return projects.docs?.map(({ slug }) => {
+		return { slug }
+	})
 }
 
 export async function generateMetadata({
-	params: { slug },
-}: {
-	params: { slug: string }
-}): Promise<Metadata> {
+	params: paramsPromise,
+}: Args): Promise<Metadata> {
+	const { slug } = await paramsPromise
 	const project = await queryProjectBySlug({ slug })
 
 	return generateMeta({ doc: project })
 }
 
 const queryProjectBySlug = cache(async ({ slug }: { slug: string }) => {
-	const { isEnabled: draft } = draftMode()
+	const { isEnabled: draft } = await draftMode()
 
-	const payload = await getPayloadHMR({ config: configPromise })
+	const payload = await getPayload({ config: configPromise })
 
 	const result = await payload.find({
 		collection: 'projects',

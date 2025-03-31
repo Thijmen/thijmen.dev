@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
 
 import useIsMobile from '@/core/common/hooks/useIsMobile'
 
@@ -10,6 +10,7 @@ import Copyright from './Copyright'
 
 interface Props {
 	navGlobal: Nav
+	sidebarContent?: ReactNode
 }
 const Sidebar = (props: Props) => {
 	const isMobile = useIsMobile()
@@ -33,15 +34,23 @@ const Sidebar = (props: Props) => {
 			id='sidebar'
 			className='sticky top-0 z-10 flex flex-col transition-all duration-300 lg:py-8'
 		>
-			<Profile isScrolled={isScrolled} navGlobal={props.navGlobal} />
-			{!isMobile && (
-				<>
-					<Breakline />
-					<Navigation navGlobal={props.navGlobal} />
-					<Breakline className='mt-2' />
-					<Copyright />
-				</>
-			)}
+			<div className='lg:mt-0'>
+				<Profile isScrolled={isScrolled} navGlobal={props.navGlobal} />
+				{!isMobile && (
+					<>
+						<Breakline />
+						<Navigation navGlobal={props.navGlobal} />
+						<Breakline className='mt-2' />
+						<Copyright />
+						{props.sidebarContent && (
+							<>
+								<Breakline className='mt-2' />
+								{props.sidebarContent}
+							</>
+						)}
+					</>
+				)}
+			</div>
 		</div>
 	)
 }

@@ -1,13 +1,13 @@
 import type { Page } from '@/payload/payload-types'
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { draftMode } from 'next/headers'
+import { getPayload } from 'payload'
 import { cache } from 'react'
 
 export const queryPageBySlug = cache(
 	async (slug: string): Promise<Page | null> => {
-		const { isEnabled: draft } = draftMode()
-		const payload = await getPayloadHMR({ config: configPromise })
+		const { isEnabled: draft } = await draftMode()
+		const payload = await getPayload({ config: configPromise })
 
 		const data = await payload.find({
 			collection: 'pages',

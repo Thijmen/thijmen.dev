@@ -1,3 +1,4 @@
+import { validateMDX } from '@/payload/validation/mdx'
 import type { Block } from 'payload'
 
 export const MyHomepageIntroduction: Block = {
@@ -23,6 +24,15 @@ export const MyHomepageIntroduction: Block = {
 			required: true,
 			admin: {
 				language: 'markdown',
+			},
+			validate: async (val) => {
+				try {
+					await validateMDX(val)
+					return true
+				} catch (err) {
+					console.error(err)
+					return 'Error compiling MDX'
+				}
 			},
 		},
 	],

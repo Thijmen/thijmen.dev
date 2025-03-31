@@ -1,21 +1,43 @@
-# Use the official lightweight Node.js 21 image.
-# https://hub.docker.com/_/node
-FROM node:21-alpine
+FROM node:20-alpine AS base
 
-# Set the working directory
-WORKDIR /usr/src/app
+ARG COOLIFY_URL
+ENV NEXT_PUBLIC_SERVER_URL=https://$COOLIFY_URL
 
-# Copy package.json and package-lock.json (if available)
-COPY package*.json ./
+RUN apk add --no-cache \
+    gcc \
+    g++ \
+    make \
+    curl \
+    wget \
+    cmake \
+    linux-headers
 
-# Install dependencies
-RUN yarn install
+RUN npm i -g corepack
 
-# Copy local code to the container image
+# Stage 1: Install dependencies
+FROM base AS deps
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
+    corepack enable pnpm && pnpm install --frozen-lockfile
+
+# Stage 2: Build the application
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN corepack enable pnpm && pnpm run ci
 
-# Build the application
-RUN yarn build
+# Stage 3: Production server
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
 
-# Run the web service on container startup
-CMD [ "yarn", "start" ]
+RUN echo "NODE_ENV: ${NODE_ENV}" > test.txt
+RUN echo "NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}" > next.txt
+
+EXPOSE 3001
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 PORT=3001 node server.js"]

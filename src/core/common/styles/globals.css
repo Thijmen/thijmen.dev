@@ -124,6 +124,55 @@ a {
   position: fixed !important;
 }
 
+/* Fix for profile component z-index on mobile */
+.fixed[class*="bg-light"],
+.fixed[class*="dark:bg-dark"] {
+  z-index: 999999 !important;
+  position: relative !important;
+}
+
+@media (max-width: 1024px) {
+  .fixed[class*="bg-light"],
+  .fixed[class*="dark:bg-dark"] {
+    position: fixed !important;
+  }
+}
+
+/* Additional fix for profile component */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  z-index: -1;
+}
+
+/* Ensure post images and gradients don't interfere with header */
+[class*="posts"] [class*="overflow-hidden"] {
+  isolation: isolate;
+  z-index: 1;
+}
+
+/* Mobile profile fix - extremely specific selector to ensure it overrides everything */
+@media (max-width: 1023px) {
+  div[class*="fixed"][class*="bg-light"],
+  div[class*="fixed"][class*="dark:bg-dark"] {
+    position: fixed !important;
+    z-index: 9999999 !important; 
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Force post gradients to stay below the header */
+  [class*="posts"] [class*="absolute"][class*="inset-0"] {
+    z-index: 5 !important;
+  }
+}
+
 ::-webkit-scrollbar {
   @apply w-1;
 }
@@ -260,4 +309,137 @@ nav {
 
 .capture-pointer-events * {
   @apply pointer-events-none;
+}
+
+@layer utilities {
+  /* Existing animations */
+
+  /* Hero section animations */
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes waving-hand {
+    0% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(14deg);
+    }
+    20% {
+      transform: rotate(-8deg);
+    }
+    30% {
+      transform: rotate(14deg);
+    }
+    40% {
+      transform: rotate(-4deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    60% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes text-gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient {
+    animation: gradient 15s ease infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  .animate-waving-hand {
+    animation: waving-hand 2.5s ease-in-out infinite;
+    transform-origin: 70% 70%;
+    display: inline-block;
+  }
+
+  .animate-text-gradient {
+    animation: text-gradient 3s linear infinite;
+  }
+
+  .animate-gradient {
+    animation: gradientShift 15s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 4s ease-in-out infinite;
+  }
 }

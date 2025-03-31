@@ -1,0 +1,103 @@
+import type { Metadata } from 'next'
+
+import { PayloadRedirects } from '@/core/common/components/PayloadRedirects'
+import BackButton from '@/core/common/components/elements/BackButton'
+import Container from '@/core/common/components/elements/Container'
+import PageHeading from '@/core/common/components/elements/PageHeading'
+import Layout from '@/core/common/components/layouts'
+import { RichText } from '@/core/common/components/shared-content'
+import { getMenuItems } from '@/core/services/menu'
+import { generateMeta } from '@/payload/utilities/generateMeta'
+import configPromise from '@payload-config'
+import { draftMode } from 'next/headers'
+import { getPayload } from 'payload'
+import { cache } from 'react'
+import type { Page as PageType } from '../../../payload/payload-types'
+
+export async function generateStaticParams() {
+	const payload = await getPayload({ config: configPromise })
+	const pages = await payload.find({
+		collection: 'pages',
+		draft: false,
+		limit: 1000,
+		overrideAccess: false,
+	})
+
+	return pages.docs
+		?.filter((doc) => {
+			return doc.slug !== 'home'
+		})
+		.map(({ slug }) => {
+			// Split the slug string into an array of segments
+			const slugArray = slug.split('/').filter(Boolean)
+			return { slug: slugArray }
+		})
+}
+
+type Args = {
+	params: Promise<{
+		slug?: string[]
+	}>
+}
+
+export default async function Page({ params: paramsPromise }: Args) {
+	const { slug = ['home'] } = await paramsPromise
+	const url = `/${slug.join('/')}`
+
+	console.log('slug', slug)
+
+	const page: PageType | null = await queryPageBySlug({
+		slug: slug.join('/'),
+	})
+
+	if (!page) {
+		return <PayloadRedirects url={url} />
+	}
+
+	const nav = await getMenuItems()
+
+	return (
+		<Layout navGlobal={nav}>
+			<Container className={page.containerClassName || ''} data-aos={'fade-up'}>
+				{page.showBackButton && (
+					<BackButton url={page.backButtonOverrideUrl || '/'} />
+				)}
+				{page.showPageHeading && (
+					<PageHeading title={page.title} description={''} />
+				)}
+				<RichText data={page.dynamiccontent} />
+			</Container>
+		</Layout>
+	)
+}
+
+export async function generateMetadata({
+	params: paramsPromise,
+}: Args): Promise<Metadata> {
+	const { slug = ['home'] } = await paramsPromise
+	const page = await queryPageBySlug({
+		slug: slug.join('/'),
+	})
+
+	return generateMeta({ doc: page })
+}
+
+const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+	const { isEnabled: draft } = await draftMode()
+
+	const payload = await getPayload({ config: configPromise })
+
+	const result = await payload.find({
+		collection: 'pages',
+		draft,
+		limit: 1,
+		overrideAccess: true,
+		where: {
+			slug: {
+				equals: slug,
+			},
+		},
+	})
+
+	return result.docs?.[0] || null
+})

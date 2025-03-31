@@ -83,9 +83,7 @@ const CommandPalette = () => {
 						) : (
 							<DarkModeIcon size={20} />
 						),
-					title: `Switch to ${
-						resolvedTheme === 'dark' ? 'Light' : 'Dark'
-					} Mode`,
+					title: `Switch to ${resolvedTheme === 'dark' ? 'Light' : 'Dark'} Mode`,
 					click: () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark'),
 					href: '#',
 					isExternal: false,
@@ -258,21 +256,19 @@ const CommandPalette = () => {
 																	{child?.title} {active}
 																</span>
 															</div>
-															<>
-																{isActiveRoute(child?.href) ? (
-																	<span className='animate-pulse font-sora text-xs text-neutral-500'>
-																		You are here
-																	</span>
-																) : (
-																	<>
-																		{child?.type && (
-																			<div className='rounded-md border border-neutral-400 px-1.5 py-0.5 font-sora text-xs text-neutral-500 dark:border-neutral-500'>
-																				{child?.type}
-																			</div>
-																		)}
-																	</>
-																)}
-															</>
+															{isActiveRoute(child?.href) ? (
+																<span className='animate-pulse font-sora text-xs text-neutral-500'>
+																	You are here
+																</span>
+															) : (
+																<>
+																	{child?.type && (
+																		<div className='rounded-md border border-neutral-400 px-1.5 py-0.5 font-sora text-xs text-neutral-500 dark:border-neutral-500'>
+																			{child?.type}
+																		</div>
+																	)}
+																</>
+															)}
 														</div>
 													)}
 												</Combobox.Option>

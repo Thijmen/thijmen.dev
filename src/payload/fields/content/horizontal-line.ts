@@ -13,6 +13,12 @@ export const MyHorizontalLine: Block = {
 			options: ['dashed', 'solid'],
 			defaultValue: 'dashed',
 		},
+		{
+			name: 'additionalClassName',
+			type: 'text',
+			label: 'Additional Class Name',
+			required: false,
+		},
 	],
 	interfaceName: 'MyHorizontalLineBlock',
 }

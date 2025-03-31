@@ -17,7 +17,7 @@ const TestPage = async () => {
 		<Layout navGlobal={nav}>
 			<h1>{new Date().toISOString()}</h1>
 			<pre>{JSON.stringify(data, null, 2)}</pre>
-			<Mdx content={dataMdx} />
+			<Mdx code={dataMdx} />
 		</Layout>
 	)
 }
